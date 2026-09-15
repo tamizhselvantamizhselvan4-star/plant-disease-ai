@@ -3,10 +3,10 @@ import json
 import uuid
 import re
 import difflib
+import threading
 from datetime import datetime
 
 import numpy as np
-import tensorflow as tf
 
 from flask import (
     Flask,
@@ -30,6 +30,11 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(
     BASE_DIR,
     "plant_disease_resnet50.keras"
+)
+
+TFLITE_MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "plant_disease_resnet50.tflite"
 )
 
 CLASS_PATH = os.path.join(
@@ -360,20 +365,7 @@ os.makedirs(
 
 app = Flask(__name__)
 
-# Cloud deployment support: Render supplies PORT at runtime.
-# The 5000 fallback keeps the existing local workflow unchanged.
-APP_HOST = os.environ.get("HOST", "0.0.0.0")
-try:
-    APP_PORT = int(os.environ.get("PORT", "5000"))
-except (TypeError, ValueError):
-    APP_PORT = 5000
-
-# Use a platform secret in production; retain the existing local
-# fallback so nothing changes for the current local project.
-app.secret_key = os.environ.get(
-    "PLANT_AI_SECRET_KEY",
-    "plant-health-local-secret"
-)
+app.secret_key = "plant-health-local-secret"
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -473,24 +465,63 @@ MOBILE_STATE_SCRIPT = r"""
 # ============================================================
 # LOAD MODEL
 # ============================================================
+# Local Windows development keeps using the existing Keras model.
+# Render/Linux uses the lightweight TFLite model so the app can
+# run within Render Free's memory limit without importing TensorFlow.
+# ============================================================
 
 print()
 print("=" * 60)
 print("🌱 LOADING PLANT DISEASE MODEL")
 print("=" * 60)
 
+USE_TFLITE = (os.name != "nt") or os.environ.get("USE_TFLITE", "").lower() == "true"
+
+model = None
+interpreter = None
+input_details = None
+output_details = None
+MODEL_LOCK = threading.Lock()
+
 try:
 
-    # Inference only: do not restore the saved optimizer state.
-    # The optimizer is not needed for prediction and can require extra RAM.
-    model = tf.keras.models.load_model(
-        MODEL_PATH,
-        compile=False
-    )
+    if USE_TFLITE:
 
-    print("✅ Model loaded successfully")
-    print("Input shape :", model.input_shape)
-    print("Output shape:", model.output_shape)
+        if not os.path.isfile(TFLITE_MODEL_PATH):
+            raise FileNotFoundError(
+                "TFLite model not found: " + TFLITE_MODEL_PATH
+            )
+
+        from tflite_runtime.interpreter import Interpreter
+
+        interpreter = Interpreter(
+            model_path=TFLITE_MODEL_PATH,
+            num_threads=1
+        )
+        interpreter.allocate_tensors()
+
+        input_details = interpreter.get_input_details()
+        output_details = interpreter.get_output_details()
+
+        print("✅ TFLite model loaded successfully")
+        print("Input shape :", input_details[0]["shape"])
+        print("Input dtype :", input_details[0]["dtype"])
+        print("Output shape:", output_details[0]["shape"])
+        print("Output dtype:", output_details[0]["dtype"])
+
+    else:
+
+        import tensorflow as tf
+
+        # Inference only: do not restore the saved optimizer state.
+        model = tf.keras.models.load_model(
+            MODEL_PATH,
+            compile=False
+        )
+
+        print("✅ Keras model loaded successfully")
+        print("Input shape :", model.input_shape)
+        print("Output shape:", model.output_shape)
 
 except Exception as error:
 
@@ -1678,10 +1709,46 @@ def predict_disease(
         image_path
     )
 
-    predictions = model.predict(
-        image_array,
-        verbose=0
-    )
+    if USE_TFLITE:
+
+        input_info = input_details[0]
+        output_info = output_details[0]
+
+        input_data = image_array.astype(
+            input_info["dtype"],
+            copy=False
+        )
+
+        # Support quantized TFLite models too, although the current
+        # conversion is float32 and therefore follows the normal path.
+        input_scale, input_zero = input_info.get("quantization", (0.0, 0))
+        if input_scale:
+            input_data = np.round(
+                image_array / input_scale + input_zero
+            ).astype(input_info["dtype"])
+
+        with MODEL_LOCK:
+            interpreter.set_tensor(
+                input_info["index"],
+                input_data
+            )
+            interpreter.invoke()
+            predictions = interpreter.get_tensor(
+                output_info["index"]
+            )
+
+        output_scale, output_zero = output_info.get("quantization", (0.0, 0))
+        if output_scale:
+            predictions = (
+                predictions.astype(np.float32) - output_zero
+            ) * output_scale
+
+    else:
+
+        predictions = model.predict(
+            image_array,
+            verbose=0
+        )
 
     predictions = np.asarray(
         predictions,
@@ -8803,13 +8870,8 @@ if __name__ == "__main__":
     )
 
     print(
-        "🌐 Host:",
-        APP_HOST
-    )
-
-    print(
-        "🔌 Port:",
-        APP_PORT
+        "🌐 Local access:",
+        "http://127.0.0.1:5000"
     )
 
     print("=" * 60)
@@ -8817,7 +8879,7 @@ if __name__ == "__main__":
 
 
     app.run(
-        host=APP_HOST,
-        port=APP_PORT,
+        host="0.0.0.0",
+        port=5000,
         debug=False
     )

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🌱 Chat History</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #1f7a45;
+            --dark-green: #14532d;
+            --light-green: #eaf7ef;
+            --soft-green: #f5fbf7;
+            --text: #193126;
+            --muted: #6b7c73;
+            --white: #ffffff;
+            --border: #dfece4;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #eaf8ef 0%,
+                    #f7fbf8 50%,
+                    #eef7f1 100%
+                );
+
+            color: var(--text);
+        }
+
+        .app {
+
+            width: 100%;
+            max-width: 760px;
+            min-height: 100vh;
+            margin: auto;
+
+            background:
+                rgba(255, 255, 255, 0.55);
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            position: sticky;
+            top: 0;
+            z-index: 10;
+
+            padding: 16px;
+
+            background:
+                rgba(255, 255, 255, 0.97);
+
+            border-bottom:
+                1px solid var(--border);
+
+            box-shadow:
+                0 2px 12px
+                rgba(25, 70, 42, 0.06);
+        }
+
+        .header-top {
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            border:
+                1px solid var(--border);
+
+            background:
+                var(--soft-green);
+
+            color:
+                var(--dark-green);
+
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+        .header-icon {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 14px;
+
+            background:
+                var(--light-green);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .header-info h1 {
+
+            margin: 0;
+
+            color:
+                var(--dark-green);
+
+            font-size: 19px;
+        }
+
+        .header-info p {
+
+            margin:
+                4px 0 0;
+
+            color:
+                var(--muted);
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+
+            padding:
+                18px 14px 30px;
+        }
+
+        .page-title {
+
+            margin:
+                0 0 4px;
+
+            color:
+                var(--dark-green);
+
+            font-size: 17px;
+        }
+
+        .page-subtitle {
+
+            margin:
+                0 0 18px;
+
+            color:
+                var(--muted);
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty {
+
+            padding:
+                45px 20px;
+
+            text-align: center;
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 18px;
+        }
+
+        .empty-icon {
+
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .empty h2 {
+
+            margin:
+                0 0 8px;
+
+            color:
+                var(--dark-green);
+
+            font-size: 18px;
+        }
+
+        .empty p {
+
+            margin: 0;
+
+            color:
+                var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           CHAT RECORD
+        ===================================================== */
+
+        .record {
+
+            margin-bottom: 16px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 6px 18px
+                rgba(25, 70, 42, 0.06);
+        }
+
+        .record-header {
+
+            padding:
+                11px 13px;
+
+            background:
+                var(--soft-green);
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .disease {
+
+            color:
+                var(--dark-green);
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            line-height: 1.4;
+        }
+
+        .date {
+
+            color:
+                var(--muted);
+
+            font-size: 10px;
+
+            white-space: nowrap;
+        }
+
+        .record-body {
+
+            padding:
+                13px;
+        }
+
+        /* =====================================================
+           USER MESSAGE
+        ===================================================== */
+
+        .user-label {
+
+            color:
+                var(--muted);
+
+            font-size: 10px;
+
+            margin-bottom: 5px;
+        }
+
+        .user-message {
+
+            display: inline-block;
+
+            max-width: 90%;
+
+            padding:
+                10px 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #176b3d,
+                    #279957
+                );
+
+            color:
+                white;
+
+            border-radius:
+                15px 15px 5px 15px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            white-space: pre-line;
+
+            overflow-wrap: anywhere;
+        }
+
+        /* =====================================================
+           ASSISTANT RESPONSE
+        ===================================================== */
+
+        .assistant-label {
+
+            color:
+                var(--muted);
+
+            font-size: 10px;
+
+            margin:
+                13px 0 5px;
+        }
+
+        .assistant-message {
+
+            padding:
+                11px 12px;
+
+            background:
+                #f8fcf9;
+
+            border:
+                1px solid #e4eee8;
+
+            border-radius:
+                5px 15px 15px 15px;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            white-space: pre-line;
+
+            overflow-wrap: anywhere;
+        }
+
+        /* =====================================================
+           MENTALITY
+        ===================================================== */
+
+        .mentality {
+
+            display: inline-block;
+
+            margin-top: 11px;
+
+            padding:
+                5px 9px;
+
+            border-radius: 12px;
+
+            background:
+                var(--light-green);
+
+            color:
+                var(--dark-green);
+
+            font-size: 10px;
+
+            border:
+                1px solid #d4ebdc;
+        }
+
+        /* =====================================================
+           DELETE / CLEAR AREA
+        ===================================================== */
+
+        .history-info {
+
+            margin-top: 20px;
+
+            padding:
+                11px 13px;
+
+            background:
+                #fff8e6;
+
+            border:
+                1px solid #efdfa8;
+
+            border-radius: 13px;
+
+            color:
+                #66541b;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 520px) {
+
+            .content {
+                padding:
+                    14px 9px 25px;
+            }
+
+            .record-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .date {
+                white-space: normal;
+            }
+
+            .user-message {
+                max-width: 94%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="header">
+
+        <div class="header-top">
+
+            <a
+                href="javascript:history.back()"
+                class="back"
+                title="Go back"
+                aria-label="Go back"
+            >
+                ←
+            </a>
+
+            <div class="header-icon">
+                💬
+            </div>
+
+            <div class="header-info">
+
+                <h1>
+                    Chat History
+                </h1>
+
+                <p>
+                    Your saved plant health conversations
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENT
+    ===================================================== -->
+
+    <main class="content">
+
+        <h2 class="page-title">
+            🕘 Saved Conversations
+        </h2>
+
+        <p class="page-subtitle">
+
+            Your previous questions and plant-health
+            responses are stored locally in this application.
+
+        </p>
+
+
+        {% if records %}
+
+            {% for record in records %}
+
+                <article class="record">
+
+                    <!-- RECORD HEADER -->
+
+                    <div class="record-header">
+
+                        <div class="disease">
+
+                            🌿
+
+                            {{ record.disease
+                               |replace("_", " ")
+                            }}
+
+                        </div>
+
+                        <div class="date">
+
+                            🕐
+
+                            {{ record.created_at }}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RECORD BODY -->
+
+                    <div class="record-body">
+
+                        <!-- USER -->
+
+                        <div class="user-label">
+                            👤 You
+                        </div>
+
+                        <div class="user-message">
+
+                            {{ record.message }}
+
+                        </div>
+
+
+                        <!-- ASSISTANT -->
+
+                        <div class="assistant-label">
+                            🌱 Plant Health Assistant
+                        </div>
+
+                        <div class="assistant-message">
+
+                            {{ record.response }}
+
+                        </div>
+
+
+                        <!-- MENTALITY -->
+
+                        {% if record.mentality %}
+
+                            <div class="mentality">
+
+                                🧠
+
+                                {{ record.mentality
+                                   |replace("_", " ")
+                                   |title
+                                }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    💬
+                </div>
+
+                <h2>
+                    No chat history yet
+                </h2>
+
+                <p>
+
+                    Your conversations will appear here
+                    after you send messages in the Plant
+                    Health Assistant.
+
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="history-info">
+
+            💾 <strong>Local storage:</strong>
+
+            Chat records are read from
+
+            <strong>
+                data/chat_records.json
+            </strong>
+
+            inside your Plant Disease application.
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+{
+  "Chilli_Cercospora": {
+    "emoji": "🌶️🍂🟤",
+    "description": "🍂 Cercospora leaf spot causes small brown to gray spots on chilli leaves and may lead to premature leaf drop.",
+    "treatments": [
+      "✂️ Remove and safely discard badly infected leaves.",
+      "💦 Apply a suitable fungicide such as a copper-based product according to the product label.",
+      "🌬️ Improve air circulation and avoid overhead watering."
+    ],
+    "home_remedy": "🏡 Remove fallen infected leaves and keep the area around the plant clean and dry.",
+    "prevention": "🛡️ Use clean planting material, avoid wetting foliage, and inspect plants regularly."
+  },
+  "Chilli_Mites_and_Thrips": {
+    "emoji": "🌶️🕷️🐜",
+    "description": "🕷️ Thrips and mites damage chilli leaves and young growth, causing curling, bronzing, stippling, or distorted leaves.",
+    "treatments": [
+      "🟨 Use yellow or blue sticky traps to monitor and reduce flying thrips.",
+      "🌿 Apply insecticidal soap or neem-based products according to the product label.",
+      "✂️ Remove severely damaged leaves and control weeds that can shelter pests."
+    ],
+    "home_remedy": "🏡 Gently wash the undersides of leaves with water to dislodge pests and repeat monitoring regularly.",
+    "prevention": "🛡️ Check young leaves and leaf undersides every week and avoid excessive nitrogen fertilization."
+  },
+  "Chilli_Nutritional_Deficiency": {
+    "emoji": "🌶️🌱🧪",
+    "description": "🌱 Nutritional deficiency can cause yellowing, poor growth, leaf discoloration, or abnormal development. The exact deficiency should be identified before applying a specific nutrient.",
+    "treatments": [
+      "🧪 Test the soil or growing medium to identify nutrient problems.",
+      "🌱 Apply a balanced fertilizer according to the soil-test result and product label.",
+      "💧 Maintain suitable watering and soil pH so nutrients can be absorbed properly."
+    ],
+    "home_remedy": "🏡 Add well-decomposed compost in a moderate amount to improve soil organic matter.",
+    "prevention": "🛡️ Use balanced nutrition, good-quality compost, and regular soil testing rather than applying excess fertilizer."
+  },
+  "Healthy_Chili": {
+    "emoji": "🌶️🌿💚",
+    "description": "🌿 The chilli plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "treatments": [
+      "💧 Water regularly while avoiding waterlogging.",
+      "🌱 Provide balanced nutrition according to the crop and growing conditions.",
+      "✂️ Remove dead or damaged plant parts when needed."
+    ],
+    "home_remedy": "🏡 Add a small amount of well-decomposed compost around the plant when appropriate.",
+    "prevention": "🛡️ Inspect leaves, stems, and growing points every week for early signs of pests or disease."
+  },
+  "botrytis_blightgray_mold": {
+    "emoji": "🌫️🩶🍃",
+    "description": "🌫️ Botrytis blight, or gray mold, produces gray fuzzy growth on flowers, leaves, and stems, especially under cool and humid conditions.",
+    "treatments": [
+      "✂️ Remove infected flowers and leaves and discard them away from healthy plants.",
+      "💦 Apply an appropriate fungicide according to the product label when disease pressure is high.",
+      "🌬️ Reduce humidity and improve air circulation around the plant."
+    ],
+    "home_remedy": "🏡 Remove dead flowers and plant debris promptly and keep foliage dry.",
+    "prevention": "🛡️ Avoid prolonged leaf wetness, overwatering, and overcrowding."
+  },
+  "healthy": {
+    "emoji": "🌿💚",
+    "description": "🌿 The hibiscus plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "treatments": [
+      "💧 Water regularly without keeping the soil waterlogged.",
+      "🌱 Provide balanced fertilizer according to plant needs.",
+      "✂️ Remove dry or damaged leaves when necessary."
+    ],
+    "home_remedy": "🏡 Add well-decomposed compost around the plant in moderation.",
+    "prevention": "🛡️ Inspect the plant weekly for early signs of disease or pests."
+  },
+  "leaf_spot": {
+    "emoji": "🍂🟤",
+    "description": "🍂 Leaf spot causes brown, black, or tan spots on leaves and may result in premature leaf drop.",
+    "treatments": [
+      "✂️ Remove badly infected leaves and fallen debris.",
+      "💦 Apply a suitable fungicide such as a copper-based product according to the product label.",
+      "🌬️ Improve air circulation and avoid overhead watering."
+    ],
+    "home_remedy": "🏡 Keep infected leaves and fallen debris removed and water the soil rather than the foliage.",
+    "prevention": "🛡️ Keep foliage dry, avoid overcrowding, and sanitize tools after working on infected plants."
+  },
+  "mealybug_infestation": {
+    "emoji": "🐛🤍",
+    "description": "🐛 Mealybugs are white, cotton-like insects that suck plant sap and can weaken plant growth.",
+    "treatments": [
+      "✂️ Remove heavily infested leaves or shoots.",
+      "🌿 Apply insecticidal soap or a neem-based product according to the product label.",
+      "🐞 Encourage natural predators and avoid unnecessary broad-spectrum insecticide use."
+    ],
+    "home_remedy": "🏡 Gently wipe visible mealybugs with a cotton swab moistened with 70% rubbing alcohol, avoiding excessive application to tender foliage.",
+    "prevention": "🛡️ Inspect new plants before introducing them and regularly check stems, leaf joints, and leaf undersides."
+  },
+  "powdery_mildew": {
+    "emoji": "⚪🍃",
+    "description": "⚪ Powdery mildew appears as a white powder-like coating on leaves and shoots and can reduce plant growth.",
+    "treatments": [
+      "✂️ Remove badly infected leaves and shoots.",
+      "💦 Apply a labeled fungicide such as sulfur or potassium bicarbonate where appropriate.",
+      "☀️ Improve sunlight exposure and air movement around the plant."
+    ],
+    "home_remedy": "🏡 Remove infected material and improve airflow; avoid keeping foliage wet for long periods.",
+    "prevention": "🛡️ Avoid overcrowding and excessive nitrogen fertilization and monitor new growth regularly."
+  },
+  "rust": {
+    "emoji": "🟠🍁",
+    "description": "🟠 Rust causes orange, yellow, or reddish-brown spore-producing spots, often on the underside of leaves.",
+    "treatments": [
+      "✂️ Remove severely infected leaves.",
+      "💦 Apply a suitable fungicide according to the product label when needed.",
+      "🍂 Collect and discard fallen infected leaves."
+    ],
+    "home_remedy": "🏡 Keep foliage dry and remove infected and fallen leaves promptly.",
+    "prevention": "🛡️ Provide good air circulation, avoid overhead irrigation, and inspect leaf undersides regularly."
+  },
+  "sooty_mold": {
+    "emoji": "⚫🍃🐜",
+    "description": "⚫ Sooty mold forms a black coating on leaves and commonly develops on sticky honeydew produced by sap-sucking insects.",
+    "treatments": [
+      "🐞 Control the underlying insects such as whiteflies, aphids, or mealybugs.",
+      "🌿 Use insecticidal soap or a neem-based product according to the product label.",
+      "💦 Gently wash the affected leaves with clean water after the pest problem is addressed."
+    ],
+    "home_remedy": "🏡 Wash leaves gently with water and mild soap, then rinse with clean water; focus on controlling the insects causing honeydew.",
+    "prevention": "🛡️ Inspect plants regularly and control sap-sucking pests before heavy honeydew buildup occurs."
+  },
+  "whitefly_infestation": {
+    "emoji": "🪰🍃",
+    "description": "🪰 Whiteflies are small sap-sucking insects that can cause yellowing, curling, weak growth, and honeydew buildup.",
+    "treatments": [
+      "🟨 Use yellow sticky traps for monitoring and reducing adult whiteflies.",
+      "🌿 Apply insecticidal soap or a neem-based product according to the product label.",
+      "✂️ Remove severely infested leaves when practical."
+    ],
+    "home_remedy": "🏡 Gently wash the undersides of leaves with water and repeat monitoring frequently.",
+    "prevention": "🛡️ Check the undersides of leaves weekly and remove heavily infested plant material."
+  },
+  "Bacterial_Spot": {
+    "emoji": "🍅🦠🟤",
+    "description": "🦠 Bacterial spot causes small dark water-soaked or brown lesions on tomato leaves and fruit.",
+    "treatments": [
+      "✂️ Remove severely infected leaves and fruit and dispose of them safely.",
+      "💦 Use a labeled copper-based bactericide where appropriate to help suppress disease.",
+      "🌬️ Avoid overhead irrigation and improve air circulation."
+    ],
+    "home_remedy": "🏡 Remove infected debris and avoid handling wet plants to reduce spread.",
+    "prevention": "🛡️ Use clean seed or transplants, sanitize tools, avoid overhead watering, and rotate crops."
+  },
+  "Early_Blight": {
+    "emoji": "🍅🍂🟤",
+    "description": "🍂 Early blight causes brown target-like lesions with concentric rings and can lead to yellowing and leaf loss.",
+    "treatments": [
+      "✂️ Remove lower infected leaves and fallen plant debris.",
+      "💦 Apply a suitable fungicide according to the product label when necessary.",
+      "🌬️ Improve airflow and avoid prolonged leaf wetness."
+    ],
+    "home_remedy": "🏡 Remove infected leaves and keep the soil surface free of diseased plant debris.",
+    "prevention": "🛡️ Mulch the soil, avoid overhead watering, provide adequate spacing, and rotate crops."
+  },
+  "Healthy": {
+    "emoji": "🍅🌿💚",
+    "description": "🌿 The tomato plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "treatments": [
+      "💧 Water consistently while avoiding waterlogging.",
+      "🌱 Provide balanced nutrition according to crop needs.",
+      "✂️ Remove dead or damaged plant parts and maintain good plant support."
+    ],
+    "home_remedy": "🏡 Use well-decomposed compost in moderation to support soil health.",
+    "prevention": "🛡️ Inspect leaves and stems weekly and maintain good spacing, sanitation, and watering practices."
+  },
+  "Late_Blight": {
+    "emoji": "🍅🌧️🟤",
+    "description": "🌧️ Late blight can cause rapidly enlarging dark lesions on leaves and stems and may severely damage tomato plants under cool, wet conditions.",
+    "treatments": [
+      "✂️ Remove and safely dispose of heavily infected plant material.",
+      "💦 Apply an appropriate labeled fungicide or fungicide mixture as soon as disease is detected.",
+      "🌬️ Improve air circulation and reduce prolonged leaf wetness."
+    ],
+    "home_remedy": "🏡 Remove infected material promptly and avoid overhead watering; home remedies should not be relied on for severe outbreaks.",
+    "prevention": "🛡️ Use healthy planting material, avoid prolonged leaf wetness, provide spacing, and monitor during cool wet weather."
+  },
+  "Leaf_Mold": {
+    "emoji": "🍅🍃🟢",
+    "description": "🍃 Tomato leaf mold commonly produces yellow patches on the upper leaf surface and olive-green to gray mold on the underside, especially in humid conditions.",
+    "treatments": [
+      "✂️ Remove severely infected leaves.",
+      "💦 Apply a suitable fungicide according to the product label when required.",
+      "🌬️ Reduce humidity and improve ventilation around the plants."
+    ],
+    "home_remedy": "🏡 Remove affected leaves and increase ventilation; avoid wetting foliage.",
+    "prevention": "🛡️ Maintain good airflow, avoid excessive humidity, and water at the soil level."
+  },
+  "Septoria_Leaf_Spot": {
+    "emoji": "🍅🍂⚫",
+    "description": "🍂 Septoria leaf spot produces many small circular spots with dark margins and pale centers, often beginning on lower leaves.",
+    "treatments": [
+      "✂️ Remove infected lower leaves and plant debris.",
+      "💦 Apply a suitable fungicide according to the product label when needed.",
+      "🌬️ Improve air circulation and avoid overhead watering."
+    ],
+    "home_remedy": "🏡 Remove infected leaves and keep fallen debris away from the base of the plant.",
+    "prevention": "🛡️ Use mulch, avoid splashing soil onto leaves, sanitize tools, and rotate crops."
+  },
+  "Target_Spot": {
+    "emoji": "🍅🎯🍂",
+    "description": "🎯 Target spot produces circular brown lesions that may develop concentric rings on tomato leaves and fruit.",
+    "treatments": [
+      "✂️ Remove severely affected leaves and fruit.",
+      "💦 Apply a suitable labeled fungicide when necessary.",
+      "🌬️ Improve airflow and reduce prolonged leaf wetness."
+    ],
+    "home_remedy": "🏡 Remove diseased debris and keep foliage as dry as practical.",
+    "prevention": "🛡️ Provide adequate spacing, avoid overhead irrigation, and rotate crops."
+  },
+  "Tomato_Mosaic_Virus": {
+    "emoji": "🍅🦠🟢",
+    "description": "🦠 Tomato mosaic virus can cause mottled or mosaic-like green patterns, distorted leaves, and reduced plant growth. There is no reliable cure for an infected plant.",
+    "treatments": [
+      "✂️ Remove and safely discard severely infected plants to reduce spread.",
+      "🧼 Wash hands and disinfect tools after handling suspected infected plants.",
+      "🌱 Use certified virus-free seed or transplants for replacement plants."
+    ],
+    "home_remedy": "🏡 There is no dependable household cure; prioritize sanitation and removal of infected material.",
+    "prevention": "🛡️ Avoid tobacco contamination, sanitize tools and hands, and use clean seed and planting material."
+  },
+  "Tomato_Yellow_Leaf_Curl_Virus": {
+    "emoji": "🍅🦠🟡",
+    "description": "🦠 Tomato yellow leaf curl virus causes upward leaf curling, yellowing, stunting, and reduced fruit production. It is commonly spread by whiteflies.",
+    "treatments": [
+      "✂️ Remove severely infected plants where appropriate to reduce virus sources.",
+      "🪰 Control whiteflies using traps and suitable labeled insect-control products.",
+      "🌱 Replace plants with healthy, virus-free transplants when necessary."
+    ],
+    "home_remedy": "🏡 Remove heavily infected plants and use yellow sticky traps to monitor whiteflies.",
+    "prevention": "🛡️ Control whiteflies early, use resistant varieties where available, remove weeds, and use healthy transplants."
+  }
+}

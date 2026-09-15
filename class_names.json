@@ -1,0 +1,23 @@
+{
+    "Bacterial_Spot": 0,
+    "Chilli_Cercospora": 1,
+    "Chilli_Mites_and_Thrips": 2,
+    "Chilli_Nutritional_Deficiency": 3,
+    "Early_Blight": 4,
+    "Healthy_Chilli": 5,
+    "Healthy_Hibiscus": 6,
+    "Healthy_Tomato": 7,
+    "Late_Blight": 8,
+    "Leaf_Mold": 9,
+    "Septoria_Leaf_Spot": 10,
+    "Target_Spot": 11,
+    "Tomato_Mosaic_Virus": 12,
+    "Tomato_Yellow_Leaf_Curl_Virus": 13,
+    "botrytis_blightgray_mold": 14,
+    "leaf_spot": 15,
+    "mealybug_infestation": 16,
+    "powdery_mildew": 17,
+    "rust": 18,
+    "sooty_mold": 19,
+    "whitefly_infestation": 20
+}

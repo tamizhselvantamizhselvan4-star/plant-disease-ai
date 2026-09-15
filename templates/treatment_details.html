@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ item.disease }} - Treatment Details | Plant Disease AI</title>
+<style>
+*{box-sizing:border-box}
+:root{--green:#1f7a45;--dark:#14532d;--light:#eaf7ef;--soft:#f7fbf8;--text:#193126;--muted:#687970;--border:#dcebe1;--white:#fff;--orange:#a85e00;--yellow:#8f7b00;--red:#a33a2b;--blue:#2a5ea3;--shadow:0 12px 34px rgba(25,70,42,.10)}
+body{margin:0;padding:18px 12px 50px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 10% 0%,rgba(31,122,69,.12),transparent 38%),linear-gradient(180deg,#edf9f1 0%,#f8fbf9 45%,#eef7f1 100%)}
+.app{max-width:820px;margin:auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.back-btn,.home-btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid var(--border);background:#fff;color:var(--dark);font-weight:850;border-radius:999px;padding:10px 15px;box-shadow:0 5px 15px rgba(25,70,42,.08);font-size:13px}
+.back-btn:hover,.home-btn:hover{background:var(--light)}
+.hero{background:linear-gradient(145deg,#fff,#effaf3);border:1px solid #d7eadc;border-radius:26px;padding:24px 20px;margin-bottom:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"🌿";position:absolute;right:-5px;top:-18px;font-size:110px;opacity:.07;transform:rotate(12deg)}
+.hero-main{position:relative;z-index:1;display:flex;gap:15px;align-items:flex-start}
+.hero-icon{width:58px;height:58px;border-radius:18px;background:#e1f3e7;display:flex;align-items:center;justify-content:center;font-size:31px;flex-shrink:0}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.1px;color:var(--green);font-weight:900;margin-bottom:5px}
+h1{margin:0;color:var(--dark);font-size:28px;line-height:1.15;letter-spacing:-.5px}
+.plant{margin-top:6px;color:var(--muted);font-size:15px;font-weight:700}
+.meta-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:900}
+.badge.started{background:#fff4e6;color:var(--orange);border:1px solid #f0dcb8}.badge.monitoring{background:#fffbe6;color:var(--yellow);border:1px solid #ece08a}.badge.completed{background:#eaf7ef;color:var(--green);border:1px solid #cce7d4}
+.date-chip{background:#fff;border:1px solid var(--border);padding:8px 12px;border-radius:999px;font-size:12px;color:var(--muted);font-weight:750}
+.image-card{background:#fff;border:1px solid var(--border);border-radius:22px;padding:14px;margin-bottom:16px;box-shadow:var(--shadow)}
+.plant-image{display:block;width:100%;max-height:360px;object-fit:cover;border-radius:16px;background:var(--soft)}
+.image-caption{text-align:center;color:var(--muted);font-size:11px;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.section{background:#fff;border:1px solid var(--border);border-radius:20px;padding:18px 17px;box-shadow:0 7px 22px rgba(25,70,42,.065);margin-bottom:14px}
+.section.full{grid-column:1/-1}
+.section h2{margin:0 0 10px;font-size:17px;color:var(--dark);line-height:1.3}
+.section p{margin:0;color:#425149;font-size:14px;line-height:1.72;white-space:pre-line}
+.section ul{margin:4px 0 0;padding-left:21px}.section li{color:#425149;font-size:14px;line-height:1.7;margin:5px 0}
+.stage{border-radius:16px;padding:14px;margin-top:10px;border:1px solid var(--border)}
+.stage:first-of-type{margin-top:0}.stage.light{background:#f1fbf4;border-color:#cce7d4}.stage.moderate{background:#fff8eb;border-color:#f0dcb8}.stage.severe{background:#fff1ee;border-color:#f0c9c1}
+.stage-title{font-size:14px;font-weight:900;margin-bottom:7px}.light .stage-title{color:var(--green)}.moderate .stage-title{color:var(--orange)}.severe .stage-title{color:var(--red)}
+.product{background:#f8fbf9;border:1px solid var(--border);border-radius:13px;padding:11px 12px;margin-top:8px;font-size:13px;line-height:1.6;color:#425149}.product:first-child{margin-top:0}
+.note{background:#fff9e9;border-color:#f0dfaa}.note h2{color:#8a6500}.safety{background:#fff8f6;border-color:#f0d2ca}.safety h2{color:var(--red)}.prevention{background:#f2f8ff;border-color:#cfe2f7}.prevention h2{color:var(--blue)}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0}.primary,.secondary{padding:12px 18px;border-radius:13px;text-decoration:none;font-weight:900;font-size:13px}.primary{background:linear-gradient(135deg,#176b3d,#279957);color:#fff;box-shadow:0 8px 20px rgba(31,122,69,.22)}.secondary{background:#fff;border:1px solid var(--border);color:var(--dark)}
+.footer{text-align:center;color:var(--muted);font-size:11px;line-height:1.6;padding:5px 15px 10px}
+@media(max-width:620px){body{padding:12px 10px 35px}.topbar{margin-bottom:10px}.home-btn{display:none}.hero{padding:20px 16px;border-radius:22px}h1{font-size:23px}.hero-icon{width:50px;height:50px;font-size:27px}.grid{grid-template-columns:1fr}.section.full{grid-column:auto}.section{padding:16px}.section p,.section li{font-size:13.5px}.plant-image{max-height:280px}}
+</style>
+</head>
+<body>
+<div class="app">
+    <div class="topbar">
+        <a class="back-btn" href="javascript:void(0)" onclick="goBackToTreatment()">← Back to Under Treatment</a>
+        <a class="home-btn" href="{{ url_for('health', filter='treatment') if false else url_for('health_page') }}?filter=treatment">📊 Health Dashboard</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-main">
+            <div class="hero-icon">{{ item.emoji or "🌿" }}</div>
+            <div>
+                <div class="eyebrow">Plant Disease AI · Treatment Details</div>
+                <h1>{{ item.disease }}</h1>
+                <div class="plant">🌿 {{ item.plant_name }}</div>
+            </div>
+        </div>
+        <div class="meta-row">
+            <span class="badge {{ item.status }}">
+                {% if item.status == "started" %}🟠 Started{% elif item.status == "monitoring" %}🟡 Monitoring{% else %}🟢 Completed{% endif %}
+            </span>
+            <span class="date-chip">📅 Started: {{ item.started_at[:10] if item.started_at else "—" }}</span>
+            {% if item.updated_at %}<span class="date-chip">🕒 Updated: {{ item.updated_at[:10] }}</span>{% endif %}
+        </div>
+    </section>
+
+    {% set ti = item.treatment_info or {} %}
+
+    {% if item.image_path %}
+    <section class="image-card">
+        <img class="plant-image" src="{{ item.image_path }}" alt="{{ item.plant_name }} - {{ item.disease }}" onerror="this.parentElement.style.display='none'">
+        <div class="image-caption">🌿 Plant image · {{ item.plant_id }}</div>
+    </section>
+    {% endif %}
+
+    <div class="grid">
+        {% if ti.get("what_is_it") or ti.get("condition_type") %}
+        <section class="section">
+            <h2>🌱 What Is It?</h2>
+            {% if ti.get("condition_type") %}<p><strong>Type:</strong> {{ ti["condition_type"] }}</p>{% endif %}
+            {% if ti.get("what_is_it") %}<p style="margin-top:7px">{{ ti["what_is_it"] }}</p>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("why_does_it_happen") %}
+        <section class="section">
+            <h2>❓ Why Does It Happen?</h2>
+            <p>{{ ti["why_does_it_happen"] }}</p>
+        </section>
+        {% endif %}
+
+        {% if ti.get("symptoms_to_look_for") %}
+        <section class="section full">
+            <h2>🔎 Symptoms To Look For</h2>
+            {% if ti["symptoms_to_look_for"] is string %}<p>{{ ti["symptoms_to_look_for"] }}</p>{% else %}<ul>{% for x in ti["symptoms_to_look_for"] %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("plain_language_help") %}
+        <section class="section full">
+            <h2>🌱 Simple Explanation</h2>
+            {% if ti["plain_language_help"] is string %}<p>{{ ti["plain_language_help"] }}</p>{% else %}<ul>{% for x in ti["plain_language_help"] %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if item.home_care %}
+        <section class="section">
+            <h2>🏠 Home Treatment</h2>
+            {% if item.home_care is string %}<p>{{ item.home_care }}</p>{% else %}<ul>{% for x in item.home_care %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if item.what_to_do_first %}
+        <section class="section">
+            <h2>⚡ What To Do First</h2>
+            {% if item.what_to_do_first is string %}<p>{{ item.what_to_do_first }}</p>{% else %}<ul>{% for x in item.what_to_do_first %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if item.prevention %}
+        <section class="section full prevention">
+            <h2>🛡️ Prevention Tips</h2>
+            {% if item.prevention is string %}<p>{{ item.prevention }}</p>{% else %}<ul>{% for x in item.prevention %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("common_treatment_options") %}
+        <section class="section full">
+            <h2>💊 Common Treatment Options</h2>
+            {% if ti["common_treatment_options"] is string %}<p>{{ ti["common_treatment_options"] }}</p>{% else %}<ul>{% for x in ti["common_treatment_options"] %}{% if x is mapping %}<li>{% for k,v in x.items() %}<strong>{{ k }}:</strong> {{ v }}{% if not loop.last %}<br>{% endif %}{% endfor %}</li>{% else %}<li>{{ x }}</li>{% endif %}{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("example_products") %}
+        <section class="section full">
+            <h2>🧴 Example Products</h2>
+            {% if ti["example_products"] is string %}<p>{{ ti["example_products"] }}</p>{% else %}{% for x in ti["example_products"] %}<div class="product">{% if x is mapping %}{% for k,v in x.items() %}<strong>{{ k }}:</strong> {{ v }}{% if not loop.last %}<br>{% endif %}{% endfor %}{% else %}🧪 {{ x }}{% endif %}</div>{% endfor %}{% endif %}
+            {% if ti.get("example_products_disclaimer") %}<p style="margin-top:10px;font-size:12px">{{ ti["example_products_disclaimer"] }}</p>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("light_stage") or ti.get("moderate_stage") or ti.get("severe_stage") %}
+        <section class="section full">
+            <h2>🧪 Control by Severity</h2>
+            {% if ti.get("light_stage") %}<div class="stage light"><div class="stage-title">🟢 Light Stage</div>{% if ti["light_stage"] is string %}<p>{{ ti["light_stage"] }}</p>{% else %}<ul>{% for x in ti["light_stage"] %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}</div>{% endif %}
+            {% if ti.get("moderate_stage") %}<div class="stage moderate"><div class="stage-title">🟠 Moderate Stage</div>{% if ti["moderate_stage"] is string %}<p>{{ ti["moderate_stage"] }}</p>{% else %}<ul>{% for x in ti["moderate_stage"] %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}</div>{% endif %}
+            {% if ti.get("severe_stage") %}<div class="stage severe"><div class="stage-title">🔴 Severe Stage</div>{% if ti["severe_stage"] is string %}<p>{{ ti["severe_stage"] }}</p>{% else %}<ul>{% for x in ti["severe_stage"] %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}</div>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("fungicide_control") %}
+        <section class="section full">
+            <h2>🧪 Fungicide / Control</h2>
+            {% if ti["fungicide_control"] is string %}<p>{{ ti["fungicide_control"] }}</p>{% else %}<ul>{% for x in ti["fungicide_control"] %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("treatment_safety") or ti.get("application_safety") %}
+        <section class="section full safety">
+            <h2>⚠️ Application / Safety</h2>
+            {% set safety = ti.get("treatment_safety") or ti.get("application_safety") %}
+            {% if safety is string %}<p>{{ safety }}</p>{% else %}<ul>{% for x in safety %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if ti.get("when_to_get_expert_help") %}
+        <section class="section full"><h2>🆘 When To Get Help</h2><p>{{ ti["when_to_get_expert_help"] }}</p></section>
+        {% endif %}
+
+        {% if ti.get("example_products_disclaimer") and not ti.get("example_products") %}
+        <section class="section full note"><h2>⚠️ Product Note</h2><p>{{ ti["example_products_disclaimer"] }}</p></section>
+        {% endif %}
+
+        {% if ti.get("final_recommendation") %}
+        <section class="section full"><h2>🎯 Final Recommendation</h2><p>{{ ti["final_recommendation"] }}</p></section>
+        {% endif %}
+
+        {% if ti.get("label_explanation") or item.label_explanation %}
+        <section class="section full note"><h2>📋 Important Information</h2><p>{{ ti.get("label_explanation") or item.label_explanation }}</p></section>
+        {% endif %}
+    </div>
+
+    <div class="actions">
+        <a class="primary" href="javascript:void(0)" onclick="goBackToTreatment()">← Back to Under Treatment</a>
+        <a class="secondary" href="{{ url_for('health_page') }}?filter=treatment">📊 Health Dashboard</a>
+    </div>
+
+    <div class="footer">🌿 Plant Disease AI · Treatment guidance is based on the treatment information stored in your project.</div>
+</div>
+<script>
+function goBackToTreatment(){
+    if (window.history.length > 1) { window.history.back(); }
+    else { window.location.href = "{{ url_for('health_page') }}?filter=treatment"; }
+}
+</script>
+</body>
+</html>

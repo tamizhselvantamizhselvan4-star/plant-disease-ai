@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Plant Disease AI</title>
+<style>
+    :root {
+        --green: #176b43;
+        --green-dark: #104c30;
+        --green-light: #319a60;
+        --green-soft: #eaf7ee;
+        --dark: #173b2b;
+        --muted: #718278;
+        --line: #dcebe1;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--dark);
+        background: linear-gradient(135deg, #edf8f0, #ffffff, #eaf6ed);
+    }
+
+    .card {
+        width: 100%;
+        max-width: 380px;
+        background: white;
+        border-radius: 22px;
+        padding: 28px 26px 32px;
+        box-shadow: 0 14px 32px rgba(23, 107, 67, 0.13);
+        border: 1px solid var(--line);
+    }
+
+    .brand {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .brand-icon {
+        font-size: 40px;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .brand h1 {
+        margin: 0;
+        font-size: 22px;
+        color: var(--green-dark);
+        letter-spacing: -0.5px;
+    }
+
+    .brand p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    /* Tabs */
+    .tabs {
+        display: flex;
+        background: var(--green-soft);
+        border-radius: 14px;
+        padding: 4px;
+        gap: 4px;
+        margin-bottom: 6px;
+    }
+
+    .tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px 8px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--muted);
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        font: inherit;
+        transition: background .15s, color .15s;
+    }
+
+    .tab.active {
+        background: white;
+        color: var(--green-dark);
+        box-shadow: 0 4px 10px rgba(23, 107, 67, 0.15);
+    }
+
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        margin: 14px 0 6px;
+        color: var(--dark);
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        font-size: 15px;
+        font: inherit;
+        background: var(--green-soft);
+        color: var(--dark);
+    }
+
+    input:focus {
+        outline: none;
+        border-color: var(--green-light);
+    }
+
+    .field-name {
+        overflow: hidden;
+        max-height: 90px;
+        transition: max-height .2s ease, opacity .2s ease, margin .2s ease;
+        opacity: 1;
+    }
+
+    .field-name.hidden {
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
+        pointer-events: none;
+    }
+
+    .error {
+        margin-top: 14px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        color: #9b3127;
+        background: #fff1ef;
+        border: 1px solid #f3d1cc;
+        font-size: 13px;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        margin-top: 20px;
+        padding: 13px;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 800;
+        font: inherit;
+        color: white;
+        cursor: pointer;
+        background: linear-gradient(135deg, #176b43, #319a60);
+        box-shadow: 0 8px 18px rgba(23, 107, 67, 0.25);
+    }
+
+    .hint {
+        margin-top: 14px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--muted);
+    }
+
+    .hint button.link {
+        border: none;
+        background: none;
+        font: inherit;
+        font-weight: 800;
+        color: var(--green-dark);
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+    }
+
+    .back {
+        display: block;
+        text-align: center;
+        margin-top: 18px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--green-dark);
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="brand">
+        <span class="brand-icon">🌿</span>
+        <h1 id="brandTitle">Welcome back</h1>
+        <p id="brandSub">Sign in to see your profile</p>
+    </div>
+
+    <div class="tabs">
+        <button type="button" class="tab" id="tabLogin" onclick="setMode('login')">Log In</button>
+        <button type="button" class="tab" id="tabSignup" onclick="setMode('signup')">Create Account</button>
+    </div>
+
+    <form method="POST" action="{{ url_for('login_page') }}" id="authForm">
+
+        <input type="hidden" name="return_to" value="{{ return_to }}">
+        <input type="hidden" name="mode" id="modeField" value="{{ mode if mode else 'login' }}">
+
+        <div class="field-name" id="nameField">
+            <label for="name">Your Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                autocomplete="name"
+                maxlength="60"
+                placeholder="e.g. Tony Stark"
+            >
+        </div>
+
+        <label for="phone">Phone Number</label>
+        <input
+            type="tel"
+            id="phone"
+            name="phone"
+            autocomplete="tel"
+            inputmode="tel"
+            placeholder="e.g. 9876543210"
+            pattern="[0-9+\-\s()]{7,20}"
+            required
+        >
+
+        {% if error %}
+        <div class="error">⚠️ {{ error }}</div>
+        {% endif %}
+
+        <button type="submit" id="submitButton">Continue</button>
+
+    </form>
+
+    <p class="hint" id="switchHint">
+        New here?
+        <button type="button" class="link" onclick="setMode('signup')">Create an account</button>
+    </p>
+
+    <a class="back" href="/">🏠 Back to Home</a>
+
+</div>
+
+<script>
+    function setMode(mode) {
+        const isSignup = mode === 'signup';
+
+        document.getElementById('modeField').value = mode;
+
+        document.getElementById('tabLogin').classList.toggle('active', !isSignup);
+        document.getElementById('tabSignup').classList.toggle('active', isSignup);
+
+        const nameField = document.getElementById('nameField');
+        const nameInput = document.getElementById('name');
+
+        nameField.classList.toggle('hidden', !isSignup);
+        nameInput.required = isSignup;
+
+        document.getElementById('brandTitle').textContent = isSignup ? 'Create your account' : 'Welcome back';
+        document.getElementById('brandSub').textContent = isSignup
+            ? 'Just your name and phone number to get started'
+            : 'Sign in to see your profile';
+
+        document.getElementById('submitButton').textContent = isSignup ? 'Create Account' : 'Log In';
+
+        document.getElementById('switchHint').innerHTML = isSignup
+            ? 'Already have an account? <button type="button" class="link" onclick="setMode(\'login\')">Log in</button>'
+            : 'New here? <button type="button" class="link" onclick="setMode(\'signup\')">Create an account</button>';
+    }
+
+    setMode(document.getElementById('modeField').value || 'login');
+</script>
+
+</body>
+</html>

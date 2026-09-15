@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+.env
+static/uploads/
+before_after_records.json
+chat_records.json
+upload_records.json
+data/before_after_records.json
+data/chat_records.json
+data/saved_before_records.json
+data/treatment_records.json
+data/upload_records.json
+data/users.json

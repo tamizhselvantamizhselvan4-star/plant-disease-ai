@@ -1,0 +1,20 @@
+[
+    {
+        "id": "09d76bfb995b4002a8a3259077156b76",
+        "user_id": "6041ed778b254956bd7a55d864c0c063",
+        "plant_number": "Plant #001",
+        "name": "hibisucs",
+        "plant_type": "hibiscus",
+        "scan_history": [
+            {
+                "saved_filename": "3e54359d626342f38b481bd252f0ad90.png",
+                "disease": "sooty_mold",
+                "confidence": 94.16,
+                "scanned_at": "2026-09-01T15:28:32"
+            }
+        ],
+        "current_disease": "sooty_mold",
+        "treatment_status": "completed",
+        "created_at": "2026-09-01T15:28:32"
+    }
+]

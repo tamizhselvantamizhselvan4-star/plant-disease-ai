@@ -1,0 +1,1552 @@
+{
+  "Chilli_Cercospora": {
+    "display_name": "Chilli Cercospora",
+    "condition_type": "Plant Disease",
+    "description": "🍂 Cercospora leaf spot causes small brown to gray spots on chilli leaves and may lead to premature leaf drop.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Chilli Cercospora** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🍂 Cercospora leaf spot causes small brown to gray spots on chilli leaves and may lead to premature leaf drop.",
+    "why_does_it_happen": "Caused by the fungus Cercospora capsici. It thrives in warm, humid weather and spreads through wind and rain splash. Spores survive on infected leaf debris and nearby volunteer plants, and dense planting with poor air circulation increases the risk of an outbreak.",
+    "symptoms_to_look_for": [
+      "🎯 Circular spots with a grey or tan center and a dark brown margin, often called 'frog-eye' spots.",
+      "🟡 A yellow halo frequently surrounds each spot.",
+      "🍂 Spots enlarge and merge over time, leading to premature leaf drop.",
+      "⬇️ Older, lower leaves are usually affected first before the disease moves upward."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove and safely discard badly infected leaves.",
+      "💦 Apply a suitable fungicide such as a copper-based product according to the product label.",
+      "🌬️ Improve air circulation and avoid overhead watering."
+    ],
+    "light_stage": [
+      "🟢 The problem is still small — only a few leaves have spots. Remove the worst affected leaves, keep foliage dry, and check the plant every few days.",
+      "🧪 If treatment is needed, look for a fungicide whose package label specifically names **chilli/pepper + Cercospora/leaf spot**. Example product from the project data: **Dithane M-45 (mancozeb)**. Use it only if the current label permits that crop and problem."
+    ],
+    "moderate_stage": [
+      "🟠 Spots are appearing on several leaves or increasing. Remove badly affected leaves, clear fallen leaves, improve airflow, and avoid overhead watering.",
+      "🧪 A labelled option may be needed. Example product: **Dithane M-45 (mancozeb)**; other examples in the project data include copper fungicide and Daconil. Choose only a product whose current label covers chilli/pepper and the target leaf-spot problem."
+    ],
+    "severe_stage": [
+      "🔴 A large part of the plant is affected, leaves are dropping, or the disease is spreading quickly. Remove heavily infected material and keep the remaining foliage as dry as practical.",
+      "🧪 Use a crop- and problem-labelled fungicide only. Do not increase the dose because the disease is severe. If the plant is badly weakened or the problem keeps spreading, get crop-specific agricultural advice."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧹 Remove and destroy fallen or infected leaves promptly instead of leaving them on the ground.",
+      "💧 Water at the base of the plant in the morning rather than wetting the foliage.",
+      "🌬️ Space plants further apart to improve airflow and speed leaf drying.",
+      "🧴 Sanitize pruning tools between plants to avoid spreading spores."
+    ],
+    "prevention": [
+      "🛡️ Use clean, healthy chilli planting material to reduce introduction of Cercospora.",
+      "💧 Avoid overhead watering and prolonged leaf wetness because the fungus spreads more easily on wet foliage.",
+      "🌬️ Provide adequate spacing and airflow so chilli leaves dry quickly.",
+      "🧹 Remove infected leaves and fallen chilli leaf debris to reduce fungal spores.",
+      "🔍 Inspect older lower leaves regularly and act early when circular leaf spots appear."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Chilli Cercospora",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL leaf spot. Fungicides that are often labelled for Cercospora leaf spot on chilli/pepper include: copper-based fungicides (copper oxychloride / copper hydroxide), chlorothalonil, mancozeb, or azoxystrobin.",
+      "🔁 Alternate between two different active ingredient groups (e.g. a copper product and a strobilurin like azoxystrobin) if repeat treatment is needed, to reduce the chance of the fungus becoming resistant.",
+      "📋 Only use a product whose label lists both 'chilli/pepper' and 'Cercospora leaf spot' (or 'leaf spot') as an approved use."
+    ],
+    "plain_language_help": "In simple terms: this is caused by a fungus, so you're looking for a product labelled as a 'fungicide' for chilli/pepper leaf spot. Copper-based fungicides are one of the most commonly available options for home gardeners — check the label to confirm it lists your crop and this problem before spraying.",
+    "example_products": [
+      "🧪 Copper fungicide: Bonide Copper Fungicide, Southern Ag Liquid Copper Fungicide",
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Mancozeb: Dithane M-45 (more common as a farm/agricultural product)"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Chilli_Mites_and_Thrips": {
+    "display_name": "Chilli Mites and Thrips",
+    "condition_type": "Pest Infestation",
+    "description": "🕷️ Thrips and mites damage chilli leaves and young growth, causing curling, bronzing, stippling, or distorted leaves.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Chilli Mites and Thrips** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🕷️ Thrips and mites damage chilli leaves and young growth, causing curling, bronzing, stippling, or distorted leaves.",
+    "why_does_it_happen": "Caused by broad mites (Polyphagotarsonemus latus) and thrips, tiny pests that pierce plant tissue and feed on sap from young leaves and buds. Populations build quickly in hot, dry weather and spread via wind, infested transplants, or contaminated tools.",
+    "symptoms_to_look_for": [
+      "🌀 Downward curling or cupping of young leaves.",
+      "📏 Narrowed, distorted, or brittle new leaf growth.",
+      "✨ Bronzing or a blistered texture on the undersides of leaves.",
+      "🌾 Silvery streaks or scarring on leaf and fruit surfaces.",
+      "🌸 Flower and fruit drop in heavier infestations."
+    ],
+    "what_to_do_first": [
+      "🟨 Use yellow or blue sticky traps to monitor and reduce flying thrips.",
+      "🌿 Apply insecticidal soap or neem-based products according to the product label.",
+      "✂️ Remove severely damaged leaves and control weeds that can shelter pests."
+    ],
+    "light_stage": [
+      "🟢 You are seeing only a small number of mites/thrips. Wash affected leaves gently, especially the undersides, and monitor closely.",
+      "🧪 Start with a lower-impact option such as **Safer Brand Insecticidal Soap** or a neem product from the project examples, only when the product label permits use on chilli and the target pest."
+    ],
+    "moderate_stage": [
+      "🟠 Pest numbers are increasing and damage is visible on several leaves. Treat the leaf undersides thoroughly and repeat monitoring as directed by the product label.",
+      "🧪 Example product for thrips: **Monterey Garden Insect Spray (spinosad)**. For mites, the project data lists products containing **abamectin** as heavier-infestation options. Use only the exact product label approved for chilli and the target pest."
+    ],
+    "severe_stage": [
+      "🔴 Heavy infestation is causing widespread leaf damage, distortion, or plant weakening. Isolate affected plants where practical and remove badly damaged leaves.",
+      "🧪 A stronger labelled miticide/insecticide may be required. Do not increase dose or mix products on your own. Seek agricultural advice for a severe infestation."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "💦 Spray a strong jet of water on leaf undersides to physically dislodge mites and thrips.",
+      "🟡 Hang yellow or blue sticky traps near the plant to monitor and reduce adult numbers.",
+      "✂️ Remove and discard the most heavily distorted growing tips, where pest numbers are highest.",
+      "🌱 Avoid excess nitrogen fertilizer, since soft new growth attracts these pests more strongly."
+    ],
+    "prevention": [
+      "🔍 Check young leaves, buds, and leaf undersides regularly for mites and thrips.",
+      "🟨 Use yellow or blue sticky traps to monitor flying thrips.",
+      "🌿 Remove weeds and plant debris that can shelter these pests.",
+      "💧 Keep chilli plants properly watered and avoid drought stress.",
+      "🌱 Avoid excessive nitrogen fertilizer because soft new growth can attract these pests."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Chilli Mites and Thrips",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🐛 This is a PEST problem, not a fungus — a fungicide will NOT help here. You need a labelled miticide (for mites) or insecticide (for thrips).",
+      "🌿 Lower-impact options often used first: insecticidal soap, horticultural oil, or neem oil (azadirachtin) sprayed to cover leaf undersides where mites/thrips hide.",
+      "🧪 For heavier infestations, a labelled miticide (e.g. abamectin) for mites, or spinosad for thrips, are commonly used where locally approved."
+    ],
+    "plain_language_help": "In simple terms: mites and thrips are tiny insects/relatives of spiders, not a disease — so 'fungicide' is the wrong tool entirely. Look for a product labelled as a 'miticide' or 'insecticide' for chilli/pepper, and make sure to spray the undersides of leaves where these pests usually hide.",
+    "example_products": [
+      "🧪 Insecticidal soap: Safer Brand Insecticidal Soap",
+      "🧪 Neem oil: Southern Ag Triple Action Neem Oil, Garden Safe Neem Oil Extract",
+      "🧪 Spinosad (thrips): Monterey Garden Insect Spray, Captain Jack's Dead Bug Brew",
+      "🧪 Miticide (mites, heavier cases): products containing abamectin are common but mostly sold as professional-use — a garden center/agri-supplier can point you to a locally registered consumer option."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Chilli_Nutritional_Deficiency": {
+    "display_name": "Chilli Nutritional Deficiency",
+    "condition_type": "Nutritional / Soil Problem",
+    "description": "🌱 Nutritional deficiency can cause yellowing, poor growth, leaf discoloration, or abnormal development. The exact deficiency should be identified before applying a specific nutrient.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Chilli Nutritional Deficiency** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🌱 Nutritional deficiency can cause yellowing, poor growth, leaf discoloration, or abnormal development. The exact deficiency should be identified before applying a specific nutrient.",
+    "why_does_it_happen": "This is not caused by a pathogen or pest — it results from insufficient or imbalanced nutrients in the soil, commonly nitrogen, magnesium, potassium, iron, or zinc. Poor soil pH, waterlogging, drought stress, or root damage can all limit nutrient uptake and trigger these symptoms.",
+    "symptoms_to_look_for": [
+      "🍃 Yellowing between the leaf veins (interveinal chlorosis) while veins stay green.",
+      "📉 Older leaves yellowing first (typical of nitrogen deficiency) or younger leaves yellowing first (typical of iron or manganese deficiency).",
+      "🌱 Overall stunted or slow plant growth.",
+      "🌶️ Small, misshapen, or poorly developed fruit.",
+      "🍁 Browning or scorching along leaf edges in more advanced cases."
+    ],
+    "what_to_do_first": [
+      "🚨 Check watering, drainage and growing medium.",
+      "🚨 Use soil or growing-medium testing when possible.",
+      "🚨 Avoid applying a specific nutrient without identifying the likely deficiency."
+    ],
+    "light_stage": [
+      "🟢 Symptoms are limited. First check watering, soil condition and recent fertilizer use. Do not spray pesticide — this is a nutrition/soil problem.",
+      "🌱 Use a fertilizer only after identifying the likely nutrient. A balanced vegetable fertilizer or a specific nutrient feed may be appropriate, but follow its label."
+    ],
+    "moderate_stage": [
+      "🟠 Yellowing, discoloration or poor growth is becoming more noticeable. Check soil pH and nutrition, and consider a soil/leaf test before adding large amounts of fertilizer.",
+      "🌱 Correct the identified nutrient using an appropriate labelled fertilizer. Avoid guessing and over-fertilizing, because excess nutrients can also damage plants."
+    ],
+    "severe_stage": [
+      "🔴 The plant is severely stunted, losing many leaves, or not recovering after correction. Stop adding random fertilizers and get a soil/leaf test or crop-specific agricultural advice.",
+      "🚫 Do not treat this with fungicides or insecticides. Correct the confirmed nutrient or soil problem according to professional advice and the fertilizer label."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧪 Test soil pH and adjust it if it's outside the ideal range for chilli (roughly 6.0–6.8).",
+      "🌿 Apply a balanced fertilizer, or a targeted micronutrient feed if the yellowing pattern points to a specific deficiency.",
+      "💧 Keep watering consistent — both drought and waterlogging make nutrient uptake worse.",
+      "🍂 Work compost or organic matter into the soil to improve long-term nutrient availability."
+    ],
+    "prevention": [
+      "🧪 Test the soil or growing medium when deficiency symptoms appear.",
+      "⚖️ Maintain suitable soil pH so nutrients remain available to chilli plants.",
+      "🌱 Apply a balanced fertilizer based on the plant's growth stage and nutrient needs.",
+      "🍂 Add good-quality compost or organic matter to support nutrient availability.",
+      "💧 Maintain consistent watering because drought or waterlogging can reduce nutrient uptake."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Chilli Nutritional Deficiency",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Identify the nutrient or soil problem before applying corrective fertilizer.",
+    "common_treatment_options": [
+      "🚫 This is NOT caused by a fungus, bacteria, virus, or pest — no fungicide or pesticide is needed here.",
+      "🌱 The usual fix is a balanced fertilizer application matched to the deficient nutrient (e.g. nitrogen, magnesium, or calcium, depending on the symptom pattern), or a soil/leaf test to confirm which nutrient is short.",
+      "💧 Also check watering consistency and soil pH, since both can block nutrient uptake even when the soil itself has enough nutrients."
+    ],
+    "plain_language_help": "In simple terms: the plant isn't sick from a germ or a pest — it's just missing something in its diet (a nutrient). Spraying a fungicide or pesticide won't fix this; a fertilizer suited to the missing nutrient, or a soil test to find out exactly what's missing, is the right next step.",
+    "example_products": [
+      "🚫 No fungicide or pesticide product applies here.",
+      "🌱 Instead: a balanced fertilizer (e.g. a general 'tomato & vegetable' fertilizer, or a specific micronutrient feed like Epsom salt for magnesium, or a chelated iron/zinc feed) matched to the deficient nutrient once identified."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Healthy_Chilli": {
+    "display_name": "Healthy Chilli",
+    "condition_type": "Healthy Plant",
+    "description": "🌿 The chilli plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Healthy Chilli** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🌿 The chilli plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "why_does_it_happen": "Not applicable — this result means the plant shows no visible signs of disease, pest damage, or nutrient stress at the time of the photo.",
+    "symptoms_to_look_for": [
+      "🟢 Uniform green leaf color with no spots, curling, or distortion.",
+      "🌱 Normal, steady growth habit for the plant's age.",
+      "🌸 Healthy flowering and fruit set with no unusual drop."
+    ],
+    "what_to_do_first": [
+      "🚨 Continue normal plant care and monitor regularly."
+    ],
+    "light_stage": [
+      "🟢 The chilli looks healthy. No pesticide or fungicide is needed. Continue normal watering, feeding and weekly inspection."
+    ],
+    "moderate_stage": [
+      "🟠 There is no treatment to apply while the plant remains healthy. If new spots, pests, curling or yellowing appear, identify the new problem first."
+    ],
+    "severe_stage": [
+      "🔴 A healthy result is not a reason to spray. If serious symptoms appear later, get a new diagnosis before applying any pesticide or fungicide."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "💧 Keep up a consistent watering schedule — avoid both drought stress and waterlogging.",
+      "🌿 Continue balanced fertilizing on a regular schedule appropriate for chilli.",
+      "🔍 Check the plant periodically, especially leaf undersides, so any new problem is caught early."
+    ],
+    "prevention": [
+      "🔍 Inspect chilli leaves, stems, buds, and fruits regularly for early problems.",
+      "💧 Water consistently while avoiding waterlogging around the roots.",
+      "🌱 Provide balanced nutrition without excessive fertilizer.",
+      "🌬️ Maintain good spacing and airflow around chilli plants.",
+      "🧹 Remove dead, damaged, or diseased plant material promptly."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Healthy Chilli",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Continue normal care and regular monitoring. Do not apply pesticides or fungicides without a specific pest or disease problem.",
+    "common_treatment_options": [
+      "✅ No treatment needed — this plant does not show signs of disease, pests, or deficiency.",
+      "🔁 Keep up your regular watering, feeding, and monitoring routine to keep it that way."
+    ],
+    "plain_language_help": "In simple terms: nothing to treat here — the plant looks healthy. No fungicide or pesticide is needed.",
+    "example_products": [
+      "✅ No product needed."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "botrytis_blightgray_mold": {
+    "display_name": "Botrytis Blight (Gray Mold)",
+    "condition_type": "Plant Disease",
+    "description": "🌫️ Botrytis blight, or gray mold, produces gray fuzzy growth on flowers, leaves, and stems, especially under cool and humid conditions.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Botrytis Blight (Gray Mold)** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🌫️ Botrytis blight, or gray mold, produces gray fuzzy growth on flowers, leaves, and stems, especially under cool and humid conditions.",
+    "why_does_it_happen": "Caused by the fungus Botrytis cinerea. It's favored by cool, humid, poorly ventilated conditions and spreads through airborne spores that land on wounded, dying, or aging plant tissue such as old flowers or damaged leaves. Excess moisture from overwatering, dew, or rain accelerates its spread.",
+    "symptoms_to_look_for": [
+      "🌫️ Fuzzy grey fungal growth on affected leaves, flowers, or fruit.",
+      "💧 Brown, water-soaked spots that often begin on flower petals or wounds.",
+      "🥀 Softening and collapse of infected tissue.",
+      "🌸 Buds that fail to open or that rot before opening."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove infected flowers and leaves and discard them away from healthy plants.",
+      "💦 Apply an appropriate fungicide according to the product label when disease pressure is high.",
+      "🌬️ Reduce humidity and improve air circulation around the plant."
+    ],
+    "light_stage": [
+      "🟢 Only a small amount of gray mold is present. Remove infected flowers/leaves, improve airflow, and reduce leaf wetness and humidity.",
+      "🧪 If a fungicide is needed, the project examples include **Daconil Fungicide (chlorothalonil)**. Use only if the current label permits the identified crop and Botrytis/gray mold."
+    ],
+    "moderate_stage": [
+      "🟠 Gray mold is appearing on several flowers/leaves. Remove infected material promptly, improve ventilation, and avoid keeping foliage wet.",
+      "🧪 A labelled Botrytis treatment may be appropriate. Example product from the project data: **Daconil Fungicide (chlorothalonil)**. Professional/greenhouse products may also be available; verify the exact label."
+    ],
+    "severe_stage": [
+      "🔴 Mold is widespread or rapidly destroying flowers/leaves. Remove badly infected material and reduce humidity immediately.",
+      "🧪 Use only a crop- and problem-labelled treatment. Do not increase pesticide dose or combine products without label permission. Seek agricultural advice for severe spread."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🌬️ Improve air circulation around the plant through pruning and wider spacing.",
+      "🧹 Remove spent flowers and dead or dying plant material as soon as you notice them.",
+      "💧 Water at the base rather than overhead, and water in the morning so foliage dries during the day.",
+      "🏠 In greenhouses or indoor settings, increase ventilation to reduce humidity around the plant."
+    ],
+    "prevention": [
+      "🌬️ Maintain good airflow around the plant to reduce humid conditions.",
+      "💧 Avoid prolonged moisture on leaves, flowers, and other plant surfaces.",
+      "🧹 Remove dead flowers, leaves, and decaying plant material promptly.",
+      "🏠 Improve ventilation in enclosed or greenhouse growing areas.",
+      "🌱 Avoid overcrowding because dense, humid growth encourages gray mold."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Botrytis Blight (Gray Mold)",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease. Fungicides often labelled for Botrytis (gray mold) include: chlorothalonil, iprodione, or combination products containing fenhexamid or cyprodinil+fludioxonil, depending on local approval.",
+      "🌬️ Fungicide alone rarely solves Botrytis — improving airflow and reducing humidity/leaf wetness around the plant matters just as much as spraying.",
+      "📋 Only use a product whose label lists your crop and 'Botrytis' or 'gray mold' as an approved use."
+    ],
+    "plain_language_help": "In simple terms: this is a fungus that thrives in damp, still air, so a fungicide labelled for 'Botrytis' or 'gray mold' on your crop is the chemical option — but cutting down humidity and improving airflow around the plant is just as important as any spray.",
+    "example_products": [
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Combination Botrytis fungicides (fenhexamid / cyprodinil+fludioxonil): more common as professional/greenhouse-supply products — ask a garden center or agri-supplier for a locally registered option."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Healthy_Hibiscus": {
+    "display_name": "Healthy Hibiscus",
+    "condition_type": "Healthy Plant",
+    "description": "🌿 The hibiscus plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Healthy Hibiscus** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🌿 The hibiscus plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "why_does_it_happen": "Not applicable — this result means the plant shows no visible signs of disease, pest damage, or nutrient stress at the time of the photo.",
+    "symptoms_to_look_for": [
+      "🟢 Even leaf color with no spots, curling, or discoloration.",
+      "🌱 Steady, proportional growth for the plant's stage.",
+      "🍅 Normal flowering and fruit development with no unusual drop."
+    ],
+    "what_to_do_first": [
+      "🚨 Continue normal plant care and monitor regularly."
+    ],
+    "light_stage": [
+      "🟢 The plant looks healthy. No treatment is needed. Continue normal care and weekly inspection."
+    ],
+    "moderate_stage": [
+      "🟠 Do not spray simply because the plant has reached a “moderate” category. Investigate any new symptom first."
+    ],
+    "severe_stage": [
+      "🔴 If serious symptoms develop later, obtain a fresh diagnosis before using any pesticide or fungicide."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "💧 Maintain a consistent watering routine, avoiding both drought and waterlogging.",
+      "🌿 Keep up regular, balanced fertilizing suited to the crop.",
+      "🔍 Inspect the plant periodically, including leaf undersides, to catch any new issue early."
+    ],
+    "prevention": [
+      "🔍 Inspect leaves, stems, and growing points weekly for pests or disease.",
+      "💧 Keep watering consistent and avoid waterlogged soil.",
+      "🌱 Provide appropriate nutrition without overfertilizing.",
+      "🌬️ Maintain good spacing and airflow around the plant.",
+      "🧹 Remove dry, damaged, or diseased leaves when necessary."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Healthy Hibiscus",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Continue normal care and regular monitoring. Do not apply pesticides or fungicides without a specific pest or disease problem.",
+    "common_treatment_options": [
+      "✅ No treatment needed — this plant does not show signs of disease, pests, or deficiency.",
+      "🔁 Keep up your regular watering, feeding, and monitoring routine to keep it that way."
+    ],
+    "plain_language_help": "In simple terms: nothing to treat here — the plant looks healthy. No fungicide or pesticide is needed.",
+    "example_products": [
+      "✅ No product needed."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "leaf_spot": {
+    "display_name": "leaf spot",
+    "condition_type": "Plant Disease",
+    "description": "🍂 Leaf spot causes brown, black, or tan spots on leaves and may result in premature leaf drop.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **leaf spot** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🍂 Leaf spot causes brown, black, or tan spots on leaves and may result in premature leaf drop.",
+    "why_does_it_happen": "Caused by various fungal or bacterial pathogens that infect leaf tissue. Development is favored by prolonged leaf wetness, high humidity, and moderate to warm temperatures, and the pathogens spread via wind, rain splash, irrigation water, and contaminated tools.",
+    "symptoms_to_look_for": [
+      "⚫ Small circular or irregular spots in brown, black, or tan on the leaves.",
+      "🟡 A yellow halo sometimes surrounding individual spots.",
+      "🔗 Spots enlarging and merging into larger dead patches over time.",
+      "🍂 Premature yellowing and leaf drop as infection progresses.",
+      "🌿 Occasional spots on stems as well as leaves."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove badly infected leaves and fallen debris.",
+      "💦 Apply a suitable fungicide such as a copper-based product according to the product label.",
+      "🌬️ Improve air circulation and avoid overhead watering."
+    ],
+    "light_stage": [
+      "🟢 A few leaf spots are present. Remove badly affected leaves, clean fallen leaves, avoid wetting foliage, and improve airflow.",
+      "🧪 Example product: **Dithane M-45 (mancozeb)** or a copper fungicide listed in the project data. Use only when the current label covers the crop and leaf-spot problem."
+    ],
+    "moderate_stage": [
+      "🟠 Spots are increasing across several leaves. Remove infected foliage, improve spacing and airflow, and avoid overhead watering.",
+      "🧪 A labelled fungicide may be needed. Example: **Dithane M-45 (mancozeb)**. Check that the exact package label permits your crop and target problem."
+    ],
+    "severe_stage": [
+      "🔴 Leaf spotting is widespread, rapidly increasing, or causing major leaf loss. Remove heavily infected material and seek crop-specific advice.",
+      "🧪 Use only a product specifically labelled for the crop and target leaf-spot problem. Never exceed the label rate."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧹 Remove and dispose of infected leaves promptly rather than leaving them nearby.",
+      "💧 Avoid wetting the foliage when watering — water at the base instead.",
+      "🌬️ Improve spacing and air circulation between plants.",
+      "🧴 Disinfect pruning tools between plants to avoid spreading the pathogen.",
+      "🍁 Clear fallen leaf debris from around the base of the plant regularly."
+    ],
+    "prevention": [
+      "💧 Avoid overhead watering and keep leaves as dry as possible.",
+      "🌬️ Provide good airflow and avoid overcrowding.",
+      "🧹 Remove spotted leaves and fallen debris before they accumulate.",
+      "🧴 Clean and disinfect pruning tools between plants.",
+      "🔍 Inspect leaves frequently so new spots can be removed early."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "leaf spot",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL leaf spot. Commonly labelled fungicide options for general leaf spot diseases include: copper-based fungicides, chlorothalonil, or mancozeb, depending on the crop.",
+      "🔁 If more than one treatment is needed, alternate between two different active ingredient groups to reduce the chance of resistance building up.",
+      "📋 Only use a product whose label lists your crop and 'leaf spot' (or the specific pathogen name, if known) as an approved use."
+    ],
+    "plain_language_help": "In simple terms: this is caused by a fungus, so you're looking for a product labelled as a 'fungicide' for your crop and 'leaf spot'. Copper-based fungicides are one of the most widely available options — check the label before spraying.",
+    "example_products": [
+      "🧪 Copper fungicide: Bonide Copper Fungicide, Natria Copper Fungicide",
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Mancozeb: Dithane M-45 (more common as a farm/agricultural product)"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "mealybug_infestation": {
+    "display_name": "mealybug infestation",
+    "condition_type": "Pest Infestation",
+    "description": "🐛 Mealybugs are white, cotton-like insects that suck plant sap and can weaken plant growth.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **mealybug infestation** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🐛 Mealybugs are white, cotton-like insects that suck plant sap and can weaken plant growth.",
+    "why_does_it_happen": "Caused by mealybugs, small soft-bodied insects covered in a waxy coating that feed on plant sap. They thrive in warm conditions and favor sheltered spots like leaf axils and leaf undersides. Ants often help spread and protect them in exchange for the honeydew they produce, and infestations can also start from contaminated tools or newly introduced plants.",
+    "symptoms_to_look_for": [
+      "☁️ White, cottony wax masses clustered in leaf joints, on stems, and on leaf undersides.",
+      "🍯 Sticky honeydew residue coating nearby leaves.",
+      "⚫ Sooty mold developing on the honeydew over time.",
+      "🍃 Yellowing, curling, or stunted new growth.",
+      "🐜 Ants actively moving along stems and leaves to tend the mealybugs."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove heavily infested leaves or shoots.",
+      "🌿 Apply insecticidal soap or a neem-based product according to the product label.",
+      "🐞 Encourage natural predators and avoid unnecessary broad-spectrum insecticide use."
+    ],
+    "light_stage": [
+      "🟢 A few mealybugs are visible. Wipe or wash them away, inspect leaf joints and undersides, and repeat checks every few days.",
+      "🧪 Example lower-impact product: **Safer Brand Insecticidal Soap**. Apply only according to the exact product label for the crop and pest."
+    ],
+    "moderate_stage": [
+      "🟠 Mealybugs are present on several parts of the plant. Clean visible colonies and treat thoroughly where the label permits.",
+      "🧪 Example products in the project data include **Bonide All Seasons Horticultural & Dormant Spray Oil** and **Southern Ag Triple Action Neem Oil**. Use only a product labelled for your crop and mealybugs."
+    ],
+    "severe_stage": [
+      "🔴 Large colonies are weakening the plant, causing heavy honeydew or repeated infestation. Remove badly affected material and isolate the plant where practical.",
+      "🧪 A labelled systemic/contact insecticide may be needed. Do not increase the dose yourself. Seek agricultural advice if the infestation is severe."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧴 Dab visible mealybugs directly with a cotton swab dipped in isopropyl alcohol.",
+      "💦 Spray the plant with a strong jet of water to physically dislodge colonies.",
+      "🧽 Wipe leaves clean of honeydew and any early sooty mold buildup.",
+      "🚧 Isolate heavily infested plants from healthy ones to slow the spread.",
+      "🐜 Manage ant activity around the plant, since ants protect mealybugs from natural predators."
+    ],
+    "prevention": [
+      "🔍 Inspect new plants carefully, especially leaf joints, stems, and leaf undersides.",
+      "🚧 Isolate newly infested plants quickly to prevent mealybugs from spreading.",
+      "🐜 Control ants around plants because ants can protect and spread mealybugs.",
+      "🧹 Remove heavily infested leaves or plant parts promptly.",
+      "🌿 Keep weeds and unnecessary plant debris controlled around the growing area."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "mealybug infestation",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🐛 This is a PEST problem, not a fungus — a fungicide will NOT help here. You need a labelled insecticide, or a lower-impact contact treatment.",
+      "🌿 Lower-impact options often used first: insecticidal soap or horticultural (neem) oil, applied directly onto the visible mealybug clusters (they're covered in a white, waxy coating that can repel sprays, so thorough coverage matters).",
+      "🐞 Natural predators such as ladybird beetles can help keep numbers down outdoors; for heavier infestations, a labelled systemic insecticide (e.g. imidacloprid, where locally approved) is sometimes used."
+    ],
+    "plain_language_help": "In simple terms: mealybugs are small sap-sucking insects, not a disease — so 'fungicide' is the wrong tool. Look for a product labelled as an 'insecticide' for your crop, and make sure the spray actually reaches the bugs (their waxy coating can shed sprays that don't make direct contact).",
+    "example_products": [
+      "🧪 Insecticidal soap: Safer Brand Insecticidal Soap",
+      "🧪 Horticultural oil: Bonide All Seasons Horticultural & Dormant Spray Oil",
+      "🧪 Neem oil: Southern Ag Triple Action Neem Oil",
+      "🧪 Systemic insecticide (heavier cases): Bonide Systemic Insect Control, Bayer Advanced Tree & Shrub Insect Control"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "powdery_mildew": {
+    "display_name": "powdery mildew",
+    "condition_type": "Plant Disease",
+    "description": "⚪ Powdery mildew appears as a white powder-like coating on leaves and shoots and can reduce plant growth.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **powdery mildew** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "⚪ Powdery mildew appears as a white powder-like coating on leaves and shoots and can reduce plant growth.",
+    "why_does_it_happen": "Caused by several related fungal species (order Erysiphales). It's favored by warm days, cool nights, high humidity, and poor air circulation — and unlike many fungal diseases, it can infect leaves even without free water on the surface. Spores spread easily through the air.",
+    "symptoms_to_look_for": [
+      "⚪ White or greyish powdery coating on leaf surfaces and stems.",
+      "🔵 Coating that starts as small circular patches and gradually spreads to cover the whole leaf.",
+      "🍃 Yellowing, curling, or distortion of affected leaves.",
+      "📉 Reduced vigor and stunted growth in more severe cases.",
+      "🍂 Premature leaf drop when infection is heavy."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove badly infected leaves and shoots.",
+      "💦 Apply a labeled fungicide such as sulfur or potassium bicarbonate where appropriate.",
+      "☀️ Improve sunlight exposure and air movement around the plant."
+    ],
+    "light_stage": [
+      "🟢 A small white powdery area is visible. Remove the worst leaves, improve sunlight and airflow, and avoid overcrowding.",
+      "🧪 Example product: **Bonide Sulfur Plant Fungicide**. Use sulfur only if the exact label permits your crop/problem and follow its temperature warnings."
+    ],
+    "moderate_stage": [
+      "🟠 Powdery growth is spreading to several leaves. Remove badly infected foliage, improve airflow and sunlight, and avoid excessive nitrogen.",
+      "🧪 Example products from the project data include **Bonide Sulfur Plant Fungicide**, **GreenCure/MilStop (potassium bicarbonate)**, and **Spectracide Immunox**. Use only the exact product labelled for your crop and powdery mildew."
+    ],
+    "severe_stage": [
+      "🔴 Large portions of the plant are covered or new growth is being seriously affected. Remove heavily infected parts and improve growing conditions immediately.",
+      "🧪 Use only a crop- and problem-labelled fungicide. Do not automatically increase the dose. Seek agricultural advice if the disease continues to spread."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🌬️ Improve air circulation through spacing and selective pruning.",
+      "🌿 Avoid excess nitrogen fertilizer, which produces soft growth that's more susceptible.",
+      "🧹 Remove and destroy heavily infected leaves.",
+      "💧 Water at the base of the plant rather than overhead.",
+      "☀️ Position plants in the most sunlight available, since mildew favors shadier, still air."
+    ],
+    "prevention": [
+      "🌬️ Provide good spacing and airflow to reduce stagnant humid air around leaves.",
+      "☀️ Give plants adequate light and avoid excessively shaded conditions.",
+      "🌱 Avoid excessive nitrogen fertilizer that produces dense, soft new growth.",
+      "💧 Water appropriately and avoid creating persistently humid conditions around foliage.",
+      "🔍 Check new leaves regularly and remove early infected material."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "powdery mildew",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease. Fungicides commonly labelled for powdery mildew include: sulfur-based fungicides, potassium bicarbonate, neem oil, or myclobutanil, depending on the crop and local approval.",
+      "☀️ Powdery mildew often responds well to improved sunlight exposure and air circulation, alongside (not instead of) a labelled fungicide when needed.",
+      "📋 Only use a product whose label lists your crop and 'powdery mildew' as an approved use — sulfur products in particular can injure some plants if applied in hot weather, so check the label's temperature guidance too."
+    ],
+    "plain_language_help": "In simple terms: this is a fungus that thrives on dry leaf surfaces with poor airflow, so a fungicide labelled for 'powdery mildew' on your crop is the chemical option — sulfur-based products are a common, widely available choice, but check the label for any hot-weather warnings first.",
+    "example_products": [
+      "🧪 Sulfur fungicide: Bonide Sulfur Plant Fungicide, Safer Brand Garden Fungicide",
+      "🧪 Potassium bicarbonate: GreenCure, MilStop",
+      "🧪 Myclobutanil: Spectracide Immunox Multi-Purpose Fungicide",
+      "🧪 Neem oil: Southern Ag Triple Action Neem Oil"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "rust": {
+    "display_name": "rust",
+    "condition_type": "Plant Disease",
+    "description": "🟠 Rust causes orange, yellow, or reddish-brown spore-producing spots, often on the underside of leaves.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **rust** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🟠 Rust causes orange, yellow, or reddish-brown spore-producing spots, often on the underside of leaves.",
+    "why_does_it_happen": "Caused by rust fungi (order Pucciniales). Development is favored by moderate temperatures and prolonged leaf wetness from dew, rain, or high humidity. Spores travel long distances on wind, and the fungus can overwinter on plant debris or alternate host plants.",
+    "symptoms_to_look_for": [
+      "🟠 Small orange, yellow, red, or brown raised pustules, mainly on leaf undersides.",
+      "🟡 Matching yellow spots visible on the corresponding upper leaf surface.",
+      "💨 Pustules that release a powdery spore mass when touched or brushed.",
+      "🍂 Yellowing, curling, and early leaf drop in severe infections."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove severely infected leaves.",
+      "💦 Apply a suitable fungicide according to the product label when needed.",
+      "🍂 Collect and discard fallen infected leaves."
+    ],
+    "light_stage": [
+      "🟢 Only a few rust spots/pustules are visible. Remove badly affected leaves, keep foliage dry and improve airflow.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)** or a copper fungicide from the project data, only if the current label covers your crop and rust."
+    ],
+    "moderate_stage": [
+      "🟠 Rust is appearing on many leaves. Remove affected leaves, clean fallen material and make sure the undersides of leaves are checked during treatment.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)**. Use only according to the exact crop/rust label."
+    ],
+    "severe_stage": [
+      "🔴 Rust is widespread and causing heavy leaf loss or weakening. Remove badly affected material and seek crop-specific advice.",
+      "🧪 Use only a labelled rust treatment. Do not repeatedly use the same active ingredient unless the label allows it; never exceed the labelled rate."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧹 Remove and destroy infected leaves and any fallen debris nearby.",
+      "💧 Avoid overhead watering and wetting the foliage.",
+      "🌅 Water early in the day so leaves have time to dry.",
+      "🌬️ Improve spacing between plants for better airflow.",
+      "🙅 Avoid working around wet plants, since handling can spread spores to healthy foliage."
+    ],
+    "prevention": [
+      "🌬️ Avoid overcrowding and maintain good airflow around leaves.",
+      "💧 Avoid overhead irrigation and prolonged leaf wetness.",
+      "🌅 Water early in the day so foliage has time to dry.",
+      "🧹 Remove infected leaves and fallen debris that can support rust spores.",
+      "🔍 Inspect leaf undersides regularly because rust pustules commonly develop there."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "rust",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease. Fungicides commonly labelled for rust include: chlorothalonil, mancozeb, myclobutanil, or copper-based fungicides, depending on the crop.",
+      "🔁 Rust fungi can build resistance to repeated use of the same product — alternate between two different active ingredient groups if more than one treatment is needed.",
+      "📋 Only use a product whose label lists your crop and 'rust' as an approved use — the underside of the leaf (where the pustules form) needs to be covered, not just the top surface."
+    ],
+    "plain_language_help": "In simple terms: this is a fungus, so you're looking for a product labelled as a 'fungicide' for your crop and 'rust'. Copper-based and chlorothalonil products are commonly available options — and since rust mostly forms on the underside of leaves, make sure spray coverage reaches there too.",
+    "example_products": [
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Copper fungicide: Bonide Copper Fungicide, Southern Ag Liquid Copper Fungicide",
+      "🧪 Myclobutanil: Spectracide Immunox Multi-Purpose Fungicide"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "sooty_mold": {
+    "display_name": "sooty mold",
+    "condition_type": "Plant Disease",
+    "description": "⚫ Sooty mold forms a black coating on leaves and commonly develops on sticky honeydew produced by sap-sucking insects.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **sooty mold** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "⚫ Sooty mold forms a black coating on leaves and commonly develops on sticky honeydew produced by sap-sucking insects.",
+    "why_does_it_happen": "Caused by saprophytic fungi growing on honeydew, the sugary excretion left behind by sap-sucking insects such as aphids, whiteflies, mealybugs, or scale. The mold itself doesn't infect the plant directly — its presence is a sign of an underlying insect problem that needs to be addressed.",
+    "symptoms_to_look_for": [
+      "⚫ Black or dark grey, powdery or sooty coating on leaf surfaces.",
+      "🧽 Coating that can be wiped off, unlike some leaf diseases.",
+      "🍯 Sticky honeydew residue often present beneath or around the mold.",
+      "🌤️ Reduced plant vigor, since the coating blocks light from reaching the leaf.",
+      "🐛 Visible sap-sucking insects (aphids, whiteflies, scale, or mealybugs) nearby."
+    ],
+    "what_to_do_first": [
+      "🐞 Control the underlying insects such as whiteflies, aphids, or mealybugs.",
+      "🌿 Use insecticidal soap or a neem-based product according to the product label.",
+      "💦 Gently wash the affected leaves with clean water after the pest problem is addressed."
+    ],
+    "light_stage": [
+      "🟢 A light black coating is present. Find the aphid, whitefly, mealybug or other honeydew-producing pest first.",
+      "🐛 Example product: **Safer Brand Insecticidal Soap** for the underlying pest, but only if its label covers your crop and pest. Wipe/rinse the mold after the pest is controlled."
+    ],
+    "moderate_stage": [
+      "🟠 More leaves are becoming black from honeydew. Control the underlying pest and wash the leaves gently after pest pressure is reduced.",
+      "🧪 Example product: **Southern Ag Triple Action Neem Oil**. This is for the insect source, not a cure for the sooty mold itself. Follow the exact product label."
+    ],
+    "severe_stage": [
+      "🔴 Heavy sooty mold is covering much of the plant or photosynthesis is being affected. Focus on identifying and controlling the underlying pest and seek advice if it is severe.",
+      "🚫 Do not use a fungicide just to treat the black coating. The main treatment is control of the honeydew-producing insect."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🔍 Identify and treat the underlying insect pest producing the honeydew — the mold won't clear up until it's controlled.",
+      "🧼 Wash the mold off leaves with a mild soapy water solution, then rinse thoroughly.",
+      "🌬️ Improve air circulation around the plant to slow further fungal growth.",
+      "🗓️ Monitor regularly for returning pest populations, since mold will reappear if pests come back."
+    ],
+    "prevention": [
+      "🐜 Monitor and control aphids, whiteflies, mealybugs, and scale insects that produce honeydew.",
+      "🔍 Inspect leaves and stems regularly for sap-sucking pests.",
+      "🧹 Remove heavily infested plant parts before honeydew buildup becomes severe.",
+      "🌿 Keep weeds under control because they can harbor the insects responsible for honeydew.",
+      "🧼 Clean honeydew-covered foliage after the underlying pest infestation is controlled."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "sooty mold",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍯 Sooty mold itself usually does NOT need a fungicide — it's a black fungal coating that grows on sugary 'honeydew' left behind by sap-sucking insects (aphids, whiteflies, mealybugs, or scale). Treating those insects is the real fix.",
+      "🐛 Look closely for the insect causing the honeydew and treat it with a labelled insecticidal soap, horticultural oil, or neem oil for that pest.",
+      "🧽 The black mold layer itself can often simply be wiped or rinsed off the leaf surface with water once the insect source is under control."
+    ],
+    "plain_language_help": "In simple terms: the black coating you see isn't the real problem — it's feeding on sticky residue from insects like aphids or whiteflies elsewhere on the plant. Find and treat those insects with an insecticide/insecticidal soap, and the sooty mold will usually stop coming back; a fungicide alone won't fix the root cause.",
+    "example_products": [
+      "🚫 No fungicide product is the real fix — treat the insect causing it instead.",
+      "🧪 Insecticidal soap: Safer Brand Insecticidal Soap",
+      "🧪 Neem oil: Southern Ag Triple Action Neem Oil"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "whitefly_infestation": {
+    "display_name": "whitefly infestation",
+    "condition_type": "Pest Infestation",
+    "description": "🪰 Whiteflies are small sap-sucking insects that can cause yellowing, curling, weak growth, and honeydew buildup.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **whitefly infestation** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🪰 Whiteflies are small sap-sucking insects that can cause yellowing, curling, weak growth, and honeydew buildup.",
+    "why_does_it_happen": "Caused by whiteflies, small sap-sucking insects that thrive in warm weather. Populations build up rapidly on the undersides of leaves and spread via wind, infested transplants, or nearby host plants.",
+    "symptoms_to_look_for": [
+      "🦟 Clouds of tiny white insects flying up when the plant is disturbed.",
+      "🍃 Yellowing and stippling of leaves from feeding damage.",
+      "🍯 Sticky honeydew on leaves, which can lead to sooty mold.",
+      "🌀 Curling and weakened growth in heavy infestations.",
+      "🦠 Increased risk of virus transmission, since whiteflies spread certain plant viruses."
+    ],
+    "what_to_do_first": [
+      "🟨 Use yellow sticky traps for monitoring and reducing adult whiteflies.",
+      "🌿 Apply insecticidal soap or a neem-based product according to the product label.",
+      "✂️ Remove severely infested leaves when practical."
+    ],
+    "light_stage": [
+      "🟢 A few whiteflies are present. Use yellow sticky traps, gently wash leaf undersides, and inspect the plant regularly.",
+      "🧪 Example product: **Safer Brand Insecticidal Soap**. Use only if the current label permits use on your crop and whiteflies."
+    ],
+    "moderate_stage": [
+      "🟠 Whiteflies are present on many leaves. Focus spray coverage on leaf undersides and continue monitoring/traps.",
+      "🧪 Example products: **Southern Ag Triple Action Neem Oil** or **Safer Brand Insecticidal Soap**. For heavier cases the project data also lists systemic insecticide examples; verify the exact label for your crop and pest."
+    ],
+    "severe_stage": [
+      "🔴 Whiteflies are numerous, repeatedly returning, or the plant is weakening. Control them promptly because they can also spread plant viruses.",
+      "🧪 Use only a labelled insecticide for your crop and whitefly. Do not increase dose or mix products without label permission; seek agricultural advice for severe infestation."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🔍 Check leaf undersides regularly and remove the most heavily infested foliage.",
+      "🟡 Use yellow sticky traps to monitor and reduce adult whitefly numbers.",
+      "💦 Wash leaves with a strong water spray to dislodge nymphs and eggs.",
+      "🌿 Avoid excess nitrogen fertilizer, which encourages the soft growth whiteflies prefer.",
+      "🐞 Encourage natural predators such as ladybugs and lacewings where practical."
+    ],
+    "prevention": [
+      "🔍 Check leaf undersides and young growth regularly for whiteflies and nymphs.",
+      "🟨 Use yellow sticky traps to monitor adult whiteflies.",
+      "🌿 Remove weeds that can provide alternative hosts for whiteflies.",
+      "🚧 Inspect and isolate new plants before placing them with healthy plants.",
+      "🧹 Remove heavily infested leaves or plant material promptly."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "whitefly infestation",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🐛 This is a PEST problem, not a fungus — a fungicide will NOT help here. You need a labelled insecticide.",
+      "🌿 Lower-impact options often used first: insecticidal soap or neem oil, sprayed onto leaf undersides where whiteflies cluster and lay eggs; yellow sticky traps also help monitor and reduce numbers.",
+      "🧪 For heavier infestations, a labelled systemic insecticide (e.g. imidacloprid, where locally approved) is sometimes used — whiteflies can also spread plant viruses, so controlling them promptly matters beyond just this symptom."
+    ],
+    "plain_language_help": "In simple terms: whiteflies are small flying insects, not a disease — so 'fungicide' is the wrong tool. Look for a product labelled as an 'insecticide' for your crop, and check the undersides of leaves, which is where whiteflies usually hide and breed.",
+    "example_products": [
+      "🧪 Insecticidal soap: Safer Brand Insecticidal Soap",
+      "🧪 Neem oil: Southern Ag Triple Action Neem Oil, Garden Safe Neem Oil Extract",
+      "🧪 Yellow sticky traps: any generic garden-center 'whitefly/aphid sticky trap'",
+      "🧪 Systemic insecticide (heavier cases): Bonide Systemic Insect Control, Bayer Advanced Tree & Shrub Insect Control"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Bacterial_Spot": {
+    "display_name": "Bacterial Spot",
+    "condition_type": "Plant Disease",
+    "description": "🦠 Bacterial spot causes small dark water-soaked or brown lesions on tomato leaves and fruit.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Bacterial Spot** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🦠 Bacterial spot causes small dark water-soaked or brown lesions on tomato leaves and fruit.",
+    "why_does_it_happen": "Caused by Xanthomonas bacteria. It spreads through wind-driven rain, splashing water, and contaminated tools or hands, entering leaf tissue through natural openings or small wounds. Warm, wet, humid weather strongly favors an outbreak.",
+    "symptoms_to_look_for": [
+      "⚫ Small, dark, water-soaked spots on leaves that turn brown to black over time.",
+      "🟡 Spots often surrounded by a yellow halo.",
+      "🔴 Raised, scab-like lesions on stems and fruit.",
+      "🍂 Yellowing and leaf drop as the infection spreads.",
+      "🍅 Reduced fruit quality and yield in severe cases."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove severely infected leaves and fruit and dispose of them safely.",
+      "💦 Use a labeled copper-based bactericide where appropriate to help suppress disease.",
+      "🌬️ Avoid overhead irrigation and improve air circulation."
+    ],
+    "light_stage": [
+      "🟢 Only a few bacterial spots are visible. Remove badly affected leaves, avoid overhead watering and keep tools/hands clean.",
+      "🧪 Example product: **Bonide Copper Fungicide**. The project data identifies copper products as the main labelled option, but the exact label must cover your crop and bacterial spot."
+    ],
+    "moderate_stage": [
+      "🟠 Spots are increasing across several leaves. Remove infected material, avoid handling wet plants, and prevent water splash between plants.",
+      "🧪 A copper bactericide may be appropriate. Example: **Bonide Copper Fungicide**. Follow the exact label carefully because excessive copper can injure foliage."
+    ],
+    "severe_stage": [
+      "🔴 Bacterial spotting is widespread or rapidly spreading. Remove badly affected material and prevent spread through water, tools and handling.",
+      "🧪 Use only a product whose label specifically permits use on your crop for bacterial spot. Do not increase copper dose. Seek agricultural advice for severe disease."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧹 Remove and destroy infected leaves and fruit as soon as you spot them.",
+      "🌤️ Avoid working with or watering plants while foliage is wet.",
+      "🧴 Disinfect tools between plants to prevent spreading the bacteria.",
+      "💧 Switch to drip irrigation instead of overhead watering.",
+      "🔄 Rotate crops and avoid replanting tomatoes or peppers in the same soil each season."
+    ],
+    "prevention": [
+      "🛡️ Use disease-free seed and healthy tomato transplants.",
+      "💧 Avoid overhead irrigation and water splash because bacteria can spread with moisture.",
+      "🧴 Sanitize hands and pruning tools after handling infected plants.",
+      "🌬️ Provide adequate spacing so foliage dries quickly.",
+      "🔄 Rotate tomato crops and remove infected plant debris after the season."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Bacterial Spot",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🦠 This is a BACTERIAL disease, not a fungus — regular fungicides mostly won't touch it. Copper-based bactericides (copper hydroxide, copper oxychloride, or copper sulfate) are the main labelled option, sometimes combined with mancozeb to slow resistance.",
+      "🚱 Avoid overhead watering and working around wet plants — bacteria spread easily through water splash and on wet hands/tools.",
+      "📋 Only use a product whose label lists your crop and 'bacterial spot' as an approved use; copper products can also cause leaf injury ('phytotoxicity') if overused, so follow the labelled rate closely."
+    ],
+    "plain_language_help": "In simple terms: this is caused by bacteria, not a fungus, so a standard 'fungicide' often has little effect. Copper-based sprays labelled as bactericides for your crop and 'bacterial spot' are the usual chemical option — and because bacteria spread through water, keeping foliage dry matters as much as any spray.",
+    "example_products": [
+      "🧪 Copper bactericide: Bonide Copper Fungicide, Southern Ag Liquid Copper Fungicide (both are dual-labelled as copper bactericide/fungicide in many markets)",
+      "🧪 Copper + mancozeb combination products: sometimes sold as 'Bonide Fung-onil' or similar combo sprays — check the label for both actives."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Early_Blight": {
+    "display_name": "Early Blight",
+    "condition_type": "Plant Disease",
+    "description": "🍂 Early blight causes brown target-like lesions with concentric rings and can lead to yellowing and leaf loss.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Early Blight** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🍂 Early blight causes brown target-like lesions with concentric rings and can lead to yellowing and leaf loss.",
+    "why_does_it_happen": "Caused by the fungus Alternaria solani. It's favored by warm temperatures combined with alternating wet and dry conditions, and it spreads through wind, rain splash, and infected plant debris. It typically appears on older, lower leaves first and works its way upward.",
+    "symptoms_to_look_for": [
+      "🎯 Dark brown spots with a concentric-ring, target-like pattern on leaves.",
+      "🟡 Yellowing of the leaf tissue surrounding each spot.",
+      "🍂 Older, lower leaves withering and dropping first as the disease progresses upward.",
+      "🌿 Dark lesions occasionally on stems.",
+      "🍅 Sunken dark spots near the stem end of fruit in advanced cases."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove lower infected leaves and fallen plant debris.",
+      "💦 Apply a suitable fungicide according to the product label when necessary.",
+      "🌬️ Improve airflow and avoid prolonged leaf wetness."
+    ],
+    "light_stage": [
+      "🟢 A few lower leaves have early blight spots. Remove the worst leaves, clear fallen debris and keep foliage dry.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)** or **Dithane M-45 (mancozeb)** from the project data, only when the current label covers your crop and early blight."
+    ],
+    "moderate_stage": [
+      "🟠 Spots are spreading to several leaves. Remove infected lower leaves, improve airflow and avoid overhead watering.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)**. Use only the exact product labelled for your crop and early blight; follow rotation instructions if stated on the label."
+    ],
+    "severe_stage": [
+      "🔴 A large portion of the foliage is affected or disease is moving rapidly upward. Remove heavily infected leaves and seek crop-specific advice if control is failing.",
+      "🧪 Use only a labelled early-blight treatment. Never exceed the label rate or combine products unless the label permits it."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧹 Remove and destroy infected lower leaves as soon as you notice them.",
+      "🍁 Mulch around the base of the plant to prevent soil from splashing onto leaves.",
+      "💧 Water at the base of the plant rather than overhead.",
+      "🎋 Stake or cage plants to improve air circulation through the canopy.",
+      "🔄 Rotate crops each season to reduce the fungus building up in the soil."
+    ],
+    "prevention": [
+      "🌱 Start with healthy tomato plants and maintain good plant vigor.",
+      "🌾 Use mulch to reduce soil splash carrying the pathogen onto lower leaves.",
+      "💧 Avoid overhead watering and prolonged leaf wetness.",
+      "🧹 Remove infected lower leaves and fallen tomato debris regularly.",
+      "🔄 Rotate tomato crops and avoid repeatedly planting tomatoes in the same soil."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Early Blight",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease. Fungicides commonly labelled for early blight include: chlorothalonil, mancozeb, or azoxystrobin, depending on the crop.",
+      "🔁 Alternate between two different active ingredient groups if repeat treatment is needed, since early blight fungi can build resistance over time.",
+      "📋 Only use a product whose label lists your crop and 'early blight' as an approved use — treatment works best when started as soon as the first lower-leaf spots appear."
+    ],
+    "plain_language_help": "In simple terms: this is a fungus, so you're looking for a product labelled as a 'fungicide' for your crop and 'early blight'. Chlorothalonil and mancozeb are commonly available options — spraying early, as soon as the first spots show up on lower leaves, works much better than waiting.",
+    "example_products": [
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Mancozeb: Dithane M-45 (more common as a farm/agricultural product)",
+      "🧪 Azoxystrobin: Scotts DiseaseEx"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Healthy_Tomato": {
+    "display_name": "Healthy Tomato",
+    "condition_type": "Healthy Plant",
+    "description": "🌿 The tomato plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Healthy Tomato** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🌿 The tomato plant appears healthy, with normal green foliage and no obvious disease or pest symptoms.",
+    "why_does_it_happen": "Not applicable — this result means the plant shows no visible signs of disease, pest damage, or nutrient stress at the time of the photo.",
+    "symptoms_to_look_for": [
+      "🟢 Even, healthy leaf color with no spots, curling, or discoloration.",
+      "🌱 Steady, proportional growth for the plant's stage.",
+      "🍅 Normal flowering and fruit set with no unusual drop."
+    ],
+    "what_to_do_first": [
+      "🚨 Continue normal plant care and monitor regularly."
+    ],
+    "light_stage": [
+      "No treatment is normally required when the plant appears healthy."
+    ],
+    "moderate_stage": [
+      "Continue monitoring and investigate any new symptoms before using a treatment."
+    ],
+    "severe_stage": [
+      "If new disease or pest symptoms develop, obtain a crop-specific diagnosis."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "💧 Keep watering consistent, avoiding both drought stress and waterlogging.",
+      "🌿 Continue regular, balanced fertilizing suited to the crop.",
+      "🔍 Check the plant periodically, including leaf undersides, so new problems are caught early."
+    ],
+    "prevention": [
+      "🔍 Inspect tomato leaves, stems, flowers, and fruit regularly.",
+      "💧 Maintain consistent watering while avoiding waterlogging.",
+      "🌱 Provide balanced nutrition appropriate for tomato growth.",
+      "🌬️ Maintain adequate plant spacing and airflow.",
+      "🧹 Remove dead or damaged leaves and keep the area around plants clean."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Healthy Tomato",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Continue normal care and regular monitoring. Do not apply pesticides or fungicides without a specific pest or disease problem.",
+    "common_treatment_options": [
+      "✅ No treatment needed — this plant does not show signs of disease, pests, or deficiency.",
+      "🔁 Keep up your regular watering, feeding, and monitoring routine to keep it that way."
+    ],
+    "plain_language_help": "In simple terms: nothing to treat here — the plant looks healthy. No fungicide or pesticide is needed.",
+    "example_products": [
+      "✅ No product needed."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Late_Blight": {
+    "display_name": "Late Blight",
+    "condition_type": "Plant Disease",
+    "description": "🌧️ Late blight can cause rapidly enlarging dark lesions on leaves and stems and may severely damage tomato plants under cool, wet conditions.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Late Blight** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🌧️ Late blight can cause rapidly enlarging dark lesions on leaves and stems and may severely damage tomato plants under cool, wet conditions.",
+    "why_does_it_happen": "Caused by the oomycete Phytophthora infestans. It spreads extremely rapidly in cool, wet, humid weather, with windborne spores capable of traveling long distances. Under favorable conditions it can severely damage or destroy a crop within days.",
+    "symptoms_to_look_for": [
+      "🌫️ Large, irregular, water-soaked lesions on leaves, ranging from dark green to brown or black.",
+      "❄️ White, fuzzy fungal growth on the underside of lesions in humid conditions.",
+      "⚡ Rapid blackening and collapse of foliage, often within a few days.",
+      "🟤 Dark, greasy-looking lesions on stems.",
+      "🍅 Firm, brown, blotchy patches on fruit."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove and safely dispose of heavily infected plant material.",
+      "💦 Apply an appropriate labeled fungicide or fungicide mixture as soon as disease is detected.",
+      "🌬️ Improve air circulation and reduce prolonged leaf wetness."
+    ],
+    "light_stage": [
+      "🟢 Early signs are present. Act quickly: remove infected leaves, reduce leaf wetness and improve airflow.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)** or a copper fungicide listed in the project data, but only if the current label specifically covers your crop and late blight."
+    ],
+    "moderate_stage": [
+      "🟠 Dark lesions are appearing on several leaves/stems. Remove infected material promptly and keep foliage as dry as possible.",
+      "🧪 A labelled late-blight fungicide may be needed. Example: **Daconil Fungicide (chlorothalonil)**. Check the exact crop + late-blight label before use."
+    ],
+    "severe_stage": [
+      "🔴 Disease is spreading rapidly, with major foliage/stem damage or plant collapse. Remove badly infected material and get agricultural advice quickly.",
+      "🧪 Use only a product specifically labelled for late blight on the crop. Do not increase the dose because late blight is severe."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🚨 Remove and destroy infected plants or plant parts immediately — do not compost them.",
+      "💧 Avoid overhead watering and reduce how long leaves stay wet.",
+      "🌬️ Ensure good spacing and airflow between plants.",
+      "⏱️ Act quickly, since this disease spreads faster than most other tomato problems.",
+      "🌧️ Watch plants closely during cool, damp weather, when outbreaks are most likely to start."
+    ],
+    "prevention": [
+      "🛡️ Use healthy, disease-free tomato planting material.",
+      "🌧️ Monitor plants closely during cool, damp, or rainy weather when late blight risk increases.",
+      "💧 Avoid prolonged leaf wetness and overhead watering.",
+      "🌬️ Provide good spacing and airflow so foliage dries quickly.",
+      "🧹 Remove infected leaves and plant debris promptly to reduce spread."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Late Blight",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease that can spread and kill plants very fast, especially in cool, wet weather. Fungicides commonly labelled for late blight include: chlorothalonil, mancozeb, copper-based fungicides, or systemic options like metalaxyl where locally approved.",
+      "⏱️ Late blight can destroy a crop within days once established — treat and remove infected material promptly rather than waiting to see if it spreads.",
+      "📋 Only use a product whose label lists your crop and 'late blight' as an approved use — this disease has a history of developing resistance to some products, so following label rotation guidance matters."
+    ],
+    "plain_language_help": "In simple terms: this is one of the fastest-spreading plant fungi, so acting quickly matters more than with most diseases. A fungicide labelled for 'late blight' on your crop is the chemical option, but removing badly infected plants right away is just as important to stop it reaching healthy ones.",
+    "example_products": [
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Copper fungicide: Bonide Copper Fungicide, Southern Ag Liquid Copper Fungicide",
+      "🧪 Metalaxyl (systemic, heavier/commercial cases): sold under names like Ridomil Gold or Subdue Maxx — mainly professional/agricultural supply, ask a local agri-supplier."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Leaf_Mold": {
+    "display_name": "Leaf Mold",
+    "condition_type": "Plant Disease",
+    "description": "🍃 Tomato leaf mold commonly produces yellow patches on the upper leaf surface and olive-green to gray mold on the underside, especially in humid conditions.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Leaf Mold** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🍃 Tomato leaf mold commonly produces yellow patches on the upper leaf surface and olive-green to gray mold on the underside, especially in humid conditions.",
+    "why_does_it_happen": "Caused by the fungus Fulvia fulva (Passalora fulva). It thrives in high humidity, especially in greenhouses or densely planted areas, at moderate temperatures. It spreads via airborne spores and needs prolonged leaf wetness or very high humidity to infect.",
+    "symptoms_to_look_for": [
+      "🟡 Pale green or yellow spots on the upper leaf surface.",
+      "🫒 Olive-green to greyish-purple fuzzy mold growth on the corresponding leaf undersides.",
+      "🔗 Spots enlarging and merging, causing broader yellowing.",
+      "🍂 Affected leaves curling, withering, and dropping.",
+      "⬇️ Lower and older leaves affected first before the disease spreads upward."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove severely infected leaves.",
+      "💦 Apply a suitable fungicide according to the product label when required.",
+      "🌬️ Reduce humidity and improve ventilation around the plants."
+    ],
+    "light_stage": [
+      "🟢 A small amount of leaf mold is visible. Remove affected leaves and improve ventilation and sunlight.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)** or a copper fungicide from the project data, only when labelled for your crop and leaf mold."
+    ],
+    "moderate_stage": [
+      "🟠 Mold is appearing on many leaves. Reduce humidity, increase spacing/ventilation and remove infected leaves.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)**. Use only the exact product label approved for your crop and leaf mold."
+    ],
+    "severe_stage": [
+      "🔴 Large portions of foliage are affected, especially in humid greenhouse/tunnel conditions. Reduce humidity immediately and remove heavily infected leaves.",
+      "🧪 Use only a labelled treatment and seek agricultural advice if the disease continues to spread."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🌬️ Increase ventilation and reduce humidity — especially important in greenhouses or indoor growing.",
+      "📏 Space plants further apart to improve airflow.",
+      "💧 Avoid overhead watering and wetting the foliage.",
+      "🧹 Remove infected leaves promptly.",
+      "🌅 Water in the morning so foliage has time to dry during the day."
+    ],
+    "prevention": [
+      "🌬️ Improve airflow and avoid overcrowding tomato plants.",
+      "💧 Water at the soil level rather than wetting tomato foliage.",
+      "🏠 Reduce excessive humidity and improve ventilation, especially in greenhouses.",
+      "🧹 Remove infected leaves and fallen plant debris promptly.",
+      "🔍 Inspect older and lower leaves regularly because symptoms often begin there."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Leaf Mold",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease, most common in humid greenhouses/tunnels. Fungicides commonly labelled for leaf mold include: chlorothalonil or copper-based fungicides.",
+      "🌬️ Reducing humidity and improving ventilation (especially in greenhouses) is often just as important as spraying, since this fungus thrives in still, damp air.",
+      "📋 Only use a product whose label lists your crop and 'leaf mold' as an approved use."
+    ],
+    "plain_language_help": "In simple terms: this is a fungus that loves humid, poorly-ventilated conditions (very common in greenhouse tomatoes), so a fungicide labelled for 'leaf mold' on your crop is the chemical option — but opening up airflow and lowering humidity is often the bigger fix.",
+    "example_products": [
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Copper fungicide: Bonide Copper Fungicide, Southern Ag Liquid Copper Fungicide"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Septoria_Leaf_Spot": {
+    "display_name": "Septoria Leaf Spot",
+    "condition_type": "Plant Disease",
+    "description": "🍂 Septoria leaf spot produces many small circular spots with dark margins and pale centers, often beginning on lower leaves.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Septoria Leaf Spot** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🍂 Septoria leaf spot produces many small circular spots with dark margins and pale centers, often beginning on lower leaves.",
+    "why_does_it_happen": "Caused by the fungus Septoria lycopersici. It's favored by warm, wet, humid weather and spreads via rain splash, irrigation water, wind, and contaminated tools. The fungus survives on infected plant debris in the soil between growing seasons.",
+    "symptoms_to_look_for": [
+      "⚪ Small circular spots with dark brown margins and light grey or tan centers.",
+      "⚫ Tiny black specks (fungal fruiting bodies) visible in the center of older spots.",
+      "⬇️ Spots starting on lower, older leaves and progressing upward over time.",
+      "🍂 Widespread yellowing and leaf drop in severe infections.",
+      "🍅 Fruit is rarely affected by this disease."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove infected lower leaves and plant debris.",
+      "💦 Apply a suitable fungicide according to the product label when needed.",
+      "🌬️ Improve air circulation and avoid overhead watering."
+    ],
+    "light_stage": [
+      "🟢 A few lower leaves have spots. Remove those leaves, clear fallen debris and keep foliage dry.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)** or **Dithane M-45 (mancozeb)** from the project data, only when labelled for your crop and Septoria leaf spot."
+    ],
+    "moderate_stage": [
+      "🟠 Septoria is moving into several leaves. Remove infected lower leaves, improve airflow and avoid overhead watering.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)**. Check the exact crop + Septoria label before use."
+    ],
+    "severe_stage": [
+      "🔴 Large amounts of foliage are affected or leaf loss is increasing quickly. Remove severely infected material and seek agricultural advice.",
+      "🧪 Use only a crop- and problem-labelled fungicide. Never exceed the labelled rate."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧹 Remove and destroy infected leaves and any fallen debris around the plant.",
+      "🍁 Mulch to prevent soil from splashing onto lower leaves.",
+      "💧 Water at the base of the plant rather than overhead.",
+      "🎋 Stake or cage plants for better air circulation.",
+      "🔄 Rotate crops and avoid planting in the same soil year after year."
+    ],
+    "prevention": [
+      "🌾 Use mulch to reduce soil splash carrying Septoria spores onto lower leaves.",
+      "💧 Avoid overhead watering and prolonged leaf wetness.",
+      "🧹 Remove infected lower leaves and fallen tomato debris regularly.",
+      "🧴 Sanitize pruning tools after working on affected plants.",
+      "🔄 Rotate tomato crops and avoid repeatedly growing tomatoes in the same soil."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Septoria Leaf Spot",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease. Fungicides commonly labelled for Septoria leaf spot include: chlorothalonil, copper-based fungicides, or mancozeb.",
+      "🍂 Removing and destroying infected lower leaves (where it usually starts) helps slow the spread up the plant, alongside any fungicide treatment.",
+      "📋 Only use a product whose label lists your crop and 'Septoria leaf spot' as an approved use."
+    ],
+    "plain_language_help": "In simple terms: this is a fungus, so you're looking for a product labelled as a 'fungicide' for your crop and 'Septoria leaf spot'. Chlorothalonil is one of the most commonly available options — starting treatment early, when spotting is still on the lower leaves, gives the best results.",
+    "example_products": [
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Copper fungicide: Bonide Copper Fungicide, Southern Ag Liquid Copper Fungicide",
+      "🧪 Mancozeb: Dithane M-45 (more common as a farm/agricultural product)"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Target_Spot": {
+    "display_name": "Target Spot",
+    "condition_type": "Plant Disease",
+    "description": "🎯 Target spot produces circular brown lesions that may develop concentric rings on tomato leaves and fruit.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Target Spot** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🎯 Target spot produces circular brown lesions that may develop concentric rings on tomato leaves and fruit.",
+    "why_does_it_happen": "Caused by the fungus Corynespora cassiicola. It's favored by warm, humid weather and extended periods of leaf wetness, spreading through windborne spores, rain splash, and contaminated tools. It can survive on crop debris between seasons.",
+    "symptoms_to_look_for": [
+      "🎯 Brown to black circular spots with a concentric-ring, target-like pattern, often smaller than early blight spots.",
+      "🍃 Spots that can appear on leaves, stems, and fruit.",
+      "🟡 A yellow halo sometimes visible around individual spots.",
+      "🍂 Yellowing, wilting, and premature leaf drop in severe infections."
+    ],
+    "what_to_do_first": [
+      "✂️ Remove severely affected leaves and fruit.",
+      "💦 Apply a suitable labeled fungicide when necessary.",
+      "🌬️ Improve airflow and reduce prolonged leaf wetness."
+    ],
+    "light_stage": [
+      "🟢 A few target-shaped spots are visible. Remove badly affected leaves, improve airflow and avoid wetting foliage.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)** or **Dithane M-45 (mancozeb)** from the project data, only when labelled for your crop and target spot."
+    ],
+    "moderate_stage": [
+      "🟠 Target spots are increasing across several leaves. Remove infected leaves, clear debris and improve ventilation.",
+      "🧪 Example product: **Daconil Fungicide (chlorothalonil)**. Use only if the exact package label covers your crop and target spot."
+    ],
+    "severe_stage": [
+      "🔴 Target spot is widespread or causing serious leaf loss. Remove badly infected material and seek crop-specific advice.",
+      "🧪 Use only a labelled treatment and do not increase the dose or mix products unless the label permits it."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🧹 Remove and destroy infected leaves and plant debris.",
+      "💧 Avoid overhead watering and reduce how long leaves stay wet.",
+      "🌬️ Improve spacing and air circulation around plants.",
+      "🔄 Rotate crops to reduce the pathogen building up in the soil.",
+      "🧴 Disinfect tools between use on different plants."
+    ],
+    "prevention": [
+      "🌬️ Provide adequate spacing and airflow around tomato plants.",
+      "💧 Avoid overhead irrigation and prolonged leaf wetness.",
+      "🌾 Use mulch to reduce soil splash onto tomato leaves.",
+      "🧹 Remove infected leaves and fallen plant debris promptly.",
+      "🔄 Rotate crops and avoid repeated tomato planting in the same area."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Target Spot",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Start with inspection, sanitation, and the low-impact controls above. If the problem persists, use only a suitable crop- and problem-labelled treatment.",
+    "common_treatment_options": [
+      "🍄 This is a FUNGAL disease. Fungicides commonly labelled for target spot include: chlorothalonil, azoxystrobin, or mancozeb, depending on the crop.",
+      "🔁 Alternate between two different active ingredient groups if repeat treatment is needed, to reduce the chance of resistance building up.",
+      "📋 Only use a product whose label lists your crop and 'target spot' as an approved use."
+    ],
+    "plain_language_help": "In simple terms: this is a fungus, so you're looking for a product labelled as a 'fungicide' for your crop and 'target spot'. Chlorothalonil and azoxystrobin are commonly available options — check the label to confirm it covers your specific crop.",
+    "example_products": [
+      "🧪 Chlorothalonil: Daconil Fungicide (GardenTech), Ortho MAX Garden Disease Control",
+      "🧪 Azoxystrobin: Scotts DiseaseEx",
+      "🧪 Mancozeb: Dithane M-45 (more common as a farm/agricultural product)"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Tomato_Mosaic_Virus": {
+    "display_name": "Tomato Mosaic Virus",
+    "condition_type": "Plant Virus",
+    "description": "🦠 Tomato mosaic virus can cause mottled or mosaic-like green patterns, distorted leaves, and reduced plant growth. There is no reliable cure for an infected plant.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Tomato Mosaic Virus** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🦠 Tomato mosaic virus can cause mottled or mosaic-like green patterns, distorted leaves, and reduced plant growth. There is no reliable cure for an infected plant.",
+    "why_does_it_happen": "Caused by Tomato Mosaic Virus (ToMV), a highly stable and persistent virus. It spreads mainly through mechanical contact — hands, tools, clothing — and contaminated seed, rather than by insects, and it can survive for a long time in dried plant debris and on surfaces.",
+    "symptoms_to_look_for": [
+      "🎨 A mottled, light and dark green mosaic pattern on leaves.",
+      "🍃 Leaf distortion, curling, or narrow, fern-like leaf growth.",
+      "📉 Stunted overall plant growth.",
+      "🍅 Reduced fruit set and yield.",
+      "🟤 Occasional internal browning or uneven ripening of fruit."
+    ],
+    "what_to_do_first": [
+      "🚨 Inspect the plant and nearby plants for similar symptoms.",
+      "🚨 Remove severely infected material where appropriate to reduce possible spread.",
+      "🚨 Clean hands and tools after handling suspected infected plants."
+    ],
+    "light_stage": [
+      "🟢 Early mosaic symptoms are suspected. There is no spray that cures the virus. Separate the affected plant where practical and avoid touching healthy plants after handling it.",
+      "🧼 Clean hands and tools. Do not buy a fungicide expecting it to cure the virus."
+    ],
+    "moderate_stage": [
+      "🟠 Mosaic symptoms are clear on several leaves. Remove the infected plant where practical rather than trying repeated pesticide sprays.",
+      "🧼 Disinfect tools/stakes and avoid spreading sap to healthy tomato plants. Use clean/virus-free planting material for replacement."
+    ],
+    "severe_stage": [
+      "🔴 The plant is strongly affected or many plants show mosaic symptoms. Remove and destroy infected plants where practical and seek agricultural advice to prevent further spread.",
+      "🚫 No fungicide, bactericide or insecticide cures Tomato Mosaic Virus. Do not increase pesticide use hoping to cure it."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🚫 Remove and destroy infected plants — there is no cure once a plant is infected.",
+      "🧼 Wash hands and disinfect tools thoroughly after handling infected plants, before touching healthy ones.",
+      "🚬 Avoid using tobacco products before handling plants, since the virus can be present in tobacco.",
+      "🌱 Use certified virus-free seed and resistant varieties where available."
+    ],
+    "prevention": [
+      "🛡️ Use certified virus-free seed and healthy transplants.",
+      "🧴 Wash hands and disinfect tools after handling tomato plants.",
+      "🚫 Keep tobacco products and tobacco-contaminated hands away from tomato plants.",
+      "🗑️ Remove and destroy infected plants promptly because there is no cure for an infected plant.",
+      "🔍 Inspect new plants carefully before introducing them into the growing area."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Tomato Mosaic Virus",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Prioritize sanitation, removal of infected material where appropriate, and prevention of spread.",
+    "common_treatment_options": [
+      "🦠 This is a VIRUS — there is NO fungicide, bactericide, or pesticide that can cure it. Once a plant is infected, the virus stays in it for life.",
+      "🗑️ Remove and destroy infected plants to stop it spreading to healthy ones nearby (don't compost them).",
+      "🧼 Disinfect hands, tools, and stakes after handling infected plants — this virus spreads very easily through touch, sap, and contaminated tools/seed, not through insects."
+    ],
+    "plain_language_help": "In simple terms: this is a virus, not a fungus or bacteria, so no spray-on product will cure it — 'suitable fungicide' does not apply here at all. The only real options are removing infected plants promptly and being very careful about clean hands/tools, since this particular virus spreads mainly by touch and contaminated tools rather than by insects.",
+    "example_products": [
+      "🚫 No product exists that treats or cures this — there is nothing to buy for the virus itself.",
+      "🧼 Instead: a general household disinfectant or diluted bleach solution for tools/hands, and certified virus-free seed/transplants for replacement plants."
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  },
+  "Tomato_Yellow_Leaf_Curl_Virus": {
+    "display_name": "Tomato Yellow Leaf Curl Virus",
+    "condition_type": "Plant Virus",
+    "description": "🦠 Tomato yellow leaf curl virus causes upward leaf curling, yellowing, stunting, and reduced fruit production. It is commonly spread by whiteflies.",
+    "ai_analysis": {
+      "heading": "🤖 AI Image Analysis",
+      "text": "The AI model identified **Tomato Yellow Leaf Curl Virus** as the most likely class from the uploaded image.",
+      "disclaimer": "⚠️ AI confidence is an estimate, not a guaranteed diagnosis. Similar symptoms can have different causes."
+    },
+    "what_is_it": "🦠 Tomato yellow leaf curl virus causes upward leaf curling, yellowing, stunting, and reduced fruit production. It is commonly spread by whiteflies.",
+    "why_does_it_happen": "Caused by Tomato Yellow Leaf Curl Virus (TYLCV), transmitted primarily by the whitefly (Bemisia tabaci). It spreads rapidly wherever whitefly populations are present, and infected transplants or nearby weed hosts can also introduce the virus.",
+    "symptoms_to_look_for": [
+      "🌀 Upward curling and cupping of leaves.",
+      "🟡 Yellowing along leaf margins and between veins.",
+      "📉 Marked stunting of overall plant growth.",
+      "🌸 Flower drop and significantly reduced fruit set.",
+      "🌿 A smaller, more upright and bushy overall plant appearance."
+    ],
+    "what_to_do_first": [
+      "🚨 Inspect the plant and nearby plants for similar symptoms.",
+      "🚨 Remove severely infected material where appropriate to reduce possible spread.",
+      "🚨 Clean hands and tools after handling suspected infected plants."
+    ],
+    "light_stage": [
+      "🟢 Early curling/yellowing is suspected. Inspect for whiteflies immediately and remove severely affected leaves if practical.",
+      "🐛 Example product for the insect vector: **Safer Brand Insecticidal Soap**. It targets whiteflies, not the virus; use only if the label covers your crop and whitefly."
+    ],
+    "moderate_stage": [
+      "🟠 Symptoms are spreading and whiteflies are present. Control whiteflies, use yellow sticky traps, and remove badly infected plants where practical.",
+      "🧪 Example product: **Southern Ag Triple Action Neem Oil** for whitefly control. The exact label must permit the crop and target pest."
+    ],
+    "severe_stage": [
+      "🔴 Plants are severely stunted/curling or several plants are affected. Remove infected plants where practical and focus on stopping whitefly spread.",
+      "🚫 No pesticide cures the virus itself. Use insect-control products only to manage the whitefly vector, following the exact label, and seek agricultural advice for widespread infection."
+    ],
+    "label_explanation": "📋 What does “labelled” mean? The product package/official label must specifically allow use on your crop and for the identified disease or pest. A product is NOT automatically suitable just because it contains the right active ingredient. Product names below are examples from the project data; availability, formulation and legal approval can vary by location and over time.",
+    "home_care": [
+      "🦟 Control whitefly populations promptly, since they are the source of spread.",
+      "🚫 Remove and destroy infected plants to reduce the virus reservoir in your growing area.",
+      "🪞 Use reflective mulch or fine mesh netting to help deter whiteflies.",
+      "📏 Avoid planting new tomatoes close to existing infected plants.",
+      "🌱 Choose TYLCV-resistant varieties where available."
+    ],
+    "prevention": [
+      "🪰 Monitor and control whiteflies because they are the main vector of TYLCV.",
+      "🟨 Use yellow sticky traps to monitor whitefly populations.",
+      "🌱 Choose TYLCV-resistant tomato varieties where suitable varieties are available.",
+      "🌿 Remove weeds that can harbor whiteflies and contribute to virus spread.",
+      "🧹 Remove severely infected tomato plants to reduce sources of virus for whiteflies."
+    ],
+    "when_to_get_expert_help": "Seek crop-specific agricultural advice if symptoms are severe, rapidly spreading, unclear, or the plant is being seriously weakened.",
+    "treatment_safety": [
+      "📋 Use a pesticide only if the actual product label includes your crop and target problem.",
+      "🧤 Wear the protective equipment specified on the product label.",
+      "⏳ Follow the labelled application rate, interval and harvest waiting period where applicable.",
+      "🚫 Never exceed the labelled rate or mix products unless the label permits it."
+    ],
+    "ai_prediction_scores": {
+      "most_likely": "Tomato Yellow Leaf Curl Virus",
+      "score": "High",
+      "note": "Model scores represent the model's ranking of available classes and should not be treated as confirmed diagnoses."
+    },
+    "final_recommendation": "Prioritize sanitation, removal of infected material where appropriate, and prevention of spread.",
+    "common_treatment_options": [
+      "🦠 This is a VIRUS — there is NO fungicide, bactericide, or pesticide that can cure it directly. Once a plant is infected, the virus stays in it for life.",
+      "🐛 This virus is spread by whiteflies, so controlling the whitefly population (insecticidal soap, neem oil, yellow sticky traps, reflective mulch) is the main way to stop it spreading further.",
+      "🗑️ Remove and destroy infected plants where practical, and consider whitefly-resistant or virus-resistant varieties for future planting."
+    ],
+    "plain_language_help": "In simple terms: this is a virus carried by tiny flying insects called whiteflies, not a disease you can spray directly — 'suitable fungicide' does not apply here. The real fix is controlling the whitefly insects spreading it and removing infected plants, rather than looking for a fungicide.",
+    "example_products": [
+      "🚫 No product exists that treats or cures the virus itself — the products below target the whitefly that spreads it, not the virus.",
+      "🧪 Insecticidal soap: Safer Brand Insecticidal Soap",
+      "🧪 Neem oil: Southern Ag Triple Action Neem Oil",
+      "🧪 Yellow sticky traps and reflective (silver) mulch: any generic garden-center version"
+    ],
+    "example_products_disclaimer": "🌍 These are examples of widely recognized branded products to search for as a starting point — exact availability, formulation, and legal approval vary by country/region and change over time. Always confirm the specific product you buy is currently labelled for your crop and problem before using it."
+  }
+}

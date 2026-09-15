@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Upload History</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8f4;
+            color: #18321f;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid #dce8df;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .back {
+            text-decoration: none;
+            font-size: 15px;
+            color: #207a3d;
+            font-weight: 600;
+        }
+
+        .title {
+            margin-left: 20px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 25px 18px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+            background: white;
+            border-radius: 18px;
+            border: 1px solid #dce8df;
+        }
+
+        .empty-icon {
+            font-size: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #dce8df;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            position: relative;
+        }
+
+        .preview {
+            width: 110px;
+            height: 110px;
+            border-radius: 14px;
+            object-fit: cover;
+            background: #e9f1eb;
+            flex-shrink: 0;
+        }
+
+        .details {
+            flex: 1;
+        }
+
+        .disease {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .filename {
+            color: #68776d;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .confidence {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .date {
+            color: #718078;
+            font-size: 13px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #e8f5eb;
+            color: #23763c;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            flex-shrink: 0;
+            align-self: flex-start;
+        }
+
+        .delete-btn {
+            border: 0;
+            background: #fff0ed;
+            color: #9b3127;
+            border-radius: 10px;
+            padding: 9px 13px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .delete-btn:hover {
+            background: #ffe3dd;
+        }
+
+        .delete-btn:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        @media (max-width: 600px) {
+
+            .card {
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .preview {
+                width: 85px;
+                height: 85px;
+            }
+
+            .disease {
+                font-size: 16px;
+            }
+
+            .card-actions {
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a
+            href="/"
+            class="back"
+        >
+            ← Back
+        </a>
+
+        <div class="title">
+            📤 Upload History
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        {% if records %}
+
+            {% for record in records %}
+
+                <div class="card" id="scan-{{ record.id }}">
+
+                    <img
+                        class="preview"
+                        src="/{{ record.image_path }}"
+                        alt="Uploaded plant image"
+                        onerror="this.style.display='none'"
+                    >
+
+                    <div class="details">
+
+                        <div class="disease">
+                            🌿
+                            {{ record.predicted_disease
+                            |replace("_", " ")
+                            }}
+                        </div>
+
+                        <div class="filename">
+                            📄
+                            {{ record.original_filename }}
+                        </div>
+
+                        <div class="confidence">
+                            🎯
+                            {{ record.confidence }}%
+                        </div>
+
+                        <span class="badge">
+                            {{ record.confidence_level }}
+                        </span>
+
+                        <div class="date">
+                            🕒
+                            {{ record.uploaded_at }}
+                        </div>
+
+                    </div>
+
+                    <div class="card-actions">
+                        <button
+                            type="button"
+                            class="delete-btn"
+                            onclick="deleteScan('{{ record.id }}', this)"
+                        >
+                            🗑️ Delete
+                        </button>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📤
+                </div>
+
+                <h2>
+                    No Upload History
+                </h2>
+
+                <p>
+                    Your uploaded plant images will appear here.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+    <script>
+
+        async function deleteScan(recordId, button) {
+
+            if (!confirm("Delete this scan? This cannot be undone.")) {
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "⏳ Deleting...";
+
+            try {
+
+                const response = await fetch(
+                    "/api/upload-history/" + encodeURIComponent(recordId),
+                    { method: "DELETE" }
+                );
+
+                let data = {};
+
+                try {
+                    data = await response.json();
+                } catch (jsonError) {
+                    data = { success: false, error: "The server returned an invalid response." };
+                }
+
+                if (response.status === 401) {
+                    alert("🔐 Please login first.");
+                    button.disabled = false;
+                    button.textContent = "🗑️ Delete";
+                    return;
+                }
+
+                if (!response.ok || !data.success) {
+                    throw new Error(data.error || "Could not delete this scan.");
+                }
+
+                const card = document.getElementById("scan-" + recordId);
+
+                if (card) {
+                    card.remove();
+                }
+
+                const container = document.querySelector(".container");
+
+                if (container && !document.querySelector(".card")) {
+
+                    container.innerHTML =
+                        '<div class="empty">' +
+                        '<div class="empty-icon">📤</div>' +
+                        '<h2>No Upload History</h2>' +
+                        '<p>Your uploaded plant images will appear here.</p>' +
+                        '</div>';
+
+                }
+
+            } catch (error) {
+
+                alert("❌ " + (error.message || "Could not delete this scan. Please try again."));
+                button.disabled = false;
+                button.textContent = "🗑️ Delete";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,6183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<script>
+    // Prevent the browser from restoring a previous scroll position
+    // when this page loads (fixes "app opens scrolled to the bottom").
+    if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+</script>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Plant Disease AI</title>
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+    --green: #176b43;
+    --green-dark: #104c30;
+    --green-light: #319a60;
+    --green-soft: #eaf7ee;
+    --green-pale: #f4fbf6;
+    --dark: #173b2b;
+    --muted: #718278;
+    --line: #dcebe1;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding-bottom: 96px;
+    min-height: 100vh;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: var(--dark);
+
+    background:
+        linear-gradient(
+            135deg,
+            #edf8f0,
+            #ffffff,
+            #eaf6ed
+        );
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.app {
+    width: min(
+        1120px,
+        calc(100% - 28px)
+    );
+
+    margin: 0 auto;
+
+    padding:
+        16px
+        0
+        50px;
+}
+
+
+/* =========================================================
+   FULL SCREEN LOGO SPLASH
+========================================================= */
+
+.splash-screen {
+    position: fixed;
+    inset: 0;
+
+    z-index: 999999;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ffffff 0%,
+            #effaf2 45%,
+            #dff3e5 100%
+        );
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+}
+
+.splash-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.splash-glow::before,
+.splash-glow::after {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 60vmax;
+    height: 60vmax;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(49, 154, 96, 0.16),
+            transparent 70%
+        );
+
+    animation:
+        glowDrift
+        7s
+        ease-in-out
+        infinite;
+}
+
+.splash-glow::after {
+    width: 42vmax;
+    height: 42vmax;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(23, 107, 67, 0.14),
+            transparent 70%
+        );
+
+    animation-delay: -3.5s;
+    animation-direction: reverse;
+}
+
+@keyframes glowDrift {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.15);
+    }
+
+}
+
+.splash-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.splash-particle {
+    position: absolute;
+
+    bottom: -60px;
+
+    opacity: 0;
+
+    filter:
+        drop-shadow(
+            0
+            4px
+            6px
+            rgba(23, 107, 67, 0.18)
+        );
+
+    animation:
+        splashFloat
+        7s
+        ease-in
+        infinite;
+}
+
+.splash-particle:nth-child(1) {
+    left: 8%;
+    font-size: 22px;
+    animation-delay: 0s;
+    animation-duration: 7.5s;
+}
+
+.splash-particle:nth-child(2) {
+    left: 22%;
+    font-size: 15px;
+    animation-delay: 1.1s;
+    animation-duration: 6.2s;
+}
+
+.splash-particle:nth-child(3) {
+    left: 78%;
+    font-size: 19px;
+    animation-delay: 0.4s;
+    animation-duration: 8s;
+}
+
+.splash-particle:nth-child(4) {
+    left: 62%;
+    font-size: 14px;
+    animation-delay: 2.2s;
+    animation-duration: 6.8s;
+}
+
+.splash-particle:nth-child(5) {
+    left: 40%;
+    font-size: 17px;
+    animation-delay: 3s;
+    animation-duration: 7.2s;
+}
+
+.splash-particle:nth-child(6) {
+    left: 90%;
+    font-size: 13px;
+    animation-delay: 1.7s;
+    animation-duration: 6.5s;
+}
+
+@keyframes splashFloat {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(-8deg);
+
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 0.85;
+    }
+
+    85% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform:
+            translateY(-105vh)
+            rotate(50deg);
+
+        opacity: 0;
+    }
+
+}
+
+.splash-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    animation:
+        splashPop
+        0.8s
+        ease
+        both;
+}
+
+.splash-logo-wrap {
+    position: relative;
+
+    width:
+        min(
+            78vw,
+            560px
+        );
+
+    height:
+        min(
+            78vw,
+            560px
+        );
+
+    max-width: 88vw;
+    max-height: 62vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-logo-wrap::before,
+.splash-logo-wrap::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 4%;
+
+    border-radius: 50%;
+
+    border:
+        2px
+        solid
+        rgba(23, 107, 67, 0.32);
+
+    animation:
+        splashRing
+        2.6s
+        cubic-bezier(0.2, 0.7, 0.4, 1)
+        infinite;
+}
+
+.splash-logo-wrap::after {
+    animation-delay: 1.3s;
+}
+
+@keyframes splashRing {
+
+    0% {
+        transform: scale(0.82);
+        opacity: 0.55;
+    }
+
+    70%,
+    100% {
+        transform: scale(1.18);
+        opacity: 0;
+    }
+
+}
+
+.splash-logo {
+    position: relative;
+
+    z-index: 1;
+
+    width: 82%;
+    height: 82%;
+
+    object-fit: contain;
+
+    display: block;
+
+    animation:
+        logoBreathe
+        3.2s
+        ease-in-out
+        infinite;
+
+    filter:
+        drop-shadow(
+            0
+            22px
+            35px
+            rgba(
+                23,
+                107,
+                67,
+                0.28
+            )
+        );
+}
+
+@keyframes logoBreathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.045);
+    }
+
+}
+
+.logo-fallback {
+    display: none;
+
+    width: 180px;
+    height: 180px;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    color: white;
+
+    font-size: 100px;
+
+    box-shadow:
+        0
+        20px
+        45px
+        rgba(
+            23,
+            107,
+            67,
+            0.22
+        );
+}
+
+.splash-title {
+    margin-top: 22px;
+
+    background:
+        linear-gradient(
+            120deg,
+            var(--green-dark),
+            var(--green-light) 55%,
+            var(--green-dark)
+        );
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    font-size:
+        clamp(
+            28px,
+            5vw,
+            48px
+        );
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+
+    animation:
+        splashTitleIn
+        0.7s
+        ease
+        0.25s
+        both,
+        splashShine
+        4s
+        linear
+        infinite;
+}
+
+@keyframes splashTitleIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes splashShine {
+
+    to {
+        background-position:
+            200%
+            center;
+    }
+
+}
+
+.splash-title-underline {
+    width: 46px;
+    height: 3px;
+
+    margin:
+        10px
+        auto
+        0;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--green),
+            var(--green-light)
+        );
+
+    animation:
+        splashUnderline
+        0.6s
+        ease
+        0.5s
+        both;
+}
+
+@keyframes splashUnderline {
+
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 46px;
+        opacity: 1;
+    }
+
+}
+
+.splash-text {
+    margin-top: 10px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        clamp(
+            15px,
+            2.5vw,
+            20px
+        );
+
+    font-weight: 700;
+
+    animation:
+        splashTitleIn
+        0.7s
+        ease
+        0.4s
+        both;
+}
+
+@keyframes splashPop {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.82);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.03);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        14px
+        20px
+        16px;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #145a39,
+            #238653,
+            #54b77b
+        );
+
+    box-shadow:
+        0
+        14px
+        32px
+        rgba(
+            23,
+            107,
+            67,
+            0.15
+        );
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    left: -90px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+}
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    right: -90px;
+    bottom: -110px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-profile-button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 3;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #232323;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #8fbc8f;
+}
+
+.hero-profile-button:active {
+    background: #2f2f2f;
+}
+
+.hero-profile-button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+
+    display: block;
+
+    margin:
+        0
+        auto
+        3px;
+
+    object-fit: contain;
+}
+
+.hero h1 {
+    margin: 0;
+
+    font-size:
+        clamp(
+            21px,
+            4vw,
+            30px
+        );
+
+    line-height: 1.1;
+
+    letter-spacing: -0.7px;
+}
+
+.hero-tagline {
+    margin:
+        5px
+        0
+        0;
+
+    font-size:
+        clamp(
+            14px,
+            2.5vw,
+            17px
+        );
+
+    font-weight: 900;
+}
+
+.hero-description {
+    margin:
+        4px
+        0
+        0;
+
+    font-size: 11px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.87
+        );
+}
+
+
+/* =========================================================
+   WEATHER
+========================================================= */
+
+.compact-weather-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin:
+        12px
+        0
+        20px;
+
+    padding:
+        10px
+        15px;
+
+    min-height: 64px;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    box-shadow:
+        0
+        8px
+        20px
+        rgba(
+            23,
+            107,
+            67,
+            0.13
+        );
+}
+
+.compact-weather-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex:
+        0
+        0
+        auto;
+}
+
+.compact-weather-icon {
+    font-size: 30px;
+}
+
+.compact-weather-temp {
+    font-size: 23px;
+
+    line-height: 1;
+
+    font-weight: 900;
+}
+
+.compact-weather-condition {
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    opacity: 0.9;
+}
+
+.compact-weather-location {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    flex: 1;
+
+    min-width: 80px;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+.compact-weather-location span {
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+.change-location-btn {
+    flex:
+        0
+        0
+        auto;
+
+    padding:
+        2px
+        5px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
+
+    color: white;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    opacity: 0.9;
+
+    transition:
+        0.15s
+        ease;
+}
+
+.change-location-btn:hover {
+    opacity: 1;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.3
+        );
+}
+
+.compact-weather-details {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex:
+        0
+        0
+        auto;
+
+    white-space: nowrap;
+}
+
+.compact-weather-details span {
+    font-size: 11px;
+}
+
+.compact-weather-details strong {
+    margin-left: 2px;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error {
+    margin-bottom: 15px;
+
+    padding:
+        12px
+        14px;
+
+    border-radius: 14px;
+
+    color: #9b3127;
+
+    background: #fff1ef;
+
+    border:
+        1px
+        solid
+        #f3d1cc;
+}
+
+
+/* =========================================================
+   SCAN SECTION
+========================================================= */
+
+.scan-section {
+    scroll-margin-top: 15px;
+}
+
+.scan-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        25px
+        clamp(
+            18px,
+            4vw,
+            42px
+        );
+
+    border-radius: 28px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
+
+    border:
+        1px
+        solid
+        rgba(
+            28,
+            90,
+            53,
+            0.10
+        );
+
+    box-shadow:
+        0
+        16px
+        40px
+        rgba(
+            27,
+            81,
+            52,
+            0.08
+        );
+}
+
+.scan-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -110px;
+    top: -110px;
+
+    border-radius: 50%;
+
+    background: #e7f7eb;
+}
+
+.scan-card > * {
+    position: relative;
+
+    z-index: 2;
+}
+
+.scan-intro {
+    text-align: center;
+
+    margin-bottom: 18px;
+}
+
+.scan-intro h2 {
+    margin: 0;
+
+    font-size: 25px;
+}
+
+.scan-intro p {
+    max-width: 600px;
+
+    margin:
+        6px
+        auto
+        0;
+
+    color:
+        var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CREATIVE SCAN FLOW
+========================================================= */
+
+.scan-flow {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr
+        auto
+        1fr;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin:
+        0
+        0
+        20px;
+
+    padding: 10px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5fbf7,
+            #eaf7ee
+        );
+
+    border:
+        1px
+        solid
+        #d9ebdf;
+}
+
+.scan-flow-item {
+    min-height: 74px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding:
+        9px
+        7px;
+
+    border-radius: 17px;
+
+    background: white;
+
+    border:
+        1px
+        solid
+        #e0eee5;
+
+    box-shadow:
+        0
+        6px
+        15px
+        rgba(
+            23,
+            107,
+            67,
+            0.06
+        );
+
+    color:
+        var(--green-dark);
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+.scan-flow-number {
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    font-size: 10px;
+
+    font-weight: 900;
+}
+
+.scan-flow-label {
+    font-size: 11px;
+
+    letter-spacing: 0.2px;
+}
+
+.scan-flow-arrow {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color:
+        var(--green);
+
+    background:
+        #dff3e6;
+
+    font-size: 16px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.upload-zone {
+    display: grid;
+
+    grid-template-columns:
+        minmax(
+            0,
+            1fr
+        )
+        auto;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    border:
+        2px
+        dashed
+        #9bcfaf;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fcf9,
+            #edf8f0
+        );
+
+    cursor: pointer;
+
+    transition:
+        0.2s
+        ease;
+}
+
+.upload-zone:hover {
+    border-color:
+        var(--green);
+
+    transform:
+        translateY(-1px);
+}
+
+.upload-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.upload-icon {
+    width: 55px;
+    height: 55px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex:
+        0
+        0
+        auto;
+
+    border-radius: 17px;
+
+    background: white;
+
+    font-size: 26px;
+}
+
+.upload-main h3 {
+    margin: 0;
+
+    font-size: 16px;
+}
+
+.upload-main p {
+    margin:
+        4px
+        0
+        0;
+
+    color:
+        var(--muted);
+
+    font-size: 12px;
+}
+
+.choose-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 130px;
+
+    padding:
+        13px
+        16px;
+
+    border-radius: 14px;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--green-light)
+        );
+}
+
+#imageInput {
+    display: none;
+}
+
+.file-preview {
+    display: none;
+
+    margin-top: 10px;
+
+    padding:
+        10px
+        13px;
+
+    border-radius: 13px;
+
+    background:
+        var(--green-soft);
+
+    color:
+        var(--green);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
+}
+
+.image-preview-container {
+    display: none;
+
+    margin-top: 14px;
+
+    text-align: center;
+}
+
+.image-preview-container img {
+    max-width: 100%;
+
+    max-height: 280px;
+
+    border-radius: 18px;
+
+    border:
+        3px
+        solid
+        #dceee2;
+
+    object-fit: contain;
+}
+
+.scan-button {
+    width: 100%;
+
+    margin-top: 13px;
+
+    padding: 17px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    box-shadow:
+        0
+        10px
+        22px
+        rgba(
+            23,
+            107,
+            67,
+            0.17
+        );
+
+    transition:
+        0.2s
+        ease;
+}
+
+.scan-button:hover {
+    transform:
+        translateY(-2px);
+}
+
+.scan-button:disabled {
+    opacity: 0.75;
+
+    cursor: wait;
+}
+
+.analysis-status {
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 12px;
+
+    color:
+        var(--green);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.small-spinner {
+    width: 15px;
+    height: 15px;
+
+    border:
+        2px
+        solid
+        #b8ddc3;
+
+    border-top-color:
+        var(--green);
+
+    border-radius: 50%;
+
+    animation:
+        spin
+        0.8s
+        linear
+        infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+.supported-plants {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 16px;
+}
+
+.plant-badge {
+    padding:
+        7px
+        12px;
+
+    border-radius: 999px;
+
+    color:
+        var(--green);
+
+    background: white;
+
+    border:
+        1px
+        solid
+        var(--line);
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+section {
+    margin-top: 24px;
+}
+
+.section-header {
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    margin: 0;
+
+    font-size:
+        clamp(
+            22px,
+            3vw,
+            29px
+        );
+}
+
+.section-header p {
+    margin:
+        5px
+        0
+        0;
+
+    color:
+        var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PLANT TOOLS
+========================================================= */
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 13px;
+}
+
+.feature-card {
+    min-height: 185px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 17px;
+
+    border:
+        1px
+        solid
+        var(--line);
+
+    border-radius: 22px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.94
+        );
+
+    box-shadow:
+        0
+        10px
+        22px
+        rgba(
+            31,
+            78,
+            52,
+            0.05
+        );
+
+    transition:
+        transform
+        0.2s
+        ease;
+}
+
+.feature-card:hover {
+    transform:
+        translateY(-3px);
+}
+
+.feature-icon {
+    width: 49px;
+    height: 49px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 15px;
+
+    background:
+        var(--green-soft);
+
+    font-size: 23px;
+}
+
+.feature-card h3 {
+    margin:
+        12px
+        0
+        5px;
+
+    font-size: 16px;
+}
+
+.feature-card p {
+    margin: 0;
+
+    color:
+        var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.feature-link {
+    margin-top: auto;
+
+    padding-top: 12px;
+
+    color:
+        var(--green);
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   PLANT CARE JOURNEY
+========================================================= */
+
+.journey-card {
+    padding: 24px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eff9f2
+        );
+
+    border:
+        1px
+        solid
+        var(--line);
+}
+
+.journey-title {
+    text-align: center;
+}
+
+.journey-title h2 {
+    margin: 0;
+
+    font-size:
+        clamp(
+            23px,
+            4vw,
+            32px
+        );
+}
+
+.journey-title p {
+    margin:
+        6px
+        0
+        0;
+
+    color:
+        var(--muted);
+
+    font-size: 13px;
+}
+
+.journey-steps {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.journey-step {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-height: 70px;
+
+    padding:
+        12px
+        14px;
+
+    border-radius: 17px;
+
+    background: white;
+
+    border:
+        1px
+        solid
+        #e3eee6;
+}
+
+.journey-number {
+    font-size: 25px;
+}
+
+.journey-step strong {
+    display: block;
+
+    font-size: 12px;
+}
+
+.journey-step small {
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   TRACK RECOVERY
+========================================================= */
+
+.recovery-card {
+    padding: 24px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #edf8f0
+        );
+
+    border:
+        1px
+        solid
+        var(--line);
+
+    box-shadow:
+        0
+        14px
+        32px
+        rgba(
+            23,
+            107,
+            67,
+            0.07
+        );
+}
+
+.recovery-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.recovery-icon {
+    width: 55px;
+    height: 55px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex:
+        0
+        0
+        auto;
+
+    border-radius: 18px;
+
+    background:
+        #dff4e6;
+
+    font-size: 26px;
+}
+
+.recovery-title h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color:
+        var(--dark);
+}
+
+.recovery-title p {
+    margin:
+        5px
+        0
+        0;
+
+    color:
+        var(--muted);
+
+    font-size: 12px;
+}
+
+.recovery-steps {
+    margin-top: 20px;
+}
+
+.recovery-step {
+    display: grid;
+
+    grid-template-columns:
+        34px
+        46px
+        1fr;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    border-radius: 17px;
+
+    background: white;
+
+    border:
+        1px
+        solid
+        #e1eee5;
+}
+
+.recovery-step-number {
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background:
+        var(--green);
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+.recovery-step-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 13px;
+
+    background:
+        var(--green-soft);
+
+    font-size: 21px;
+}
+
+.recovery-step strong {
+    display: block;
+
+    font-size: 13px;
+}
+
+.recovery-step p {
+    margin:
+        4px
+        0
+        0;
+
+    color:
+        var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.45;
+}
+
+.recovery-arrow {
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color:
+        var(--green-light);
+
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+.recovery-tip {
+    margin-top: 16px;
+
+    padding:
+        12px
+        14px;
+
+    border-radius: 14px;
+
+    color:
+        #486756;
+
+    background:
+        #f7fcf8;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    border:
+        1px
+        solid
+        var(--line);
+}
+
+.recovery-button {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 14px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   BEFORE / AFTER COMPARISON UI
+========================================================= */
+
+.compare-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 25px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #edf8f0
+        );
+
+    border:
+        1px
+        solid
+        var(--line);
+
+    box-shadow:
+        0
+        14px
+        32px
+        rgba(
+            23,
+            107,
+            67,
+            0.08
+        );
+}
+
+.compare-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    right: -95px;
+    top: -95px;
+
+    border-radius: 50%;
+
+    background:
+        #e2f5e8;
+
+    opacity: 0.7;
+}
+
+.compare-content {
+    position: relative;
+    z-index: 2;
+}
+
+.compare-title {
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.compare-title h2 {
+    margin: 0;
+
+    font-size:
+        clamp(
+            22px,
+            4vw,
+            28px
+        );
+}
+
+.compare-title p {
+    max-width: 650px;
+
+    margin:
+        6px
+        auto
+        0;
+
+    color:
+        var(--muted);
+
+    font-size: 13px;
+}
+
+.compare-flow {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr
+        auto
+        1fr;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    padding: 9px;
+
+    border-radius: 20px;
+
+    background:
+        #f5fbf7;
+
+    border:
+        1px
+        solid
+        #dcebe1;
+}
+
+.compare-flow-item {
+    padding:
+        10px
+        7px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    background: white;
+
+    border:
+        1px
+        solid
+        #e1eee5;
+}
+
+.compare-flow-icon {
+    font-size: 22px;
+}
+
+.compare-flow-label {
+    margin-top: 3px;
+
+    color:
+        var(--green-dark);
+
+    font-size: 10px;
+
+    font-weight: 900;
+}
+
+.compare-flow-arrow {
+    color:
+        var(--green);
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+.compare-upload-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 18px;
+}
+
+.compare-box {
+    position: relative;
+
+    min-height: 280px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 18px;
+
+    border:
+        2px
+        dashed
+        #9bcfaf;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f9fdf9,
+            #edf8f0
+        );
+
+    text-align: center;
+
+    transition:
+        0.2s
+        ease;
+}
+
+.compare-box:hover {
+    border-color:
+        var(--green);
+
+    transform:
+        translateY(-2px);
+}
+
+.compare-box h3 {
+    margin:
+        0
+        0
+        7px;
+
+    font-size: 16px;
+
+    color:
+        var(--green-dark);
+}
+
+.compare-box p {
+    margin:
+        0
+        0
+        12px;
+
+    color:
+        var(--muted);
+
+    font-size: 11px;
+}
+
+.compare-file-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 145px;
+
+    padding:
+        11px
+        14px;
+
+    border-radius: 13px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+.compare-input {
+    display: none;
+}
+
+.compare-preview-wrap {
+    width: 100%;
+
+    margin-top: 12px;
+
+    display: none;
+}
+
+.compare-preview {
+    width: 100%;
+
+    max-height: 210px;
+
+    object-fit: contain;
+
+    border-radius: 17px;
+
+    border:
+        3px
+        solid
+        #dceee2;
+
+    background: white;
+}
+
+.compare-file-name {
+    margin-top: 7px;
+
+    color:
+        var(--green);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
+}
+
+.compare-button {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    box-shadow:
+        0
+        9px
+        20px
+        rgba(
+            23,
+            107,
+            67,
+            0.16
+        );
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    transition:
+        0.2s
+        ease;
+}
+
+.compare-button:hover {
+    transform:
+        translateY(-2px);
+}
+
+.compare-button:disabled {
+    opacity: 0.7;
+
+    cursor: wait;
+}
+
+.compare-note {
+    margin-top: 12px;
+
+    padding:
+        11px
+        13px;
+
+    border-radius: 14px;
+
+    color:
+        #536b5b;
+
+    background:
+        #f7fcf8;
+
+    border:
+        1px
+        solid
+        var(--line);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+/* =========================================================
+   BEFORE / AFTER INLINE RESULT (home page)
+========================================================= */
+
+.compare-result {
+    margin-top: 18px;
+    display: none;
+}
+
+.compare-result.visible {
+    display: block;
+}
+
+.compare-result-status {
+    text-align: center;
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+}
+
+.compare-result-status .icon {
+    font-size: 30px;
+}
+
+.compare-result-status h3 {
+    margin: 6px 0 4px;
+    font-size: 16px;
+}
+
+.compare-result-status p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.compare-result-status.improving {
+    background: #eaf8ef;
+    border: 1px solid #c9e7d3;
+    color: #176b43;
+}
+
+.compare-result-status.warning {
+    background: #fff4e5;
+    border: 1px solid #efc36a;
+    color: #704d0a;
+}
+
+.compare-result-status.worsening {
+    background: #fff0ed;
+    border: 1px solid #f1c7bf;
+    color: #8e3328;
+}
+
+.compare-result-status.monitor {
+    background: #f3f7f4;
+    border: 1px solid #dce8df;
+    color: #4d6055;
+}
+
+.compare-result-note {
+    padding: 12px 14px;
+    border-radius: 14px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+
+.compare-result-note.recommendation {
+    background: #eef9f1;
+    border: 1px solid #cdeadc;
+    color: #174a31;
+}
+
+.compare-result-note.visual {
+    background: #f7fcf8;
+    border: 1px solid var(--line);
+    color: #536b5b;
+}
+
+.compare-result-note b {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.compare-result-link {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--green-dark, #176b43);
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    margin-top: 28px;
+
+    text-align: center;
+
+    color:
+        var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 0;
+
+    z-index: 99999;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(
+            680px,
+            100%
+        );
+
+    height: 74px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-around;
+
+    padding:
+        6px
+        8px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
+
+    backdrop-filter:
+        blur(18px);
+
+    border-top:
+        1px
+        solid
+        var(--line);
+
+    box-shadow:
+        0
+        -8px
+        28px
+        rgba(
+            23,
+            107,
+            67,
+            0.10
+        );
+}
+
+.bottom-nav-item {
+    min-width: 58px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    color:
+        var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+.bottom-nav-item.active {
+    color:
+        var(--green);
+}
+
+.bottom-nav-icon {
+    font-size: 19px;
+}
+
+.bottom-scan-button {
+    width: 62px;
+    height: 62px;
+
+    margin-top: -25px;
+
+    border:
+        4px
+        solid
+        #eef8f1;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176b43,
+            #319a60
+        );
+
+    box-shadow:
+        0
+        8px
+        20px
+        rgba(
+            23,
+            107,
+            67,
+            0.28
+        );
+
+    font-size: 23px;
+}
+
+.bottom-scan-button small {
+    margin-top: -1px;
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .feature-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+    }
+
+    .journey-steps {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .app {
+        width:
+            calc(100% - 18px);
+
+        padding-top: 9px;
+    }
+
+    .hero {
+        padding:
+            13px
+            14px
+            15px;
+    }
+
+    .compact-weather-card {
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            auto;
+
+        gap: 9px;
+
+        padding:
+            11px
+            13px;
+    }
+
+    .compact-weather-location {
+        grid-column:
+            1
+            /
+            -1;
+
+        order: -1;
+    }
+
+    .scan-flow {
+        grid-template-columns:
+            1fr
+            auto
+            1fr
+            auto
+            1fr;
+
+        gap: 5px;
+
+        padding: 7px;
+    }
+
+    .scan-flow-item {
+        min-height: 68px;
+
+        font-size: 10px;
+    }
+
+    .scan-flow-number {
+        width: 21px;
+        height: 21px;
+
+        font-size: 9px;
+    }
+
+    .scan-flow-label {
+        font-size: 9px;
+    }
+
+    .scan-flow-arrow {
+        width: 25px;
+        height: 25px;
+
+        font-size: 13px;
+    }
+
+    .upload-zone {
+        grid-template-columns:
+            1fr;
+    }
+
+    .choose-label {
+        width: 100%;
+    }
+
+    .compare-upload-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .compare-box {
+        min-height: 250px;
+    }
+
+    .compare-flow {
+        grid-template-columns:
+            1fr
+            auto
+            1fr
+            auto
+            1fr;
+
+        gap: 4px;
+    }
+
+    .compare-flow-item {
+        padding:
+            8px
+            4px;
+    }
+
+    .compare-flow-icon {
+        font-size: 18px;
+    }
+
+    .compare-flow-label {
+        font-size: 8px;
+    }
+
+    .compare-flow-arrow {
+        font-size: 14px;
+    }
+
+    .splash-logo-wrap {
+        width:
+            min(
+                94vw,
+                600px
+            );
+
+        height:
+            min(
+                94vw,
+                600px
+            );
+
+        max-height: 68vh;
+    }
+
+}
+
+@media (max-width: 540px) {
+
+    .feature-grid {
+        gap: 10px;
+    }
+
+    .feature-card {
+        min-height: 170px;
+
+        padding: 14px;
+    }
+
+    .journey-card {
+        padding:
+            18px
+            12px;
+    }
+
+    .journey-steps {
+        grid-template-columns:
+            1fr;
+
+        gap: 8px;
+    }
+
+    .journey-step {
+        min-height: 62px;
+    }
+
+    .bottom-nav {
+        height: 70px;
+    }
+
+    .bottom-nav-item {
+        min-width: 48px;
+
+        font-size: 8px;
+    }
+
+    .bottom-scan-button {
+        width: 58px;
+        height: 58px;
+    }
+
+    .recovery-card {
+        padding:
+            17px
+            12px;
+    }
+
+    .recovery-step {
+        grid-template-columns:
+            28px
+            40px
+            1fr;
+
+        padding: 11px;
+    }
+
+    .recovery-step-icon {
+        width: 37px;
+        height: 37px;
+    }
+
+    .scan-flow {
+        gap: 3px;
+    }
+
+    .scan-flow-item {
+        min-height: 62px;
+
+        border-radius: 13px;
+    }
+
+    .compare-card {
+        padding:
+            18px
+            12px;
+    }
+
+    .compare-upload-grid {
+        gap: 12px;
+    }
+
+}
+
+@media (max-width: 380px) {
+
+    .scan-flow {
+        grid-template-columns:
+            1fr
+            auto
+            1fr
+            auto
+            1fr;
+
+        padding: 5px;
+    }
+
+    .scan-flow-label {
+        font-size: 8px;
+    }
+
+    .scan-flow-number {
+        width: 19px;
+        height: 19px;
+    }
+
+    .scan-flow-arrow {
+        width: 20px;
+        height: 20px;
+
+        font-size: 11px;
+    }
+
+    .compare-flow-label {
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   GPS STATUS
+========================================================= */
+
+.location-loading {
+    opacity: 0.9;
+}
+
+</style>
+
+</head>
+
+<body data-app-root="true">
+
+
+<!-- =========================================================
+     FULL SCREEN LOGO SPLASH
+========================================================= -->
+
+<div
+    class="splash-screen"
+    id="splashScreen"
+>
+
+    <div class="splash-glow"></div>
+
+    <div
+        class="splash-particles"
+        aria-hidden="true"
+    >
+        <span class="splash-particle">🌿</span>
+        <span class="splash-particle">🍃</span>
+        <span class="splash-particle">🌿</span>
+        <span class="splash-particle">🍃</span>
+        <span class="splash-particle">🌱</span>
+        <span class="splash-particle">🍃</span>
+    </div>
+
+    <div class="splash-content">
+
+        <div class="splash-logo-wrap">
+
+            <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                class="splash-logo"
+                id="splashLogo"
+                alt="Plant Disease AI Logo"
+                onerror="handleLogoError(this)"
+            >
+
+            <div
+                class="logo-fallback"
+                id="logoFallback"
+            >
+                🌿
+            </div>
+
+        </div>
+
+        <div class="splash-title">
+            🌿 Plant Disease AI
+        </div>
+
+        <div class="splash-title-underline"></div>
+
+        <div class="splash-text">
+            Scan. Diagnose. Treat.
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<header class="hero">
+
+    <a
+        href="/profile?return_to=/"
+        class="hero-profile-button"
+        aria-label="Profile"
+        id="heroProfileBtn"
+    >
+        <!--
+            Guest icon (shown by default).
+            If a user is logged in, this gets swapped
+            for their first initial by the script below.
+        -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="3.6" fill="#8fbc8f"/>
+            <path d="M5 19.2C5 15.6 8.1 13 12 13C15.9 13 19 15.6 19 19.2" stroke="#8fbc8f" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        </svg>
+    </a>
+
+    <div class="hero-content">
+
+        <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="Plant Disease AI"
+            class="logo"
+            onerror="this.style.display='none';"
+        >
+
+        <h1>
+            🌿 Plant Disease AI
+        </h1>
+
+        <p class="hero-tagline">
+            Scan. Diagnose. Treat.
+        </p>
+
+        <p class="hero-description">
+            Smart plant disease detection and care guidance
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     WEATHER
+====================================================== -->
+
+<div class="compact-weather-card">
+
+    <div class="compact-weather-main">
+
+        <span
+            class="compact-weather-icon"
+            id="weatherIcon"
+        >
+            🌤️
+        </span>
+
+        <div>
+
+            <div
+                class="compact-weather-temp"
+                id="weatherTemperature"
+            >
+                --°C
+            </div>
+
+            <div
+                class="compact-weather-condition"
+                id="weatherCondition"
+            >
+                Locating...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="compact-weather-location">
+
+        📍
+
+        <span
+            id="weatherCity"
+            class="location-loading"
+        >
+            Detecting your location...
+        </span>
+
+        <button
+            type="button"
+            id="changeLocationBtn"
+            class="change-location-btn"
+            title="Set your location manually"
+        >
+            ✏️
+        </button>
+
+    </div>
+
+
+    <div class="compact-weather-details">
+
+        <span>
+            💧
+            <strong id="humidityValue">
+                --
+            </strong>
+        </span>
+
+        <span>
+            💨
+            <strong id="windValue">
+                --
+            </strong>
+        </span>
+
+        <span>
+            ☀️
+            <strong id="uvValue">
+                --
+            </strong>
+        </span>
+
+    </div>
+
+</div>
+
+
+{% if error %}
+
+<div class="error">
+
+    ⚠️ {{ error }}
+
+</div>
+
+{% endif %}
+
+
+<!-- =====================================================
+     SCAN YOUR PLANT
+====================================================== -->
+
+<section
+    id="scanSection"
+    class="scan-section"
+>
+
+    <div class="scan-card">
+
+        <div class="scan-intro">
+
+            <h2>
+                📷 Scan Your Plant
+            </h2>
+
+            <p>
+                Upload a clear leaf photo for AI disease analysis.
+            </p>
+
+        </div>
+
+
+        <div class="scan-flow">
+
+            <div class="scan-flow-item">
+
+                <div class="scan-flow-number">
+                    1
+                </div>
+
+                <div class="scan-flow-label">
+                    📷 SCAN
+                </div>
+
+            </div>
+
+
+            <div class="scan-flow-arrow">
+                →
+            </div>
+
+
+            <div class="scan-flow-item">
+
+                <div class="scan-flow-number">
+                    2
+                </div>
+
+                <div class="scan-flow-label">
+                    🔍 DIAGNOSE
+                </div>
+
+            </div>
+
+
+            <div class="scan-flow-arrow">
+                →
+            </div>
+
+
+            <div class="scan-flow-item">
+
+                <div class="scan-flow-number">
+                    3
+                </div>
+
+                <div class="scan-flow-label">
+                    💊 TREATMENT
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <form
+            action="/predict"
+            method="POST"
+            enctype="multipart/form-data"
+            id="uploadForm"
+        >
+
+            <label
+                class="upload-zone"
+                for="imageInput"
+            >
+
+                <div class="upload-main">
+
+                    <div class="upload-icon">
+                        🌿
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Choose a plant image
+                        </h3>
+
+                        <p>
+                            JPG, JPEG, PNG or WEBP
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="choose-label">
+                    CHOOSE IMAGE
+                </div>
+
+            </label>
+
+
+            <input
+                type="file"
+                name="image"
+                id="imageInput"
+                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                required
+            >
+
+            <!-- Camera-only input. The normal upload input above stays gallery/files friendly. -->
+            <input
+                type="file"
+                id="cameraInput"
+                accept="image/*"
+                capture="environment"
+                style="display:none;"
+            >
+
+
+            <div
+                class="file-preview"
+                id="filePreview"
+            ></div>
+
+
+            <div
+                class="image-preview-container"
+                id="imagePreviewContainer"
+            >
+
+                <img
+                    id="imagePreview"
+                    alt="Selected plant image"
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                class="scan-button"
+                id="detectButton"
+            >
+                📸 TAKE A PICTURE & SCAN
+            </button>
+
+
+            <div
+                class="analysis-status"
+                id="analysisStatus"
+            >
+
+                <span class="small-spinner"></span>
+
+                🔍 AI is analyzing your plant image...
+
+            </div>
+
+        </form>
+
+
+        <div class="supported-plants">
+
+            <span class="plant-badge">
+                🍅 Tomato
+            </span>
+
+            <span class="plant-badge">
+                🌶️ Chilli
+            </span>
+
+            <span class="plant-badge">
+                🌺 Hibiscus
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PLANT HEALTH TOOLS
+====================================================== -->
+
+<section>
+
+    <div class="section-header">
+
+        <h2>
+            🌱 Plant Health Tools
+        </h2>
+
+        <p>
+            Chat, care, progress and records.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <a
+            href="/chat?return_to=/"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                💬
+            </div>
+
+            <h3>
+                AI Chat
+            </h3>
+
+            <p>
+                Ask about symptoms, diseases and treatment.
+            </p>
+
+            <span class="feature-link">
+                Open Chat →
+            </span>
+
+        </a>
+
+
+        <a
+            href="/plant-care?return_to=/"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                🌱
+            </div>
+
+            <h3>
+                Plant Care
+            </h3>
+
+            <p>
+                Watering, sunlight, soil and fertilizer guidance.
+            </p>
+
+            <span class="feature-link">
+                Open Care Guide →
+            </span>
+
+        </a>
+
+
+        <a
+            href="/before-after?return_to=/"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Before / After
+            </h3>
+
+            <p>
+                Compare plant condition and track recovery.
+            </p>
+
+            <span class="feature-link">
+                Track Progress →
+            </span>
+
+        </a>
+
+
+        <a
+            href="/upload-history?return_to=/"
+            class="feature-card"
+        >
+
+            <div class="feature-icon">
+                📋
+            </div>
+
+            <h3>
+                My Records
+            </h3>
+
+            <p>
+                Review previous scans and saved predictions.
+            </p>
+
+            <span class="feature-link">
+                View Records →
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PLANT CARE JOURNEY
+====================================================== -->
+
+<section>
+
+    <div class="journey-card">
+
+        <div class="journey-title">
+
+            <h2>
+                🌿 Your Plant Care Journey
+            </h2>
+
+            <p>
+                From first scan to recovery tracking.
+            </p>
+
+        </div>
+
+
+        <div class="journey-steps">
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    1️⃣
+                </div>
+
+                <div>
+
+                    <strong>
+                        📷 Scan the leaf
+                    </strong>
+
+                    <small>
+                        Upload a clear image
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    2️⃣
+                </div>
+
+                <div>
+
+                    <strong>
+                        🔍 AI diagnosis
+                    </strong>
+
+                    <small>
+                        Detect disease and confidence
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    3️⃣
+                </div>
+
+                <div>
+
+                    <strong>
+                        💊 Treatment
+                    </strong>
+
+                    <small>
+                        Get treatment guidance
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    4️⃣
+                </div>
+
+                <div>
+
+                    <strong>
+                        🌱 Plant care
+                    </strong>
+
+                    <small>
+                        Water, soil and sunlight
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    5️⃣
+                </div>
+
+                <div>
+
+                    <strong>
+                        💬 Ask AI
+                    </strong>
+
+                    <small>
+                        Ask about your plant
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-number">
+                    6️⃣
+                </div>
+
+                <div>
+
+                    <strong>
+                        📊 Track recovery
+                    </strong>
+
+                    <small>
+                        Compare Before and After
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TRACK RECOVERY
+====================================================== -->
+
+<section>
+
+    <div class="recovery-card">
+
+
+        <div class="recovery-title">
+
+            <span class="recovery-icon">
+                📊
+            </span>
+
+            <div>
+
+                <h2>
+                    Track Treatment Recovery
+                </h2>
+
+                <p>
+                    Compare your plant before and after treatment.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="recovery-steps">
+
+
+            <div class="recovery-step">
+
+                <div class="recovery-step-number">
+                    1
+                </div>
+
+                <div class="recovery-step-icon">
+                    📷
+                </div>
+
+                <div>
+
+                    <strong>
+                        Save Before Scan
+                    </strong>
+
+                    <p>
+                        Scan the affected leaf before treatment.
+                        Use a clear photo in good lighting.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="recovery-arrow">
+                ↓
+            </div>
+
+
+            <div class="recovery-step">
+
+                <div class="recovery-step-number">
+                    2
+                </div>
+
+                <div class="recovery-step-icon">
+                    💊
+                </div>
+
+                <div>
+
+                    <strong>
+                        Follow Treatment
+                    </strong>
+
+                    <p>
+                        Follow treatment and plant care guidance
+                        for several days.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="recovery-arrow">
+                ↓
+            </div>
+
+
+            <div class="recovery-step">
+
+                <div class="recovery-step-number">
+                    3
+                </div>
+
+                <div class="recovery-step-icon">
+                    📸
+                </div>
+
+                <div>
+
+                    <strong>
+                        Scan the Same Plant Again
+                    </strong>
+
+                    <p>
+                        Take another photo of the same leaf
+                        or affected area after treatment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="recovery-arrow">
+                ↓
+            </div>
+
+
+            <div class="recovery-step">
+
+                <div class="recovery-step-number">
+                    4
+                </div>
+
+                <div class="recovery-step-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <strong>
+                        Compare Progress
+                    </strong>
+
+                    <p>
+                        Compare Before and After scans
+                        to track visible improvement.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="recovery-tip">
+
+            💡
+
+            <strong>
+                Best result:
+            </strong>
+
+            Take Before and After photos from a similar
+            distance and in similar lighting.
+
+        </div>
+
+
+        <a
+            href="/before-after?return_to=/"
+            class="recovery-button"
+        >
+
+            📊 TRACK RECOVERY →
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BEFORE / AFTER COMPARISON
+====================================================== -->
+
+<section id="compareSection">
+
+    <div class="compare-card">
+
+        <div class="compare-content">
+
+            <div class="compare-title">
+
+                <h2>
+                    📊 Before / After Treatment
+                </h2>
+
+                <p>
+                    Upload your Before and After photos
+                    to compare treatment progress.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPARISON FLOW
+            ================================================= -->
+
+            <div class="compare-flow">
+
+                <div class="compare-flow-item">
+
+                    <div class="compare-flow-icon">
+                        📷
+                    </div>
+
+                    <div class="compare-flow-label">
+                        BEFORE
+                    </div>
+
+                </div>
+
+
+                <div class="compare-flow-arrow">
+                    →
+                </div>
+
+
+                <div class="compare-flow-item">
+
+                    <div class="compare-flow-icon">
+                        💊
+                    </div>
+
+                    <div class="compare-flow-label">
+                        TREATMENT
+                    </div>
+
+                </div>
+
+
+                <div class="compare-flow-arrow">
+                    →
+                </div>
+
+
+                <div class="compare-flow-item">
+
+                    <div class="compare-flow-icon">
+                        📸
+                    </div>
+
+                    <div class="compare-flow-label">
+                        AFTER
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 BEFORE / AFTER FORM
+            ================================================= -->
+
+            <form
+                action="/api/before-after"
+                method="POST"
+                enctype="multipart/form-data"
+                id="compareForm"
+            >
+
+                <div class="compare-upload-grid">
+
+
+                    <!-- BEFORE -->
+
+                    <div class="compare-box">
+
+                        <h3>
+                            📷 Before Treatment
+                        </h3>
+
+                        <p>
+                            Upload the affected plant photo
+                            before treatment.
+                        </p>
+
+
+                        <label
+                            for="beforeImageInput"
+                            class="compare-file-label"
+                        >
+                            📷 CHOOSE BEFORE IMAGE
+                        </label>
+
+
+                        <input
+                            type="file"
+                            name="before_image"
+                            id="beforeImageInput"
+                            class="compare-input"
+                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                            required
+                        >
+
+
+                        <div
+                            class="compare-preview-wrap"
+                            id="beforePreviewWrap"
+                        >
+
+                            <img
+                                id="beforePreview"
+                                class="compare-preview"
+                                alt="Before treatment preview"
+                            >
+
+                            <div
+                                id="beforeFileName"
+                                class="compare-file-name"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AFTER -->
+
+                    <div class="compare-box">
+
+                        <h3>
+                            📸 After Treatment
+                        </h3>
+
+                        <p>
+                            Upload the same plant or affected
+                            area after treatment.
+                        </p>
+
+
+                        <label
+                            for="afterImageInput"
+                            class="compare-file-label"
+                        >
+                            📸 CHOOSE AFTER IMAGE
+                        </label>
+
+
+                        <input
+                            type="file"
+                            name="after_image"
+                            id="afterImageInput"
+                            class="compare-input"
+                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                            required
+                        >
+
+
+                        <div
+                            class="compare-preview-wrap"
+                            id="afterPreviewWrap"
+                        >
+
+                            <img
+                                id="afterPreview"
+                                class="compare-preview"
+                                alt="After treatment preview"
+                            >
+
+                            <div
+                                id="afterFileName"
+                                class="compare-file-name"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="compare-button"
+                    id="compareButton"
+                >
+
+                    🔍 COMPARE TREATMENT PROGRESS
+
+                </button>
+
+
+                <div class="compare-note">
+
+                    💡 For a better comparison, take both photos
+                    from a similar distance, angle and lighting.
+                    Use the same plant or affected leaf area whenever possible.
+
+                </div>
+
+            </form>
+
+            <div class="compare-result" id="compareResultPanel">
+                <div id="compareResultContent"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    🌿 Plant Disease AI
+
+    <br>
+
+    Scan. Diagnose. Treat. Care. Recover.
+
+    <br><br>
+
+    ⚠️ AI predictions are screening guidance and may not
+    replace expert agricultural diagnosis.
+
+</footer>
+
+
+</div>
+
+
+<!-- =========================================================
+     BOTTOM NAVIGATION
+========================================================= -->
+
+<nav class="bottom-nav">
+
+    <a
+        href="/"
+        class="bottom-nav-item active"
+    >
+
+        <span class="bottom-nav-icon">
+            🏠
+        </span>
+
+        <span>
+            Home
+        </span>
+
+    </a>
+
+
+    <a
+        href="/chat?return_to=/"
+        class="bottom-nav-item"
+    >
+
+        <span class="bottom-nav-icon">
+            💬
+        </span>
+
+        <span>
+            AI
+        </span>
+
+    </a>
+
+
+    <button
+        type="button"
+        class="bottom-scan-button"
+        id="bottomCameraButton"
+        aria-label="Open camera to scan plant"
+    >
+
+        <span>
+            📷
+        </span>
+
+        <small>
+            Scan
+        </small>
+
+    </button>
+
+
+    <a
+        href="/plant-care?return_to=/"
+        class="bottom-nav-item"
+    >
+
+        <span class="bottom-nav-icon">
+            🌱
+        </span>
+
+        <span>
+            Care
+        </span>
+
+    </a>
+
+
+    <a
+        href="/health"
+        class="bottom-nav-item"
+    >
+
+        <span class="bottom-nav-icon">
+            📊
+        </span>
+
+        <span>
+            Health
+        </span>
+
+    </a>
+
+</nav>
+
+
+<script>
+
+
+/* =========================================================
+   LOGO ERROR FALLBACK
+========================================================= */
+
+function handleLogoError(image) {
+
+    image.style.display = "none";
+
+    const fallback =
+        document.getElementById(
+            "logoFallback"
+        );
+
+    if (fallback) {
+
+        fallback.style.display =
+            "flex";
+
+    }
+
+}
+
+
+/* =========================================================
+   FULL SCREEN SPLASH
+========================================================= */
+
+(function () {
+
+    const splashScreen =
+        document.getElementById(
+            "splashScreen"
+        );
+
+    if (!splashScreen) {
+        return;
+    }
+
+    let alreadyShown = false;
+
+    try {
+
+        alreadyShown =
+            sessionStorage.getItem(
+                "plantDiseaseAI_appStarted"
+            )
+            ===
+            "1";
+
+    } catch (error) {
+
+        alreadyShown = false;
+
+    }
+
+
+    if (alreadyShown) {
+
+        splashScreen.remove();
+
+        return;
+
+    }
+
+
+    try {
+
+        sessionStorage.setItem(
+            "plantDiseaseAI_appStarted",
+            "1"
+        );
+
+    } catch (error) {
+
+        /* Ignore. */
+
+    }
+
+
+    setTimeout(
+
+        function () {
+
+            splashScreen.classList.add(
+                "hide"
+            );
+
+
+            setTimeout(
+
+                function () {
+
+                    if (
+                        splashScreen
+                        &&
+                        splashScreen.parentNode
+                    ) {
+
+                        splashScreen.remove();
+
+                    }
+
+                },
+
+                650
+
+            );
+
+        },
+
+        2500
+
+    );
+
+})();
+
+
+/* =========================================================
+   MAIN IMAGE UPLOAD + CAMERA
+========================================================= */
+
+const imageInput =
+    document.getElementById(
+        "imageInput"
+    );
+
+const cameraInput =
+    document.getElementById(
+        "cameraInput"
+    );
+
+const filePreview =
+    document.getElementById(
+        "filePreview"
+    );
+
+const imagePreviewContainer =
+    document.getElementById(
+        "imagePreviewContainer"
+    );
+
+const imagePreview =
+    document.getElementById(
+        "imagePreview"
+    );
+
+const detectButton =
+    document.getElementById(
+        "detectButton"
+    );
+
+const bottomCameraButton =
+    document.getElementById(
+        "bottomCameraButton"
+    );
+
+const uploadForm =
+    document.getElementById(
+        "uploadForm"
+    );
+
+const analysisStatus =
+    document.getElementById(
+        "analysisStatus"
+    );
+
+
+function putFileIntoMainInput(file) {
+
+    if (!imageInput || !file) {
+        return false;
+    }
+
+    try {
+
+        const transfer = new DataTransfer();
+
+        transfer.items.add(file);
+        imageInput.files = transfer.files;
+
+        return true;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Could not transfer camera image to upload input:",
+            error
+        );
+
+        return false;
+
+    }
+
+}
+
+
+function showSelectedImage(file) {
+
+    if (!file) {
+        return;
+    }
+
+    filePreview.style.display = "block";
+
+    filePreview.textContent =
+        "✅ Image selected: "
+        +
+        file.name;
+
+    detectButton.textContent =
+        "🔍 DETECT DISEASE";
+
+    detectButton.disabled = false;
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        imagePreview.src =
+            event.target.result;
+
+        imagePreviewContainer.style.display =
+            "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   CHOOSE IMAGE
+   No capture attribute here, so mobile can use Gallery/Files.
+========================================================= */
+
+if (imageInput) {
+
+    imageInput.addEventListener(
+        "change",
+        function () {
+
+            if (
+                this.files
+                &&
+                this.files.length > 0
+            ) {
+
+                showSelectedImage(
+                    this.files[0]
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+function openPlantCamera() {
+
+    if (!cameraInput) {
+        alert(
+            "📷 Camera is not available in this browser."
+        );
+        return;
+    }
+
+    cameraInput.value = "";
+    cameraInput.click();
+
+}
+
+
+if (cameraInput) {
+
+    cameraInput.addEventListener(
+        "change",
+        function () {
+
+            if (
+                this.files
+                &&
+                this.files.length > 0
+            ) {
+
+                const cameraFile =
+                    this.files[0];
+
+                if (
+                    putFileIntoMainInput(
+                        cameraFile
+                    )
+                ) {
+
+                    showSelectedImage(
+                        cameraFile
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   TAKE A PICTURE & SCAN
+========================================================= */
+
+if (detectButton) {
+
+    detectButton.addEventListener(
+        "click",
+        function () {
+
+            const hasImage =
+                imageInput
+                &&
+                imageInput.files
+                &&
+                imageInput.files.length > 0;
+
+            if (!hasImage) {
+
+                openPlantCamera();
+                return;
+
+            }
+
+            if (uploadForm) {
+                uploadForm.requestSubmit();
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BOTTOM CENTER SCAN BUTTON
+   Opens camera directly.
+========================================================= */
+
+if (bottomCameraButton) {
+
+    bottomCameraButton.addEventListener(
+        "click",
+        function () {
+
+            openPlantCamera();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MAIN FORM SUBMIT
+========================================================= */
+
+if (uploadForm) {
+
+    uploadForm.addEventListener(
+        "submit",
+        function (event) {
+
+            if (
+                !imageInput
+                ||
+                !imageInput.files
+                ||
+                imageInput.files.length === 0
+            ) {
+
+                event.preventDefault();
+
+                alert(
+                    "📷 Please select or take a plant image first."
+                );
+
+                return;
+
+            }
+
+            analysisStatus.style.display =
+                "flex";
+
+            detectButton.disabled =
+                true;
+
+            detectButton.textContent =
+                "🔍 ANALYZING DISEASE...";
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BEFORE / AFTER IMAGE PREVIEW
+========================================================= */
+
+function setupComparePreview(
+    inputId,
+    previewId,
+    wrapperId,
+    fileNameId
+) {
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+    const preview =
+        document.getElementById(
+            previewId
+        );
+
+    const wrapper =
+        document.getElementById(
+            wrapperId
+        );
+
+    const fileName =
+        document.getElementById(
+            fileNameId
+        );
+
+
+    if (
+        !input
+        ||
+        !preview
+        ||
+        !wrapper
+        ||
+        !fileName
+    ) {
+
+        return;
+
+    }
+
+
+    input.addEventListener(
+
+        "change",
+
+        function () {
+
+            if (
+                !this.files
+                ||
+                this.files.length === 0
+            ) {
+
+                wrapper.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            const file =
+                this.files[0];
+
+
+            fileName.textContent =
+                "✅ "
+                +
+                file.name;
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    preview.src =
+                        event.target.result;
+
+                    wrapper.style.display =
+                        "block";
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+
+    );
+
+}
+
+
+setupComparePreview(
+
+    "beforeImageInput",
+
+    "beforePreview",
+
+    "beforePreviewWrap",
+
+    "beforeFileName"
+
+);
+
+
+setupComparePreview(
+
+    "afterImageInput",
+
+    "afterPreview",
+
+    "afterPreviewWrap",
+
+    "afterFileName"
+
+);
+
+
+/* =========================================================
+   BEFORE / AFTER FORM SUBMIT
+========================================================= */
+
+const compareForm =
+    document.getElementById(
+        "compareForm"
+    );
+
+
+const compareButton =
+    document.getElementById(
+        "compareButton"
+    );
+
+
+if (compareForm) {
+
+    compareForm.addEventListener(
+
+        "submit",
+
+        async function (event) {
+
+            event.preventDefault();
+
+            const beforeInput =
+                document.getElementById(
+                    "beforeImageInput"
+                );
+
+            const afterInput =
+                document.getElementById(
+                    "afterImageInput"
+                );
+
+
+            if (
+                !beforeInput.files.length
+                ||
+                !afterInput.files.length
+            ) {
+
+                alert(
+                    "📷 Please select both Before and After images."
+                );
+
+                return;
+
+            }
+
+
+            compareButton.disabled =
+                true;
+
+
+            compareButton.textContent =
+                "🔍 COMPARING TREATMENT PROGRESS...";
+
+            const panel = document.getElementById("compareResultPanel");
+            const content = document.getElementById("compareResultContent");
+
+            try {
+
+                const formData = new FormData();
+                formData.append("before_image", beforeInput.files[0]);
+                formData.append("after_image", afterInput.files[0]);
+
+                const response = await fetch("/api/before-after", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.status === 401) {
+                    panel.classList.add("visible");
+                    content.innerHTML =
+                        '<div class="compare-result-status warning">' +
+                        '<div class="icon">🔐</div>' +
+                        '<h3>Please Log In</h3>' +
+                        '<p>Log in to your account first, then run the comparison so it saves to your history.</p>' +
+                        '</div>' +
+                        '<a class="compare-result-link" href="/login?return_to=/">Go to Login →</a>';
+                    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+
+                if (!data.success) {
+                    panel.classList.add("visible");
+                    content.innerHTML =
+                        '<div class="compare-result-status warning">' +
+                        '<div class="icon">⚠️</div>' +
+                        '<h3>Comparison Failed</h3>' +
+                        '<p>' + escapeCompareHtml(data.error || "Please try again with clearer photos.") + '</p>' +
+                        '</div>';
+                    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+
+                renderCompareResult(data.record, data.comparison);
+
+            } catch (error) {
+
+                panel.classList.add("visible");
+                content.innerHTML =
+                    '<div class="compare-result-status warning">' +
+                    '<div class="icon">⚠️</div>' +
+                    '<h3>Something Went Wrong</h3>' +
+                    '<p>Could not complete the comparison. Please try again.</p>' +
+                    '</div>';
+                panel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            } finally {
+
+                compareButton.disabled = false;
+                compareButton.textContent = "🔍 COMPARE TREATMENT PROGRESS";
+
+            }
+
+        }
+
+    );
+
+}
+
+
+function escapeCompareHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>'"]/g, function (m) {
+        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[m];
+    });
+}
+
+
+function renderCompareResult(record, c) {
+
+    const panel = document.getElementById("compareResultPanel");
+    const content = document.getElementById("compareResultContent");
+
+    const type = c.status === "warning"
+        ? "warning"
+        : (c.status === "worsening" ? "worsening" : (c.status === "improving" ? "improving" : "monitor"));
+
+    const warning = !c.same_disease
+        ? '<div class="compare-result-note recommendation" style="background:#fff4e5;border-color:#efc36a;color:#704d0a;">'
+        + '<b>⚠️ DISEASE CHANGE WARNING</b>'
+        + 'The BEFORE and AFTER images were classified as different conditions. '
+        + 'Do not switch treatment solely because of this result. Retake a clear photo '
+        + 'of the same area and review the new condition carefully.'
+        + '</div>'
+        : '';
+
+    content.innerHTML =
+        '<div class="compare-result-status ' + type + '">'
+        + '<div class="icon">' + escapeCompareHtml(c.status_icon) + '</div>'
+        + '<h3>' + escapeCompareHtml(c.status_title) + '</h3>'
+        + '<p>' + escapeCompareHtml(c.message) + '</p>'
+        + '</div>'
+        + warning
+        + '<div class="compare-result-note recommendation">'
+        + '<b>💡 Recommendation</b>'
+        + escapeCompareHtml(c.recommendation)
+        + '</div>'
+        + '<div class="compare-result-note visual">'
+        + '<b>Secondary visual metric</b>'
+        + escapeCompareHtml(c.visual_note)
+        + '</div>'
+        + '<a class="compare-result-link" href="/before-after?return_to=/">See full comparison history →</a>';
+
+    panel.classList.add("visible");
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+}
+
+
+/* =========================================================
+   WEATHER ELEMENTS
+========================================================= */
+
+const weatherCity =
+    document.getElementById(
+        "weatherCity"
+    );
+
+
+const weatherTemperature =
+    document.getElementById(
+        "weatherTemperature"
+    );
+
+
+const weatherCondition =
+    document.getElementById(
+        "weatherCondition"
+    );
+
+
+const weatherIcon =
+    document.getElementById(
+        "weatherIcon"
+    );
+
+
+const humidityValue =
+    document.getElementById(
+        "humidityValue"
+    );
+
+
+const windValue =
+    document.getElementById(
+        "windValue"
+    );
+
+
+const uvValue =
+    document.getElementById(
+        "uvValue"
+    );
+
+
+const changeLocationBtn =
+    document.getElementById(
+        "changeLocationBtn"
+    );
+
+
+/* =========================================================
+   MANUAL LOCATION OVERRIDE
+========================================================= */
+
+const MANUAL_LOCATION_KEY =
+    "plantDiseaseAI_manualLocation";
+
+
+const DEFAULT_LOCATION = {
+
+    latitude: 12.9165,
+
+    longitude: 79.1325,
+
+    label: "Vellore"
+
+};
+
+
+/* =========================================================
+   FAST WEATHER CACHE
+   Show the last successful location/weather immediately,
+   then refresh it in the background.
+========================================================= */
+
+const WEATHER_CACHE_KEY =
+    "plantDiseaseAI_weatherCache";
+
+
+function getWeatherCache() {
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                WEATHER_CACHE_KEY
+            );
+
+        if (!raw) {
+            return null;
+        }
+
+        return JSON.parse(raw);
+
+    }
+
+    catch (error) {
+
+        return null;
+
+    }
+
+}
+
+
+function saveWeatherCache(data) {
+
+    try {
+
+        localStorage.setItem(
+            WEATHER_CACHE_KEY,
+            JSON.stringify(data)
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Could not cache weather:",
+            error
+        );
+
+    }
+
+}
+
+
+function applyWeatherCache(cache) {
+
+    if (!cache) {
+        return false;
+    }
+
+    if (cache.cityName) {
+
+        weatherCity.textContent =
+            cache.cityName;
+
+    }
+
+    if (cache.temperature != null) {
+
+        weatherTemperature.textContent =
+            Math.round(cache.temperature) + "°C";
+
+    }
+
+    if (cache.condition) {
+
+        weatherCondition.textContent =
+            cache.condition;
+
+    }
+
+    if (cache.icon) {
+
+        weatherIcon.textContent =
+            cache.icon;
+
+    }
+
+    if (cache.humidity != null) {
+
+        humidityValue.textContent =
+            cache.humidity + "%";
+
+    }
+
+    if (cache.wind != null) {
+
+        windValue.textContent =
+            Math.round(cache.wind) + " km/h";
+
+    }
+
+    if (cache.uv != null) {
+
+        uvValue.textContent =
+            cache.uv;
+
+    }
+
+    return true;
+
+}
+
+
+const initialWeatherCache =
+    getWeatherCache();
+
+applyWeatherCache(
+    initialWeatherCache
+);
+
+
+function getManualLocationOverride() {
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                MANUAL_LOCATION_KEY
+            );
+
+        if (!raw) {
+            return null;
+        }
+
+        const parsed =
+            JSON.parse(raw);
+
+        if (
+            parsed
+            &&
+            typeof parsed.latitude === "number"
+            &&
+            typeof parsed.longitude === "number"
+        ) {
+
+            return parsed;
+
+        }
+
+        return null;
+
+    }
+
+    catch (error) {
+
+        return null;
+
+    }
+
+}
+
+
+function saveManualLocationOverride(
+    latitude,
+    longitude,
+    label
+) {
+
+    try {
+
+        localStorage.setItem(
+
+            MANUAL_LOCATION_KEY,
+
+            JSON.stringify({
+                latitude: latitude,
+                longitude: longitude,
+                label: label
+            })
+
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Could not save manual location:",
+            error
+        );
+
+    }
+
+}
+
+
+function clearManualLocationOverride() {
+
+    try {
+
+        localStorage.removeItem(
+            MANUAL_LOCATION_KEY
+        );
+
+    }
+
+    catch (error) {
+
+        /* Ignore. */
+
+    }
+
+}
+
+
+async function forwardGeocode(query) {
+
+    const url =
+        new URL(
+            "https://nominatim.openstreetmap.org/search"
+        );
+
+    url.searchParams.set(
+        "q",
+        query
+    );
+
+    url.searchParams.set(
+        "format",
+        "json"
+    );
+
+    url.searchParams.set(
+        "limit",
+        "1"
+    );
+
+
+    const response =
+        await fetch(
+
+            url.toString(),
+
+            {
+
+                cache:
+                    "no-store",
+
+                headers: {
+                    "Accept": "application/json"
+                }
+
+            }
+
+        );
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            "Location search failed."
+        );
+
+    }
+
+
+    const results =
+        await response.json();
+
+
+    if (
+        !results
+        ||
+        results.length === 0
+    ) {
+
+        throw new Error(
+            "No matching location found."
+        );
+
+    }
+
+
+    const bestMatch =
+        results[0];
+
+
+    return {
+
+        latitude:
+            parseFloat(
+                bestMatch.lat
+            ),
+
+        longitude:
+            parseFloat(
+                bestMatch.lon
+            ),
+
+        label:
+
+            bestMatch.display_name
+
+            ?
+
+            bestMatch.display_name.split(",")[0]
+
+            :
+
+            query
+
+    };
+
+}
+
+
+if (changeLocationBtn) {
+
+    changeLocationBtn.addEventListener(
+
+        "click",
+
+        async function () {
+
+            const input =
+                window.prompt(
+
+                    "Enter your city (e.g. Vellore).\n\n"
+                    +
+                    "Leave this blank to reset to the default location.",
+
+                    ""
+
+                );
+
+
+            if (input === null) {
+
+                return;
+
+            }
+
+
+            if (input.trim() === "") {
+
+                clearManualLocationOverride();
+
+                getWeather();
+
+                return;
+
+            }
+
+
+            const cityQuery =
+                input.trim();
+
+
+            weatherCity.textContent =
+                "🔍 Searching for "
+                +
+                cityQuery
+                +
+                "...";
+
+
+            try {
+
+                const match =
+                    await forwardGeocode(
+                        cityQuery
+                    );
+
+
+                saveManualLocationOverride(
+
+                    match.latitude,
+
+                    match.longitude,
+
+                    match.label
+
+                );
+
+
+                getWeather();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Manual location search error:",
+                    error
+                );
+
+
+                alert(
+                    "Couldn't find \""
+                    +
+                    cityQuery
+                    +
+                    "\". Try a different spelling or a nearby larger town."
+                );
+
+
+                getWeather();
+
+            }
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   WEATHER CODES
+========================================================= */
+
+function getWeatherInfo(code) {
+
+    const weatherCodes = {
+
+        0: {
+            text: "Clear sky",
+            icon: "☀️"
+        },
+
+        1: {
+            text: "Mainly clear",
+            icon: "🌤️"
+        },
+
+        2: {
+            text: "Partly cloudy",
+            icon: "⛅"
+        },
+
+        3: {
+            text: "Cloudy",
+            icon: "☁️"
+        },
+
+        45: {
+            text: "Foggy",
+            icon: "🌫️"
+        },
+
+        48: {
+            text: "Foggy",
+            icon: "🌫️"
+        },
+
+        51: {
+            text: "Light drizzle",
+            icon: "🌦️"
+        },
+
+        53: {
+            text: "Drizzle",
+            icon: "🌦️"
+        },
+
+        55: {
+            text: "Heavy drizzle",
+            icon: "🌧️"
+        },
+
+        61: {
+            text: "Light rain",
+            icon: "🌦️"
+        },
+
+        63: {
+            text: "Rain",
+            icon: "🌧️"
+        },
+
+        65: {
+            text: "Heavy rain",
+            icon: "🌧️"
+        },
+
+        71: {
+            text: "Light snow",
+            icon: "🌨️"
+        },
+
+        73: {
+            text: "Snow",
+            icon: "🌨️"
+        },
+
+        75: {
+            text: "Heavy snow",
+            icon: "❄️"
+        },
+
+        80: {
+            text: "Rain showers",
+            icon: "🌦️"
+        },
+
+        81: {
+            text: "Rain showers",
+            icon: "🌧️"
+        },
+
+        82: {
+            text: "Heavy showers",
+            icon: "🌧️"
+        },
+
+        95: {
+            text: "Thunderstorm",
+            icon: "⛈️"
+        },
+
+        96: {
+            text: "Thunderstorm with hail",
+            icon: "⛈️"
+        },
+
+        99: {
+            text: "Heavy thunderstorm",
+            icon: "⛈️"
+        }
+
+    };
+
+
+    return (
+        weatherCodes[code]
+        ||
+        {
+            text: "Current weather",
+            icon: "🌤️"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   REAL GPS
+========================================================= */
+
+function getBrowserLocation() {
+
+    return new Promise(function (resolve, reject) {
+
+        if (
+            !("geolocation" in navigator)
+        ) {
+
+            reject(
+                new Error(
+                    "Geolocation is not supported."
+                )
+            );
+
+            return;
+
+        }
+
+
+        navigator.geolocation.getCurrentPosition(
+
+            function (position) {
+
+                resolve({
+
+                    latitude:
+                        position.coords.latitude,
+
+                    longitude:
+                        position.coords.longitude,
+
+                    accuracy:
+                        position.coords.accuracy
+
+                });
+
+            },
+
+            function (error) {
+
+                reject(error);
+
+            },
+
+            {
+
+                enableHighAccuracy: false,
+
+                timeout: 3000,
+
+                maximumAge: 5 * 60 * 1000
+
+            }
+
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   REVERSE GEOCODING
+========================================================= */
+
+async function getLocationName(
+    latitude,
+    longitude
+) {
+
+    try {
+
+        const geoURL =
+            "https://nominatim.openstreetmap.org/reverse"
+            +
+            "?lat="
+            +
+            encodeURIComponent(latitude)
+            +
+            "&lon="
+            +
+            encodeURIComponent(longitude)
+            +
+            "&format=json"
+            +
+            "&zoom=14"
+            +
+            "&addressdetails=1";
+
+
+        const response =
+            await fetch(
+
+                geoURL,
+
+                {
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+                        "Accept": "application/json"
+                    }
+
+                }
+
+            );
+
+
+        if (response.ok) {
+
+            const data =
+                await response.json();
+
+            const address =
+                data.address
+                ||
+                {};
+
+            const name =
+
+                address.city
+
+                ||
+
+                address.town
+
+                ||
+
+                address.municipality
+
+                ||
+
+                address.village
+
+                ||
+
+                address.suburb
+
+                ||
+
+                address.county
+
+                ||
+
+                address.state
+
+                ||
+
+                null;
+
+
+            if (name) {
+
+                return name;
+
+            }
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Reverse geocoding error:",
+            error
+        );
+
+    }
+
+
+    try {
+
+        const fallbackURL =
+            "https://api.bigdatacloud.net/data/reverse-geocode-client"
+            +
+            "?latitude="
+            +
+            encodeURIComponent(latitude)
+            +
+            "&longitude="
+            +
+            encodeURIComponent(longitude)
+            +
+            "&localityLanguage=en";
+
+
+        const fallbackResponse =
+            await fetch(
+
+                fallbackURL,
+
+                {
+                    cache:
+                        "no-store"
+                }
+
+            );
+
+
+        if (fallbackResponse.ok) {
+
+            const fallbackData =
+                await fallbackResponse.json();
+
+            return (
+
+                fallbackData.city
+
+                ||
+
+                fallbackData.locality
+
+                ||
+
+                fallbackData.principalSubdivision
+
+                ||
+
+                fallbackData.countryName
+
+                ||
+
+                null
+
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Fallback geocoding error:",
+            error
+        );
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =========================================================
+   LIVE WEATHER
+   Cached values render immediately; fresh GPS/weather runs
+   in the background so the page never waits for them.
+========================================================= */
+
+async function getWeather() {
+
+    const cached =
+        getWeatherCache();
+
+    const hadCache =
+        applyWeatherCache(cached);
+
+    if (!hadCache) {
+
+        weatherCity.textContent =
+            "Vellore";
+
+        weatherCondition.textContent =
+            "Getting live weather...";
+
+    }
+
+    try {
+
+        const manualOverride =
+            getManualLocationOverride();
+
+        let location;
+        let cityName;
+
+        if (manualOverride) {
+
+            location = {
+                latitude: manualOverride.latitude,
+                longitude: manualOverride.longitude,
+                accuracy: null
+            };
+
+            cityName =
+                manualOverride.label
+                ||
+                "Your Location";
+
+        } else {
+
+            try {
+
+                const gps =
+                    await getBrowserLocation();
+
+                location = {
+                    latitude: gps.latitude,
+                    longitude: gps.longitude,
+                    accuracy: gps.accuracy
+                };
+
+                /* Start reverse geocoding and weather at the same time. */
+                const [detectedName, weatherData] =
+                    await Promise.all([
+                        getLocationName(
+                            gps.latitude,
+                            gps.longitude
+                        ),
+                        fetchWeatherData(
+                            gps.latitude,
+                            gps.longitude
+                        )
+                    ]);
+
+                cityName =
+                    detectedName
+                    ||
+                    "Your Location";
+
+                renderWeatherData(
+                    weatherData,
+                    cityName
+                );
+
+                return;
+
+            }
+
+            catch (gpsError) {
+
+                console.error(
+                    "GPS location unavailable, using cached/default location:",
+                    gpsError
+                );
+
+                location = {
+                    latitude: DEFAULT_LOCATION.latitude,
+                    longitude: DEFAULT_LOCATION.longitude,
+                    accuracy: null
+                };
+
+                cityName =
+                    DEFAULT_LOCATION.label;
+
+            }
+
+        }
+
+        const weatherData =
+            await fetchWeatherData(
+                location.latitude,
+                location.longitude
+            );
+
+        renderWeatherData(
+            weatherData,
+            cityName
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Location/weather error:",
+            error
+        );
+
+        /* Keep cached data visible instead of replacing it with blanks. */
+        if (!hadCache) {
+
+            weatherCity.textContent =
+                "Vellore";
+
+            weatherCondition.textContent =
+                "Weather unavailable";
+
+            weatherIcon.textContent =
+                "🌤️";
+
+        }
+
+    }
+
+}
+
+
+async function fetchWeatherData(
+    latitude,
+    longitude
+) {
+
+    const weatherURL =
+        "https://api.open-meteo.com/v1/forecast"
+        +
+        "?latitude="
+        +
+        encodeURIComponent(latitude)
+        +
+        "&longitude="
+        +
+        encodeURIComponent(longitude)
+        +
+        "&current="
+        +
+        "temperature_2m,"
+        +
+        "relative_humidity_2m,"
+        +
+        "weather_code,"
+        +
+        "wind_speed_10m,"
+        +
+        "uv_index"
+        +
+        "&timezone=auto";
+
+    const response =
+        await fetch(
+            weatherURL,
+            {
+                cache: "no-store"
+            }
+        );
+
+    if (!response.ok) {
+        throw new Error(
+            "Weather request failed"
+        );
+    }
+
+    return response.json();
+
+}
+
+
+function renderWeatherData(
+    data,
+    cityName
+) {
+
+    const current =
+        data.current
+        ||
+        {};
+
+    const weather =
+        getWeatherInfo(
+            current.weather_code
+        );
+
+    weatherCity.textContent =
+        (cityName || "Your Location");
+
+    weatherTemperature.textContent =
+        current.temperature_2m != null
+        ?
+        Math.round(
+            current.temperature_2m
+        )
+        +
+        "°C"
+        :
+        "--°C";
+
+    weatherCondition.textContent =
+        weather.text;
+
+    weatherIcon.textContent =
+        weather.icon;
+
+    humidityValue.textContent =
+        current.relative_humidity_2m != null
+        ?
+        current.relative_humidity_2m + "%"
+        :
+        "--";
+
+    windValue.textContent =
+        current.wind_speed_10m != null
+        ?
+        Math.round(
+            current.wind_speed_10m
+        )
+        +
+        " km/h"
+        :
+        "--";
+
+    uvValue.textContent =
+        current.uv_index != null
+        ?
+        current.uv_index
+        :
+        "--";
+
+    weatherCity.classList.remove(
+        "location-loading"
+    );
+
+    saveWeatherCache({
+        cityName: cityName || "Your Location",
+        temperature: current.temperature_2m,
+        condition: weather.text,
+        icon: weather.icon,
+        humidity: current.relative_humidity_2m,
+        wind: current.wind_speed_10m,
+        uv: current.uv_index,
+        savedAt: Date.now()
+    });
+
+}
+
+
+/* =========================================================
+   PROFILE AVATAR STATE
+   Swaps the guest icon for the user's first initial
+   once they are logged in. Replace the placeholder
+   check below with your actual login/session source
+   (e.g. a Jinja-rendered value, a /api/me fetch call,
+   or your existing auth cookie/localStorage key).
+========================================================= */
+
+(function setProfileAvatarState() {
+
+    const btn = document.getElementById("heroProfileBtn");
+    if (!btn) return;
+
+    // TODO: replace with your real logged-in username source
+    const loggedInName =
+        localStorage.getItem("username") || null;
+
+    if (loggedInName) {
+
+        const initial =
+            loggedInName.trim().charAt(0).toUpperCase();
+
+        btn.textContent = initial;
+        btn.setAttribute(
+            "aria-label",
+            "Profile (" + loggedInName + ")"
+        );
+
+    }
+
+})();
+
+
+/* =========================================================
+   START WEATHER
+========================================================= */
+
+getWeather();
+
+
+/* =========================================================
+   REFRESH WEATHER
+========================================================= */
+
+setInterval(
+
+    getWeather,
+
+    10 * 60 * 1000
+
+);
+
+</script>
+
+<script src="{{ url_for('static', filename='js/mobile-nav.js') }}"></script>
+
+<script>
+    window.addEventListener("load", function () {
+        window.scrollTo(0, 0);
+    });
+</script>
+
+</body>
+
+</html>

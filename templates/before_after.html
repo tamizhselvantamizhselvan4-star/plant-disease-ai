@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌿 Before & After Recovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:18px 12px 45px;font-family:'Inter',Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#eaf8ef,#f8fcf9);color:#193126}
+.app{max-width:900px;margin:auto}
+h1,h2,h3,.title,.status h2,.verdict-title{font-family:'Poppins',Arial,sans-serif}
+.header{text-align:center;padding:10px 8px 20px;position:relative}.badge{display:inline-block;padding:7px 12px;border-radius:20px;background:#e3f5e9;color:#176b43;font-weight:800;font-size:12px;letter-spacing:.3px}.header h1{margin:10px 0 5px;color:#14532d;font-weight:800}.header p{margin:0;color:#66776e;font-size:14px}
+.home-button{position:absolute;top:4px;left:0;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#eef7f0;border:1px solid #cfe4d7;color:#176b43;text-decoration:none;font-size:18px}
+.home-button:active{background:#e3f5e9}
+.card{background:#fff;border:1px solid #dcebe1;border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 10px 28px rgba(25,70,42,.08)}
+.title{margin:0 0 8px;color:#14532d;font-weight:700}.sub{color:#68786f;font-size:14px;line-height:1.55}
+.baselines{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:14px}
+.baseline{border:2px solid #e1eee5;border-radius:17px;padding:12px;cursor:pointer;transition:.15s;background:#fbfefc}.baseline.selected{border-color:#176b43;background:#eef9f1}.baseline img{width:100%;height:170px;object-fit:cover;border-radius:12px;background:#edf3ef}.baseline strong{display:block;margin-top:8px;color:#174a31}.baseline small{display:block;margin-top:4px;color:#718278;line-height:1.4}.choose{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:#53645b}
+.upload{border:2px dashed #c9e1d1;border-radius:17px;padding:18px;text-align:center;background:#f8fcf9}.upload input{width:100%;margin-top:10px}
+.capture-row{display:flex;gap:10px;margin-top:10px}
+.capture-btn{flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid #cfe4d7;border-radius:13px;padding:12px 10px;background:#fff;color:#176b43;font-size:13.5px;font-weight:700;cursor:pointer;font-family:'Inter',Arial,sans-serif;transition:.15s}
+.capture-btn:hover{background:#eef7f0;border-color:#9fd6b3}
+.capture-btn:active{transform:scale(.98)}
+.capture-btn.camera{background:linear-gradient(135deg,#176b43,#279957);color:#fff;border-color:transparent}
+.capture-btn.camera:hover{filter:brightness(1.05)}
+.primary{width:100%;border:0;border-radius:15px;padding:15px;margin-top:14px;background:linear-gradient(135deg,#176b43,#279957);color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:'Poppins',sans-serif}.primary:disabled{opacity:.6;cursor:wait}.secondary{display:inline-block;padding:11px 14px;border-radius:12px;background:#edf7f0;color:#176b43;text-decoration:none;font-weight:700;font-size:13px}
+.notice{padding:14px 16px;border-radius:15px;margin-top:12px;line-height:1.6;font-size:14.5px}.warning{background:#fff4e5;border:1px solid #efc36a;color:#704d0a}.success{background:#eaf8ef;border:1px solid #c9e7d3;color:#176b43}.danger{background:#fff0ed;border:1px solid #f1c7bf;color:#8e3328}.neutral{background:#f3f7f4;border:1px solid #dce8df;color:#4d6055}
+
+/* ===== Verdict hero (the headline recovery / worse / cured / new-disease call-out) ===== */
+.verdict{border-radius:20px;padding:24px 22px;text-align:center;position:relative;overflow:hidden}
+.verdict.improving{background:linear-gradient(135deg,#1c8a4f,#2fb872);color:#fff}
+.verdict.worsening{background:linear-gradient(135deg,#c23b32,#e0574a);color:#fff}
+.verdict.warning{background:linear-gradient(135deg,#e0983a,#f0b955);color:#fff}
+.verdict.monitor{background:linear-gradient(135deg,#3d7a8a,#4f9bb0);color:#fff}
+.verdict.neutral{background:linear-gradient(135deg,#5a6b62,#748578);color:#fff}
+.verdict-icon{font-size:42px;line-height:1}
+.verdict-eyebrow{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;opacity:.85;margin-top:6px}
+.verdict-title{font-size:24px;font-weight:800;margin:6px 0 10px}
+.verdict-message{font-size:15px;line-height:1.6;opacity:.97;max-width:560px;margin:0 auto}
+
+/* ===== Stat chips ===== */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:16px}
+.stat-chip{background:#f4faf6;border:1px solid #dfeee5;border-radius:14px;padding:12px 10px;text-align:center}
+.stat-chip .label{font-size:11px;font-weight:700;color:#6f8177;text-transform:uppercase;letter-spacing:.5px}
+.stat-chip .value{font-size:16px;font-weight:800;color:#14532d;margin-top:4px;font-family:'Poppins',sans-serif}
+.stat-chip .value.up{color:#1c8a4f}.stat-chip .value.down{color:#c23b32}.stat-chip .value.flat{color:#8a6d1f}
+
+/* ===== Explanation block (clear, readable, "attractive" typography) ===== */
+.explain{margin-top:16px;border-radius:16px;padding:18px 20px;background:#f7fbf8;border-left:5px solid #176b43}
+.explain.worsening{border-left-color:#c23b32;background:#fff7f5}
+.explain.warning{border-left-color:#e0983a;background:#fffaf0}
+.explain.monitor{border-left-color:#4f9bb0;background:#f3fafc}
+.explain h4{margin:0 0 8px;font-size:14px;color:#14532d;font-weight:700;display:flex;align-items:center;gap:6px}
+.explain p{margin:0;font-size:14.5px;line-height:1.75;color:#2c3b32}
+
+/* ===== Real-life action plan — highlighted, categorized advice ===== */
+.action-plan{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.action-block{border-radius:16px;padding:16px 18px;border:1px solid transparent}
+.action-block .action-label{font-size:13.5px;font-weight:700;font-family:'Poppins',sans-serif;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.action-block ul{margin:0;padding-left:20px}
+.action-block li{font-size:14px;line-height:1.7;margin-bottom:4px}
+.action-block li:last-child{margin-bottom:0}
+.action-block.good{background:#eef9f1;border-color:#c9e7d3}.action-block.good .action-label{color:#176b43}
+.action-block.warn{background:#fff7e8;border-color:#f0d19a}.action-block.warn .action-label{color:#8a5a0a}
+.action-block.danger{background:#fff0ed;border-color:#f1c7bf}.action-block.danger .action-label{color:#9b3127}
+.action-block.info{background:#eef7fa;border-color:#c9e3ec}.action-block.info .action-label{color:#265d70}
+
+.footnote{margin-top:12px;font-size:12.5px;color:#82938a;line-height:1.6;font-style:italic}
+
+/* ===== Photos section — moved to the END, shown at a normal, calmer size ===== */
+.photos-heading{margin:22px 0 10px;font-size:14px;font-weight:700;color:#4d6055;text-transform:uppercase;letter-spacing:.4px;display:flex;align-items:center;gap:8px}
+.photos-heading::after{content:"";flex:1;height:1px;background:#e1eee5}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.photo{background:#fbfefc;border:1px solid #eaf1ec;border-radius:14px;padding:8px}
+.photo img{width:100%;height:170px;object-fit:cover;border-radius:10px;background:#f0f4f1}
+.photo h3{margin:8px 2px 4px;color:#14532d;font-size:13px;font-weight:700}.meta{font-size:12.5px;line-height:1.6;color:#5c6d63;padding:0 2px 4px}
+
+/* ===== Live upload preview: Before | After side-by-side ===== */
+.preview-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.preview-box{border:2px dashed #cfe4d7;border-radius:16px;padding:10px;text-align:center;background:#fbfefc;min-height:150px;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:.15s}
+.preview-box.filled{border-style:solid;border-color:#bfe0cc;background:#fff}
+.preview-label{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#6f8177;margin-bottom:8px}
+.preview-box img{max-width:100%;max-height:150px;border-radius:10px;object-fit:cover;background:#f1f5f2}
+.preview-empty{color:#a3b3a9;font-size:12.5px;line-height:1.5}
+.preview-disease{margin-top:8px;font-size:12.5px;font-weight:700;color:#14532d;background:#eaf7ef;border-radius:20px;padding:4px 10px;display:inline-block}
+@media(max-width:480px){.preview-row{grid-template-columns:1fr}}
+
+.status{text-align:center;padding:18px;border-radius:18px;margin-bottom:14px}.status .icon{font-size:32px}.status h2{margin:7px 0 5px;color:#14532d}.status p{margin:0;line-height:1.55}
+
+.history-item{border-top:1px solid #e5eee8;padding:14px 0}.history-item:first-child{border-top:0}
+.history-head{display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 2px}
+.history-icon{font-size:22px;line-height:1.3}
+.history-head-text{flex:1;min-width:0}
+.history-title{font-weight:800;font-size:15px;color:#14532d;font-family:'Poppins',sans-serif}
+.history-subtitle{font-size:12.5px;color:#7c8d82;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-chevron{font-size:13px;color:#9aab9f;transition:transform .2s ease;flex-shrink:0}
+.history-item.expanded .history-chevron{transform:rotate(180deg)}
+.history-details{display:none;margin-top:12px;padding-left:2px}
+.history-item.expanded .history-details{display:block}
+.history-stats{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.history-stat{background:#f4faf6;border:1px solid #e2eee6;border-radius:10px;padding:6px 10px;font-size:12.5px;color:#3c4d43}
+.history-stat b{color:#14532d}
+.history-text{font-size:13.5px;line-height:1.7;color:#3c4d43;margin-top:6px}
+.history-text b{color:#14532d}
+.history-images{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.history-images img{width:100%;height:150px;object-fit:cover;border-radius:12px;background:#f1f5f2}
+.history-images-label{font-size:11px;font-weight:700;color:#8a988f;text-transform:uppercase;letter-spacing:.4px;margin-top:14px;margin-bottom:6px}
+.delete{border:0;background:#fff0ed;color:#9b3127;border-radius:10px;padding:8px 11px;cursor:pointer;margin-top:10px;font-size:13px}
+.empty{text-align:center;padding:22px;color:#728279}.back{display:block;text-align:center;margin-top:18px;color:#176b43;font-weight:700;text-decoration:none}
+@media(max-width:620px){.compare-grid{grid-template-columns:1fr}.photo img{height:200px}.history-images{grid-template-columns:1fr}.history-images img{height:190px}.verdict-title{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+<a href="/" class="home-button" aria-label="Back to home">🏠</a>
+<div class="badge">🌿 {{ current_user.get('name','User') }}'S RECOVERY TRACKER</div>
+<h1>Before & After Treatment Recovery</h1>
+<p>Choose your saved BEFORE scan, upload the AFTER scan, and let our AI analyze both images.</p>
+</header>
+
+<section class="card">
+<h2 class="title">1️⃣ Choose a BEFORE image</h2>
+<p class="sub">Your saved BEFORE scans are private to your account. The comparison uses the saved image itself, not a new copy uploaded by another user.</p>
+
+{% if saved_before %}
+<div class="baselines" id="baselineGrid">
+{% for item in saved_before %}
+<div class="baseline" data-id="{{ item.id }}" onclick="selectBaseline(this)">
+<img src="{{ item.before_image }}" alt="Saved before image">
+<strong>{{ item.disease_display }}</strong>
+<small>Confidence: {{ item.confidence }}%<br>Plant: {{ item.plant_name or 'Unknown' }}<br>{{ item.created_at }}</small>
+<div class="choose"><input type="radio" name="beforeChoice" value="{{ item.id }}"> Select this BEFORE</div>
+<button type="button" class="delete" onclick="deleteBaseline(event,'{{ item.id }}')">Delete BEFORE</button>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">No saved BEFORE scans yet. Scan a plant first, then press <b>Save as BEFORE Image</b> on the result page.</div>
+{% endif %}
+
+<div class="upload" style="margin-top:16px">
+<strong>Or upload a BEFORE image manually</strong>
+<div class="sub">Use this only when you did not save a baseline earlier.</div>
+<div class="capture-row">
+<button type="button" class="capture-btn camera" onclick="openCamera('before')">📷 Take Photo</button>
+<button type="button" class="capture-btn" onclick="document.getElementById('beforeFile').click()">🖼️ Choose from Gallery</button>
+</div>
+<input type="file" id="beforeFile" accept="image/jpeg,image/png,image/webp" onchange="handleFileSelect('before', this)" style="display:none">
+<input type="file" id="beforeCameraFile" accept="image/*" capture="environment" onchange="handleCameraCapture('before', this)" style="display:none">
+</div>
+</section>
+
+<section class="card">
+<h2 class="title">2️⃣ Upload AFTER image</h2>
+<div class="upload">
+<strong>📸 Take the AFTER photo after treatment</strong>
+<div class="sub">For the best comparison, photograph the same plant/leaf from a similar distance, angle and lighting.</div>
+<div class="capture-row">
+<button type="button" class="capture-btn camera" onclick="openCamera('after')">📷 Take Photo</button>
+<button type="button" class="capture-btn" onclick="document.getElementById('afterFile').click()">🖼️ Choose from Gallery</button>
+</div>
+<input type="file" id="afterFile" accept="image/jpeg,image/png,image/webp" onchange="handleFileSelect('after', this)" style="display:none">
+<input type="file" id="afterCameraFile" accept="image/*" capture="environment" onchange="handleCameraCapture('after', this)" style="display:none">
+</div>
+
+<div class="preview-row">
+<div class="preview-box" id="previewBefore">
+<div class="preview-label">Before</div>
+<div class="preview-empty">No image selected yet</div>
+</div>
+<div class="preview-box" id="previewAfter">
+<div class="preview-label">After</div>
+<div class="preview-empty">No image selected yet</div>
+</div>
+</div>
+
+<button class="primary" id="compareButton" onclick="runComparison()">🧠 Compare Images</button>
+<div id="formMessage"></div>
+</section>
+
+<section class="card" id="resultCard" style="display:none">
+<h2 class="title">3️⃣ Comparison Result</h2>
+<div id="resultContent"></div>
+</section>
+
+<section class="card">
+<h2 class="title">📊 My Comparison History</h2>
+{% if records %}
+<div id="historyList">
+{% for item in records %}
+<div class="history-item" id="history-{{ item.id }}">
+
+<div class="history-head" onclick="toggleHistoryItem('{{ item.id }}')">
+<div class="history-icon">{{ item.status_icon or '📊' }}</div>
+<div class="history-head-text">
+<div class="history-title">{{ item.status_title or item.comparison_status or 'Comparison' }}</div>
+<div class="history-subtitle">{{ item.before_disease_display or item.before_disease }} → {{ item.after_disease_display or item.after_disease }}{% if item.created_at %} · {{ item.created_at }}{% endif %}</div>
+</div>
+<div class="history-chevron">▾</div>
+</div>
+
+<div class="history-details">
+
+<div class="history-stats">
+<div class="history-stat">BEFORE: <b>{{ item.before_disease_display or item.before_disease }}</b> · {{ item.before_confidence }}%</div>
+<div class="history-stat">AFTER: <b>{{ item.after_disease_display or item.after_disease }}</b> · {{ item.after_confidence }}%</div>
+<div class="history-stat">Confidence change: <b>{{ item.confidence_change }}%</b></div>
+{% if item.visual_similarity is not none %}<div class="history-stat">Visual similarity: <b>{{ item.visual_similarity }}%</b></div>{% endif %}
+</div>
+
+<div class="history-text">{{ item.comparison_message or '' }}</div>
+
+{% if item.action_plan %}
+<div class="action-plan">
+{% for block in item.action_plan %}
+<div class="action-block {{ block.tone or 'info' }}">
+<p class="action-label">{{ block.icon or '•' }} {{ block.label or '' }}</p>
+<ul>{% for line in block['items'] %}<li>{{ line }}</li>{% endfor %}</ul>
+</div>
+{% endfor %}
+</div>
+{% elif item.recommendation %}
+<div class="explain">
+<h4>💡 What this means &amp; what to do next</h4>
+<p>{{ item.recommendation }}</p>
+</div>
+{% endif %}
+
+<div class="history-images-label">📸 Photos compared</div>
+<div class="history-images"><img src="{{ item.before_image }}" alt="Before"><img src="{{ item.after_image }}" alt="After"></div>
+
+<button class="delete" onclick="deleteComparison('{{ item.id }}')">Delete comparison</button>
+
+</div>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">No Before/After comparisons yet.</div>
+{% endif %}
+</section>
+
+<a class="back" href="/">← Back to Plant Disease AI</a>
+</div>
+
+<script>
+function toggleHistoryItem(id){
+    const item=document.getElementById('history-'+id);
+    if(item) item.classList.toggle('expanded');
+}
+
+// ===== Live upload preview: Before | After =====
+function setPreview(kind, imgSrc, diseaseLabel){
+    const box=document.getElementById(kind==='before' ? 'previewBefore' : 'previewAfter');
+    if(!box) return;
+    const label=kind==='before' ? 'Before' : 'After';
+    if(imgSrc){
+        box.classList.add('filled');
+        box.innerHTML='<div class="preview-label">'+label+'</div><img src="'+imgSrc+'" alt="'+label+' preview">'
+            + (diseaseLabel ? '<div class="preview-disease">'+escapeHtml(diseaseLabel)+'</div>' : '');
+    }else{
+        box.classList.remove('filled');
+        box.innerHTML='<div class="preview-label">'+label+'</div><div class="preview-empty">No image selected yet</div>';
+    }
+}
+
+function handleFileSelect(kind, input){
+    const file=input.files && input.files[0];
+    if(!file){ setPreview(kind, null); return; }
+    if(kind==='before'){
+        // A manual BEFORE upload always overrides any selected saved baseline.
+        document.querySelectorAll('.baseline').forEach(x=>x.classList.remove('selected'));
+        const radio=document.querySelector('input[name="beforeChoice"]:checked');
+        if(radio) radio.checked=false;
+    }
+    const reader=new FileReader();
+    reader.onload=e=>setPreview(kind, e.target.result);
+    reader.readAsDataURL(file);
+}
+
+// Opens the device camera for the given side ('before' or 'after').
+// The camera-only input is hidden - this just triggers its native
+// picker via .click().
+function openCamera(kind){
+    const cameraInput=document.getElementById(kind==='before' ? 'beforeCameraFile' : 'afterCameraFile');
+    if(!cameraInput){
+        alert('📷 Camera is not available in this browser.');
+        return;
+    }
+    cameraInput.value='';
+    cameraInput.click();
+}
+
+// Once a photo is captured, copy it into the main (gallery) file
+// input for that side using the DataTransfer API, so the existing
+// runComparison()/handleFileSelect() logic - which only reads from
+// beforeFile/afterFile - keeps working unchanged for camera photos.
+function handleCameraCapture(kind, cameraInput){
+    const file=cameraInput.files && cameraInput.files[0];
+    if(!file) return;
+
+    const mainInput=document.getElementById(kind==='before' ? 'beforeFile' : 'afterFile');
+
+    try{
+        const transfer=new DataTransfer();
+        transfer.items.add(file);
+        mainInput.files=transfer.files;
+    }catch(error){
+        console.error('Could not transfer captured photo:', error);
+        message('Could not use the captured photo. Please try again or choose from gallery instead.','danger');
+        return;
+    }
+
+    handleFileSelect(kind, mainInput);
+}
+
+function selectBaseline(card){
+    const alreadySelected=card.classList.contains('selected');
+
+    document.querySelectorAll('.baseline').forEach(x=>x.classList.remove('selected'));
+    document.querySelectorAll('input[name="beforeChoice"]').forEach(r=>r.checked=false);
+
+    if(alreadySelected){
+        // Clicking the already-selected card deselects it.
+        setPreview('before', null);
+        return;
+    }
+
+    card.classList.add('selected');
+    const radio=card.querySelector('input[type=radio]');
+    if(radio) radio.checked=true;
+    document.getElementById('beforeFile').value='';
+    const img=card.querySelector('img');
+    setPreview('before', img ? img.src : null);
+}
+
+function getSelectedBaseline(){
+    const radio=document.querySelector('input[name="beforeChoice"]:checked');
+    return radio ? radio.value : '';
+}
+
+function message(text,type='neutral'){
+    document.getElementById('formMessage').innerHTML='<div class="notice '+type+'">'+text+'</div>';
+}
+
+async function runComparison(){
+    const button=document.getElementById('compareButton');
+    const after=document.getElementById('afterFile').files[0];
+    const before=document.getElementById('beforeFile').files[0];
+    const selected=getSelectedBaseline();
+
+    if(!selected && !before){ message('Please choose a saved BEFORE image or upload a BEFORE image.','warning'); return; }
+    if(selected && before){ message('Use either a saved BEFORE image or a manual BEFORE upload, not both.','warning'); return; }
+    if(!after){ message('Please upload the AFTER image.','warning'); return; }
+
+    const form=new FormData();
+    if(selected) form.append('before_record_id',selected);
+    else form.append('before_image',before);
+    form.append('after_image',after);
+
+    button.disabled=true;
+    button.textContent='⏳ Analyzing both images...';
+    message('Running the same AI model independently on BEFORE and AFTER...','neutral');
+
+    try{
+        const response=await fetch('/api/before-after',{method:'POST',body:form});
+        const data=await response.json();
+        if(!data.success){ message(data.error||'Comparison failed.','danger'); return; }
+        renderResult(data.record,data.comparison);
+        message('Comparison saved to your account history.','success');
+    }catch(error){
+        message('Could not complete the comparison. Please try again.','danger');
+    }finally{
+        button.disabled=false;
+        button.textContent='🧠 Compare Images';
+    }
+}
+
+// Maps the backend "status" value to a plain-language eyebrow label so the
+// headline always reads like a verdict (recovering / worsening / cured /
+// different disease) rather than a raw status code.
+function verdictEyebrow(status){
+    const labels={
+        improving:'Good sign',
+        worsening:'Needs attention',
+        warning:'Please review',
+        monitor:'Keep watching',
+        neutral:'Result'
+    };
+    return labels[status] || 'Result';
+}
+
+function statChangeClass(change){
+    if(change > 0) return 'up';
+    if(change < 0) return 'down';
+    return 'flat';
+}
+
+// Renders the structured, highlighted, real-life advice categories
+// (keep doing / do now / avoid / severity-based / escalate, etc).
+// Falls back to the plain recommendation paragraph for older records
+// that were saved before action_plan existed.
+function renderActionPlan(actionPlan, fallbackRecommendation){
+    if(Array.isArray(actionPlan) && actionPlan.length){
+        return '<div class="action-plan">' + actionPlan.map(block => `
+            <div class="action-block ${block.tone||'info'}">
+              <p class="action-label">${block.icon||'•'} ${escapeHtml(block.label||'')}</p>
+              <ul>${(block.items||[]).map(item=>`<li>${escapeHtml(item)}</li>`).join('')}</ul>
+            </div>
+        `).join('') + '</div>';
+    }
+    return `<div class="explain"><h4>💡 What this means &amp; what to do next</h4><p>${escapeHtml(fallbackRecommendation)}</p></div>`;
+}
+
+function renderResult(record,c){
+    const card=document.getElementById('resultCard');
+    const content=document.getElementById('resultContent');
+    let type=c.status==='warning'?'warning':(c.status==='worsening'?'worsening':(c.status==='improving'?'improving':'monitor'));
+    const changeClass=statChangeClass(c.confidence_change);
+    const changeSign=c.confidence_change>0?'+':'';
+
+    const diseaseChangeWarning = !c.same_disease ? `
+        <div class="notice warning"><b>⚠️ Different condition detected</b><br>
+        The BEFORE and AFTER photos were classified as different conditions. Don't switch treatment based on this
+        alone &mdash; retake a clear, matching photo of the same spot and compare again to confirm it's a real change
+        and not a photo difference.</div>` : '';
+
+    content.innerHTML=`
+        <div class="verdict ${type}">
+          <div class="verdict-icon">${c.status_icon}</div>
+          <div class="verdict-eyebrow">${verdictEyebrow(c.status)}</div>
+          <div class="verdict-title">${escapeHtml(c.status_title)}</div>
+          <div class="verdict-message">${escapeHtml(c.message)}</div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-chip"><div class="label">Before</div><div class="value">${record.before_confidence}%</div></div>
+          <div class="stat-chip"><div class="label">After</div><div class="value">${record.after_confidence}%</div></div>
+          <div class="stat-chip"><div class="label">Confidence change</div><div class="value ${changeClass}">${changeSign}${c.confidence_change}%</div></div>
+          ${record.visual_similarity!==undefined && record.visual_similarity!==null ? `<div class="stat-chip"><div class="label">Visual similarity</div><div class="value">${record.visual_similarity}%</div></div>` : ''}
+        </div>
+
+        ${diseaseChangeWarning}
+
+        ${renderActionPlan(c.action_plan, c.recommendation)}
+
+        <div class="footnote">${escapeHtml(c.visual_note)}</div>
+
+        <div class="photos-heading">📸 Photos compared</div>
+        <div class="compare-grid">
+          <div class="photo"><h3>BEFORE</h3><img src="${record.before_image}" alt="Before"><div class="meta"><b>${escapeHtml(record.before_disease_display)}</b><br>Confidence: ${record.before_confidence}%<br>Plant: ${escapeHtml(record.before_plant||'Unknown')}</div></div>
+          <div class="photo"><h3>AFTER</h3><img src="${record.after_image}" alt="After"><div class="meta"><b>${escapeHtml(record.after_disease_display)}</b><br>Confidence: ${record.after_confidence}%<br>Plant: ${escapeHtml(record.after_plant||'Unknown')}</div></div>
+        </div>
+    `;
+    card.style.display='block';
+    card.scrollIntoView({behavior:'smooth',block:'start'});
+
+    // Update the Before | After preview boxes above with the detected
+    // disease name shown right under each image.
+    setPreview('before', record.before_image, record.before_disease_display + ' · ' + record.before_confidence + '%');
+    setPreview('after', record.after_image, record.after_disease_display + ' · ' + record.after_confidence + '%');
+}
+
+function escapeHtml(value){
+    return String(value??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
+}
+
+async function deleteBaseline(event,id){
+    event.stopPropagation();
+    if(!confirm('Delete this saved BEFORE image?')) return;
+    const response=await fetch('/api/before-images/'+encodeURIComponent(id),{method:'DELETE'});
+    const data=await response.json();
+    if(data.success){ location.reload(); } else { alert(data.error||'Could not delete BEFORE image.'); }
+}
+
+async function deleteComparison(id){
+    if(!confirm('Delete this comparison record?')) return;
+    const response=await fetch('/api/before-after/'+encodeURIComponent(id),{method:'DELETE'});
+    const data=await response.json();
+    if(data.success){
+        const item=document.getElementById('history-'+id);
+        if(item) item.remove();
+    }else{ alert(data.error||'Could not delete comparison.'); }
+}
+</script>
+</body>
+</html>

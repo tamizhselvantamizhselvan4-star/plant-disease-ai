@@ -1,0 +1,305 @@
+{
+    "metadata": {
+        "title": "Smart Plant Care Guide",
+        "version": "1.1",
+        "supported_plants": [
+            "Hibiscus",
+            "Chilli",
+            "Tomato"
+        ]
+    },
+
+    "Hibiscus": {
+        "display_name": "🌺 Hibiscus Care Guide",
+
+        "watering": {
+            "title": "💧 Watering",
+            "summary": "Keep the soil evenly moist, but never constantly waterlogged.",
+            "guidance": [
+                "🌱 Check the top 2–3 cm of soil before watering. Water when it begins to feel slightly dry.",
+                "☀️ Hibiscus usually needs more frequent watering during hot, sunny weather.",
+                "🪴 Container-grown hibiscus may dry out faster than plants growing in the ground.",
+                "🌧️ Reduce watering during rainy or cool periods when the soil stays moist longer.",
+                "🚫 Do not keep the roots continuously submerged in water."
+            ],
+            "frequency": "Usually 2–4 times per week depending on heat, rainfall, pot size and soil drainage.",
+            "warning": "⚠️ Overwatering can cause yellow leaves, poor root health and fungal problems. Underwatering may cause wilting and bud drop."
+        },
+
+        "sunlight": {
+            "title": "☀️ Sunlight",
+            "summary": "Hibiscus grows and flowers best with plenty of bright sunlight.",
+            "guidance": [
+                "🌞 Aim for around 6 hours of sunlight or strong bright light.",
+                "🌸 Morning sunlight is generally beneficial.",
+                "🔥 In extremely hot weather, some protection from harsh afternoon heat can help prevent stress.",
+                "🏡 Keep potted plants in a bright location with good air circulation."
+            ],
+            "warning": "⚠️ Too little sunlight may reduce flowering and cause weak, stretched growth."
+        },
+
+        "temperature": {
+            "title": "🌡️ Temperature",
+            "summary": "Hibiscus prefers warm conditions.",
+            "ideal_range": "Approximately 18°C to 32°C.",
+            "guidance": [
+                "🌿 Protect the plant from extreme cold.",
+                "🔥 Provide sufficient water during very hot conditions.",
+                "🌬️ Good airflow helps reduce stress and disease-friendly humidity."
+            ],
+            "warning": "⚠️ Sudden environmental changes can cause stress, leaf drop or bud drop."
+        },
+
+        "soil": {
+            "title": "🪴 Soil",
+            "summary": "Use fertile soil that holds some moisture but drains excess water well.",
+            "recommended_mix": [
+                "🌱 Good-quality garden soil",
+                "🍂 Well-decomposed compost or organic matter",
+                "🏖️ Coarse material such as sand or perlite for improved drainage"
+            ],
+            "warning": "⚠️ Avoid heavy soil that remains saturated for long periods."
+        },
+
+        "fertilizer": {
+            "title": "🌱 Recommended Fertilizer",
+            "recommended": "🌱 19-19-19 NPK water-soluble fertilizer for general growth. 🌸 00-52-34 (MKP) can be used as a phosphorus-rich fertilizer during flowering.",
+            "guidance": [
+                "🌱 Use 19-19-19 NPK during active vegetative growth for balanced nutrition.",
+                "🌸 During flowering, 00-52-34 (MKP) can be used as a phosphorus-rich fertilizer when appropriate.",
+                "🧴 Follow the exact dosage and application instructions printed on the fertilizer product label.",
+                "💧 Avoid applying concentrated fertilizer to very dry soil unless the product label specifically allows it.",
+                "🚫 Do not repeatedly apply high doses in an attempt to produce more flowers."
+            ],
+            "schedule": "Generally every 2–4 weeks during active growth, depending on the fertilizer product and label instructions.",
+            "warning": "🚨 Over-fertilizing can damage roots, burn leaves and cause nutrient or salt buildup in containers."
+        },
+
+        "pruning": {
+            "title": "✂️ Pruning",
+            "guidance": [
+                "✂️ Remove dead, damaged or clearly diseased branches.",
+                "🌿 Light pruning can encourage bushier growth.",
+                "🧹 Use clean tools to reduce the risk of spreading disease.",
+                "🚫 Do not heavily prune a severely stressed plant unless necessary."
+            ],
+            "warning": "⚠️ Disinfect pruning tools when moving between diseased and healthy plants."
+        },
+
+        "calendar": {
+            "watering": "Check soil moisture every day; water when the upper soil layer begins to dry.",
+            "leaf_inspection": "Inspect leaves every 7 days for spots, pests, whiteflies, mealybugs, rust or powdery growth.",
+            "fertilizer": "Review feeding every 2–4 weeks during active growth, following the fertilizer label.",
+            "pruning": "Remove dead or damaged growth during regular weekly inspection."
+        },
+
+        "safety_care": [
+            "🧤 Wear gloves when handling fertilizers, pesticides or unknown plant treatments.",
+            "🧴 Never exceed the product label rate.",
+            "🌬️ Apply sprays only in suitable conditions and avoid strong wind.",
+            "🐝 Protect pollinators by avoiding unnecessary pesticide use on open flowers.",
+            "👶 Keep fertilizers and chemicals away from children and pets."
+        ],
+
+        "important_warning": [
+            "🚨 Do not treat every yellow leaf as a disease; watering, nutrient problems and environmental stress can produce similar symptoms.",
+            "🚨 Do not combine multiple pesticides or fungicides unless the product labels specifically permit it.",
+            "🚨 If the plant is rapidly declining, inspect roots, watering conditions and pest activity in addition to leaf symptoms."
+        ]
+    },
+
+    "Chilli": {
+        "display_name": "🌶️ Chilli Care Guide",
+
+        "watering": {
+            "title": "💧 Watering",
+            "summary": "Keep moisture reasonably consistent without waterlogging the root zone.",
+            "guidance": [
+                "🌱 Water when the upper layer of soil begins to dry.",
+                "☀️ Increase attention during hot and dry weather.",
+                "🌧️ Reduce watering when rainfall keeps the soil wet.",
+                "💧 Deep, appropriate watering is generally better than keeping the soil constantly saturated."
+            ],
+            "frequency": "Often 2–3 times per week, but actual needs depend on weather, soil and container size.",
+            "warning": "⚠️ Irregular watering can stress chilli plants and may affect flowering and fruit development."
+        },
+
+        "sunlight": {
+            "title": "☀️ Sunlight",
+            "summary": "Chilli generally performs best in bright sunlight.",
+            "guidance": [
+                "🌞 Aim for approximately 6–8 hours of direct sunlight where conditions are suitable.",
+                "🏡 Ensure the plant receives good light for healthy growth and fruit production.",
+                "🌬️ Avoid extremely enclosed locations with poor airflow."
+            ],
+            "warning": "⚠️ Low light can lead to weak growth and reduced flowering or fruit production."
+        },
+
+        "temperature": {
+            "title": "🌡️ Temperature",
+            "summary": "Chilli prefers warm growing conditions.",
+            "ideal_range": "Approximately 20°C to 32°C.",
+            "guidance": [
+                "🌱 Protect plants from prolonged cold conditions.",
+                "🔥 During intense heat, monitor for wilting and water stress.",
+                "🌸 Extreme temperatures may affect flowering and fruit set."
+            ],
+            "warning": "⚠️ Very high heat combined with poor watering can cause severe stress."
+        },
+
+        "soil": {
+            "title": "🪴 Soil",
+            "summary": "Use fertile, loose and well-draining soil.",
+            "recommended_mix": [
+                "🌱 Good garden soil",
+                "🍂 Mature compost",
+                "🏖️ Sand or another drainage-improving material"
+            ],
+            "warning": "⚠️ Poor drainage increases the risk of root problems and disease development."
+        },
+
+        "fertilizer": {
+            "title": "🌱 Recommended Fertilizer",
+            "recommended": "🌱 19-19-19 NPK water-soluble fertilizer during general vegetative growth. 🌶️ 13-00-45 (Potassium Nitrate) can be used as a potassium-rich fertilizer during flowering and fruit development.",
+            "guidance": [
+                "🌱 Use 19-19-19 NPK during active vegetative growth for balanced nutrition.",
+                "🌸 During flowering and fruit development, 13-00-45 (Potassium Nitrate) provides nitrogen and a higher proportion of potassium.",
+                "🌶️ Balanced nutrition is important for healthy flowering and fruit development.",
+                "🧴 Follow the exact dosage and application instructions on the fertilizer label.",
+                "🚫 Avoid excessive nitrogen, which can encourage excessive leafy growth."
+            ],
+            "schedule": "Review feeding every 2–4 weeks during active growth according to the fertilizer product label.",
+            "warning": "🚨 Excess fertilizer can burn roots, damage leaves and cause nutrient imbalance."
+        },
+
+        "pruning": {
+            "title": "✂️ Pruning",
+            "guidance": [
+                "✂️ Remove clearly dead or severely diseased leaves.",
+                "🌿 Avoid excessive pruning of a healthy fruiting plant.",
+                "🧹 Keep pruning tools clean."
+            ],
+            "warning": "⚠️ Remove and dispose of heavily diseased material appropriately instead of leaving it near healthy plants."
+        },
+
+        "calendar": {
+            "watering": "Check soil moisture daily during hot weather.",
+            "leaf_inspection": "Inspect every 7 days for thrips, mites, spots, curling and nutrient deficiency symptoms.",
+            "fertilizer": "Review feeding every 2–4 weeks during active growth according to the product label.",
+            "pruning": "Remove dead or severely affected material during inspection."
+        },
+
+        "safety_care": [
+            "🧤 Wear protective equipment when applying crop-protection products.",
+            "🌬️ Do not spray during strong wind.",
+            "🧴 Follow the exact product label and required waiting period before harvest.",
+            "🥬 Wash harvested produce appropriately.",
+            "🚫 Do not randomly mix pesticides or fertilizers."
+        ],
+
+        "important_warning": [
+            "🚨 Leaf curling can have several causes, including pests, viruses, heat stress or nutrient problems.",
+            "🚨 Yellow leaves do not automatically mean fertilizer is required.",
+            "🚨 Check the underside of leaves for mites, thrips and other small pests."
+        ]
+    },
+
+    "Tomato": {
+        "display_name": "🍅 Tomato Care Guide",
+
+        "watering": {
+            "title": "💧 Watering",
+            "summary": "Provide consistent moisture while avoiding waterlogged soil.",
+            "guidance": [
+                "🌱 Check the soil before watering.",
+                "💧 Water near the root zone rather than frequently wetting the leaves.",
+                "☀️ Increase monitoring during hot weather.",
+                "🌧️ Avoid unnecessary watering after sufficient rainfall.",
+                "🪴 Use pots with drainage holes for container-grown tomatoes."
+            ],
+            "frequency": "Often every 1–3 days in hot conditions, but the correct schedule depends on weather, soil and plant size.",
+            "warning": "⚠️ Very inconsistent watering can contribute to plant stress and some fruit-quality problems."
+        },
+
+        "sunlight": {
+            "title": "☀️ Sunlight",
+            "summary": "Tomatoes generally need strong sunlight for vigorous growth and fruit production.",
+            "guidance": [
+                "🌞 Aim for around 6–8 hours of direct sunlight when possible.",
+                "🌿 Ensure good airflow around plants.",
+                "🏡 Avoid overcrowding container plants."
+            ],
+            "warning": "⚠️ Poor sunlight can reduce healthy growth and fruit production."
+        },
+
+        "temperature": {
+            "title": "🌡️ Temperature",
+            "summary": "Tomatoes prefer warm growing conditions.",
+            "ideal_range": "Approximately 18°C to 30°C.",
+            "guidance": [
+                "🌸 Very high temperatures can reduce successful flowering and fruit set.",
+                "🌱 Protect plants from prolonged cold.",
+                "💧 Monitor watering more carefully during hot periods."
+            ],
+            "warning": "⚠️ Extreme heat can cause stress and wilting even when the plant has no disease."
+        },
+
+        "soil": {
+            "title": "🪴 Soil",
+            "summary": "Use fertile, well-draining soil rich in organic matter.",
+            "recommended_mix": [
+                "🌱 Quality garden or potting soil",
+                "🍂 Well-decomposed compost",
+                "🏖️ Drainage-improving material when required"
+            ],
+            "warning": "⚠️ Avoid reusing heavily diseased soil or leaving infected plant debris around the growing area."
+        },
+
+        "fertilizer": {
+            "title": "🌱 Recommended Fertilizer",
+            "recommended": "🌱 19-19-19 NPK water-soluble fertilizer during general growth. 🍅 13-00-45 (Potassium Nitrate) can be used as a potassium-rich fertilizer during flowering and fruit development.",
+            "guidance": [
+                "🌱 Use 19-19-19 NPK during early vegetative growth for balanced nutrition.",
+                "🌸 During flowering and fruit development, 13-00-45 (Potassium Nitrate) provides a higher proportion of potassium.",
+                "🍅 Avoid excessive nitrogen during fruiting because it can encourage excessive leafy growth.",
+                "🧴 Follow fertilizer product label rates and application instructions.",
+                "🚫 Do not increase fertilizer dosage to try to obtain faster growth or larger fruits."
+            ],
+            "schedule": "Review feeding every 2–4 weeks during active growth depending on the fertilizer product and label instructions.",
+            "warning": "🚨 Over-fertilization can damage roots and cause nutrient imbalance or salt buildup."
+        },
+
+        "pruning": {
+            "title": "✂️ Pruning and Plant Support",
+            "guidance": [
+                "✂️ Remove dead or heavily diseased leaves where appropriate.",
+                "🌿 Keep lower foliage from resting on wet soil when possible.",
+                "🪢 Support plants using stakes or cages.",
+                "🧹 Keep tools clean when working with multiple plants."
+            ],
+            "warning": "⚠️ Do not remove large amounts of healthy foliage at once."
+        },
+
+        "calendar": {
+            "watering": "Check soil moisture daily, especially during hot weather.",
+            "leaf_inspection": "Inspect every 7 days for early blight, late blight, leaf mold, spots, pests and leaf curling.",
+            "fertilizer": "Review feeding every 2–4 weeks during active growth according to the fertilizer label.",
+            "pruning": "Check and remove dead or severely affected leaves during weekly inspection."
+        },
+
+        "safety_care": [
+            "🧤 Use protective equipment when handling fertilizers or plant-protection products.",
+            "🌬️ Avoid spraying in strong wind.",
+            "🧴 Follow product labels exactly.",
+            "🍅 Follow the required pre-harvest interval for agricultural chemicals.",
+            "🐝 Avoid unnecessary chemical treatment when pollinators are active."
+        ],
+
+        "important_warning": [
+            "🚨 Tomato leaf spots can have multiple causes; do not assume every spot is the same disease.",
+            "🚨 Late blight and early blight require careful differentiation because management decisions can differ.",
+            "🚨 Avoid wetting leaves unnecessarily when fungal disease pressure is high.",
+            "🚨 If symptoms spread rapidly, isolate the affected plant area and inspect nearby plants."
+        ]
+    }
+}

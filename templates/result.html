@@ -1,0 +1,5601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script>
+        // Prevent the browser from restoring a previous scroll position
+        // when this page loads (fixes "result page opens scrolled down").
+        if ("scrollRestoration" in history) {
+            history.scrollRestoration = "manual";
+        }
+        window.scrollTo(0, 0);
+    </script>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🌿 Plant Health Result</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+
+            --green: #1f7a45;
+            --dark-green: #14532d;
+            --light-green: #eaf7ef;
+            --soft-green: #f4fbf6;
+
+            --text: #193126;
+            --muted: #6b7c73;
+
+            --white: #ffffff;
+            --border: #e2eee6;
+
+            --warning: #fff7df;
+            --warning-border: #e5a400;
+
+            --shadow:
+                0 10px 30px
+                rgba(25, 70, 42, 0.10);
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding:
+                20px
+                12px
+                40px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #eaf8ef 0%,
+                    #f7fbf8 35%,
+                    #eef7f1 100%
+                );
+
+            color: var(--text);
+        }
+
+
+        .app {
+
+            width: 100%;
+
+            max-width: 760px;
+
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+
+            text-align: center;
+
+            padding:
+                8px
+                8px
+                22px;
+        }
+
+
+        .logo-wrapper {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            margin-bottom: 12px;
+        }
+
+
+        .logo {
+
+            width: 92px;
+
+            height: 92px;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+
+        .header-badge {
+
+            display: inline-block;
+
+            padding:
+                7px
+                13px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(
+                    31,
+                    122,
+                    69,
+                    0.10
+                );
+
+            color: var(--green);
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+
+        .header h1 {
+
+            margin: 0;
+
+            font-size: 27px;
+
+            color: var(--dark-green);
+        }
+
+
+        .header p {
+
+            margin:
+                8px
+                0
+                0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           IMAGE
+        ===================================================== */
+
+        .image-card {
+
+            background: var(--white);
+
+            border-radius: 24px;
+
+            padding: 12px;
+
+            box-shadow: var(--shadow);
+
+            border:
+                1px solid
+                var(--border);
+        }
+
+
+        .image-card img {
+
+            display: block;
+
+            width: 100%;
+
+            max-height: 430px;
+
+            object-fit: contain;
+
+            border-radius: 18px;
+
+            background: #f1f5f2;
+        }
+
+
+        .filename {
+
+            text-align: center;
+
+            margin:
+                12px
+                6px
+                4px;
+
+            font-size: 13px;
+
+            color: var(--muted);
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           RESULT
+        ===================================================== */
+
+        .healthy-result-note {
+            margin-top: 12px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: #eef9f1;
+            border: 1px solid #cce7d2;
+            color: #17683a;
+            line-height: 1.6;
+        }
+
+        .result-hero {
+
+            margin-top: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #176b3d,
+                    #279957
+                );
+
+            color: white;
+
+            border-radius: 24px;
+
+            padding:
+                24px
+                20px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    31,
+                    122,
+                    69,
+                    0.22
+                );
+        }
+
+
+        .result-label {
+
+            font-size: 13px;
+
+            opacity: 0.88;
+
+            font-weight: bold;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .condition-type-badge {
+
+            display: inline-block;
+
+            margin-top: 8px;
+
+            padding:
+                4px
+                10px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        .disease-name {
+
+            margin:
+                8px
+                0;
+
+            font-size: 30px;
+
+            line-height: 1.2;
+        }
+
+
+        .plant-name {
+
+            font-size: 15px;
+
+            opacity: 0.95;
+        }
+
+
+        .plant-analysis-text {
+
+            margin-top: 10px;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            opacity: 0.95;
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .section {
+
+            margin-top: 16px;
+
+            background: var(--white);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            box-shadow: var(--shadow);
+        }
+
+
+        .section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin:
+                0
+                0
+                14px;
+
+            color: var(--dark-green);
+
+            font-size: 19px;
+        }
+
+
+        .section-text {
+
+            color: #35483e;
+
+            line-height: 1.7;
+
+            font-size: 15px;
+
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           INFO
+        ===================================================== */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 10px;
+
+            margin-top: 16px;
+        }
+
+
+        .info-box {
+
+            background:
+                var(--soft-green);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 15px;
+
+            padding: 14px;
+        }
+
+
+        .info-box-title {
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-box-value {
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            color: var(--dark-green);
+        }
+
+
+        /* =====================================================
+           LIST
+        ===================================================== */
+
+        .list {
+
+            margin: 0;
+
+            padding: 0;
+
+            list-style: none;
+        }
+
+
+        .list li {
+
+            position: relative;
+
+            padding:
+                11px
+                0
+                11px
+                30px;
+
+            border-bottom:
+                1px solid
+                #edf3ee;
+
+            line-height: 1.55;
+
+            font-size: 15px;
+
+            color: #35483e;
+        }
+
+
+        .list li:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .list li::before {
+
+            content: "🌱";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 10px;
+        }
+
+
+        /* =====================================================
+           PLANT CARE
+        ===================================================== */
+
+        .plant-care-section {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0faf3,
+                    #ffffff
+                );
+
+            border:
+                1px solid
+                #cfe9d7;
+
+            box-shadow:
+                0 10px 30px
+                rgba(
+                    31,
+                    122,
+                    69,
+                    0.10
+                );
+        }
+
+
+        .plant-care-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .plant-care-icon {
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: #e1f5e8;
+
+            font-size: 26px;
+
+            flex-shrink: 0;
+        }
+
+
+        .plant-care-heading {
+
+            margin: 0;
+
+            color: var(--dark-green);
+
+            font-size: 20px;
+        }
+
+
+        .plant-care-subtitle {
+
+            margin:
+                3px
+                0
+                0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        .care-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 12px;
+        }
+
+
+        .care-card {
+
+            background: white;
+
+            border:
+                1px solid
+                #e0eee4;
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            min-height: 90px;
+        }
+
+
+        .care-card-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--dark-green);
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .care-card-content {
+
+            color: #405349;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        .care-card-content ul {
+
+            margin: 0;
+
+            padding-left: 18px;
+        }
+
+
+        .care-card-content li {
+
+            margin-bottom: 5px;
+        }
+
+
+        .care-card-summary {
+
+            margin: 0 0 8px;
+
+            color: #405349;
+        }
+
+
+        .care-card-extra {
+
+            margin-top: 8px;
+
+            padding-top: 8px;
+
+            border-top:
+                1px dashed
+                #e0eee4;
+
+            font-size: 13px;
+        }
+
+
+        .care-card-extra div {
+
+            margin-bottom: 4px;
+        }
+
+
+        .care-card-extra strong {
+
+            color: var(--dark-green);
+        }
+
+
+        .care-card-warning {
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            color: #8a5a00;
+        }
+
+
+        .care-full {
+
+            grid-column: 1 / -1;
+        }
+
+
+        .care-note {
+
+            margin-top: 14px;
+
+            padding: 14px;
+
+            background: #eaf8ef;
+
+            border:
+                1px solid
+                #cce7d4;
+
+            border-radius: 14px;
+
+            color: #31543e;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .care-calendar {
+
+            margin-top: 14px;
+        }
+
+
+        .care-calendar-row {
+
+            display: flex;
+
+            gap: 10px;
+
+            padding: 8px 0;
+
+            border-bottom:
+                1px solid
+                #edf3ee;
+
+            font-size: 13px;
+
+            line-height: 1.55;
+        }
+
+
+        .care-calendar-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .care-calendar-label {
+
+            flex: 0 0 110px;
+
+            font-weight: bold;
+
+            color: var(--dark-green);
+        }
+
+
+        .care-calendar-value {
+
+            color: #405349;
+        }
+
+
+        .care-warning-box {
+
+            margin-top: 14px;
+
+            padding: 14px;
+
+            background: #fff8e6;
+
+            border:
+                1px solid
+                #f0dda1;
+
+            border-left:
+                4px solid
+                #e2a600;
+
+            border-radius: 13px;
+
+            color: #604b12;
+
+            font-size: 13px;
+
+            line-height: 1.65;
+        }
+
+
+        .care-warning-box ul {
+
+            margin: 6px 0 0;
+
+            padding-left: 18px;
+        }
+
+
+        .care-warning-box li {
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =====================================================
+           PLANT CARE POPUP
+        ===================================================== */
+
+        /* =====================================================
+           FULL-SCREEN MODALS
+        ===================================================== */
+
+        body.modal-open { overflow: hidden; }
+
+        .plant-care-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 40, 25, 0.55);
+            z-index: 100000;
+            padding: 0;
+            align-items: stretch;
+            justify-content: stretch;
+        }
+
+        .plant-care-modal-overlay.open { display: flex; }
+
+        .plant-care-modal-panel {
+            width: 100vw;
+            max-width: none;
+            height: 100vh;
+            max-height: none;
+            overflow-y: auto;
+            background: white;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 48px clamp(18px, 5vw, 72px) 40px;
+            position: relative;
+            scrollbar-gutter: stable;
+        }
+
+        .plant-care-modal-close {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid #d9e8de;
+            background: #ffffff;
+            color: var(--dark-green);
+            font-size: 24px;
+            font-weight: 800;
+            cursor: pointer;
+            z-index: 100002;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .plant-care-modal-close:hover {
+            transform: scale(1.06);
+            background: #f3fbf6;
+        }
+
+        /* Big, bold and easy-to-read Plant Care information */
+        .plant-care-modal-panel .plant-care-section {
+            max-width: 1180px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .plant-care-modal-panel .plant-care-heading {
+            font-size: clamp(28px, 3vw, 40px);
+            font-weight: 800;
+        }
+
+        .plant-care-modal-panel .plant-care-subtitle {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .plant-care-modal-panel .care-grid { gap: 18px; }
+        .plant-care-modal-panel .care-card { padding: 20px; }
+
+        .plant-care-modal-panel .care-card-title {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .plant-care-modal-panel .care-card-content,
+        .plant-care-modal-panel .care-card-content li,
+        .plant-care-modal-panel .care-calendar-value,
+        .plant-care-modal-panel .care-note,
+        .plant-care-modal-panel .care-warning-box {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.75;
+        }
+
+        .plant-care-modal-panel .care-card-extra strong,
+        .plant-care-modal-panel .care-calendar-label { font-weight: 800; }
+
+        @media (max-width: 520px) {
+            .plant-care-modal-panel { padding: 70px 16px 28px; }
+            .plant-care-modal-close {
+                top: 12px;
+                right: 12px;
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+        /* =====================================================
+           OTHER PLANT CARE OPTIONS
+        ===================================================== */
+        .alternative-care-section {
+            max-width: 1180px;
+            margin: 28px auto 0;
+            padding: 22px;
+            border: 1px solid #dcebe0;
+            border-radius: 18px;
+            background: #f8fcf9;
+        }
+
+        .alternative-care-title {
+            margin: 0 0 8px;
+            font-size: clamp(22px, 2.5vw, 30px);
+            font-weight: 800;
+            color: var(--dark-green);
+        }
+
+        .alternative-care-text {
+            margin: 0 0 16px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.65;
+        }
+
+        .alternative-care-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .alternative-care-button {
+            border: none;
+            border-radius: 12px;
+            padding: 13px 18px;
+            background: var(--green);
+            color: white;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform .2s ease, opacity .2s ease;
+        }
+
+        .alternative-care-button:hover {
+            transform: translateY(-2px);
+            opacity: .94;
+        }
+
+        .alternative-care-view {
+            display: none;
+            max-width: 1180px;
+            margin: 20px auto 0;
+        }
+
+        .alternative-care-view.active {
+            display: block;
+        }
+
+        .alternative-care-view-header {
+            margin-bottom: 18px;
+            padding: 18px;
+            border-radius: 16px;
+            background: #eef8f0;
+            border: 1px solid #d6e9da;
+        }
+
+        .alternative-care-view-title {
+            margin: 0 0 6px;
+            font-size: clamp(24px, 3vw, 34px);
+            font-weight: 900;
+            color: var(--dark-green);
+        }
+
+        .alternative-care-view-meta {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .alternative-care-back {
+            margin-top: 16px;
+        }
+
+        .alternative-care-loading,
+        .alternative-care-error {
+            padding: 22px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.65;
+            background: #f6faf7;
+            border: 1px solid #dcebe0;
+        }
+
+        .alternative-care-json {
+            display: grid;
+            gap: 14px;
+        }
+
+        .alternative-care-json-card {
+            padding: 18px;
+            border: 1px solid #dcebe0;
+            border-radius: 16px;
+            background: #ffffff;
+        }
+
+        .alternative-care-json-title {
+            margin: 0 0 8px;
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--dark-green);
+        }
+
+        .alternative-care-json-content {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.75;
+        }
+
+        .alternative-care-json-content ul {
+            margin: 8px 0 0;
+            padding-left: 22px;
+        }
+
+
+        /* =====================================================
+           ATTRACTIVE STEP-BY-STEP PLANT CARE
+        ===================================================== */
+        .plant-care-modal-panel {
+            background:
+                radial-gradient(circle at top left, rgba(207, 243, 217, .78), transparent 30%),
+                linear-gradient(180deg, #f7fcf8 0%, #ffffff 38%, #f7fbf8 100%);
+        }
+
+        .plant-care-modal-panel .plant-care-section {
+            position: relative;
+            padding-bottom: 24px !important;
+        }
+
+        .plant-care-header {
+            position: sticky;
+            top: -48px;
+            z-index: 5;
+            margin: 0 0 26px;
+            padding: 24px 28px;
+            border: 1px solid rgba(31, 122, 69, .16);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .88);
+            box-shadow: 0 12px 34px rgba(31, 95, 57, .10);
+            backdrop-filter: blur(14px);
+        }
+
+        .plant-care-modal-panel .plant-care-heading {
+            margin: 0;
+            color: var(--dark-green);
+            letter-spacing: .2px;
+        }
+
+        .plant-care-modal-panel .plant-care-subtitle {
+            margin-top: 7px;
+            color: #587065;
+        }
+
+        .plant-care-modal-panel .care-grid.care-timeline {
+            display: block;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 8px 0 10px 54px;
+            position: relative;
+        }
+
+        .plant-care-modal-panel .care-grid.care-timeline::before {
+            content: "";
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            bottom: 34px;
+            width: 3px;
+            border-radius: 99px;
+            background: linear-gradient(180deg, #2f8a53 0%, #a9d8b6 55%, #e1f0e5 100%);
+        }
+
+        .plant-care-modal-panel .care-step-card {
+            position: relative;
+            width: 100%;
+            margin: 0 0 20px;
+            padding: 25px 26px 24px 30px;
+            border: 1px solid #dcebe0;
+            border-radius: 22px;
+            background: linear-gradient(145deg, #ffffff 0%, #f7fcf8 100%);
+            box-shadow: 0 10px 28px rgba(29, 94, 53, .08);
+            overflow: visible;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .plant-care-modal-panel .care-step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(29, 94, 53, .13);
+        }
+
+        .plant-care-modal-panel .care-step-number {
+            position: absolute;
+            left: -55px;
+            top: 22px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #f7fcf8;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1f7a45, #49a76a);
+            color: #fff;
+            font-size: 17px;
+            font-weight: 900;
+            box-shadow: 0 6px 16px rgba(31, 122, 69, .25);
+            z-index: 2;
+        }
+
+        .plant-care-modal-panel .care-card-title {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e4efe7;
+            color: var(--dark-green);
+            font-size: clamp(19px, 2vw, 23px);
+            font-weight: 900;
+        }
+
+        .plant-care-modal-panel .care-card-summary {
+            margin: 0 0 13px;
+            color: #31483b;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.8;
+        }
+
+        .plant-care-modal-panel .care-card-content ul {
+            margin: 12px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .plant-care-modal-panel .care-card-content li {
+            position: relative;
+            margin: 10px 0;
+            padding: 13px 15px 13px 42px;
+            border-radius: 14px;
+            background: #f0f8f2;
+            color: #334b3d;
+        }
+
+        .plant-care-modal-panel .care-card-content li::before {
+            content: "✓";
+            position: absolute;
+            left: 14px;
+            top: 11px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #d6efdc;
+            color: #1f7a45;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .plant-care-modal-panel .care-card-extra {
+            display: grid;
+            gap: 9px;
+            margin-top: 14px;
+        }
+
+        .plant-care-modal-panel .care-card-extra > div {
+            padding: 12px 14px;
+            border-left: 4px solid #73b88a;
+            border-radius: 10px;
+            background: #f7fbf8;
+        }
+
+        .plant-care-modal-panel .care-card-warning,
+        .plant-care-modal-panel .care-warning-box,
+        .plant-care-modal-panel .care-note {
+            border-radius: 18px;
+            box-shadow: 0 8px 22px rgba(64, 94, 70, .06);
+        }
+
+        .plant-care-modal-panel .care-calendar {
+            max-width: 1040px;
+            margin: 18px auto;
+            padding: 26px;
+            border-radius: 22px;
+            background: #fff;
+            box-shadow: 0 10px 28px rgba(29, 94, 53, .08);
+        }
+
+        .alternative-care-section {
+            max-width: 1040px;
+            padding: 28px;
+            border-radius: 22px;
+            background: linear-gradient(145deg, #eef9f0, #ffffff);
+            box-shadow: 0 12px 30px rgba(31, 122, 69, .08);
+        }
+
+        .alternative-care-button {
+            min-height: 50px;
+            box-shadow: 0 7px 18px rgba(31, 122, 69, .16);
+        }
+
+        .alternative-care-json {
+            display: block;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding-left: 54px;
+            position: relative;
+        }
+
+        .alternative-care-json::before {
+            content: "";
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            bottom: 34px;
+            width: 3px;
+            border-radius: 99px;
+            background: linear-gradient(180deg, #2f8a53, #c9e7d1);
+        }
+
+        .alternative-care-json-card {
+            position: relative;
+            margin-bottom: 18px;
+            padding: 24px 26px 22px 30px;
+            border-radius: 22px;
+            box-shadow: 0 10px 28px rgba(29, 94, 53, .08);
+        }
+
+        .alternative-care-step-number {
+            position: absolute;
+            left: -55px;
+            top: 22px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #f7fcf8;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1f7a45, #49a76a);
+            color: #fff;
+            font-weight: 900;
+            box-shadow: 0 6px 16px rgba(31, 122, 69, .25);
+            z-index: 2;
+        }
+
+        .alternative-care-json-title {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e4efe7;
+            font-size: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .plant-care-header {
+                position: static;
+                padding: 20px;
+                border-radius: 18px;
+            }
+            .plant-care-modal-panel .care-grid.care-timeline,
+            .alternative-care-json {
+                padding-left: 0;
+            }
+            .plant-care-modal-panel .care-grid.care-timeline::before,
+            .alternative-care-json::before,
+            .plant-care-modal-panel .care-step-number,
+            .alternative-care-step-number {
+                display: none;
+            }
+            .plant-care-modal-panel .care-step-card,
+            .alternative-care-json-card {
+                padding: 20px;
+                border-radius: 18px;
+            }
+        }
+
+        /* =====================================================
+           AI ASSISTANT POPUP (iframe)
+        ===================================================== */
+
+        .assistant-modal-panel {
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            max-width: none;
+            height: 100vh;
+            max-height: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .assistant-modal-panel .plant-care-modal-close {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            background: white;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .assistant-iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            border: 0;
+            display: block;
+
+            border: 0;
+
+            display: block;
+        }
+
+
+        /* =====================================================
+           MEDICINE
+        ===================================================== */
+
+        .medicine-card {
+
+            padding: 15px;
+
+            margin: 10px 0;
+
+            background: #f7fbff;
+
+            border:
+                1px solid
+                #dbeaf5;
+
+            border-left:
+                4px solid
+                #3984b8;
+
+            border-radius: 13px;
+
+            line-height: 1.65;
+
+            font-size: 14px;
+        }
+
+
+        .medicine-name {
+
+            font-weight: bold;
+
+            color: #245f85;
+
+            margin-bottom: 5px;
+
+            font-size: 15px;
+        }
+
+
+        .medicine-note {
+
+            background: #eef8ff;
+
+            border:
+                1px solid
+                #d4eaf8;
+
+            border-radius: 13px;
+
+            padding: 14px;
+
+            margin-top: 14px;
+
+            line-height: 1.6;
+
+            font-size: 13px;
+
+            color: #38596d;
+        }
+
+
+        /* =====================================================
+           ACTION
+        ===================================================== */
+
+        .action-box {
+
+            padding: 16px;
+
+            border-radius: 16px;
+
+            margin-top: 10px;
+        }
+
+
+        .action-green {
+
+            background: #eaf8ef;
+
+            border:
+                1px solid
+                #cdebd8;
+        }
+
+
+        .action-yellow {
+
+            background: #fff8df;
+
+            border:
+                1px solid
+                #f1df9e;
+        }
+
+
+        .action-red {
+
+            background: #fff0ed;
+
+            border:
+                1px solid
+                #f2c8bf;
+        }
+
+
+        .action-box strong {
+
+            color: var(--dark-green);
+        }
+
+
+        .action-box ul {
+
+            margin:
+                7px
+                0
+                0;
+
+            padding-left: 18px;
+
+            line-height: 1.6;
+
+            color: #45564d;
+
+            font-size: 14px;
+        }
+
+
+        .action-box li {
+
+            margin-bottom: 4px;
+        }
+
+
+        /* =====================================================
+           SAFETY
+        ===================================================== */
+
+        .safety {
+
+            background:
+                var(--warning);
+
+            border:
+                1px solid
+                #f0dda1;
+
+            border-left:
+                5px solid
+                var(--warning-border);
+        }
+
+
+        /* =====================================================
+           IMPORTANT
+        ===================================================== */
+
+        .important {
+
+            background: #fff8e6;
+
+            border-left:
+                5px solid
+                #e2a600;
+
+            border-radius: 15px;
+
+            padding: 16px;
+
+            margin-top: 16px;
+
+            line-height: 1.65;
+
+            font-size: 14px;
+
+            color: #604b12;
+        }
+
+
+        /* =====================================================
+           PLANT HEALTH NOTE
+        ===================================================== */
+
+        .plant-health-note {
+
+            margin-top: 16px;
+
+            padding: 15px;
+
+            background: #f7fbf8;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 15px;
+        }
+
+
+        .plant-health-note strong {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--dark-green);
+
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           CONFIDENCE
+        ===================================================== */
+
+        .confidence-final {
+
+            margin-top: 22px;
+
+            padding: 18px;
+
+            background: #f4fbf6;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 17px;
+
+            box-shadow:
+                0 6px 18px
+                rgba(
+                    25,
+                    70,
+                    42,
+                    0.06
+                );
+        }
+
+
+        .confidence-final-title {
+
+            color: var(--dark-green);
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .confidence-final-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .confidence-final-bar {
+
+            flex: 1;
+
+            height: 10px;
+
+            background: #dfeee4;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+
+        .confidence-final-fill {
+
+            height: 100%;
+
+            width: 0%;
+
+            background: var(--green);
+
+            border-radius: 20px;
+
+            transition:
+                width
+                0.8s
+                ease;
+        }
+
+
+        .confidence-final-text {
+
+            color: var(--dark-green);
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+
+        .confidence-final-level {
+
+            display: inline-block;
+
+            margin-top: 10px;
+
+            padding:
+                6px
+                11px;
+
+            border-radius: 20px;
+
+            background: #eaf8ef;
+
+            color: var(--green);
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           FINAL RESULT ACTIONS
+        ===================================================== */
+
+        .final-result-actions {
+            margin-top: 28px;
+            padding-top: 8px;
+        }
+
+        .final-result-actions .before-save-card {
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .start-treatment-button {
+            font-weight: 800;
+            letter-spacing: 0.2px;
+        }
+
+        /* Strong, clean treatment-page typography */
+        .section-title,
+        .disease-name,
+        .plant-name,
+        .confidence-final-title,
+        .before-save-title {
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .button {
+
+            display: block;
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 17px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #176b3d,
+                    #279957
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 17px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    31,
+                    122,
+                    69,
+                    0.20
+                );
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px
+                rgba(
+                    31,
+                    122,
+                    69,
+                    0.26
+                );
+        }
+
+
+        .button:active {
+
+            transform: scale(0.98);
+        }
+
+
+        .chat-button {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #14532d,
+                    #1f7a45
+                );
+        }
+
+
+        /* =====================================================
+           FLOATING CHAT (STACKED FABs)
+           Two independent floating buttons, WhatsApp-style:
+             1. Assistant  (opens chat popup, unchanged backend)
+             2. Plant Care (opens plant-care popup)
+        ===================================================== */
+
+        .fab-stack {
+
+            position: fixed;
+
+            right: 24px;
+
+            bottom: 24px;
+
+            z-index: 99999;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-end;
+
+            gap: 16px;
+        }
+
+
+        .floating-chat-wrapper {
+
+            position: relative;
+        }
+
+
+        .floating-chat-button.assistant-fab {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #3b82f6 0%,
+                    #2563eb 45%,
+                    #1d4ed8 100%
+                );
+
+            box-shadow:
+                0 8px 25px rgba(29, 78, 216, 0.32),
+                0 3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+
+        .floating-chat-button.assistant-fab:hover {
+
+            box-shadow:
+                0 14px 32px rgba(29, 78, 216, 0.40),
+                0 5px 12px rgba(0, 0, 0, 0.16);
+        }
+
+
+        .floating-chat-button.assistant-fab .floating-chat-label,
+        .floating-chat-button.assistant-fab + .floating-chat-label {
+
+            background: rgba(29, 78, 216, 0.96);
+        }
+
+
+        .floating-chat-button.assistant-fab + .floating-chat-label::after {
+
+            background: rgba(29, 78, 216, 0.96);
+        }
+
+
+        .floating-chat-button {
+
+            position: relative;
+
+            width: 64px;
+
+            height: 64px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #35b86b 0%,
+                    #1f8f4d 45%,
+                    #14532d 100%
+                );
+
+            border:
+                3px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.95
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(
+                    20,
+                    83,
+                    45,
+                    0.32
+                ),
+
+                0 3px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.12
+                );
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+
+            animation:
+                chatFloat
+                3s
+                ease-in-out
+                infinite;
+        }
+
+
+        .floating-chat-icon {
+
+            width: 29px;
+
+            height: 29px;
+
+            fill: white;
+
+            filter:
+                drop-shadow(
+                    0 2px 2px
+                    rgba(
+                        0,
+                        0,
+                        0,
+                        0.15
+                    )
+                );
+        }
+
+
+        .floating-chat-leaf {
+
+            position: absolute;
+
+            right: 4px;
+
+            top: 3px;
+
+            width: 18px;
+
+            height: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 11px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 2px 6px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.15
+                );
+        }
+
+
+        .chat-online-dot {
+
+            position: absolute;
+
+            right: 2px;
+
+            bottom: 3px;
+
+            width: 14px;
+
+            height: 14px;
+
+            background: #22c55e;
+
+            border:
+                3px solid
+                white;
+
+            border-radius: 50%;
+        }
+
+
+        .floating-chat-button:hover {
+
+            transform: scale(1.10);
+
+            box-shadow:
+                0 14px 32px
+                rgba(
+                    20,
+                    83,
+                    45,
+                    0.40
+                ),
+
+                0 5px 12px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.16
+                );
+
+            animation-play-state: paused;
+        }
+
+
+        .floating-chat-button:active {
+
+            transform: scale(0.94);
+        }
+
+
+        .floating-chat-label {
+
+            position: absolute;
+
+            right: 0;
+
+            bottom: 76px;
+
+            padding:
+                9px
+                14px;
+
+            background:
+                rgba(
+                    20,
+                    83,
+                    45,
+                    0.96
+                );
+
+            color: white;
+
+            border-radius: 18px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            box-shadow:
+                0 7px 20px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.16
+                );
+
+            opacity: 0;
+
+            transform:
+                translateY(8px)
+                scale(0.95);
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        .floating-chat-label::after {
+
+            content: "";
+
+            position: absolute;
+
+            right: 22px;
+
+            bottom: -6px;
+
+            width: 12px;
+
+            height: 12px;
+
+            background:
+                rgba(
+                    20,
+                    83,
+                    45,
+                    0.96
+                );
+
+            transform: rotate(45deg);
+        }
+
+
+        .floating-chat-button:hover
+        + .floating-chat-label {
+
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+
+        @keyframes chatFloat {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+
+                transform:
+                    translateY(-5px);
+            }
+        }
+
+
+        /* =====================================================
+           DISCLAIMER
+        ===================================================== */
+
+        .disclaimer {
+
+            margin-top: 22px;
+
+            padding: 18px;
+
+            background: #f4f7f5;
+
+            border:
+                1px solid
+                #dfe8e2;
+
+            border-radius: 17px;
+
+            color: #5c6d64;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        .disclaimer-title {
+
+            color: var(--dark-green);
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+
+            text-align: center;
+
+            padding:
+                20px
+                10px
+                0;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+
+
+        /* =========================================================
+           BEFORE IMAGE / TREATMENT RECOVERY TRACKING
+           ADDED ONLY - EXISTING RESULT PAGE STYLES UNCHANGED
+        ========================================================= */
+
+        .before-save-card {
+            margin-top: 22px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f7fbf8, #eef8f1);
+            border: 1px solid #d5e8db;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(31, 122, 69, 0.08);
+        }
+
+        .before-save-title {
+            color: var(--dark-green);
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 9px;
+        }
+
+        .before-save-text {
+            color: #5c6d64;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .before-save-button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 15px 16px;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #176b3d, #279957);
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(31, 122, 69, 0.18);
+            transition: transform .18s ease, opacity .18s ease;
+        }
+
+        .before-save-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .before-save-button:disabled {
+            opacity: .7;
+            cursor: wait;
+            transform: none;
+        }
+
+        .before-save-status {
+            display: none;
+            margin-top: 11px;
+            padding: 10px 12px;
+            border-radius: 11px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .before-save-status.success {
+            display: block;
+            color: #176b3d;
+            background: #eaf8ef;
+            border: 1px solid #cce7d4;
+            font-weight: 700;
+        }
+
+        .before-save-status.error {
+            display: block;
+            color: #a33a2b;
+            background: #fff0ed;
+            border: 1px solid #f0c9c1;
+            font-weight: 700;
+        }
+
+        .before-save-status.warning {
+            display: block;
+            color: #8a5a00;
+            background: #fff8df;
+            border: 1px solid #f0dfaa;
+            font-weight: 700;
+        }
+
+        .before-save-next {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: var(--green);
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .before-save-next:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 520px) {
+
+            body {
+
+                padding:
+                    10px
+                    8px
+                    30px;
+            }
+
+
+            .logo {
+
+                width: 78px;
+
+                height: 78px;
+            }
+
+
+            .header h1 {
+
+                font-size: 23px;
+            }
+
+
+            .disease-name {
+
+                font-size: 25px;
+            }
+
+
+            .section {
+
+                padding: 17px;
+
+                border-radius: 19px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .care-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .care-full {
+
+                grid-column: auto;
+            }
+
+
+            .care-calendar-row {
+
+                display: block;
+            }
+
+
+            .care-calendar-label {
+
+                margin-bottom: 2px;
+            }
+
+
+            .confidence-final-row {
+
+                display: block;
+            }
+
+
+            .confidence-final-bar {
+
+                width: 100%;
+            }
+
+
+            .confidence-final-text {
+
+                display: block;
+
+                margin-top: 8px;
+            }
+
+
+            .fab-stack {
+
+                right: 16px;
+
+                bottom: 18px;
+
+                gap: 12px;
+            }
+            .floating-chat-button {
+
+                width: 60px;
+
+                height: 60px;
+            }
+
+
+            .floating-chat-icon {
+
+                width: 27px;
+
+                height: 27px;
+            }
+
+
+            .floating-chat-label {
+
+                bottom: 71px;
+
+                font-size: 11px;
+
+                padding:
+                    8px
+                    12px;
+            }
+
+        }
+
+    
+        .plant-care-modal-overlay.open ~ .fab-stack {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .fab-stack .floating-chat-button {
+            font-weight: 800;
+        }
+
+    </style>
+
+
+<style id="detected-chat-styles">
+/* =========================================================
+   DETECTED DISEASE CHAT - INLINE, NO SEPARATE CHAT PAGE
+   Restyled to exactly match the home page chat (chat.html):
+   same color tokens, header, bubbles, quick-grid and input pill.
+========================================================= */
+#assistantModalOverlay {
+    --chat-green:#176b43;
+    --chat-green2:#2e9a61;
+    --chat-green3:#7fe3a8;
+    --chat-dark:#163e2b;
+    --chat-soft:#eef8f1;
+    --chat-line:#d8eadf;
+    --chat-muted:#66766d;
+
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: var(--chat-vh, 100dvh);
+    min-height: 0;
+    z-index: 99999;
+    background: rgba(8, 30, 18, 0.48);
+    display: none;
+    align-items: stretch;
+    justify-content: stretch;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+#assistantModalOverlay.open { display: flex; }
+#assistantModalOverlay .detected-chat-panel {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(1100px 550px at -5% -10%, #d9f3e2 0%, transparent 60%),
+        radial-gradient(900px 500px at 105% 0%, #dcf6ea 0%, transparent 55%),
+        linear-gradient(160deg,#f3fbf5,#f8fbf9 45%,#eef8f1);
+    color: var(--chat-dark);
+}
+
+/* ---------------- HEADER (matches chat.html .chat-header) ---------------- */
+.detected-chat-header {
+    flex: 0 0 auto;
+    background: rgba(255,255,255,.85);
+    border-bottom: 1px solid var(--chat-line);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 2px 18px rgba(20,70,45,.05);
+    padding: 10px clamp(14px,4vw,40px);
+    padding-top: calc(10px + env(safe-area-inset-top));
+}
+.detected-chat-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.detected-chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+.detected-chat-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.detected-chat-back {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    color: var(--chat-green);
+    background: var(--chat-soft);
+    border: 0;
+    font-size: 21px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s;
+    flex-shrink: 0;
+}
+.detected-chat-back:hover {
+    transform: translateX(-2px);
+    background: #dff2e5;
+}
+.detected-chat-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--chat-green), var(--chat-green3));
+    color: #fff;
+    font-size: 21px;
+    box-shadow: 0 10px 25px rgba(23,107,67,.28);
+    flex-shrink: 0;
+}
+.detected-chat-title-wrap { min-width: 0; }
+.detected-chat-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -.2px;
+    color: var(--chat-dark);
+}
+.detected-chat-online-line {
+    margin: 3px 0 0;
+    font-size: 11px;
+    color: var(--chat-muted);
+}
+.detected-chat-online {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.detected-chat-online-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2fa35b;
+    box-shadow: 0 0 0 0 rgba(47,163,91,.55);
+    animation: detectedChatPulseDot 2s infinite;
+}
+@keyframes detectedChatPulseDot {
+    0%{ box-shadow:0 0 0 0 rgba(47,163,91,.45); }
+    70%{ box-shadow:0 0 0 7px rgba(47,163,91,0); }
+    100%{ box-shadow:0 0 0 0 rgba(47,163,91,0); }
+}
+.detected-chat-clear {
+    height: 38px;
+    border-radius: 13px;
+    border: 1px solid #f2d5cf;
+    background: #fff5f3;
+    color: #9a3d30;
+    font-weight: 700;
+    font-size: 12.5px;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+.detected-chat-clear:hover {
+    background: #ffe9e4;
+    transform: translateY(-1px);
+}
+
+/* ---------------- MESSAGES ---------------- */
+.detected-chat-messages {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: 20px clamp(14px,5vw,60px) 12px;
+}
+.detected-chat-welcome {
+    text-align: center;
+    padding: 14px 10px 6px;
+}
+.detected-chat-welcome-icon {
+    font-size: 46px;
+    display: inline-block;
+    animation: detectedChatFloatIcon 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 10px 18px rgba(23,107,67,.22));
+}
+@keyframes detectedChatFloatIcon {
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-8px) rotate(-4deg); }
+}
+.detected-chat-welcome h3 {
+    margin: 10px 0 8px;
+    font-size: clamp(20px,3vw,28px);
+    background: linear-gradient(135deg, var(--chat-green), #1f8a53);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -.5px;
+}
+.detected-chat-welcome p {
+    max-width: 560px;
+    margin: 0 auto;
+    color: var(--chat-muted);
+    font-size: 13px;
+    line-height: 1.65;
+}
+.detected-chat-welcome p strong { color: var(--chat-dark); }
+.detected-chat-row { display: flex; width: 100%; margin: 14px 0; animation: detectedChatRiseIn .28s ease; }
+@keyframes detectedChatRiseIn {
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+.detected-chat-row.user { justify-content: flex-end; }
+.detected-chat-row.bot { justify-content: flex-start; }
+.detected-chat-bubble {
+    max-width: min(82%, 680px);
+    padding: 13px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    box-shadow: 0 7px 20px rgba(20,70,45,.07);
+    position: relative;
+}
+.detected-chat-bubble::before {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    opacity: .7;
+    margin-bottom: 5px;
+}
+.detected-chat-bubble.user::before { content: "YOU"; }
+.detected-chat-bubble.bot::before { content: "PLANT HEALTH ASSISTANT"; }
+.detected-chat-bubble.user {
+    color: #fff;
+    background: linear-gradient(135deg, var(--chat-green), #2d965e);
+    border-bottom-right-radius: 6px;
+    box-shadow: 0 10px 24px rgba(23,107,67,.28);
+}
+.detected-chat-bubble.bot {
+    color: var(--chat-dark);
+    background: #fff;
+    border: 1px solid var(--chat-line);
+    border-bottom-left-radius: 6px;
+}
+.detected-chat-time { display:block; margin-top:6px; font-size:10px; opacity:.65; text-align:right; }
+
+/* ---------------- INPUT (matches chat.html pill input) ---------------- */
+.detected-chat-input-area {
+    flex: 0 0 auto;
+    padding: 12px clamp(12px,5vw,60px) calc(14px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, rgba(237,248,240,.98), rgba(237,248,240,.82));
+    backdrop-filter: blur(12px);
+}
+.detected-chat-input-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    padding: 9px 10px 9px 16px;
+    background: #fff;
+    border: 1px solid var(--chat-line);
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(20,70,45,.14);
+    transition: .2s;
+}
+.detected-chat-input-row:focus-within {
+    border-color: #8fd0a7;
+    box-shadow: 0 14px 38px rgba(20,85,52,.2), 0 0 0 4px rgba(47,155,97,.1);
+}
+#detectedChatInput {
+    flex:1 1 auto;
+    min-width:0;
+    min-height:46px;
+    max-height:120px;
+    resize:none;
+    border:0;
+    outline:0;
+    padding:12px 0;
+    background:transparent;
+    color:var(--chat-dark);
+    -webkit-text-fill-color:var(--chat-dark);
+    caret-color:var(--chat-green);
+    opacity:1;
+    font:14px Inter, "Segoe UI", Arial, sans-serif;
+    line-height:1.45;
+}
+#detectedChatInput::placeholder { color:var(--chat-muted); -webkit-text-fill-color:var(--chat-muted); opacity:1; }
+#detectedChatSend {
+    flex:0 0 48px;
+    width:48px;
+    height:48px;
+    border:0;
+    border-radius:16px;
+    background: linear-gradient(135deg, var(--chat-green), #2f9b61);
+    color:#fff;
+    font-size:21px;
+    cursor:pointer;
+    box-shadow: 0 8px 18px rgba(23,107,67,.32);
+    transition: .15s;
+}
+#detectedChatSend:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(23,107,67,.4);
+}
+#detectedChatSend:disabled { opacity:.6; cursor:not-allowed; }
+.detected-chat-error { color:#b42318; font-size:12px; margin-top:6px; text-align:center; display:none; }
+
+/* ---------------- TYPING ---------------- */
+.detected-chat-typing { display:flex; gap:4px; align-items:center; padding:3px 2px; }
+.detected-chat-typing span { width:7px; height:7px; border-radius:50%; background: linear-gradient(135deg, var(--chat-green), var(--chat-green3)); animation:detectedChatTyping 1.1s infinite; }
+.detected-chat-typing span:nth-child(2){animation-delay:.15s}.detected-chat-typing span:nth-child(3){animation-delay:.3s}
+@keyframes detectedChatTyping { 50%{transform:translateY(-4px);opacity:.45} }
+
+/* scrollbar polish, matches chat.html */
+.detected-chat-messages::-webkit-scrollbar{ width:8px; }
+.detected-chat-messages::-webkit-scrollbar-thumb{ background:rgba(23,107,67,.22); border-radius:10px; }
+.detected-chat-messages::-webkit-scrollbar-thumb:hover{ background:rgba(23,107,67,.35); }
+
+@media (max-width:680px){
+    #assistantModalOverlay .detected-chat-panel { border-radius:0; }
+    .detected-chat-header { padding:9px 12px; }
+    .detected-chat-avatar { width:40px; height:40px; }
+    .detected-chat-title { font-size:14px; }
+    .detected-chat-online-line { display:none; }
+    .detected-chat-bubble { max-width:90%; font-size:13px; }
+    .detected-chat-messages { padding:16px 12px 12px; }
+    .detected-chat-input-area { padding:10px 10px 14px; }
+}
+</style>
+
+<style id="detected-chat-final-mobile-fix">
+html.chat-open, body.chat-open {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+}
+#assistantModalOverlay.open {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: auto;
+    width: 100%;
+    height: var(--chat-vh, 100dvh);
+    max-height: var(--chat-vh, 100dvh);
+    overflow: hidden;
+}
+#assistantModalOverlay.open .detected-chat-panel {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+#assistantModalOverlay.open .detected-chat-messages {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 14px;
+    -webkit-overflow-scrolling: touch;
+}
+#assistantModalOverlay.open .detected-chat-input-area {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background: linear-gradient(to top, rgba(237,248,240,.98), rgba(237,248,240,.82));
+    padding-bottom: max(9px, env(safe-area-inset-bottom));
+}
+#detectedChatInput {
+    color: #163e2b !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #163e2b !important;
+    caret-color: #176b43 !important;
+    opacity: 1 !important;
+}
+@media (max-width: 600px) {
+    #assistantModalOverlay.open .detected-chat-header {
+        padding-top: max(10px, env(safe-area-inset-top));
+    }
+    #assistantModalOverlay.open .detected-chat-input-area {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    #detectedChatInput {
+        font-size: 16px !important;
+        line-height: 1.35;
+    }
+}
+</style>
+
+
+<style id="detected-chat-real-final-fix">
+/* FINAL MOBILE DETECTED-CHAT FIX
+   Keep the treatment page completely hidden while chat is open.
+   The detected chat itself owns the whole visible viewport. */
+html.chat-open,
+body.chat-open {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+}
+
+body.chat-open > .app {
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+body.chat-open #assistantModalOverlay {
+    display: block !important;
+    position: fixed !important;
+    z-index: 2147483000 !important;
+    left: 0 !important;
+    top: var(--chat-top, 0px) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100vw !important;
+    height: var(--chat-height, 100dvh) !important;
+    max-height: var(--chat-height, 100dvh) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: rgba(8, 30, 18, 0.48) !important;
+    overflow: hidden !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+}
+
+body.chat-open #assistantModalOverlay .detected-chat-panel {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    background:
+        radial-gradient(1100px 550px at -5% -10%, #d9f3e2 0%, transparent 60%),
+        radial-gradient(900px 500px at 105% 0%, #dcf6ea 0%, transparent 55%),
+        linear-gradient(160deg,#f3fbf5,#f8fbf9 45%,#eef8f1) !important;
+}
+
+body.chat-open #assistantModalOverlay .detected-chat-header {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding-top: max(10px, env(safe-area-inset-top)) !important;
+}
+
+body.chat-open #assistantModalOverlay .detected-chat-messages {
+    position: relative !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+}
+
+body.chat-open #assistantModalOverlay .detected-chat-input-area {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    z-index: 20 !important;
+    background: linear-gradient(to top, rgba(237,248,240,.98), rgba(237,248,240,.82)) !important;
+    padding: 12px clamp(12px,5vw,60px) max(14px, env(safe-area-inset-bottom)) !important;
+}
+
+body.chat-open #assistantModalOverlay .detected-chat-input-row {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: auto !important;
+    box-sizing: border-box !important;
+}
+
+body.chat-open #assistantModalOverlay #detectedChatInput {
+    display: block !important;
+    visibility: visible !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 46px !important;
+    max-height: 120px !important;
+    box-sizing: border-box !important;
+    color: #163e2b !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #163e2b !important;
+    caret-color: #176b43 !important;
+    opacity: 1 !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+}
+
+body.chat-open #assistantModalOverlay #detectedChatInput::placeholder {
+    color: #66766d !important;
+    -webkit-text-fill-color: #66766d !important;
+    opacity: 1 !important;
+}
+
+body.chat-open #assistantModalOverlay #detectedChatSend {
+    flex: 0 0 48px !important;
+    width: 48px !important;
+    height: 48px !important;
+}
+
+/* Hide every floating page control while detected chat is open. */
+body.chat-open .fab-stack,
+body.chat-open .floating-chat-wrapper,
+body.chat-open .floating-chat-button,
+body.chat-open .floating-chat-label {
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+</style>
+
+
+<style id="detected-chat-context-styles">
+/* Mirrors chat.html's .context-wrap / .context-card */
+.detected-chat-context-wrap {
+    padding: 10px clamp(16px, 5vw, 40px);
+    background: rgba(238,248,241,.75);
+    border-bottom: 1px solid var(--chat-line);
+}
+.detected-chat-context {
+    max-width: 1100px;
+    margin: auto;
+    border: 1px solid #cfe6d6;
+    background: linear-gradient(135deg, #ffffff, #f6fdf8);
+    border-radius: 14px;
+    padding: 10px 14px;
+    color: #315543;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(20,70,45,.06);
+    overflow-wrap: anywhere;
+}
+
+/* Mirrors chat.html's .quick-grid / .quick-btn */
+.detected-chat-question-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 640px;
+    margin: 22px auto 4px;
+}
+.detected-chat-question {
+    padding: 14px;
+    border: 1px solid var(--chat-line);
+    border-radius: 16px;
+    background: rgba(255,255,255,.9);
+    text-align: left;
+    color: var(--chat-dark);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+.detected-chat-question:hover {
+    transform: translateY(-2px);
+    border-color: #93c7a5;
+    box-shadow: 0 12px 26px rgba(20,85,52,.12);
+}
+.detected-chat-question:active { transform: translateY(-1px); }
+@media (max-width: 480px) {
+    .detected-chat-question-list { grid-template-columns: 1fr; }
+    .detected-chat-question { font-size: 12px; padding: 12px; }
+}
+</style>
+
+
+<style id="treatment-tracking-final">
+.treatment-track-card{
+    margin-top:18px;
+    padding:20px;
+    background:linear-gradient(135deg,#fffaf2,#fff5e8);
+    border:1px solid #efd9b7;
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(120,80,20,.08);
+}
+.treatment-track-title{color:#7a5200;font-size:18px;font-weight:900;margin-bottom:8px}
+.treatment-track-text{color:#52635a;font-size:13px;line-height:1.65}
+.treatment-track-badge{display:none;margin-top:12px;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:900;width:max-content;max-width:100%}
+.treatment-track-badge.badge-started{display:block;color:#9a5600;background:#fff0d2;border:1px solid #efca8c}
+.treatment-track-badge.badge-monitoring{display:block;color:#776600;background:#fff8cc;border:1px solid #e7da86}
+.treatment-track-badge.badge-completed{display:block;color:#17683a;background:#eaf8ef;border:1px solid #c9e5d2}
+.treatment-track-buttons{margin-top:14px}
+.treatment-track-button{width:100%;padding:14px 16px;border:0;border-radius:14px;background:linear-gradient(135deg,#a85f00,#d48718);color:#fff;font-size:14px;font-weight:900;cursor:pointer;box-shadow:0 8px 20px rgba(168,95,0,.16)}
+.treatment-track-button.button-monitoring{background:linear-gradient(135deg,#978000,#c2a719)}
+.treatment-track-button.button-completed{background:linear-gradient(135deg,#176b3d,#279957)}
+.treatment-track-button:disabled,.treatment-track-remove-button:disabled{opacity:.65;cursor:wait}
+.treatment-track-remove-button{width:100%;margin-top:10px;padding:12px 16px;border:1px solid #efc8c0;border-radius:14px;background:#fff5f3;color:#a33a2b;font-size:13px;font-weight:800;cursor:pointer}
+.treatment-track-remove-button:hover{background:#ffe9e4}
+.treatment-track-status{display:none;margin-top:11px;padding:10px 12px;border-radius:11px;font-size:13px;line-height:1.5}
+.treatment-track-status.error{display:block;color:#a33a2b;background:#fff0ed;border:1px solid #efc8c0;font-weight:700}
+.treatment-track-status.warning{display:block;color:#805900;background:#fff8df;border:1px solid #efdfaa;font-weight:700}
+.treatment-track-status.success{display:block;color:#17683a;background:#edf9f1;border:1px solid #cbe7d3;font-weight:700}
+@media(max-width:600px){.treatment-track-card{padding:16px}.treatment-track-title{font-size:17px}}
+</style>
+
+</head>
+
+
+<body data-disease="{{ disease|e }}" data-confidence="{{ confidence|e }}" data-plant-name="{{ plant_name|default('')|e }}" data-plant-id="{{ plant_id|default('')|e }}" data-saved-filename="{{ saved_filename|default('')|e }}" data-plant-care-url="{{ url_for('plant_care_page', plant=plant_name) }}">
+
+
+<div class="app">
+
+
+    <!-- ====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="header">
+
+        <div class="logo-wrapper">
+
+            <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="Plant Health"
+                class="logo"
+            >
+
+        </div>
+
+
+        <div class="header-badge">
+
+            🌿 PLANT HEALTH
+
+        </div>
+
+
+        <h1>
+
+            Plant Disease Result
+
+        </h1>
+
+
+        <p>
+
+            Plant health screening and care guidance
+
+        </p>
+
+    </header>
+
+
+    <!-- ====================================================
+         IMAGE
+    ===================================================== -->
+
+    <div class="image-card">
+
+        <img
+            src="{{ image_url }}"
+            alt="Uploaded plant leaf"
+        >
+
+
+        <div class="filename">
+
+            📷 {{ original_filename }}
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         FINAL PREDICTION
+    ===================================================== -->
+
+    <div class="result-hero">
+
+
+        <div class="result-label">
+
+            🩺 Detection Result
+
+        </div>
+
+
+        {% if treatment.get("condition_type") %}
+
+        <div class="condition-type-badge">
+
+            {{ treatment["condition_type"] }}
+
+        </div>
+
+        {% endif %}
+
+
+        {% if is_healthy %}
+
+        <div class="disease-name">
+
+            🌿 Healthy {{ plant_name|title }}
+
+        </div>
+
+        <p class="plant-analysis-text healthy-result-note">
+
+            Your {{ plant_name|title }} plant appears healthy based on this
+            image. No disease treatment is required at this time.
+            Continue regular plant care and monitor the plant for changes.
+
+        </p>
+
+        {% elif treatment %}
+
+        <div class="disease-name">
+
+            {{ treatment.get("emoji", "🌿") }}
+
+            {{ treatment.get(
+                "display_name",
+                disease
+            ) }}
+
+        </div>
+
+        {% else %}
+
+        <div class="disease-name">
+
+            🌿 Result Ready
+
+        </div>
+
+        <p class="plant-analysis-text">
+
+            We couldn't match this to a known condition in our
+            guide yet. Try the assistant below for help, or
+            analyze another photo.
+
+        </p>
+
+        {% endif %}
+
+
+        {% if treatment.get("plant") %}
+
+        <div class="plant-name">
+
+            🌱 Plant:
+
+            <strong>
+
+                {{ treatment["plant"] }}
+
+            </strong>
+
+        </div>
+
+        {% elif plant_name %}
+
+        <div class="plant-name">
+
+            🌱 Plant:
+
+            <strong>
+
+                {{ plant_name }}
+
+            </strong>
+
+        </div>
+
+        {% endif %}
+
+
+        {% if treatment.get("ai_analysis", {}).get("text") %}
+
+        <div class="plant-analysis-text">
+
+            {{ treatment["ai_analysis"]["text"] }}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Treatment information is shown for BOTH healthy and disease results. -->
+
+    <!-- ====================================================
+         WHAT IS THIS
+    ===================================================== -->
+
+    {% if treatment.get("what_is_it") or treatment.get("description") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            📋 What is this?
+
+        </h2>
+
+
+        <p class="section-text">
+
+            {{ treatment.get(
+                "what_is_it",
+                treatment.get(
+                    "description",
+                    "Information not available."
+                )
+            ) }}
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         WHY DOES IT HAPPEN
+    ===================================================== -->
+
+    {% if treatment.get("why_does_it_happen") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            ❓ Why does it happen?
+
+        </h2>
+
+
+        {% if treatment["why_does_it_happen"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["why_does_it_happen"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["why_does_it_happen"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         SYMPTOMS
+    ===================================================== -->
+
+    {% if treatment.get("symptoms_to_look_for") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            🔍 Symptoms to look for
+
+        </h2>
+
+
+        {% if treatment["symptoms_to_look_for"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["symptoms_to_look_for"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["symptoms_to_look_for"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         WHAT TO DO FIRST
+    ===================================================== -->
+
+    {% if treatment.get("what_to_do_first") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            🚨 What should I do first?
+
+        </h2>
+
+
+        {% if treatment["what_to_do_first"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["what_to_do_first"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["what_to_do_first"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         TREATMENT / STAGED CONTROL
+    ===================================================== -->
+
+    {% if treatment.get("light_stage")
+        or treatment.get("moderate_stage")
+        or treatment.get("severe_stage") %}
+
+    <div class="section" id="treatmentControlSection">
+
+        <h2 class="section-title">
+
+            💊 Treatment & Control
+
+        </h2>
+
+
+        {% if treatment.get("light_stage") %}
+
+        <div class="action-box action-green">
+
+            <strong>
+
+                🟢 Early / Small Problem
+
+            </strong>
+
+
+            <ul>
+
+                {% if treatment["light_stage"] is string %}
+
+                <li>
+
+                    {{ treatment["light_stage"] }}
+
+                </li>
+
+                {% else %}
+
+                    {% for item in treatment["light_stage"] %}
+
+                    <li>
+
+                        {{ item }}
+
+                    </li>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+
+        {% if treatment.get("moderate_stage") %}
+
+        <div class="action-box action-yellow">
+
+            <strong>
+
+                🟠 Moderate Problem
+
+            </strong>
+
+
+            <ul>
+
+                {% if treatment["moderate_stage"] is string %}
+
+                <li>
+
+                    {{ treatment["moderate_stage"] }}
+
+                </li>
+
+                {% else %}
+
+                    {% for item in treatment["moderate_stage"] %}
+
+                    <li>
+
+                        {{ item }}
+
+                    </li>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+
+        {% if treatment.get("severe_stage") %}
+
+        <div class="action-box action-red">
+
+            <strong>
+
+                🔴 Severe Problem
+
+            </strong>
+
+
+            <ul>
+
+                {% if treatment["severe_stage"] is string %}
+
+                <li>
+
+                    {{ treatment["severe_stage"] }}
+
+                </li>
+
+                {% else %}
+
+                    {% for item in treatment["severe_stage"] %}
+
+                    <li>
+
+                        {{ item }}
+
+                    </li>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+    <!-- ====================================================
+         🌱 GENERAL PLANT CARE
+
+         plant_care here is the flattened structure built by
+         build_plant_care_display() in app.py:
+
+           plant_care.sections        -> list of
+               {key, icon, title, summary, bullets, extra, warning}
+           plant_care.calendar        -> {label: value, ...}
+           plant_care.safety_care     -> [str, ...]
+           plant_care.important_warning -> [str, ...]
+           plant_care.prevention      -> {summary, bullets, extra, warning}
+    ===================================================== -->
+
+    {% if plant_care and plant_care.sections %}
+
+    <div
+        class="plant-care-modal-overlay"
+        id="plantCareModalOverlay"
+    >
+
+    <div class="plant-care-modal-panel">
+
+        <button
+            type="button"
+            class="plant-care-modal-close"
+            aria-label="Close plant care"
+            onclick="closePlantCareModal()"
+        >
+
+            ✕
+
+        </button>
+
+    <div class="section plant-care-section" style="box-shadow:none; border:none; padding:0; margin-top:0;">
+
+        <div class="plant-care-header">
+
+            <div class="plant-care-icon">
+
+                🌱
+
+            </div>
+
+            <div>
+
+                <h2 class="plant-care-heading">
+
+                    Plant Care
+
+                </h2>
+
+                <p class="plant-care-subtitle">
+
+                    General care guidance for
+                    {{ plant_care.plant or plant_name or "your plant" }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="care-grid care-timeline">
+
+            {% for card in plant_care.sections %}
+
+            <div class="care-card care-step-card">
+
+                <div class="care-step-number">{{ loop.index }}</div>
+
+                <div class="care-card-title">
+
+                    {{ card.icon }} {{ card.title }}
+
+                </div>
+
+                <div class="care-card-content">
+
+                    {% if card.summary %}
+
+                    <p class="care-card-summary">
+
+                        {{ card.summary }}
+
+                    </p>
+
+                    {% endif %}
+
+
+                    {% if card.bullets %}
+
+                    <ul>
+
+                        {% for item in card.bullets %}
+
+                        <li>
+
+                            {{ item }}
+
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                    {% endif %}
+
+
+                    {% if card.extra %}
+
+                    <div class="care-card-extra">
+
+                        {# SAFE EXTRA RENDERING: supports dictionaries,
+                           lists of dictionaries, pairs and normal strings. #}
+
+                        {% if card.extra is mapping %}
+
+                            {% for label, value in card.extra.items() %}
+                            <div>
+                                <strong>{{ label }}:</strong>
+                                {{ value }}
+                            </div>
+                            {% endfor %}
+
+                        {% else %}
+
+                            {% for item in card.extra %}
+
+                                {% if item is mapping %}
+
+                                    {% for label, value in item.items() %}
+                                    <div>
+                                        <strong>{{ label }}:</strong>
+                                        {{ value }}
+                                    </div>
+                                    {% endfor %}
+
+                                {% elif item is sequence and item is not string and item|length >= 2 %}
+
+                                    <div>
+                                        <strong>{{ item[0] }}:</strong>
+                                        {{ item[1:]|join(' ') }}
+                                    </div>
+
+                                {% else %}
+
+                                    <div>{{ item }}</div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if card.warning %}
+
+                    <div class="care-card-warning">
+
+                        {{ card.warning }}
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+            <!-- PREVENTION -->
+
+            {% if plant_care.prevention %}
+
+            <div class="care-card care-full care-step-card">
+
+                <div class="care-step-number">{{ plant_care.sections|length + 1 }}</div>
+
+                <div class="care-card-title">
+
+                    🛡️ Everyday Prevention
+
+                </div>
+
+                <div class="care-card-content">
+
+                    {% if plant_care.prevention.summary %}
+
+                    <p class="care-card-summary">
+
+                        {{ plant_care.prevention.summary }}
+
+                    </p>
+
+                    {% endif %}
+
+
+                    {% if plant_care.prevention.bullets %}
+
+                    <ul>
+
+                        {% for item in plant_care.prevention.bullets %}
+
+                        <li>
+
+                            {{ item }}
+
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- CARE CALENDAR -->
+
+        {% if plant_care.calendar %}
+
+        <div class="care-card care-calendar">
+
+            <div class="care-card-title">
+
+                📅 Care Calendar
+
+            </div>
+
+            <div class="care-card-content">
+
+                {% for label, value in plant_care.calendar.items() %}
+
+                <div class="care-calendar-row">
+
+                    <div class="care-calendar-label">
+
+                        {{ label }}
+
+                    </div>
+
+                    <div class="care-calendar-value">
+
+                        {{ value }}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- SAFETY WHEN HANDLING -->
+
+        {% if plant_care.safety_care %}
+
+        <div class="care-warning-box">
+
+            🧤 <strong>Handling Safety:</strong>
+
+            <ul>
+
+                {% for item in plant_care.safety_care %}
+
+                <li>
+
+                    {{ item }}
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- IMPORTANT WARNINGS -->
+
+        {% if plant_care.important_warning %}
+
+        <div class="care-warning-box">
+
+            🚨 <strong>Important:</strong>
+
+            <ul>
+
+                {% for item in plant_care.important_warning %}
+
+                <li>
+
+                    {{ item }}
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="care-note">
+
+            🌿 <strong>Plant Care Tip:</strong>
+
+            These are general care recommendations
+            for the detected plant. Continue to follow
+            the disease-specific treatment guidance
+            shown above when managing the detected
+            condition.
+
+        </div>
+
+
+        {% if alternative_plants %}
+        <div class="alternative-care-section">
+            <h3 class="alternative-care-title">🌿 More Plant Care Information</h3>
+            <p class="alternative-care-text">
+                The model also returned other likely plant classes. You can open their own plant-care information below.
+            </p>
+
+            <div class="alternative-care-buttons">
+                {% for alternative in alternative_plants %}
+                <button
+                    type="button"
+                    class="alternative-care-button"
+                    data-plant="{{ alternative.plant }}"
+                    data-disease="{{ alternative.disease_display }}"
+                    data-confidence="{{ alternative.confidence }}"
+                    onclick="openAlternativePlantCare(this)"
+                >
+                    🌱 {{ alternative.plant }} Care
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="alternativePlantCareView" class="alternative-care-view" aria-live="polite"></div>
+        {% endif %}
+
+    </div>
+
+    </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         HOME CARE
+    ===================================================== -->
+
+    {% if treatment.get("home_care") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            🏡 Home Care
+
+        </h2>
+
+
+        {% if treatment["home_care"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["home_care"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["home_care"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         PREVENTION
+    ===================================================== -->
+
+    {% if treatment.get("prevention") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            🛡️ Prevention
+
+        </h2>
+
+
+        {% if treatment["prevention"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["prevention"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["prevention"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         PLAIN LANGUAGE HELP
+    ===================================================== -->
+
+    {% if treatment.get("plain_language_help") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            💡 In Simple Terms
+
+        </h2>
+
+
+        <p class="section-text">
+
+            {{ treatment["plain_language_help"] }}
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         COMMON TREATMENT OPTIONS
+    ===================================================== -->
+
+    {% if treatment.get("common_treatment_options") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            🩺 Common Treatment Options
+
+        </h2>
+
+
+        {% if treatment["common_treatment_options"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["common_treatment_options"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["common_treatment_options"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         EXAMPLE PRODUCTS
+    ===================================================== -->
+
+    {% if treatment.get("example_products") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            🧪 Example Products
+
+        </h2>
+
+
+        {% if treatment["example_products"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["example_products"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["example_products"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+
+        {% if treatment.get("example_products_disclaimer") %}
+
+        <div class="medicine-note">
+
+            {{ treatment["example_products_disclaimer"] }}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         FUNGICIDE
+    ===================================================== -->
+
+    {% if treatment.get("fungicide") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            🧪 Fungicide / Control
+
+        </h2>
+
+
+        <p class="section-text">
+
+            {{ treatment["fungicide"] }}
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         WHEN TO GET HELP
+    ===================================================== -->
+
+    {% if treatment.get("when_to_get_expert_help") %}
+
+    <div class="section">
+
+        <h2 class="section-title">
+
+            👨‍🌾 When should I get help?
+
+        </h2>
+
+
+        <p class="section-text">
+
+            {{ treatment["when_to_get_expert_help"] }}
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         FINAL RECOMMENDATION
+    ===================================================== -->
+
+    {% if treatment.get("final_recommendation") %}
+
+    <div class="important">
+
+        ⚠️ <strong>Final Recommendation:</strong>
+
+        {{ treatment["final_recommendation"] }}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         APPLICATION SAFETY
+    ===================================================== -->
+
+    {% if treatment.get("treatment_safety") %}
+
+    <div class="section safety">
+
+        <h2 class="section-title">
+
+            ⚠️ Application Safety
+
+        </h2>
+
+
+        {% if treatment["treatment_safety"] is string %}
+
+        <p class="section-text">
+
+            {{ treatment["treatment_safety"] }}
+
+        </p>
+
+        {% else %}
+
+        <ul class="list">
+
+            {% for item in treatment["treatment_safety"] %}
+
+            <li>
+
+                {{ item }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         PLANT HEALTH NOTE
+    ===================================================== -->
+
+    {% if treatment.get("ai_analysis", {}).get("disclaimer") %}
+
+    <div class="plant-health-note">
+
+        <strong>
+
+            🌿 Plant Health Note
+
+        </strong>
+
+
+        {{ treatment["ai_analysis"]["disclaimer"] }}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ====================================================
+         SCREENING DISCLAIMER
+    ===================================================== -->
+
+    <div class="disclaimer">
+
+        <div class="disclaimer-title">
+
+            ⚠️ About This Result
+
+        </div>
+
+
+        This result is intended for plant health screening
+        and educational guidance. It should not replace
+        professional diagnosis. Similar symptoms can occur
+        in different plant diseases, pest attacks, or
+        nutritional problems.
+
+    </div>
+
+
+    <!-- ====================================================
+         FINAL CONFIDENCE
+    ===================================================== -->
+
+    <div class="confidence-final">
+
+        <div class="confidence-final-title">
+
+            🎯 Prediction Confidence
+
+        </div>
+
+
+        <div class="confidence-final-row">
+
+            <div class="confidence-final-bar">
+
+                <div
+                    class="confidence-final-fill"
+                    data-confidence="{{ confidence }}"
+                ></div>
+
+            </div>
+
+
+            <div class="confidence-final-text">
+
+                {{ confidence }}%
+
+            </div>
+
+        </div>
+
+
+        <div class="confidence-final-level">
+
+            📊 {{ confidence_level }}
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- ====================================================
+         SAVE CURRENT SCAN AS BEFORE IMAGE
+         TREATMENT RECOVERY TRACKING
+         ADDED ONLY - EXISTING RESULT CONTENT UNCHANGED
+    ===================================================== -->
+
+    <!--
+        BEFORE-SAVE-DATA:
+        image_url={{ image_url | default('') }}
+        original_filename={{ original_filename | default('') }}
+        disease={{ disease | default('') }}
+        confidence={{ confidence | default(0) }}
+        plant_name={{ plant_name | default('') }}
+    -->
+
+
+
+
+    <!-- ====================================================
+         FINAL ACTIONS — ONLY AT THE END OF THE RESULT PAGE
+         Constant actions such as Chat and Plant Care remain
+         available through the floating buttons above.
+    ===================================================== -->
+
+    <div class="final-result-actions" id="finalResultActions">
+
+    <div
+        class="before-save-card"
+        id="beforeSaveCard"
+    >
+
+        <div class="before-save-title">
+            📌 Save This Scan for Treatment Recovery Tracking
+        </div>
+
+        <div class="before-save-text">
+            {% if is_healthy %}
+            Save this healthy scan as a <strong>BEFORE</strong> image if you want to
+            monitor the plant over time. You can scan the same plant again later and
+            compare the BEFORE and AFTER scans.
+            {% else %}
+            Save this current diagnosis as your <strong>BEFORE</strong> image.
+            After you complete the recommended treatment, scan the same plant again
+            and use <strong>Track Recovery</strong> to compare the BEFORE and AFTER scans.
+            Both images will be independently checked by the same ResNet50 model before
+            the recovery comparison is calculated.
+            {% endif %}
+        </div>
+
+        <button
+            type="button"
+            id="saveBeforeButton"
+            class="before-save-button"
+            onclick="saveCurrentScanAsBefore()"
+        >
+            💾 Save as BEFORE Image
+        </button>
+
+        <div
+            id="beforeSaveStatus"
+            class="before-save-status"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+        <a
+            href="/before-after"
+            class="before-save-next"
+        >
+            📊 Open Treatment Recovery / Before–After Tracking
+        </a>
+
+    </div>
+
+        {% if not is_healthy and current_user %}
+        <div class="treatment-track-card" id="treatmentTrackCard">
+            <div class="treatment-track-title">🌿 Start Treatment</div>
+            <div class="treatment-track-text" id="treatmentTrackText">Select this detected condition for active treatment tracking.</div>
+            <div id="treatmentTrackBadge" class="treatment-track-badge"></div>
+            <div id="treatmentTrackButtons" class="treatment-track-buttons">
+                <button type="button" id="startTreatmentButton" class="treatment-track-button">🌿 ADD TREATMENT</button>
+            </div>
+            <div id="treatmentTrackStatus" class="treatment-track-status" role="status" aria-live="polite"></div>
+        </div>
+        {% elif not is_healthy %}
+        <div class="treatment-track-card">
+            <div class="treatment-track-title">🌿 Track This Treatment</div>
+            <div class="treatment-track-text">
+                Log in to add this condition to your Treatment Center, update its status,
+                or remove it later — only you can see and manage your own treatment records.
+            </div>
+            <a href="/login" class="treatment-track-button" style="display:block;text-align:center;text-decoration:none;">
+                🔐 Login to Add Treatment
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+    <!-- ====================================================
+         ANALYZE ANOTHER
+    ===================================================== -->
+
+    <a
+        href="/"
+        class="button"
+    >
+
+        🔄 Analyze Another Plant Image
+
+    </a>
+
+
+    <!-- ====================================================
+         FOOTER
+    ===================================================== -->
+
+    <div class="footer">
+
+        🌿 Plant Health Assistant<br>
+
+        Plant disease screening and care guidance<br><br>
+
+        ⚠️ Always follow the official product label and
+        local agricultural recommendations.
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FLOATING BUTTONS (STACKED)
+     1. AI Assistant  -> opens chat popup (backend unchanged)
+     2. Plant Care    -> opens plant-care popup (unchanged)
+========================================================= -->
+
+<div class="fab-stack">
+
+    <div class="floating-chat-wrapper">
+
+        <button
+            type="button"
+            onclick="openAssistantModal()"
+            class="floating-chat-button assistant-fab"
+            title="Ask Plant Health Assistant"
+            aria-label="Open Plant Health Assistant"
+        >
+
+            <svg
+                class="floating-chat-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+
+                <path d="
+                    M12 2
+                    C6.48 2 2 5.94 2 10.8
+                    c0 2.77 1.46 5.24 3.75 6.86
+                    L5 22l4.53-1.98
+                    c0.79 0.15 1.61 0.23 2.47 0.23
+                    5.52 0 10-3.94 10-8.8
+                    S17.52 2 12 2
+                    Z
+                    M8.5 12
+                    a1.25 1.25 0 1 1 0-2.5
+                    1.25 1.25 0 0 1 0 2.5
+                    Z
+                    M12 12
+                    a1.25 1.25 0 1 1 0-2.5
+                    1.25 1.25 0 0 1 0 2.5
+                    Z
+                    M15.5 12
+                    a1.25 1.25 0 1 1 0-2.5
+                    1.25 1.25 0 0 1 0 2.5
+                    Z
+                "/>
+
+            </svg>
+
+            <span class="chat-online-dot"></span>
+
+        </button>
+
+        <div class="floating-chat-label">
+
+            🤖 Ask Assistant
+
+        </div>
+
+    </div>
+
+
+    <div class="floating-chat-wrapper">
+
+        <button
+            type="button"
+            onclick="openPlantCareModal()"
+            class="floating-chat-button"
+            title="Plant Care"
+            aria-label="Open Plant Care"
+        >
+
+
+            <svg
+                class="floating-chat-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+
+                <path d="
+                    M20 2H4
+                    C2.9 2 2 2.9 2 4V15
+                    C2 16.1 2.9 17 4 17H7
+                    V22L12 17H20
+                    C21.1 17 22 16.1 22 15V4
+                    C22 2.9 21.1 2 20 2Z
+                "/>
+
+            </svg>
+
+
+            <span class="floating-chat-leaf">
+
+                🌱
+
+            </span>
+
+
+            <span class="chat-online-dot"></span>
+
+
+        </button>
+
+
+        <div class="floating-chat-label">
+
+            🌱 Plant Care
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     DETECTED DISEASE CHAT
+     Inline chat: no separate chat page / no iframe.
+========================================================= -->
+<div class="plant-care-modal-overlay" id="assistantModalOverlay" aria-hidden="true">
+    <div class="detected-chat-panel" role="dialog" aria-modal="true" aria-label="Detected disease chat">
+        <header class="detected-chat-header">
+            <div class="detected-chat-header-row">
+                <div class="detected-chat-header-left">
+                    <button type="button" class="detected-chat-back" id="detectedChatBack" title="Back to Treatment">←</button>
+                    <div class="detected-chat-avatar">🌿</div>
+                    <div class="detected-chat-title-wrap">
+                        <h2 class="detected-chat-title">Plant Health Assistant</h2>
+                        <p class="detected-chat-online-line">
+                            <span class="detected-chat-online">
+                                <span class="detected-chat-online-dot"></span>
+                                Ready to help with plant health
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="detected-chat-header-right">
+                    <button type="button" class="detected-chat-clear" id="detectedChatClear">Clear</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="detected-chat-context-wrap">
+            <div class="detected-chat-context" id="detectedChatDisease">
+                🩺 Current plant context:
+                <strong id="detectedChatDiseaseValue">{{ treatment.get("display_name", disease) if treatment else disease }}</strong>
+                · AI confidence:
+                <strong id="detectedChatConfidenceValue">{{ "%.2f"|format(confidence|float) }}%</strong>
+                · Plant:
+                <strong id="detectedChatPlantValue">{{ treatment.get("plant", plant_name) if treatment else plant_name }}</strong>
+            </div>
+        </div>
+
+        <main class="detected-chat-messages" id="detectedChatMessages">
+            <div class="detected-chat-welcome" id="detectedChatWelcome">
+                <div class="detected-chat-welcome-icon">🌿</div>
+                <h3>Let's Discuss Your Plant</h3>
+                <p>Your current diagnosis is <strong>{{ treatment.get("display_name", disease) if treatment else disease }}</strong>. Ask about treatment, symptoms, causes, prevention, recovery or plant care.</p>
+
+                <div class="detected-chat-question-list" id="detectedChatQuestionList">
+                    <button type="button" class="detected-chat-question" data-question="What treatment should I use?">💊 What treatment should I follow?</button>
+                    <button type="button" class="detected-chat-question" data-question="What are the main symptoms of this disease?">🔍 What are the symptoms?</button>
+                    <button type="button" class="detected-chat-question" data-question="How can I prevent this from coming back?">🛡️ How can I prevent it?</button>
+                    <button type="button" class="detected-chat-question" data-question="What should I do first?">🚨 What should I do first?</button>
+                </div>
+            </div>
+
+            <template id="detectedChatWelcomeTemplate"><div class="detected-chat-welcome">
+                <div class="detected-chat-welcome-icon">🌿</div>
+                <h3>Let's Discuss Your Plant</h3>
+                <p>Your current diagnosis is <strong>{{ treatment.get("display_name", disease) if treatment else disease }}</strong>. Ask about treatment, symptoms, causes, prevention, recovery or plant care.</p>
+
+                <div class="detected-chat-question-list">
+                    <button type="button" class="detected-chat-question" data-question="What treatment should I use?">💊 What treatment should I follow?</button>
+                    <button type="button" class="detected-chat-question" data-question="What are the main symptoms of this disease?">🔍 What are the symptoms?</button>
+                    <button type="button" class="detected-chat-question" data-question="How can I prevent this from coming back?">🛡️ How can I prevent it?</button>
+                    <button type="button" class="detected-chat-question" data-question="What should I do first?">🚨 What should I do first?</button>
+                </div>
+            </div></template>
+        </main>
+
+        <div class="detected-chat-input-area">
+            <div class="detected-chat-input-row">
+                <textarea id="detectedChatInput" rows="1" maxlength="1000" autocomplete="off" autocorrect="on" spellcheck="true" placeholder="Type your message..."></textarea>
+                <button type="button" id="detectedChatSend" aria-label="Send message">➤</button>
+            </div>
+            <div class="detected-chat-error" id="detectedChatError"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    "use strict";
+
+    const plantCareUrl = document.body.dataset.plantCareUrl || "/plant-care";
+
+    function getPlantCareOverlay() {
+        return document.getElementById("plantCareModalOverlay");
+    }
+
+    function getAssistantOverlay() {
+        return document.getElementById("assistantModalOverlay");
+    }
+
+    function isPlantCareOpen() {
+        const overlay = getPlantCareOverlay();
+        return !!(overlay && overlay.classList.contains("open"));
+    }
+
+    function isAssistantOpen() {
+        const overlay = getAssistantOverlay();
+        return !!(overlay && overlay.classList.contains("open"));
+    }
+
+    function updateBodyModalState() {
+        document.body.classList.toggle(
+            "modal-open",
+            isPlantCareOpen() || isAssistantOpen()
+        );
+    }
+
+    function closeAllModalsDirectly() {
+        const plantOverlay = getPlantCareOverlay();
+        const assistantOverlay = getAssistantOverlay();
+
+        if (plantOverlay) plantOverlay.classList.remove("open");
+        if (assistantOverlay) assistantOverlay.classList.remove("open");
+
+        updateBodyModalState();
+    }
+
+    function pushModalHistory(modalName) {
+        const currentState = history.state || {};
+
+        if (currentState.plantModal === modalName) return;
+
+        history.pushState(
+            { ...currentState, plantModal: modalName },
+            "",
+            window.location.href
+        );
+    }
+
+    function initializeConfidenceBar() {
+        const confidenceFill = document.querySelector(".confidence-final-fill");
+        if (!confidenceFill) return;
+
+        let confidence = parseFloat(confidenceFill.dataset.confidence || "0");
+        if (!Number.isFinite(confidence)) confidence = 0;
+
+        confidence = Math.max(0, Math.min(100, confidence));
+
+        requestAnimationFrame(function () {
+            confidenceFill.style.width = confidence + "%";
+        });
+    }
+
+    function openPlantCareModal() {
+        const overlay = getPlantCareOverlay();
+        if (!overlay) {
+            window.location.href = plantCareUrl;
+            return;
+        }
+
+        const assistantOverlay = getAssistantOverlay();
+        if (assistantOverlay) assistantOverlay.classList.remove("open");
+
+        overlay.classList.add("open");
+        pushModalHistory("plant-care");
+        updateBodyModalState();
+    }
+
+    function closePlantCareModal() {
+        const overlay = getPlantCareOverlay();
+        if (!overlay) return;
+
+        if (history.state && history.state.plantModal === "plant-care") {
+            history.back();
+            return;
+        }
+
+        overlay.classList.remove("open");
+        updateBodyModalState();
+    }
+
+    function openAssistantModal() {
+        const overlay = getAssistantOverlay();
+        if (!overlay) return;
+
+        const plantOverlay = getPlantCareOverlay();
+        if (plantOverlay) plantOverlay.classList.remove("open");
+
+        overlay.classList.add("open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("chat-open");
+        document.body.classList.add("chat-open");
+        updateBodyModalState();
+        updateDetectedChatViewport();
+        updateDetectedChatDisease();
+    }
+
+    function closeAssistantModal() {
+        const overlay = getAssistantOverlay();
+        if (!overlay) return;
+
+        overlay.classList.remove("open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("chat-open");
+        document.body.classList.remove("chat-open");
+        updateBodyModalState();
+    }
+
+    function escapeHtml(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function formatCareKey(key) {
+        return String(key || "Plant Care")
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, function (letter) {
+                return letter.toUpperCase();
+            });
+    }
+
+    function formatCareValue(value) {
+        if (Array.isArray(value)) {
+            return "<ul>" + value.map(function (item) {
+                return "<li>" + formatCareValue(item) + "</li>";
+            }).join("") + "</ul>";
+        }
+
+        if (value && typeof value === "object") {
+            return Object.keys(value).map(function (key) {
+                return "<div><strong>" + escapeHtml(formatCareKey(key)) + ":</strong> "
+                    + formatCareValue(value[key]) + "</div>";
+            }).join("");
+        }
+
+        return escapeHtml(value);
+    }
+
+    function renderAlternativePlantCare(care) {
+        if (!care || typeof care !== "object") {
+            return '<div class="alternative-care-error">Plant care information is not available for this plant.</div>';
+        }
+
+        const entries = Object.keys(care).filter(function (key) {
+            return !["plant", "current_condition"].includes(key);
+        });
+
+        return '<div class="alternative-care-json">'
+            + entries.map(function (key, index) {
+                return '<div class="alternative-care-json-card">'
+                    + '<div class="alternative-care-step-number">' + (index + 1) + '</div>'
+                    + '<h4 class="alternative-care-json-title">'
+                    + escapeHtml(formatCareKey(key))
+                    + '</h4>'
+                    + '<div class="alternative-care-json-content">'
+                    + formatCareValue(care[key])
+                    + '</div></div>';
+            }).join("")
+            + '</div>';
+    }
+
+    function showDetectedPlantCare() {
+        const view = document.getElementById("alternativePlantCareView");
+        if (view) {
+            view.classList.remove("active");
+            view.innerHTML = "";
+        }
+
+        const modalPanel = document.querySelector("#plantCareModalOverlay .plant-care-modal-panel");
+        if (modalPanel) modalPanel.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function openAlternativePlantCare(button) {
+        const view = document.getElementById("alternativePlantCareView");
+        if (!view || !button) return;
+
+        const plant = button.dataset.plant || "";
+        const disease = button.dataset.disease || "";
+        const confidence = button.dataset.confidence || "";
+
+        view.classList.add("active");
+        view.innerHTML = '<div class="alternative-care-view-header">'
+            + '<h3 class="alternative-care-view-title">🌱 ' + escapeHtml(plant) + ' Plant Care</h3>'
+            + '<p class="alternative-care-view-meta">Related model class: ' + escapeHtml(disease)
+            + (confidence ? ' · Score: ' + escapeHtml(confidence) + '%' : '') + '</p>'
+            + '</div>'
+            + '<div class="alternative-care-loading">Loading plant care information...</div>';
+
+        const modalPanel = document.querySelector("#plantCareModalOverlay .plant-care-modal-panel");
+        if (modalPanel) modalPanel.scrollTo({ top: view.offsetTop - 20, behavior: "smooth" });
+
+        try {
+            const response = await fetch('/api/plant-care?plant=' + encodeURIComponent(plant));
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Plant care information not found.");
+            }
+
+            view.innerHTML = '<div class="alternative-care-view-header">'
+                + '<h3 class="alternative-care-view-title">🌱 ' + escapeHtml(data.plant || plant) + ' Plant Care</h3>'
+                + '<p class="alternative-care-view-meta">Related model class: ' + escapeHtml(disease)
+                + (confidence ? ' · Score: ' + escapeHtml(confidence) + '%' : '') + '</p>'
+                + '</div>'
+                + renderAlternativePlantCare(data.care)
+                + '<button type="button" class="alternative-care-button alternative-care-back" onclick="showDetectedPlantCare()">← Back to Detected Plant Care</button>';
+        } catch (error) {
+            view.innerHTML = '<div class="alternative-care-error">Unable to load plant care information. '
+                + escapeHtml(error.message || "Please try again.")
+                + '</div><button type="button" class="alternative-care-button alternative-care-back" onclick="showDetectedPlantCare()">← Back to Detected Plant Care</button>';
+        }
+    }
+
+    window.addEventListener("popstate", function () {
+        closeAllModalsDirectly();
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        initializeConfidenceBar();
+
+        const plantOverlay = getPlantCareOverlay();
+        const assistantOverlay = getAssistantOverlay();
+
+        if (plantOverlay) {
+            plantOverlay.addEventListener("click", function (event) {
+                if (event.target === plantOverlay) closePlantCareModal();
+            });
+        }
+
+        if (assistantOverlay) {
+            assistantOverlay.addEventListener("click", function (event) {
+                if (event.target === assistantOverlay) closeAssistantModal();
+            });
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key !== "Escape") return;
+
+            if (isAssistantOpen()) {
+                closeAssistantModal();
+            } else if (isPlantCareOpen()) {
+                closePlantCareModal();
+            }
+        });
+    });
+</script>
+
+
+<script>
+    // ============================================================
+    // SAVE CURRENT RESULT AS BEFORE IMAGE
+    // ============================================================
+    // The normal diagnosis flow has already stored the current scan.
+    // This call creates a user-specific BEFORE baseline without
+    // changing the existing diagnosis or treatment result.
+
+    async function saveCurrentScanAsBefore() {
+
+        const button = document.getElementById("saveBeforeButton");
+        const status = document.getElementById("beforeSaveStatus");
+
+        if (!button || !status) {
+            return;
+        }
+
+        const card = document.getElementById("beforeSaveCard");
+
+        if (!card) {
+            return;
+        }
+
+        // Read the values from the server-rendered BEFORE-SAVE comment.
+        // Keeping the Jinja values inside an HTML comment prevents VS Code
+        // from treating template syntax as JavaScript.
+        const pageHtml = document.documentElement.innerHTML;
+        const dataMatch = pageHtml.match(/BEFORE-SAVE-DATA:[\s\S]*?-->/);
+
+        if (!dataMatch) {
+            status.className = "before-save-status error";
+            status.textContent = "❌ Could not read the current scan details.";
+            return;
+        }
+
+        const dataText = dataMatch[0];
+
+        function readBeforeValue(key) {
+            const match = dataText.match(new RegExp("\\n\\s*" + key + "=(.*?)\\n"));
+            return match ? match[1].trim() : "";
+        }
+
+        const imageUrl = readBeforeValue("image_url");
+        const originalFilename = readBeforeValue("original_filename");
+        const disease = readBeforeValue("disease");
+        const confidence = Number(readBeforeValue("confidence") || 0);
+        const plantName = readBeforeValue("plant_name");
+
+        const savedFilename = String(imageUrl || "")
+            .split("/")
+            .pop()
+            .split("?")[0];
+
+        if (!savedFilename) {
+            status.className = "before-save-status error";
+            status.textContent = "❌ The current scan image could not be identified.";
+            return;
+        }
+
+        button.disabled = true;
+        button.textContent = "⏳ Saving BEFORE image...";
+        status.className = "before-save-status";
+        status.textContent = "Saving this diagnosis as your recovery baseline...";
+
+        try {
+
+            const response = await fetch("/api/before-save", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    saved_filename: savedFilename,
+                    original_filename: originalFilename,
+                    disease: disease,
+                    confidence: confidence,
+                    plant_name: plantName
+                })
+            });
+
+            let data = {};
+
+            try {
+                data = await response.json();
+            } catch (jsonError) {
+                data = {
+                    success: false,
+                    error: "The server returned an invalid response."
+                };
+            }
+
+            if (response.status === 401) {
+                button.disabled = false;
+                button.textContent = "💾 Save as BEFORE Image";
+                status.className = "before-save-status warning";
+                status.textContent = "🔐 Please login first to save a BEFORE image to your account.";
+                return;
+            }
+
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.error || "Could not save the BEFORE image."
+                );
+            }
+
+            button.textContent = "✅ BEFORE Image Saved";
+            button.disabled = true;
+
+            status.className = "before-save-status success";
+            status.textContent = data.already_saved
+                ? "This scan is already saved as a BEFORE image in your account."
+                : "BEFORE image saved successfully. After treatment, open Treatment Recovery and choose this baseline for the AFTER comparison.";
+
+        } catch (error) {
+
+            console.error("BEFORE image save error:", error);
+
+            button.disabled = false;
+            button.textContent = "💾 Save as BEFORE Image";
+            status.className = "before-save-status error";
+            status.textContent = "❌ " + (
+                error.message ||
+                "Could not save the BEFORE image. Please try again."
+            );
+        }
+    }
+</script>
+
+
+
+
+<script id="treatment-tracking-final-script">
+(function(){
+    "use strict";
+
+    const trackText = document.getElementById("treatmentTrackText");
+    const badge = document.getElementById("treatmentTrackBadge");
+    const buttons = document.getElementById("treatmentTrackButtons");
+    const statusBox = document.getElementById("treatmentTrackStatus");
+
+    let treatmentRecordId = null;
+    const savedFilename = String(document.body.dataset.savedFilename || "").trim();
+    const disease = String(document.body.dataset.disease || "").trim();
+    const plantName = String(document.body.dataset.plantName || "").trim();
+
+    function setStatus(type, text){
+        if(!statusBox) return;
+        statusBox.className = "treatment-track-status" + (type ? " " + type : "");
+        statusBox.textContent = text || "";
+    }
+
+    function normalize(v){
+        return String(v || "").trim().toLowerCase().replace(/[._-]+/g," ").replace(/\s+/g," ");
+    }
+
+    function updateText(){
+        if(!trackText) return;
+        trackText.textContent = plantName
+            ? "Start treatment tracking for " + plantName + " using the detected " + (disease || "condition") + "."
+            : "Start treatment tracking for this detected condition.";
+    }
+
+    function addDeleteButton(){
+        if(!buttons) return;
+        const d=document.createElement("button");
+        d.type="button"; d.className="treatment-track-remove-button";
+        d.textContent="🗑️ Delete Treatment";
+        d.addEventListener("click",deleteTreatment);
+        buttons.appendChild(d);
+    }
+
+    function renderState(state){
+        if(!badge || !buttons) return;
+        badge.className = "treatment-track-badge";
+        badge.textContent = "";
+        buttons.innerHTML = "";
+
+        if(state === "started"){
+            badge.className += " badge-started";
+            badge.textContent = "🟠 Treatment Started";
+            const b=document.createElement("button");
+            b.type="button"; b.className="treatment-track-button button-monitoring";
+            b.textContent="🟡 Move to Monitoring";
+            b.addEventListener("click",()=>updateStatus("monitoring"));
+            buttons.appendChild(b);
+            addDeleteButton();
+        } else if(state === "monitoring"){
+            badge.className += " badge-monitoring";
+            badge.textContent = "🟡 Monitoring";
+            const b=document.createElement("button");
+            b.type="button"; b.className="treatment-track-button button-completed";
+            b.textContent="🟢 Mark Treatment Completed";
+            b.addEventListener("click",()=>updateStatus("completed"));
+            buttons.appendChild(b);
+            addDeleteButton();
+        } else if(state === "completed"){
+            badge.className += " badge-completed";
+            badge.textContent = "🟢 Treatment Completed";
+            addDeleteButton();
+        } else {
+            const b=document.createElement("button");
+            b.type="button"; b.id="startTreatmentButton"; b.className="treatment-track-button";
+            b.textContent="🌿 ADD TREATMENT";
+            b.addEventListener("click",startTreatment);
+            buttons.appendChild(b);
+        }
+    }
+
+    async function loadState(){
+        updateText();
+        renderState("none");
+        if(!savedFilename) return;
+
+        try{
+            const r=await fetch("/api/treatment",{headers:{"Accept":"application/json"}});
+            const data=await r.json();
+            if(!r.ok || !data.success) return;
+
+            const records=Array.isArray(data.treatments)?data.treatments:[];
+            const match=records.filter(x =>
+                String(x.saved_filename || "") === savedFilename &&
+                normalize(x.disease) === normalize(disease)
+            ).pop();
+
+            if(match){
+                treatmentRecordId=match.id;
+                renderState(match.status);
+            }
+        }catch(e){
+            console.error("Load treatment state error",e);
+        }
+    }
+
+    async function startTreatment(){
+        setStatus("","");
+        const b=document.getElementById("startTreatmentButton");
+        if(b){b.disabled=true;b.textContent="⏳ Starting Treatment...";}
+
+        try{
+            if(!savedFilename){
+                throw new Error("The current scan image could not be identified.");
+            }
+
+            const r=await fetch("/api/treatment/start",{
+                method:"POST",
+                headers:{"Content-Type":"application/json","Accept":"application/json"},
+                body:JSON.stringify({
+                    saved_filename:savedFilename,
+                    disease:disease,
+                    plant_name:plantName
+                })
+            });
+
+            let data={};
+            try{data=await r.json();}catch(e){}
+
+            if(r.status===401) throw new Error("Please login first to start treatment tracking.");
+            if(!r.ok || !data.success) throw new Error(data.error || "Could not start treatment.");
+
+            treatmentRecordId=data.treatment && data.treatment.id ? data.treatment.id : null;
+            setStatus("success","✅ Treatment started. This detected condition is now under treatment.");
+            renderState((data.treatment && data.treatment.status) || "started");
+        }catch(e){
+            console.error("Start treatment error",e);
+            setStatus("error","❌ " + (e.message || "Could not start treatment."));
+            if(b){b.disabled=false;b.textContent="🌿 START TREATMENT";}
+        }
+    }
+
+    async function updateStatus(newStatus){
+        if(!treatmentRecordId){setStatus("error","❌ No treatment record found.");return;}
+        try{
+            const r=await fetch("/api/treatment/"+encodeURIComponent(treatmentRecordId)+"/status",{
+                method:"POST",
+                headers:{"Content-Type":"application/json","Accept":"application/json"},
+                body:JSON.stringify({status:newStatus})
+            });
+            let data={}; try{data=await r.json();}catch(e){}
+            if(r.status===401) throw new Error("Please login first.");
+            if(!r.ok || !data.success) throw new Error(data.error || "Could not update treatment status.");
+            setStatus("success","✅ Treatment status updated.");
+            renderState((data.treatment && data.treatment.status) || newStatus);
+        }catch(e){
+            setStatus("error","❌ "+(e.message || "Could not update treatment status."));
+        }
+    }
+
+    async function deleteTreatment(){
+        if(!treatmentRecordId){setStatus("error","❌ No treatment record found.");return;}
+        if(!window.confirm("Delete this treatment record? This can't be undone.")) return;
+
+        const d=buttons ? buttons.querySelector(".treatment-track-remove-button") : null;
+        if(d){d.disabled=true;d.textContent="⏳ Deleting...";}
+
+        try{
+            const r=await fetch("/api/treatment/"+encodeURIComponent(treatmentRecordId),{
+                method:"DELETE",
+                headers:{"Accept":"application/json"}
+            });
+            let data={}; try{data=await r.json();}catch(e){}
+            if(r.status===401) throw new Error("Please login first.");
+            if(!r.ok || !data.success) throw new Error(data.error || "Could not delete treatment.");
+
+            treatmentRecordId=null;
+            setStatus("success","🗑️ Treatment record deleted.");
+            renderState("none");
+        }catch(e){
+            setStatus("error","❌ "+(e.message || "Could not delete treatment."));
+            if(d){d.disabled=false;d.textContent="🗑️ Delete Treatment";}
+        }
+    }
+
+    window.startTreatment=startTreatment;
+    window.updateTreatmentStatus=updateStatus;
+    window.deleteTreatment=deleteTreatment;
+    loadState();
+})();
+</script>
+
+<script id="detected-chat-inline-script">
+(function () {
+    "use strict";
+
+    const chatOverlay = document.getElementById("assistantModalOverlay");
+    const chatMessages = document.getElementById("detectedChatMessages");
+    const chatInput = document.getElementById("detectedChatInput");
+    const chatSend = document.getElementById("detectedChatSend");
+    const chatClear = document.getElementById("detectedChatClear");
+    const chatBack = document.getElementById("detectedChatBack");
+    const chatError = document.getElementById("detectedChatError");
+    const chatDisease = document.getElementById("detectedChatDisease");
+
+    function currentDisease() {
+        return String(document.body.dataset.disease || "{{ disease }}" || "Unknown");
+    }
+
+    function currentConfidence() {
+        const n = Number(document.body.dataset.confidence || "{{ confidence }}" || 0);
+        return Number.isFinite(n) ? Math.max(0, Math.min(n, 100)) : 0;
+    }
+
+    function updateDetectedChatDisease() {
+        if (chatDisease) {
+            const plantName = String(document.body.dataset.plantName || "{{ plant_name|default('', true) }}" || "");
+            let html = "🩺 Current plant context: <strong>" + chatEscape(currentDisease()) + "</strong>"
+                + " · AI confidence: <strong>" + currentConfidence().toFixed(2) + "%</strong>";
+            if (plantName) {
+                html += " · Plant: <strong>" + chatEscape(plantName) + "</strong>";
+            }
+            chatDisease.innerHTML = html;
+        }
+    }
+
+    function updateDetectedChatViewport() {
+        if (!chatOverlay) return;
+        const h = window.visualViewport
+            ? Math.round(window.visualViewport.height)
+            : Math.round(window.innerHeight);
+        chatOverlay.style.setProperty("--chat-vh", Math.max(280, h) + "px");
+    }
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", updateDetectedChatViewport);
+    }
+    window.addEventListener("resize", updateDetectedChatViewport);
+
+    function hideChatError() {
+        if (chatError) {
+            chatError.textContent = "";
+            chatError.style.display = "none";
+        }
+    }
+
+    function showChatError(message) {
+        if (chatError) {
+            chatError.textContent = message || "Unable to send message.";
+            chatError.style.display = "block";
+        }
+    }
+
+    function chatEscape(value) {
+        const div = document.createElement("div");
+        div.textContent = String(value ?? "");
+        return div.innerHTML;
+    }
+
+    function formatChatResponse(text) {
+        return chatEscape(text)
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\n/g, "<br>");
+    }
+
+    function chatTime() {
+        return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    }
+
+    function scrollChatBottom() {
+        if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addDetectedChatMessage(text, sender) {
+        const row = document.createElement("div");
+        row.className = "detected-chat-row " + sender;
+
+        const bubble = document.createElement("div");
+        bubble.className = "detected-chat-bubble " + sender;
+        bubble.innerHTML = sender === "user" ? chatEscape(text) : formatChatResponse(text);
+
+        const time = document.createElement("span");
+        time.className = "detected-chat-time";
+        time.textContent = chatTime();
+        bubble.appendChild(time);
+
+        row.appendChild(bubble);
+        chatMessages.appendChild(row);
+        scrollChatBottom();
+    }
+
+    function showDetectedTyping() {
+        removeDetectedTyping();
+        const row = document.createElement("div");
+        row.className = "detected-chat-row bot";
+        row.id = "detectedChatTyping";
+        const bubble = document.createElement("div");
+        bubble.className = "detected-chat-bubble bot";
+        bubble.innerHTML = '<div class="detected-chat-typing"><span></span><span></span><span></span></div>';
+        row.appendChild(bubble);
+        chatMessages.appendChild(row);
+        scrollChatBottom();
+    }
+
+    function removeDetectedTyping() {
+        const el = document.getElementById("detectedChatTyping");
+        if (el) el.remove();
+    }
+
+    function resetDetectedChat() {
+        const welcomeTemplate = document.getElementById("detectedChatWelcomeTemplate");
+        if (welcomeTemplate) {
+            chatMessages.innerHTML = welcomeTemplate.innerHTML;
+        } else {
+            document.querySelectorAll(".detected-chat-row").forEach(function (row) { row.remove(); });
+        }
+        bindQuickQuestionButtons();
+        hideChatError();
+    }
+
+    async function sendDetectedChatMessage() {
+        if (!chatInput || !chatSend) return;
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        if (message.length > 1000) {
+            showChatError("Please keep your message under 1000 characters.");
+            return;
+        }
+
+        hideChatError();
+        addDetectedChatMessage(message, "user");
+        chatInput.value = "";
+        autoResizeDetectedChatInput();
+        chatSend.disabled = true;
+        showDetectedTyping();
+
+        try {
+            const response = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    message: message,
+                    disease: currentDisease(),
+                    confidence: currentConfidence(),
+                    mentality: "friendly",
+                    page: "treatment"
+                })
+            });
+
+            let data = {};
+            try { data = await response.json(); } catch (e) { throw new Error("The server returned an invalid response."); }
+
+            if (!response.ok || !data || !data.success) {
+                throw new Error(data && data.error ? data.error : "Unable to get a response.");
+            }
+
+            removeDetectedTyping();
+            addDetectedChatMessage(data.response || "I could not generate a response.", "bot");
+        } catch (error) {
+            removeDetectedTyping();
+            console.error("Detected disease chat error:", error);
+            addDetectedChatMessage("⚠️ Sorry, I could not process that message. Please try again.", "bot");
+            showChatError(error.message || "Unable to connect to the chat service.");
+        } finally {
+            chatSend.disabled = false;
+            updateDetectedChatViewport();
+            setTimeout(scrollChatBottom, 50);
+        }
+    }
+
+    function autoResizeDetectedChatInput() {
+        if (!chatInput) return;
+        chatInput.style.height = "auto";
+        chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + "px";
+    }
+
+    if (chatSend) chatSend.addEventListener("click", sendDetectedChatMessage);
+
+    function bindQuickQuestionButtons() {
+        document.querySelectorAll(".detected-chat-question").forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (!chatInput) return;
+                chatInput.value = button.getAttribute("data-question") || "";
+                autoResizeDetectedChatInput();
+                chatInput.focus({ preventScroll: true });
+                setTimeout(function () {
+                    sendDetectedChatMessage();
+                }, 60);
+            });
+        });
+    }
+
+    bindQuickQuestionButtons();
+
+    if (chatInput) {
+        chatInput.addEventListener("input", autoResizeDetectedChatInput);
+        chatInput.addEventListener("focus", function () {
+            updateDetectedChatViewport();
+            setTimeout(function () {
+                scrollChatBottom();
+            }, 250);
+        });
+        chatInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                sendDetectedChatMessage();
+            }
+        });
+    }
+
+    if (chatClear) chatClear.addEventListener("click", resetDetectedChat);
+
+    if (chatBack) {
+        chatBack.addEventListener("click", function () {
+            if (chatOverlay) {
+                chatOverlay.classList.remove("open");
+                chatOverlay.setAttribute("aria-hidden", "true");
+                document.documentElement.classList.remove("chat-open");
+                document.body.classList.remove("chat-open");
+                document.body.classList.remove("modal-open");
+                if (chatInput) chatInput.blur();
+            }
+        });
+    }
+
+    updateDetectedChatViewport();
+    updateDetectedChatDisease();
+})();
+</script>
+
+
+<script id="detected-chat-real-final-js">
+(function () {
+    "use strict";
+
+    const overlay = document.getElementById("assistantModalOverlay");
+    const input = document.getElementById("detectedChatInput");
+    const messages = document.getElementById("detectedChatMessages");
+
+    function setChatViewport() {
+        if (!overlay) return;
+        const vv = window.visualViewport;
+        const height = vv ? Math.round(vv.height) : Math.round(window.innerHeight);
+        const top = vv ? Math.round(vv.offsetTop) : 0;
+        overlay.style.setProperty("--chat-height", Math.max(280, height) + "px");
+        overlay.style.setProperty("--chat-top", Math.max(0, top) + "px");
+    }
+
+    function keepInputVisible() {
+        if (!input) return;
+        setChatViewport();
+        requestAnimationFrame(function () {
+            if (messages) messages.scrollTop = messages.scrollHeight;
+            if (document.activeElement === input) {
+                input.scrollIntoView({ block: "nearest", inline: "nearest" });
+            }
+        });
+    }
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", setChatViewport);
+        window.visualViewport.addEventListener("scroll", setChatViewport);
+    }
+    window.addEventListener("resize", setChatViewport);
+
+    if (input) {
+        input.addEventListener("focus", function () {
+            setChatViewport();
+            setTimeout(keepInputVisible, 80);
+            setTimeout(keepInputVisible, 300);
+        });
+    }
+
+    /* Override the existing open/close functions without changing backend behavior. */
+    window.openAssistantModal = function () {
+        if (!overlay) return;
+
+        const plantOverlay = document.getElementById("plantCareModalOverlay");
+        if (plantOverlay) {
+            plantOverlay.classList.remove("open");
+            plantOverlay.setAttribute("aria-hidden", "true");
+        }
+
+        overlay.classList.add("open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("chat-open");
+        document.body.classList.add("chat-open");
+
+        setChatViewport();
+
+        setTimeout(function () {
+            if (input) input.focus({ preventScroll: true });
+            keepInputVisible();
+        }, 80);
+    };
+
+    window.closeAssistantModal = function () {
+        if (!overlay) return;
+
+        if (input) input.blur();
+        overlay.classList.remove("open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("chat-open");
+        document.body.classList.remove("chat-open");
+        document.body.classList.remove("modal-open");
+        overlay.style.removeProperty("--chat-height");
+        overlay.style.removeProperty("--chat-top");
+    };
+
+    /* The Back button must ALWAYS return to the treatment result, never Home. */
+    const back = document.getElementById("detectedChatBack");
+    if (back) {
+        back.onclick = function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            window.closeAssistantModal();
+        };
+    }
+
+    setChatViewport();
+})();
+</script>
+
+<script>
+    window.addEventListener("load", function () {
+        window.scrollTo(0, 0);
+    });
+</script>
+
+</body>
+
+</html>

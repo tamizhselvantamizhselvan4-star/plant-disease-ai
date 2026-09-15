@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Plant Care Guide</title>
+
+<style>
+:root{
+    --green:#176b43;
+    --green2:#2f9a60;
+    --dark:#123b29;
+    --light:#edf8f0;
+    --soft:#f8fcf9;
+    --text:#25382e;
+    --muted:#697a70;
+    --border:#d7e8dc;
+    --white:#ffffff;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(
+            circle at top left,
+            #dff3e6 0%,
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at top right,
+            #e8f6ec 0%,
+            transparent 28%
+        ),
+        var(--soft);
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.page{
+    width:min(1500px,100%);
+    margin:auto;
+    padding:22px 22px 110px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:14px 18px;
+    background:
+        rgba(255,255,255,.94);
+    border:1px solid var(--border);
+    border-radius:24px;
+    box-shadow:
+        0 15px 40px
+        rgba(22,75,45,.08);
+    backdrop-filter:blur(15px);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+}
+
+.logo{
+    width:52px;
+    height:52px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.brand h1{
+    margin:0;
+    color:var(--dark);
+    font-size:clamp(20px,3vw,30px);
+    font-weight:800;
+}
+
+.brand p{
+    margin:4px 0 0;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.home-button,
+.back-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    min-height:44px;
+    padding:10px 16px;
+    border-radius:14px;
+    background:var(--light);
+    color:var(--dark);
+    font-weight:800;
+    transition:.2s ease;
+}
+
+.home-button:hover,
+.back-button:hover{
+    transform:translateY(-2px);
+    background:#dff1e5;
+}
+
+/* =========================
+   PLANT SELECTION HERO
+========================= */
+
+.selector-hero{
+    position:relative;
+    overflow:hidden;
+    margin-top:22px;
+    padding:clamp(30px,6vw,60px);
+    text-align:center;
+    color:white;
+    border-radius:32px;
+    background:
+        linear-gradient(
+            135deg,
+            #123d29,
+            #1e7046 52%,
+            #43a96b
+        );
+    box-shadow:
+        0 20px 50px
+        rgba(19,95,55,.18);
+}
+
+.selector-hero::before{
+    content:"";
+    position:absolute;
+    width:240px;
+    height:240px;
+    border-radius:50%;
+    background:
+        rgba(255,255,255,.08);
+    top:-120px;
+    right:-70px;
+}
+
+.selector-hero::after{
+    content:"🌿";
+    position:absolute;
+    font-size:170px;
+    opacity:.07;
+    left:-25px;
+    bottom:-65px;
+    transform:rotate(-20deg);
+}
+
+.selector-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 14px;
+    margin-bottom:14px;
+    border:1px solid
+        rgba(255,255,255,.28);
+    border-radius:999px;
+    background:
+        rgba(255,255,255,.1);
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.3px;
+}
+
+.selector-hero h2{
+    margin:0;
+    font-size:
+        clamp(34px,6vw,62px);
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+.selector-hero p{
+    max-width:720px;
+    margin:15px auto 0;
+    line-height:1.7;
+    color:
+        rgba(255,255,255,.88);
+    font-size:
+        clamp(14px,2vw,17px);
+}
+
+/* =========================
+   PLANT CARDS
+========================= */
+
+.plant-selector{
+    display:grid;
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+    gap:20px;
+    margin-top:25px;
+}
+
+.plant-option{
+    position:relative;
+    overflow:hidden;
+    min-height:270px;
+    padding:30px 24px;
+    border-radius:28px;
+    background:var(--white);
+    border:1px solid var(--border);
+    text-align:center;
+    box-shadow:
+        0 12px 30px
+        rgba(20,70,45,.07);
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+.plant-option:hover{
+    transform:
+        translateY(-7px);
+    border-color:#9bcdae;
+    box-shadow:
+        0 24px 45px
+        rgba(20,90,50,.15);
+}
+
+.plant-option::after{
+    content:"";
+    position:absolute;
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    background:var(--light);
+    right:-65px;
+    top:-65px;
+    z-index:0;
+}
+
+.plant-card-content{
+    position:relative;
+    z-index:1;
+}
+
+.plant-emoji{
+    width:90px;
+    height:90px;
+    margin:0 auto 17px;
+    display:grid;
+    place-items:center;
+    border-radius:28px;
+    background:
+        linear-gradient(
+            135deg,
+            #effaf2,
+            #dff2e5
+        );
+    font-size:50px;
+    box-shadow:
+        inset 0 0 0 1px
+        #d6ebdc;
+}
+
+.plant-option h3{
+    margin:0;
+    color:var(--dark);
+    font-size:26px;
+}
+
+.plant-option p{
+    min-height:42px;
+    margin:10px auto 18px;
+    color:var(--muted);
+    line-height:1.55;
+    font-size:14px;
+}
+
+.plant-open{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 15px;
+    border-radius:13px;
+    color:white;
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--green2)
+        );
+    font-size:13px;
+    font-weight:800;
+}
+
+/* =========================
+   CARE PAGE HERO
+========================= */
+
+.care-hero{
+    position:relative;
+    overflow:hidden;
+    margin-top:22px;
+    padding:42px 28px;
+    border-radius:30px;
+    text-align:center;
+    color:white;
+    background:
+        linear-gradient(
+            135deg,
+            #17442f,
+            #31845a
+        );
+}
+
+.care-hero h2{
+    margin:0;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+    font-size:
+        clamp(34px,6vw,60px);
+}
+
+.care-hero p{
+    max-width:720px;
+    margin:14px auto 0;
+    color:
+        rgba(255,255,255,.88);
+    line-height:1.7;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.care-title{
+    margin:34px 0 15px;
+    color:var(--dark);
+    font-size:
+        clamp(24px,4vw,32px);
+}
+
+.section-subtitle{
+    margin:-6px 0 18px;
+    color:var(--muted);
+    line-height:1.6;
+}
+
+/* =========================
+   OVERVIEW
+========================= */
+
+.overview{
+    padding:22px;
+    border-radius:22px;
+    background:var(--white);
+    border:1px solid var(--border);
+    color:#42574a;
+    line-height:1.75;
+    box-shadow:
+        0 8px 22px
+        rgba(20,70,45,.04);
+}
+
+/* =========================
+   CARE CARDS — STEP TIMELINE
+========================= */
+
+.care-grid{
+    display:block;
+    max-width:900px;
+    margin:20px auto 0;
+    padding:8px 0 10px 56px;
+    position:relative;
+}
+
+.care-grid::before{
+    content:"";
+    position:absolute;
+    left:25px;
+    top:24px;
+    bottom:34px;
+    width:3px;
+    border-radius:99px;
+    background:
+        linear-gradient(
+            180deg,
+            var(--green2) 0%,
+            #a9d8b6 55%,
+            #e1f0e5 100%
+        );
+}
+
+.care-card{
+    position:relative;
+    width:100%;
+    margin:0 0 22px;
+    padding:26px 26px 24px 30px;
+    border-radius:24px;
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f7fcf8 100%
+        );
+    border:1px solid var(--border);
+    box-shadow:
+        0 10px 28px
+        rgba(20,70,45,.08);
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.care-card:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 18px 36px
+        rgba(20,70,45,.14);
+}
+
+.care-step-number{
+    position:absolute;
+    left:-56px;
+    top:24px;
+    width:46px;
+    height:46px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:4px solid #f7fcf8;
+    border-radius:50%;
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--green2)
+        );
+    color:#fff;
+    font-size:18px;
+    font-weight:900;
+    box-shadow:
+        0 6px 16px
+        rgba(23,107,67,.28);
+    z-index:2;
+}
+
+.care-card-title{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:12px;
+    padding-bottom:12px;
+    border-bottom:1px solid #e4efe7;
+    color:var(--dark);
+    font-size:clamp(19px,2vw,22px);
+    font-weight:800;
+}
+
+.care-card-summary{
+    margin:0 0 12px;
+    color:#31483b;
+    font-size:16px;
+    font-weight:600;
+    line-height:1.75;
+}
+
+.care-card-content ul{
+    margin:12px 0 0;
+    padding:0;
+    list-style:none;
+}
+
+.care-card-content li{
+    position:relative;
+    margin:9px 0;
+    padding:12px 14px 12px 40px;
+    border-radius:13px;
+    background:var(--light);
+    color:#334b3d;
+    line-height:1.6;
+}
+
+.care-card-content li::before{
+    content:"✓";
+    position:absolute;
+    left:13px;
+    top:11px;
+    width:19px;
+    height:19px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#d6efdc;
+    color:var(--green);
+    font-size:12px;
+    font-weight:900;
+}
+
+.care-card-extra{
+    display:grid;
+    gap:8px;
+    margin-top:14px;
+}
+
+.care-card-extra>div{
+    padding:11px 13px;
+    border-left:4px solid var(--green2);
+    border-radius:10px;
+    background:#f7fbf8;
+    font-size:14px;
+    line-height:1.6;
+    color:#3d5347;
+}
+
+.care-card-extra strong{
+    color:var(--dark);
+}
+
+.details{
+    margin-top:14px;
+}
+
+.details summary{
+    cursor:pointer;
+    color:var(--green);
+    font-weight:800;
+}
+
+.detail-list{
+    margin:12px 0 0;
+    padding-left:20px;
+    color:#53655a;
+    line-height:1.7;
+}
+
+.care-card-warning,
+.warning{
+    margin-top:14px;
+    padding:13px 15px;
+    border-radius:15px;
+    background:#fff7df;
+    color:#785d17;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.care-full{
+    grid-column:1/-1;
+}
+
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar{
+    max-width:900px;
+    margin:8px auto 0;
+    padding:26px;
+    border-radius:24px;
+    background:
+        linear-gradient(
+            135deg,
+            #edf8f0,
+            #e1f2e6
+        );
+    border:1px solid #d1e8d8;
+}
+
+.calendar h3{
+    margin:0 0 10px;
+    color:var(--dark);
+    font-size:22px;
+}
+
+.calendar-row{
+    display:flex;
+    gap:18px;
+    padding:14px 0;
+    border-bottom:
+        1px solid
+        rgba(130,180,145,.25);
+    line-height:1.65;
+}
+
+.calendar-row:last-child{
+    border-bottom:none;
+}
+
+.calendar-label{
+    width:160px;
+    flex-shrink:0;
+    color:var(--dark);
+    font-weight:800;
+}
+
+/* =========================
+   SAFETY / WARNING BOXES
+========================= */
+
+.care-warning-box{
+    max-width:900px;
+    margin:20px auto 0;
+    padding:16px 18px;
+    border-radius:16px;
+    background:#fff8e6;
+    border:1px solid #f0dda1;
+    border-left:4px solid #e2a600;
+    color:#604b12;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.care-warning-box ul{
+    margin:8px 0 0;
+    padding-left:20px;
+}
+
+.care-warning-box li{
+    margin-bottom:6px;
+}
+
+.care-note{
+    max-width:900px;
+    margin:18px auto 0;
+    padding:16px 18px;
+    background:var(--light);
+    border:1px solid #cce7d4;
+    border-radius:16px;
+    color:#31543e;
+    font-size:14px;
+    line-height:1.7;
+}
+
+@media (max-width:760px){
+
+    .care-grid{
+        padding-left:0;
+    }
+
+    .care-grid::before,
+    .care-step-number{
+        display:none;
+    }
+
+    .care-card{
+        padding:20px;
+        border-radius:18px;
+    }
+
+}
+
+/* =========================
+   SWITCH PLANT
+========================= */
+
+.switch-plant{
+    margin-top:30px;
+    text-align:center;
+}
+
+.switch-plant a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 20px;
+    border-radius:15px;
+    background:var(--light);
+    color:var(--dark);
+    font-weight:800;
+}
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+
+.bottom-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:999;
+    display:flex;
+    justify-content:center;
+    background:
+        rgba(255,255,255,.94);
+    backdrop-filter:blur(20px);
+    border-top:
+        1px solid
+        var(--border);
+}
+
+.nav-inner{
+    width:min(900px,100%);
+    display:grid;
+    grid-template-columns:
+        repeat(5,1fr);
+    padding:7px 10px;
+}
+
+.nav-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    min-height:62px;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+    border-radius:18px;
+}
+
+.nav-item.active{
+    background:var(--light);
+    color:var(--dark);
+}
+
+.nav-icon{
+    font-size:21px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .plant-selector{
+        grid-template-columns:
+            repeat(3,minmax(0,1fr));
+    }
+
+    .care-grid{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(max-width:680px){
+
+    .page{
+        padding:12px 12px 100px;
+    }
+
+    .header{
+        padding:12px;
+        border-radius:20px;
+    }
+
+    .logo{
+        width:44px;
+        height:44px;
+    }
+
+    .brand h1{
+        font-size:18px;
+    }
+
+    .brand p{
+        display:none;
+    }
+
+    .home-button{
+        width:44px;
+        padding:0;
+        font-size:0;
+    }
+
+    .home-button::before{
+        content:"🏠";
+        font-size:19px;
+    }
+
+    .selector-hero{
+        margin-top:14px;
+        padding:35px 18px;
+        border-radius:25px;
+    }
+
+    .plant-selector{
+        grid-template-columns:1fr;
+        gap:14px;
+        margin-top:16px;
+    }
+
+    .plant-option{
+        min-height:auto;
+        padding:24px;
+    }
+
+    .plant-option p{
+        min-height:auto;
+    }
+
+    .care-grid{
+        grid-template-columns:1fr;
+    }
+
+    .calendar{
+        padding:20px;
+    }
+
+    .calendar-row{
+        display:block;
+    }
+
+    .calendar-label{
+        width:auto;
+        margin-bottom:5px;
+    }
+
+    .nav-item{
+        font-size:10px;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="header">
+
+<div class="brand">
+
+    <img
+        src="{{ url_for('static', filename='images/logo.png') }}"
+        class="logo"
+        alt="Plant Disease AI Logo"
+    >
+
+    <div>
+        <h1>Plant Care</h1>
+        <p>Simple daily care for healthier plants</p>
+    </div>
+
+</div>
+
+<div class="header-actions">
+
+    {% if plant_name %}
+
+    <a
+        href="{{ url_for('plant_care_page') }}"
+        class="back-button"
+    >
+        ← Plants
+    </a>
+
+    {% endif %}
+
+    <a
+        href="{{ return_to if return_to else '/' }}"
+        class="home-button"
+    >
+        🏠 Home
+    </a>
+
+</div>
+
+</header>
+
+{% if not plant_name %}
+
+<section class="selector-hero">
+
+<div class="selector-content">
+
+    <div class="hero-badge">
+        🌿 Smart Plant Care
+    </div>
+
+    <h2>Choose Your Plant</h2>
+
+    <p>
+        Select your plant to discover practical guidance
+        for watering, sunlight, soil, fertilizer,
+        pruning and healthy growth.
+    </p>
+
+</div>
+
+</section>
+
+<section class="plant-selector">
+
+<a
+    href="{{ url_for('plant_care_page', plant='Hibiscus', return_to=return_to) }}"
+    class="plant-option"
+>
+
+    <div class="plant-card-content">
+
+        <div class="plant-emoji">
+            🌺
+        </div>
+
+        <h3>Hibiscus</h3>
+
+        <p>
+            Care for watering, flowering,
+            sunlight and healthy leaves.
+        </p>
+
+        <span class="plant-open">
+            Explore Care →
+        </span>
+
+    </div>
+
+</a>
+
+
+<a
+    href="{{ url_for('plant_care_page', plant='Chilli', return_to=return_to) }}"
+    class="plant-option"
+>
+
+    <div class="plant-card-content">
+
+        <div class="plant-emoji">
+            🌶️
+        </div>
+
+        <h3>Chilli</h3>
+
+        <p>
+            Growing, watering, nutrition
+            and healthy fruit development.
+        </p>
+
+        <span class="plant-open">
+            Explore Care →
+        </span>
+
+    </div>
+
+</a>
+
+
+<a
+    href="{{ url_for('plant_care_page', plant='Tomato', return_to=return_to) }}"
+    class="plant-option"
+>
+
+    <div class="plant-card-content">
+
+        <div class="plant-emoji">
+            🍅
+        </div>
+
+        <h3>Tomato</h3>
+
+        <p>
+            Healthy growth, sunlight,
+            watering and fruit care.
+        </p>
+
+        <span class="plant-open">
+            Explore Care →
+        </span>
+
+    </div>
+
+</a>
+
+</section>
+
+{% else %}
+
+<section class="care-hero">
+
+<h2>
+    {{ plant_care.get(
+        "plant",
+        plant_name
+    ) }}
+</h2>
+
+<p>
+    Give your plant the right daily care,
+    step by step, to support healthy growth
+    and recovery. Follow disease-specific
+    treatment separately when a disease is
+    detected.
+</p>
+
+</section>
+
+<h2 class="care-title">
+    🌱 Essential Plant Care
+</h2>
+
+<p class="section-subtitle">
+    Follow these steps in order for
+    healthier plant growth.
+</p>
+
+<section class="care-grid">
+
+{% for card in plant_care.get("sections", []) %}
+
+<article class="care-card">
+
+<div class="care-step-number">
+{{ loop.index }}
+</div>
+
+<div class="care-card-title">
+{{ card.icon }} {{ card.title }}
+</div>
+
+<div class="care-card-content">
+
+{% if card.summary %}
+
+<p class="care-card-summary">
+{{ card.summary }}
+</p>
+
+{% endif %}
+
+{% if card.bullets %}
+
+<ul>
+
+{% for item in card.bullets %}
+
+<li>
+{{ item }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endif %}
+
+{% if card.extra %}
+
+<div class="care-card-extra">
+
+{% if card.extra is mapping %}
+
+{% for label, value in card.extra.items() %}
+
+<div>
+<strong>{{ label }}:</strong>
+{{ value }}
+</div>
+
+{% endfor %}
+
+{% else %}
+
+{% for item in card.extra %}
+
+{% if item is mapping %}
+
+{% for label, value in item.items() %}
+
+<div>
+<strong>{{ label }}:</strong>
+{{ value }}
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div>{{ item }}</div>
+
+{% endif %}
+
+{% endfor %}
+
+{% endif %}
+
+</div>
+
+{% endif %}
+
+{% if card.warning %}
+
+<div class="care-card-warning">
+{{ card.warning }}
+</div>
+
+{% endif %}
+
+</div>
+
+</article>
+
+{% endfor %}
+
+{% if plant_care.get("prevention") %}
+
+<article class="care-card">
+
+<div class="care-step-number">
+{{ plant_care.get("sections", [])|length + 1 }}
+</div>
+
+<div class="care-card-title">
+🛡️ Everyday Prevention
+</div>
+
+<div class="care-card-content">
+
+{% set prevention = plant_care.get("prevention") %}
+
+{% if prevention.summary %}
+
+<p class="care-card-summary">
+{{ prevention.summary }}
+</p>
+
+{% endif %}
+
+{% if prevention.bullets %}
+
+<ul>
+
+{% for item in prevention.bullets %}
+
+<li>
+{{ item }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endif %}
+
+{% if prevention.warning %}
+
+<div class="care-card-warning">
+{{ prevention.warning }}
+</div>
+
+{% endif %}
+
+</div>
+
+</article>
+
+{% endif %}
+
+</section>
+
+{% if plant_care.get("calendar") %}
+
+<section class="calendar">
+
+<h3>
+📅 Simple Care Schedule
+</h3>
+
+{% for label, value in plant_care.get(
+"calendar"
+).items() %}
+
+<div class="calendar-row">
+
+<div class="calendar-label">
+{{ label }}
+</div>
+
+<div>
+{{ value }}
+</div>
+
+</div>
+
+{% endfor %}
+
+</section>
+
+{% endif %}
+
+{% if plant_care.get("safety_care") %}
+
+<div class="care-warning-box">
+
+🧤 <strong>Handling Safety:</strong>
+
+<ul>
+
+{% for item in plant_care.get("safety_care") %}
+
+<li>
+{{ item }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endif %}
+
+{% if plant_care.get("important_warning") %}
+
+<div class="care-warning-box">
+
+🚨 <strong>Important:</strong>
+
+<ul>
+
+{% for item in plant_care.get("important_warning") %}
+
+<li>
+{{ item }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endif %}
+
+<div class="care-note">
+🌿 <strong>Plant Care Tip:</strong>
+These are general care recommendations
+for this plant. Continue to follow any
+disease-specific treatment guidance
+separately when a disease has been detected.
+</div>
+
+<div class="switch-plant">
+
+<a
+href="{{ url_for('plant_care_page', return_to=return_to) }}"
+
+>
+
+🌿 Explore Other Plants
+
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<nav class="bottom-nav">
+
+<div class="nav-inner">
+
+<a
+href="{{ return_to if return_to else '/' }}"
+class="nav-item"
+
+>
+
+<div class="nav-icon">
+🏠
+</div>
+
+Home
+
+</a>
+
+<a
+href="{{ url_for('chat_page', return_to=return_to) }}"
+class="nav-item"
+
+>
+
+<div class="nav-icon">
+💬
+</div>
+
+Chat
+
+</a>
+
+<a
+href="/#scanSection"
+class="nav-item"
+
+>
+
+<div class="nav-icon">
+📷
+</div>
+
+Scan
+
+</a>
+
+<a
+href="{{ url_for('plant_care_page', return_to=return_to) }}"
+class="nav-item active"
+
+>
+
+<div class="nav-icon">
+🌱
+</div>
+
+Care
+
+</a>
+
+<a
+href="/health"
+class="nav-item"
+
+>
+
+<div class="nav-icon">
+📊
+</div>
+
+Health
+
+</a>
+
+</div>
+
+</nav>
+
+<script src="{{ url_for('static', filename='js/mobile-nav.js') }}"></script>
+
+</body>
+
+</html>

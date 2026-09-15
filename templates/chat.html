@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant Health Assistant</title>
+
+<style>
+:root{
+    --green:#176b43;
+    --green2:#2e9a61;
+    --green3:#7fe3a8;
+    --dark:#163e2b;
+    --soft:#eef8f1;
+    --line:#d8eadf;
+    --muted:#66766d;
+    --gold:#f0a93a;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    font-family:Inter,"Segoe UI",Arial,sans-serif;
+    color:var(--dark);
+}
+
+body{
+    overflow:hidden;
+    background:
+        radial-gradient(1100px 550px at -5% -10%, #d9f3e2 0%, transparent 60%),
+        radial-gradient(900px 500px at 105% 0%, #dcf6ea 0%, transparent 55%),
+        radial-gradient(800px 600px at 50% 120%, #e8f9ee 0%, transparent 60%),
+        linear-gradient(160deg,#f3fbf5,#f8fbf9 45%,#eef8f1);
+    background-attachment:fixed;
+}
+
+.chat-app{
+    height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+}
+
+/* subtle floating leaf decorations, purely decorative */
+.chat-app::before,
+.chat-app::after{
+    content:"🌿";
+    position:fixed;
+    font-size:120px;
+    opacity:.05;
+    pointer-events:none;
+    z-index:0;
+    filter:blur(.5px);
+}
+.chat-app::before{ top:-30px; right:-20px; transform:rotate(18deg); }
+.chat-app::after{ bottom:-10px; left:-30px; transform:rotate(-22deg); font-size:150px; }
+
+/* ================= HEADER ================= */
+
+.chat-header{
+    min-height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:10px clamp(16px,4vw,58px);
+    background:rgba(255,255,255,.85);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(16px);
+    z-index:2;
+    box-shadow:0 2px 18px rgba(20,70,45,.05);
+}
+
+.header-left,
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+}
+
+.back-btn{
+    width:46px;
+    height:46px;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    text-decoration:none;
+    color:var(--green);
+    background:var(--soft);
+    font-size:25px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.back-btn:hover{
+    transform:translateX(-2px);
+    background:#dff2e5;
+}
+
+.assistant-avatar{
+    width:48px;
+    height:48px;
+    border-radius:17px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--green),var(--green3));
+    color:#fff;
+    font-size:24px;
+    box-shadow:0 10px 25px rgba(23,107,67,.28);
+    flex-shrink:0;
+    position:relative;
+}
+
+.assistant-avatar::after{
+    content:"";
+    position:absolute;
+    inset:-3px;
+    border-radius:19px;
+    border:2px solid rgba(23,107,67,.18);
+}
+
+.assistant-title{
+    min-width:0;
+}
+
+.assistant-title h1{
+    margin:0;
+    font-size:18px;
+    letter-spacing:-.2px;
+}
+
+.assistant-title p{
+    margin:4px 0 0;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.online{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+}
+
+.online-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#2fa35b;
+    box-shadow:0 0 0 0 rgba(47,163,91,.55);
+    animation:pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot{
+    0%{ box-shadow:0 0 0 0 rgba(47,163,91,.45); }
+    70%{ box-shadow:0 0 0 7px rgba(47,163,91,0); }
+    100%{ box-shadow:0 0 0 0 rgba(47,163,91,0); }
+}
+
+.mentality-select,
+.clear-btn{
+    height:42px;
+    border-radius:13px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--dark);
+    font-weight:700;
+    padding:0 12px;
+    transition:.2s;
+    cursor:pointer;
+}
+
+.mentality-select:hover,
+.mentality-select:focus{
+    border-color:#9fd6b3;
+    outline:0;
+}
+
+.clear-btn{
+    background:#fff5f3;
+    border-color:#f2d5cf;
+    color:#9a3d30;
+}
+
+.clear-btn:hover{
+    background:#ffe9e4;
+    transform:translateY(-1px);
+}
+
+/* ================= DISEASE CONTEXT ================= */
+
+.context-wrap{
+    padding:10px clamp(16px,5vw,110px);
+    background:rgba(238,248,241,.75);
+    border-bottom:1px solid var(--line);
+    position:relative;
+    z-index:1;
+}
+
+.context-card{
+    max-width:1200px;
+    margin:auto;
+    border:1px solid #cfe6d6;
+    background:linear-gradient(135deg,#ffffff,#f6fdf8);
+    border-radius:14px;
+    padding:10px 14px;
+    color:#315543;
+    font-size:14px;
+    box-shadow:0 6px 18px rgba(20,70,45,.06);
+}
+
+/* ================= MESSAGES ================= */
+
+.messages{
+    flex:1;
+    min-height:0;
+    overflow-y:auto;
+    padding:26px clamp(14px,7vw,180px) 150px;
+    position:relative;
+    z-index:1;
+}
+
+.messages-inner{
+    width:min(1100px,100%);
+    margin:auto;
+}
+
+.welcome-chat{
+    text-align:center;
+    padding:18px 10px 8px;
+}
+
+.welcome-icon{
+    font-size:56px;
+    display:inline-block;
+    animation:float-icon 3.2s ease-in-out infinite;
+    filter:drop-shadow(0 10px 18px rgba(23,107,67,.22));
+}
+
+@keyframes float-icon{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-8px) rotate(-4deg); }
+}
+
+.welcome-chat h2{
+    margin:12px 0 8px;
+    font-size:clamp(24px,3vw,38px);
+    background:linear-gradient(135deg,var(--green),#1f8a53);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    letter-spacing:-.5px;
+}
+
+.welcome-chat p{
+    max-width:680px;
+    margin:auto;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    max-width:850px;
+    margin:28px auto 34px;
+}
+
+.quick-btn{
+    padding:16px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:rgba(255,255,255,.85);
+    text-align:left;
+    color:var(--dark);
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+    position:relative;
+    overflow:hidden;
+}
+
+.quick-btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(23,107,67,.06),rgba(47,155,97,0));
+    opacity:0;
+    transition:.2s;
+}
+
+.quick-btn:hover{
+    transform:translateY(-3px);
+    border-color:#93c7a5;
+    box-shadow:0 14px 30px rgba(20,85,52,.12);
+}
+
+.quick-btn:hover::before{
+    opacity:1;
+}
+
+.quick-btn:active{
+    transform:translateY(-1px);
+}
+
+/* ================= CHAT BUBBLES ================= */
+
+.message-row{
+    display:flex;
+    margin:16px 0;
+    animation:rise-in .28s ease;
+}
+
+@keyframes rise-in{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.message-row.user{
+    justify-content:flex-end;
+}
+
+.message-row.assistant{
+    justify-content:flex-start;
+}
+
+.message-bubble{
+    max-width:min(82%,780px);
+    padding:14px 17px;
+    border-radius:20px;
+    line-height:1.65;
+    white-space:pre-wrap;
+    box-shadow:0 7px 20px rgba(20,70,45,.07);
+    position:relative;
+}
+
+.user-bubble{
+    background:linear-gradient(135deg,var(--green),#2d965e);
+    color:#fff;
+    border-bottom-right-radius:6px;
+    box-shadow:0 10px 24px rgba(23,107,67,.28);
+}
+
+.assistant-bubble{
+    background:#fff;
+    border:1px solid var(--line);
+    border-bottom-left-radius:6px;
+}
+
+.message-label{
+    font-size:10px;
+    letter-spacing:1px;
+    font-weight:900;
+    opacity:.7;
+    margin-bottom:5px;
+}
+
+/* ================= TYPING ================= */
+
+.typing{
+    display:none;
+    align-items:center;
+    gap:9px;
+    margin:16px 0;
+}
+
+.typing-bubble{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:13px 16px;
+    box-shadow:0 7px 20px rgba(20,70,45,.06);
+}
+
+.dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    margin:0 3px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--green),var(--green3));
+    animation:bounce 1.1s infinite;
+}
+
+.dot:nth-child(2){animation-delay:.15s}
+.dot:nth-child(3){animation-delay:.3s}
+
+@keyframes bounce{
+    50%{
+        transform:translateY(-4px);
+        opacity:.45;
+    }
+}
+
+/* ================= INPUT ================= */
+
+.input-area{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:12px clamp(12px,7vw,180px) 18px;
+    background:linear-gradient(
+        to top,
+        rgba(237,248,240,.98),
+        rgba(237,248,240,.82)
+    );
+    backdrop-filter:blur(12px);
+    z-index:3;
+}
+
+.input-box{
+    width:min(1100px,100%);
+    margin:auto;
+    display:flex;
+    align-items:flex-end;
+    gap:10px;
+    padding:9px 10px 9px 16px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 12px 35px rgba(20,70,45,.14);
+    transition:.2s;
+}
+
+.input-box:focus-within{
+    border-color:#8fd0a7;
+    box-shadow:0 14px 38px rgba(20,85,52,.2), 0 0 0 4px rgba(47,155,97,.1);
+}
+
+.message-input{
+    flex:1;
+    resize:none;
+    border:0;
+    outline:0;
+    min-height:46px;
+    max-height:130px;
+    padding:12px 0;
+    font:inherit;
+    color:var(--dark);
+    line-height:1.45;
+    background:transparent;
+}
+
+.send-btn{
+    width:48px;
+    height:48px;
+    border:0;
+    border-radius:16px;
+    background:linear-gradient(135deg,var(--green),#2f9b61);
+    color:#fff;
+    font-size:21px;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(23,107,67,.32);
+    transition:.15s;
+}
+
+.send-btn:hover:not(:disabled){
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:0 12px 24px rgba(23,107,67,.4);
+}
+
+.send-btn:active:not(:disabled){
+    transform:translateY(0) scale(.97);
+}
+
+.send-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+/* scrollbar polish */
+.messages::-webkit-scrollbar{ width:8px; }
+.messages::-webkit-scrollbar-thumb{
+    background:rgba(23,107,67,.22);
+    border-radius:10px;
+}
+.messages::-webkit-scrollbar-thumb:hover{
+    background:rgba(23,107,67,.35);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:680px){
+
+    .chat-header{
+        min-height:70px;
+        padding:9px 12px;
+    }
+
+    .assistant-avatar{
+        width:42px;
+        height:42px;
+    }
+
+    .assistant-title h1{
+        font-size:15px;
+    }
+
+    .assistant-title p{
+        display:none;
+    }
+
+    .mentality-select{
+        max-width:110px;
+    }
+
+    .clear-btn{
+        padding:0 9px;
+    }
+
+    .context-wrap{
+        padding:8px 12px;
+    }
+
+    .context-card{
+        font-size:12px;
+    }
+
+    .messages{
+        padding:18px 12px 125px;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr;
+    }
+
+    .message-bubble{
+        max-width:92%;
+    }
+
+    .input-area{
+        padding:10px 10px 14px;
+    }
+
+    .welcome-chat h2{
+        font-size:26px;
+    }
+
+    .chat-app::before,
+    .chat-app::after{
+        font-size:80px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- ============================================================
+     CHAT CONTEXT FROM RESULT / HOME PAGE
+============================================================ -->
+
+<div
+    id="chatServerData"
+    data-disease="{{ disease|default('', true)|e }}"
+    data-confidence="{{ confidence|default(0, true) }}"
+    data-display-name="{{ display_name|default('', true)|e }}"
+    data-plant-name="{{ plant_name|default('', true)|e }}"
+    hidden>
+</div>
+
+<div class="chat-app">
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+<header class="chat-header">
+
+<div class="header-left">
+
+    <!-- IMPORTANT: Returns to result page if opened from treatment -->
+    <a
+        href="{{ return_to|default('/', true) }}"
+        class="back-btn"
+        title="Go Back">
+        ←
+    </a>
+
+    <div class="assistant-avatar">🌿</div>
+
+    <div class="assistant-title">
+        <h1>Plant Health Assistant</h1>
+
+        <p>
+            <span class="online">
+                <span class="online-dot"></span>
+                Ready to help with plant health
+            </span>
+        </p>
+    </div>
+
+</div>
+
+
+<div class="header-right">
+
+    <select id="mentality" class="mentality-select">
+
+        {% for key, value in mentalities.items() %}
+        <option value="{{ key }}">
+            {{ value.name }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+
+    <button
+        type="button"
+        class="clear-btn"
+        onclick="clearChat()">
+
+        Clear
+
+    </button>
+
+</div>
+
+</header>
+
+<!-- ============================================================
+     CURRENT DISEASE CONTEXT
+============================================================ -->
+
+{% if disease %}
+
+<div class="context-wrap">
+
+<div class="context-card">
+
+    🩺 Current plant context:
+    <strong>{{ display_name }}</strong>
+
+    {% if confidence %}
+    · AI confidence:
+    <strong>{{ confidence }}%</strong>
+    {% endif %}
+
+    {% if plant_name %}
+    · Plant:
+    <strong>{{ plant_name }}</strong>
+    {% endif %}
+
+</div>
+
+</div>
+
+{% endif %}
+
+<!-- ============================================================
+     MESSAGES
+============================================================ -->
+
+<div class="messages" id="messages">
+
+<div class="messages-inner">
+
+
+    <div class="welcome-chat">
+
+        <div class="welcome-icon">🌿</div>
+
+        {% if disease %}
+
+        <h2>Let's Discuss Your Plant</h2>
+
+        <p>
+            Your current diagnosis is
+            <strong>{{ display_name }}</strong>.
+            Ask about treatment, symptoms, causes, prevention,
+            recovery or plant care.
+        </p>
+
+        {% else %}
+
+        <h2>Ask Anything About Your Plant</h2>
+
+        <p>
+            Ask about diseases, symptoms, treatment, prevention,
+            medicine guidance and general care for your supported plants.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="quick-grid">
+
+        {% if disease %}
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('What treatment should I follow for this disease?')">
+
+            💊 What treatment should I follow?
+
+        </button>
+
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('What are the main symptoms of this disease?')">
+
+            🔍 What are the symptoms?
+
+        </button>
+
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('How can I prevent this disease from spreading?')">
+
+            🛡️ How can I prevent it?
+
+        </button>
+
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('How do I know whether my plant is recovering?')">
+
+            📊 How can I track recovery?
+
+        </button>
+
+        {% else %}
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('What diseases can this app identify?')">
+
+            🔎 What diseases can this app identify?
+
+        </button>
+
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('How can I prevent plant diseases?')">
+
+            🛡️ How can I prevent plant diseases?
+
+        </button>
+
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('Give me general plant care advice.')">
+
+            🌱 Give me general plant care advice
+
+        </button>
+
+
+        <button
+            class="quick-btn"
+            type="button"
+            onclick="askQuick('What should I do first if my plant is infected?')">
+
+            🚨 What should I do first?
+
+        </button>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="typing" id="typing">
+
+        <div class="assistant-avatar">🌿</div>
+
+        <div class="typing-bubble">
+
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- ============================================================
+     INPUT
+============================================================ -->
+
+<div class="input-area">
+
+<div class="input-box">
+
+    <textarea
+        id="messageInput"
+        class="message-input"
+        placeholder="Ask about plant diseases, treatment or plant care..."
+        rows="1"></textarea>
+
+
+    <button
+        id="sendButton"
+        class="send-btn"
+        type="button"
+        onclick="sendMessage()">
+
+        ➤
+
+    </button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ============================================================
+   GET SERVER CONTEXT
+============================================================ */
+
+const messages = document.getElementById("messages");
+const messageInput = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
+const typing = document.getElementById("typing");
+const mentality = document.getElementById("mentality");
+const chatServerData = document.getElementById("chatServerData");
+
+const disease = chatServerData
+    ? (chatServerData.dataset.disease || "")
+    : "";
+
+const displayName = chatServerData
+    ? (chatServerData.dataset.displayName || disease || "Plant Health")
+    : (disease || "Plant Health");
+
+const plantName = chatServerData
+    ? (chatServerData.dataset.plantName || "")
+    : "";
+
+const confidence = chatServerData
+    ? (Number(chatServerData.dataset.confidence) || 0)
+    : 0;
+
+
+/* ============================================================
+   AUTO RESIZE TEXTAREA
+============================================================ */
+
+messageInput.addEventListener("input", function(){
+
+    this.style.height = "auto";
+
+    this.style.height =
+        Math.min(this.scrollHeight, 130) + "px";
+
+});
+
+
+/* ============================================================
+   ENTER TO SEND
+============================================================ */
+
+messageInput.addEventListener("keydown", function(event){
+
+    if(event.key === "Enter" && !event.shiftKey){
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+});
+
+
+/* ============================================================
+   SCROLL
+============================================================ */
+
+function scrollToBottom(){
+
+    messages.scrollTop = messages.scrollHeight;
+
+}
+
+
+/* ============================================================
+   ADD MESSAGE
+============================================================ */
+
+function addMessage(type, text){
+
+    const inner =
+        messages.querySelector(".messages-inner");
+
+    const row =
+        document.createElement("div");
+
+    row.className =
+        "message-row " + type;
+
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "message-bubble " +
+        (
+            type === "user"
+            ? "user-bubble"
+            : "assistant-bubble"
+        );
+
+
+    const label =
+        document.createElement("div");
+
+    label.className = "message-label";
+
+    label.textContent =
+        type === "user"
+        ? "YOU"
+        : "PLANT HEALTH ASSISTANT";
+
+
+    const content =
+        document.createElement("div");
+
+    content.textContent = text;
+
+
+    bubble.appendChild(label);
+
+    bubble.appendChild(content);
+
+    row.appendChild(bubble);
+
+
+    inner.insertBefore(row, typing);
+
+
+    scrollToBottom();
+
+}
+
+
+/* ============================================================
+   QUICK QUESTION
+============================================================ */
+
+function askQuick(question){
+
+    messageInput.value = question;
+
+    sendMessage();
+
+}
+
+
+/* ============================================================
+   SEND MESSAGE
+============================================================ */
+
+async function sendMessage(){
+
+    const message =
+        messageInput.value.trim();
+
+
+    if(!message){
+
+        return;
+
+    }
+
+
+    addMessage("user", message);
+
+
+    messageInput.value = "";
+
+    messageInput.style.height = "auto";
+
+
+    sendButton.disabled = true;
+
+
+    typing.style.display = "flex";
+
+
+    scrollToBottom();
+
+
+    try{
+
+        const response =
+            await fetch("/api/chat", {
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    message:message,
+
+                    disease:disease,
+
+                    display_name:displayName,
+
+                    plant_name:plantName,
+
+                    confidence:
+                        confidence || null,
+
+                    mentality:
+                        mentality
+                        ? mentality.value
+                        : "friendly",
+
+                    page: "home"
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        typing.style.display = "none";
+
+
+        if(data.success){
+
+            addMessage(
+                "assistant",
+                data.response
+            );
+
+        }else{
+
+            addMessage(
+                "assistant",
+                data.error ||
+                "Sorry, I could not process your question."
+            );
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        typing.style.display = "none";
+
+
+        addMessage(
+            "assistant",
+            "Connection problem. Please try again."
+        );
+
+    }finally{
+
+        sendButton.disabled = false;
+
+        messageInput.focus();
+
+    }
+
+}
+
+
+/* ============================================================
+   CLEAR CHAT
+============================================================ */
+
+async function clearChat(){
+
+    document
+        .querySelectorAll(".message-row")
+        .forEach(function(row){
+
+            row.remove();
+
+        });
+
+
+    try{
+
+        await fetch(
+            "/api/chat/clear",
+            {
+                method:"POST"
+            }
+        );
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+
+    messageInput.focus();
+
+}
+
+</script>
+
+</body>
+</html>

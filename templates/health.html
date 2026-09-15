@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Plant Health - Plant Disease AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #1f7a45;
+    --dark-green: #14532d;
+    --light-green: #eaf7ef;
+    --soft-green: #f4fbf6;
+    --text: #193126;
+    --muted: #6b7c73;
+    --white: #ffffff;
+    --border: #e2eee6;
+    --shadow: 0 10px 30px rgba(25, 70, 42, 0.10);
+
+    --orange: #b06a00;
+    --orange-soft: #fff4e6;
+    --yellow: #a38a00;
+    --yellow-soft: #fffbe6;
+    --red: #a33a2b;
+    --red-soft: #fff0ed;
+}
+
+body {
+    margin: 0;
+    padding: 20px 12px 110px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(31, 122, 69, 0.10), transparent 45%),
+        radial-gradient(circle at 90% 12%, rgba(217, 140, 31, 0.08), transparent 40%),
+        linear-gradient(180deg, #eaf8ef 0%, #f7fbf8 35%, #eef7f1 100%);
+    color: var(--text);
+}
+
+.app {
+    width: 100%;
+    max-width: 780px;
+    margin: auto;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 4px 6px;
+}
+
+.page-header a {
+    color: var(--dark-green);
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 14px;
+    background: var(--white);
+    padding: 8px 14px;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(25, 70, 42, 0.10);
+}
+
+.hero {
+    text-align: center;
+    padding: 10px 14px 26px;
+    animation: fadeUp .5s ease;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #176b3d, #279957);
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(31, 122, 69, 0.25);
+    animation: floatBadge 3.4s ease-in-out infinite;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+    color: var(--dark-green);
+    margin: 12px 0 6px;
+    letter-spacing: -0.3px;
+}
+
+.page-subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13.5px;
+    margin: 0 0 4px;
+}
+
+/* ================================
+   STAT CARDS
+================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 26px;
+    animation: fadeUp .55s ease;
+}
+
+.stat {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 18px 14px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    color: inherit;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.stat::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--stat-glow, rgba(31, 122, 69, 0.08));
+    z-index: 0;
+}
+
+.stat > * {
+    position: relative;
+    z-index: 1;
+}
+
+.stat:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(25, 70, 42, 0.16);
+}
+
+.stat:active {
+    transform: scale(0.98);
+}
+
+.stat-total { --stat-glow: rgba(31, 122, 69, 0.10); }
+.stat-healthy { --stat-glow: rgba(31, 122, 69, 0.14); }
+.stat-disease { --stat-glow: rgba(163, 58, 43, 0.12); }
+.stat-treatment { --stat-glow: rgba(176, 106, 0, 0.14); }
+
+.stat .icon {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.stat .num {
+    margin-top: 8px;
+    font-size: 29px;
+    font-weight: 900;
+    color: var(--dark-green);
+    line-height: 1.1;
+}
+
+.stat .label {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.stat-healthy .num {
+    color: #1f7a45;
+}
+
+.stat-disease .num {
+    color: #a33a2b;
+}
+
+.stat-treatment .num {
+    color: #a35a00;
+}
+
+/* ================================
+   SECTION CARD
+================================ */
+
+.section-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    animation: fadeUp .6s ease;
+}
+
+.section-card h2 {
+    font-size: 16.5px;
+    color: var(--dark-green);
+    margin: 0 0 14px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ================================
+   FILTER
+================================ */
+
+.filter-banner {
+    background: linear-gradient(135deg, #eaf7ef, #f4fbf6);
+    border: 1px solid #cfe6d6;
+    border-radius: 16px;
+    padding: 13px 15px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #315543;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clear-filter {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 800;
+    background: #ffffff;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+}
+
+/* ================================
+   SCAN RECORD
+================================ */
+
+.scan-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 8px;
+    border-top: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s ease;
+    border-radius: 12px;
+}
+
+.scan-row:hover {
+    background: var(--soft-green);
+}
+
+.scan-row:first-child {
+    border-top: none;
+}
+
+.scan-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--soft-green);
+    box-shadow: 0 4px 10px rgba(25, 70, 42, 0.10);
+}
+
+.scan-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.scan-disease {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--dark-green);
+}
+
+.scan-meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.scan-confidence {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--green);
+    white-space: nowrap;
+    background: var(--light-green);
+    padding: 5px 10px;
+    border-radius: 999px;
+}
+
+/* ================================
+   TREATMENT CENTER
+================================ */
+
+.treatment-summary-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.treatment-summary-chip {
+    flex: 1;
+    min-width: 90px;
+    text-align: center;
+    padding: 10px 8px;
+    border-radius: 14px;
+    font-size: 11.5px;
+    font-weight: 800;
+}
+
+.chip-started {
+    background: var(--orange-soft);
+    color: var(--orange);
+    border: 1px solid #f0dcb8;
+}
+
+.chip-monitoring {
+    background: var(--yellow-soft);
+    color: var(--yellow);
+    border: 1px solid #ece08a;
+}
+
+.chip-completed {
+    background: var(--light-green);
+    color: var(--green);
+    border: 1px solid #cce7d4;
+}
+
+.treatment-summary-chip .chip-num {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.treatment-card {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 16px;
+    margin-top: 14px;
+    background: linear-gradient(180deg, #ffffff, #fbfdfb);
+    box-shadow: 0 6px 18px rgba(25, 70, 42, 0.06);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+.treatment-card:first-of-type {
+    margin-top: 0;
+}
+
+.treatment-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.treatment-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.treatment-emoji {
+    font-size: 26px;
+    line-height: 1;
+}
+
+.treatment-title {
+    font-weight: 900;
+    color: var(--dark-green);
+    font-size: 15px;
+}
+
+.treatment-plant {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.treatment-meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 10px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.started {
+    background: var(--orange-soft);
+    color: var(--orange);
+    border: 1px solid #f0dcb8;
+}
+
+.monitoring {
+    background: var(--yellow-soft);
+    color: var(--yellow);
+    border: 1px solid #ece08a;
+}
+
+.completed {
+    background: var(--light-green);
+    color: var(--green);
+    border: 1px solid #cce7d4;
+}
+
+.treatment-info-block {
+    margin-top: 14px;
+    padding: 12px 13px;
+    border-radius: 13px;
+    background: var(--soft-green);
+    border: 1px solid var(--border);
+}
+
+.treatment-info-block.block-first-aid {
+    background: var(--orange-soft);
+    border-color: #f0dcb8;
+}
+
+.treatment-info-block.block-prevention {
+    background: #eef6ff;
+    border-color: #cfe2f7;
+}
+
+.treatment-info-title {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--dark-green);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.block-first-aid .treatment-info-title {
+    color: var(--orange);
+}
+
+.block-prevention .treatment-info-title {
+    color: #2a5ea3;
+}
+
+.treatment-info-block ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.treatment-info-block li {
+    font-size: 12.5px;
+    color: #445048;
+    line-height: 1.6;
+}
+
+.treatment-info-block p {
+    margin: 0;
+    font-size: 12.5px;
+    color: #445048;
+    line-height: 1.6;
+}
+
+.treatment-info-block.block-professional {
+    background: #fbeeff;
+    border-color: #ecd2f5;
+}
+
+.block-professional .treatment-info-title {
+    color: #7a2e94;
+}
+
+.medicine-card-mini {
+    background: #ffffff;
+    border: 1px solid #ecd2f5;
+    border-radius: 10px;
+    padding: 9px 11px;
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: #445048;
+    line-height: 1.55;
+}
+
+.medicine-card-mini:first-child {
+    margin-top: 0;
+}
+
+.medicine-card-mini .medicine-name-mini {
+    font-weight: 900;
+    color: #7a2e94;
+    margin-bottom: 3px;
+}
+
+.see-treatment-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px 16px;
+    border: 1px solid #cfe6d6;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--dark-green);
+    font-size: 12.5px;
+    font-weight: 900;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.see-treatment-button:hover {
+    background: var(--light-green);
+    border-color: #9fd6b3;
+}
+
+.treatment-details {
+    display: none;
+}
+
+.treatment-details.open {
+    display: block;
+}
+
+.treatment-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.treatment-select {
+    flex: 1;
+    min-width: 150px;
+    padding: 11px 34px 11px 13px;
+    border: 1px solid #cfe6d6;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--dark-green);
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%231f7a45' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+.treatment-select:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.treatment-delete-button {
+    padding: 11px 16px;
+    border: 1px solid #f0c9c1;
+    border-radius: 12px;
+    background: var(--red-soft);
+    color: var(--red);
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.treatment-delete-button:hover {
+    background: #ffe1db;
+}
+
+.treatment-delete-button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.treatment-card-status {
+    display: none;
+    margin-top: 10px;
+    padding: 8px 11px;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.treatment-card-status.error {
+    display: block;
+    color: var(--red);
+    background: var(--red-soft);
+    border: 1px solid #f0c9c1;
+    font-weight: 700;
+}
+
+.treatment-card-status.warning {
+    display: block;
+    color: #8a5a00;
+    background: #fff8df;
+    border: 1px solid #f0dfaa;
+    font-weight: 700;
+}
+
+/* ================================
+   EMPTY
+================================ */
+
+.empty-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    padding: 22px 12px;
+}
+
+.empty-note .empty-emoji {
+    display: block;
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+/* ================================
+   BOTTOM NAVIGATION
+================================ */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background: var(--white);
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: 8px 6px
+        calc(8px + env(safe-area-inset-bottom));
+
+    box-shadow: 0 -6px 20px rgba(25, 70, 42, 0.08);
+
+    z-index: 20;
+}
+
+.nav-item {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 2px;
+}
+
+.nav-icon {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 2px;
+}
+
+.nav-item.active {
+    color: var(--dark-green);
+}
+
+/* CENTER SCAN */
+
+.nav-item.nav-scan {
+    position: relative;
+    top: -14px;
+}
+
+.nav-item.nav-scan .nav-icon {
+    width: 54px;
+    height: 54px;
+
+    line-height: 54px;
+
+    margin: 0 auto 2px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #176b3d,
+        #279957
+    );
+
+    color: #ffffff;
+
+    font-size: 23px;
+
+    box-shadow:
+        0 8px 20px rgba(31, 122, 69, 0.35);
+}
+
+/* ================================
+   DESKTOP
+================================ */
+
+@media (min-width: 620px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <div class="page-header">
+        <a href="/">🏠 Home</a>
+    </div>
+
+    <div class="hero">
+
+        <span class="hero-badge">
+            🌿 Plant Health AI
+        </span>
+
+        <h1 class="page-title">
+            📊 My Plant Health
+        </h1>
+
+        <p class="page-subtitle">
+            Every scan, every diagnosis, every treatment — in one place.
+        </p>
+
+    </div>
+
+
+    <!-- =========================================
+         HEALTH STATISTICS
+    ========================================== -->
+
+    <div class="stats-grid">
+
+        <!-- TOTAL SCANS -->
+
+        <a
+            class="stat stat-total"
+            href="/health?filter=all"
+        >
+
+            <div class="icon">
+                📷
+            </div>
+
+            <div class="num">
+                {{ total_scans }}
+            </div>
+
+            <div class="label">
+                Total Scans
+            </div>
+
+        </a>
+
+
+        <!-- HEALTHY -->
+
+        <a
+            class="stat stat-healthy"
+            href="/health?filter=healthy"
+        >
+
+            <div class="icon">
+                💚
+            </div>
+
+            <div class="num">
+                {{ healthy_count }}
+            </div>
+
+            <div class="label">
+                Healthy
+            </div>
+
+        </a>
+
+
+        <!-- DISEASES -->
+
+        <a
+            class="stat stat-disease"
+            href="/health?filter=disease"
+        >
+
+            <div class="icon">
+                ⚠️
+            </div>
+
+            <div class="num">
+                {{ diseases_found_count }}
+            </div>
+
+            <div class="label">
+                Diseases Found
+            </div>
+
+        </a>
+
+
+        <!-- UNDER TREATMENT -->
+
+        <a
+            class="stat stat-treatment"
+            href="/health?filter=treatment"
+        >
+
+            <div class="icon">
+                🔄
+            </div>
+
+            <div class="num">
+                {{ under_treatment_count }}
+            </div>
+
+            <div class="label">
+                Under Treatment
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================================
+         FILTER TITLE
+    ========================================== -->
+
+    {% if selected_filter %}
+
+    <div class="filter-banner">
+
+        <span>
+
+        {% if selected_filter == "all" %}
+
+            📷 All Scan Records
+
+        {% elif selected_filter == "healthy" %}
+
+            💚 Healthy Scan Records
+
+        {% elif selected_filter == "disease" %}
+
+            ⚠️ Disease Detected Records
+
+        {% elif selected_filter == "treatment" %}
+
+            💊 Treatment Center
+
+        {% endif %}
+
+        </span>
+
+        <a
+            class="clear-filter"
+            href="/health"
+        >
+            View All
+        </a>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         TREATMENT CENTER
+         Full history - started, monitoring AND
+         completed - each with home-care guidance
+         plus a status select + delete control.
+    ========================================== -->
+
+    {% if selected_filter == "treatment" %}
+
+    <div class="section-card">
+
+        <h2>
+            💊 Treatment Center
+        </h2>
+
+
+        {% if treatment_details %}
+
+            <div class="treatment-summary-bar">
+
+                <div class="treatment-summary-chip chip-started">
+                    <span class="chip-num">
+                        {{ treatment_details | selectattr("status", "equalto", "started") | list | length }}
+                    </span>
+                    🟠 Started
+                </div>
+
+                <div class="treatment-summary-chip chip-monitoring">
+                    <span class="chip-num">
+                        {{ treatment_details | selectattr("status", "equalto", "monitoring") | list | length }}
+                    </span>
+                    🟡 Monitoring
+                </div>
+
+                <div class="treatment-summary-chip chip-completed">
+                    <span class="chip-num">
+                        {{ treatment_details | selectattr("status", "equalto", "completed") | list | length }}
+                    </span>
+                    🟢 Completed
+                </div>
+
+            </div>
+
+
+            {% for item in treatment_details %}
+
+            <div
+                class="treatment-card"
+                id="treatmentCard-{{ item.id }}"
+                data-record-id="{{ item.id }}"
+            >
+
+                <div class="treatment-card-top">
+
+                    <div class="treatment-card-heading">
+
+                        <div class="treatment-emoji">
+                            {{ item.emoji or "🌿" }}
+                        </div>
+
+                        <div>
+                            <div class="treatment-title">
+                                {{ item.disease }}
+                            </div>
+
+                            <div class="treatment-plant">
+                                {{ item.plant_name }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <span
+                        id="treatmentBadge-{{ item.id }}"
+                        class="badge {{ item.status }}"
+                    >
+
+                        {% if item.status == "started" %}
+
+                            🟠 Started
+
+                        {% elif item.status == "monitoring" %}
+
+                            🟡 Monitoring
+
+                        {% else %}
+
+                            🟢 Completed
+
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+                <div class="treatment-meta">
+
+                    <span>
+                        📅 Started:
+                        {{ item.started_at[:10] if item.started_at else "—" }}
+                    </span>
+
+                    {% if item.updated_at %}
+                    <span>
+                        🕒 Updated:
+                        {{ item.updated_at[:10] }}
+                    </span>
+                    {% endif %}
+
+                </div>
+
+
+                <a
+                    class="see-treatment-button"
+                    id="seeTreatmentButton-{{ item.id }}"
+                    href="{{ url_for('treatment_detail_page', record_id=item.id) }}"
+                >
+                    👁️ See Treatment
+                </a>
+
+                <div class="treatment-controls">
+
+                    <select
+                        class="treatment-select"
+                        id="treatmentSelect-{{ item.id }}"
+                        onchange="updateDashboardTreatment('{{ item.id }}', this.value)"
+                    >
+                        <option value="started" {% if item.status == "started" %}selected{% endif %}>🟠 Started</option>
+                        <option value="monitoring" {% if item.status == "monitoring" %}selected{% endif %}>🟡 Monitoring</option>
+                        <option value="completed" {% if item.status == "completed" %}selected{% endif %}>🟢 Completed</option>
+                    </select>
+
+                    <button
+                        type="button"
+                        class="treatment-delete-button"
+                        id="treatmentDelete-{{ item.id }}"
+                        onclick="deleteDashboardTreatment('{{ item.id }}')"
+                    >
+                        🗑️ Delete
+                    </button>
+
+                </div>
+
+                <div
+                    class="treatment-card-status"
+                    id="treatmentCardStatus-{{ item.id }}"
+                ></div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p class="empty-note">
+                <span class="empty-emoji">🌱</span>
+                No treatments yet.
+                <br>
+                Start treatment from a disease result to track it here.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         RECENT SCANS
+    ========================================== -->
+
+    <div class="section-card">
+
+        <h2>
+
+            {% if selected_filter == "treatment" %}
+
+                🕘 Recent Scan Records
+
+            {% elif selected_filter == "healthy" %}
+
+                💚 Healthy Records
+
+            {% elif selected_filter == "disease" %}
+
+                ⚠️ Disease Records
+
+            {% else %}
+
+                🕘 Recent Scans
+
+            {% endif %}
+
+        </h2>
+
+
+        {% if recent_scans %}
+
+            {% for scan in recent_scans %}
+
+            <div class="scan-row">
+
+                {% if scan.image_path %}
+
+                <img
+                    class="scan-thumb"
+                    src="/{{ scan.image_path }}"
+                    alt="Plant scan"
+                >
+
+                {% else %}
+
+                <div class="scan-thumb"
+                     style="
+                     display:flex;
+                     align-items:center;
+                     justify-content:center;
+                     font-size:24px;
+                     ">
+                    🌿
+                </div>
+
+                {% endif %}
+
+
+                <div class="scan-info">
+
+                    <div class="scan-disease">
+
+                        {{ scan.predicted_disease
+                           | replace("_"," ")
+                           | title }}
+
+                    </div>
+
+
+                    <div class="scan-meta">
+
+                        {% if scan.plant_display_name %}
+
+                            {{ scan.plant_number }}
+                            —
+                            {{ scan.plant_display_name }}
+                            ·
+
+                        {% endif %}
+
+                        {{ scan.uploaded_at[:10]
+                           if scan.uploaded_at
+                           else "" }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="scan-confidence">
+
+                    {{ scan.confidence }}%
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <p class="empty-note">
+                <span class="empty-emoji">📷</span>
+                No matching records found.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     MOBILE BOTTOM NAVIGATION
+========================================== -->
+
+<div class="bottom-nav">
+
+    <a
+        class="nav-item"
+        href="/"
+    >
+        <span class="nav-icon">
+            🏠
+        </span>
+        Home
+    </a>
+
+
+    <a
+        class="nav-item"
+        href="/chat"
+    >
+        <span class="nav-icon">
+            💬
+        </span>
+        AI
+    </a>
+
+
+    <!-- CENTER SCAN -->
+
+    <a
+        class="nav-item nav-scan"
+        href="/"
+    >
+        <span class="nav-icon">
+            📷
+        </span>
+        Scan
+    </a>
+
+
+    <a
+        class="nav-item"
+        href="/plant-care"
+    >
+        <span class="nav-icon">
+            🌿
+        </span>
+        Care
+    </a>
+
+
+    <a
+        class="nav-item active"
+        href="/health"
+    >
+        <span class="nav-icon">
+            📊
+        </span>
+        Health
+    </a>
+
+</div>
+
+
+<script>
+    // ============================================================
+    // TREATMENT CENTER - STATUS SELECT + DELETE
+    // ============================================================
+    // Same /api/treatment endpoints the scan result page uses.
+    // Updates happen in place - no full page reload needed.
+
+    function setCardStatus(recordId, className, text) {
+        const status = document.getElementById("treatmentCardStatus-" + recordId);
+        if (!status) return;
+        status.className = "treatment-card-status " + className;
+        status.textContent = text;
+    }
+
+    async function updateDashboardTreatment(recordId, newStatus) {
+
+        const select = document.getElementById("treatmentSelect-" + recordId);
+        const badge = document.getElementById("treatmentBadge-" + recordId);
+        const previousStatus = select ? select.getAttribute("data-current") || select.value : newStatus;
+
+        if (select) select.disabled = true;
+
+        try {
+
+            const response = await fetch("/api/treatment/" + recordId + "/status", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            if (response.status === 401) {
+                setCardStatus(recordId, "warning", "🔐 Please login first to update treatment status.");
+                if (select) { select.disabled = false; select.value = previousStatus; }
+                return;
+            }
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Could not update treatment status.");
+            }
+
+            const labels = {
+                started: "🟠 Started",
+                monitoring: "🟡 Monitoring",
+                completed: "🟢 Completed"
+            };
+
+            if (badge) {
+                badge.className = "badge " + data.treatment.status;
+                badge.textContent = labels[data.treatment.status] || data.treatment.status;
+            }
+
+            if (select) select.setAttribute("data-current", data.treatment.status);
+
+            setCardStatus(recordId, "", "");
+
+        } catch (error) {
+            console.error("Update treatment status error:", error);
+            setCardStatus(recordId, "error", "❌ " + (error.message || "Could not update treatment status."));
+            if (select) select.value = previousStatus;
+        } finally {
+            if (select) select.disabled = false;
+        }
+    }
+
+    async function deleteDashboardTreatment(recordId) {
+
+        const confirmed = window.confirm("Delete this treatment record? This can't be undone.");
+        if (!confirmed) return;
+
+        const card = document.getElementById("treatmentCard-" + recordId);
+        const button = document.getElementById("treatmentDelete-" + recordId);
+
+        if (button) {
+            button.disabled = true;
+            button.textContent = "⏳ Deleting...";
+        }
+
+        try {
+
+            const response = await fetch("/api/treatment/" + recordId, {
+                method: "DELETE"
+            });
+
+            if (response.status === 401) {
+                setCardStatus(recordId, "warning", "🔐 Please login first to delete this treatment.");
+                if (button) { button.disabled = false; button.textContent = "🗑️ Delete"; }
+                return;
+            }
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Could not delete this treatment.");
+            }
+
+            if (card) {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(-8px)";
+                setTimeout(function () { card.remove(); }, 220);
+            }
+
+        } catch (error) {
+            console.error("Delete treatment error:", error);
+            setCardStatus(recordId, "error", "❌ " + (error.message || "Could not delete this treatment."));
+            if (button) { button.disabled = false; button.textContent = "🗑️ Delete"; }
+        }
+    }
+</script>
+
+<script src="{{ url_for('static', filename='js/mobile-nav.js') }}"></script>
+
+</body>
+</html>

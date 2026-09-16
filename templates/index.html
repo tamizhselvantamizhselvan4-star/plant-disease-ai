@@ -20,6 +20,19 @@
 >
 
 <title>Plant Disease AI</title>
+<!-- Plant Disease AI - PWA Settings -->
+<link rel="manifest" href="/static/manifest.json">
+
+<meta name="theme-color" content="#176b43">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Plant Disease AI">
+
+<link
+    rel="apple-touch-icon"
+    href="{{ url_for('static', filename='icons/icon-192.png') }}"
+>
 
 <style>
 
@@ -6176,6 +6189,19 @@ setInterval(
     window.addEventListener("load", function () {
         window.scrollTo(0, 0);
     });
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/static/sw.js")
+            .then(function (registration) {
+                console.log("🌱 Plant Disease AI service worker registered");
+            })
+            .catch(function (error) {
+                console.log("Service worker registration failed:", error);
+            });
+    });
+}
 </script>
 
 </body>

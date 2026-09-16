@@ -5,6 +5,9 @@ import re
 import difflib
 import threading
 from datetime import datetime
+from urllib.parse import quote
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 
 import numpy as np
 
@@ -372,6 +375,421 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = (
     10 * 1024 * 1024
 )
+
+
+# ============================================================
+# ☁️ SUPABASE PERSISTENT STORAGE
+# ============================================================
+# Local JSON files remain as a safe fallback for Windows/offline
+# development. When SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY are
+# present (Render), Supabase becomes the persistent source for user
+# records and Supabase Storage becomes the persistent image store.
+# The service-role key must NEVER be placed in source code.
+# ============================================================
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "").strip().rstrip("/")
+SUPABASE_SERVICE_ROLE_KEY = os.environ.get(
+    "SUPABASE_SERVICE_ROLE_KEY", ""
+).strip()
+SUPABASE_BUCKET = os.environ.get(
+    "SUPABASE_STORAGE_BUCKET",
+    "plant-images"
+).strip() or "plant-images"
+
+SUPABASE_ENABLED = bool(
+    SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY
+)
+
+print(
+    "☁️ Supabase persistence:",
+    "ENABLED" if SUPABASE_ENABLED else "DISABLED (local JSON only)",
+    flush=True
+)
+
+SUPABASE_TABLES = {
+    "users.json": "users",
+    "upload_records.json": "upload_records",
+    "chat_records.json": "chat_records",
+    "saved_before_records.json": "saved_before_records",
+    "plant_profiles.json": "plant_profiles",
+    "treatment_records.json": "treatment_records",
+    "care_reminders.json": "care_reminders",
+    "before_after_records.json": "before_after_records",
+}
+
+
+def _supabase_headers(prefer=None, content_type="application/json"):
+    headers = {
+        "apikey": SUPABASE_SERVICE_ROLE_KEY,
+        "Authorization": "Bearer " + SUPABASE_SERVICE_ROLE_KEY,
+        "Content-Type": content_type,
+    }
+    if prefer:
+        headers["Prefer"] = prefer
+    return headers
+
+
+def _supabase_request(method, path, payload=None, query=None, headers=None):
+    if not SUPABASE_ENABLED:
+        return None
+
+    url = SUPABASE_URL + path
+    if query:
+        url += "?" + query
+
+    body = None
+    request_headers = _supabase_headers()
+    if headers:
+        request_headers.update(headers)
+
+    if payload is not None:
+        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+
+    request = Request(
+        url,
+        data=body,
+        headers=request_headers,
+        method=method.upper()
+    )
+
+    try:
+        with urlopen(request, timeout=20) as response:
+            raw = response.read()
+            if not raw:
+                return None
+            try:
+                return json.loads(raw.decode("utf-8"))
+            except Exception:
+                return raw
+    except HTTPError as error:
+        try:
+            detail = error.read().decode("utf-8", errors="replace")
+        except Exception:
+            detail = str(error)
+        raise RuntimeError(
+            f"Supabase {method} {path} failed ({error.code}): {detail[:500]}"
+        ) from error
+    except (URLError, TimeoutError) as error:
+        raise RuntimeError(
+            f"Supabase connection failed: {error}"
+        ) from error
+
+
+def _supabase_table_for_file(file_path):
+    return SUPABASE_TABLES.get(
+        os.path.basename(str(file_path))
+    )
+
+
+def _supabase_get_rows(table):
+    rows = _supabase_request(
+        "GET",
+        f"/rest/v1/{table}",
+        query="select=*"
+    )
+    return rows if isinstance(rows, list) else []
+
+
+def _supabase_row_to_record(row):
+    if not isinstance(row, dict):
+        return {}
+
+    data = row.get("data")
+    if isinstance(data, dict):
+        record = dict(data)
+        if row.get("id") is not None:
+            record.setdefault("id", row.get("id"))
+        if row.get("user_id") is not None:
+            record.setdefault("user_id", row.get("user_id"))
+        return record
+
+    return {
+        key: value
+        for key, value in row.items()
+        if key != "data"
+    }
+
+
+def _supabase_load_records(table):
+    return [
+        record
+        for record in (
+            _supabase_row_to_record(row)
+            for row in _supabase_get_rows(table)
+        )
+        if record
+    ]
+
+
+def _supabase_upsert_record(table, record):
+    if not record:
+        return
+
+    record = dict(record)
+    record_id = record.get("id") or uuid.uuid4().hex
+    record["id"] = record_id
+
+    # Store the complete original Flask record in data JSONB. This
+    # means existing application fields do not need to be redesigned.
+    row = {
+        "id": record_id,
+        "data": record
+    }
+    if record.get("user_id") is not None:
+        row["user_id"] = record.get("user_id")
+
+    try:
+        _supabase_request(
+            "POST",
+            f"/rest/v1/{table}",
+            payload=[row],
+            headers={
+                "Prefer": "resolution=merge-duplicates,return=minimal"
+            }
+        )
+        return
+    except Exception as first_error:
+        # Compatibility fallback for tables that were created with
+        # individual columns and do not have a data JSONB column.
+        try:
+            _supabase_request(
+                "POST",
+                f"/rest/v1/{table}",
+                payload=[record],
+                headers={
+                    "Prefer": "resolution=merge-duplicates,return=minimal"
+                }
+            )
+            return
+        except Exception:
+            raise first_error
+
+
+def _supabase_delete_record(table, record_id):
+    if not record_id:
+        return
+
+    _supabase_request(
+        "DELETE",
+        f"/rest/v1/{table}",
+        query="id=eq." + quote(str(record_id), safe="")
+    )
+
+
+def _supabase_save_records(table, records):
+    records = [
+        dict(record)
+        for record in records
+        if isinstance(record, dict)
+    ]
+
+    existing = _supabase_load_records(table)
+    desired_ids = set()
+
+    for record in records:
+        record_id = record.get("id") or uuid.uuid4().hex
+        record["id"] = record_id
+        desired_ids.add(str(record_id))
+        _supabase_upsert_record(table, record)
+
+    # Keep deletes performed by the existing app synchronized.
+    for old in existing:
+        old_id = old.get("id")
+        if old_id is not None and str(old_id) not in desired_ids:
+            _supabase_delete_record(table, old_id)
+
+    return True
+
+
+def _storage_public_url(storage_path):
+    return (
+        SUPABASE_URL
+        + "/storage/v1/object/public/"
+        + quote(SUPABASE_BUCKET, safe="")
+        + "/"
+        + quote(storage_path.lstrip("/"), safe="/")
+    )
+
+
+def _upload_image_to_supabase(local_path, storage_path):
+    if not SUPABASE_ENABLED:
+        return None
+
+    if not local_path or not os.path.isfile(local_path):
+        return None
+
+    extension = os.path.splitext(local_path)[1].lower()
+    content_type = {
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".png": "image/png",
+        ".webp": "image/webp",
+    }.get(extension, "application/octet-stream")
+
+    with open(local_path, "rb") as image_file:
+        image_bytes = image_file.read()
+
+    url = (
+        SUPABASE_URL
+        + "/storage/v1/object/"
+        + quote(SUPABASE_BUCKET, safe="")
+        + "/"
+        + quote(storage_path.lstrip("/"), safe="/")
+    )
+
+    headers = {
+        "apikey": SUPABASE_SERVICE_ROLE_KEY,
+        "Authorization": "Bearer " + SUPABASE_SERVICE_ROLE_KEY,
+        "Content-Type": content_type,
+        "x-upsert": "true",
+    }
+
+    for method in ("POST", "PUT"):
+        try:
+            request = Request(
+                url,
+                data=image_bytes,
+                headers=headers,
+                method=method
+            )
+            with urlopen(request, timeout=30):
+                pass
+            return _storage_public_url(storage_path)
+        except Exception as error:
+            if method == "PUT":
+                print("⚠️ Supabase image upload failed:", error)
+
+    return None
+
+
+def _download_storage_image(public_url, local_path):
+    if not public_url or not str(public_url).startswith(("http://", "https://")):
+        return False
+
+    try:
+        request = Request(
+            public_url,
+            headers={
+                "apikey": SUPABASE_SERVICE_ROLE_KEY,
+                "Authorization": "Bearer " + SUPABASE_SERVICE_ROLE_KEY,
+            }
+        )
+        with urlopen(request, timeout=30) as response:
+            image_bytes = response.read()
+
+        os.makedirs(os.path.dirname(local_path), exist_ok=True)
+        with open(local_path, "wb") as image_file:
+            image_file.write(image_bytes)
+
+        return True
+
+    except Exception as error:
+        print("⚠️ Supabase image download failed:", error)
+        return False
+
+
+def _delete_storage_image(storage_path):
+    if not SUPABASE_ENABLED or not storage_path:
+        return
+
+    url = (
+        SUPABASE_URL
+        + "/storage/v1/object/"
+        + quote(SUPABASE_BUCKET, safe="")
+        + "/"
+        + quote(str(storage_path).lstrip("/"), safe="/")
+    )
+
+    try:
+        request = Request(
+            url,
+            headers={
+                "apikey": SUPABASE_SERVICE_ROLE_KEY,
+                "Authorization": "Bearer " + SUPABASE_SERVICE_ROLE_KEY,
+            },
+            method="DELETE"
+        )
+        with urlopen(request, timeout=20):
+            pass
+    except Exception as error:
+        print("⚠️ Supabase image delete failed:", error)
+
+def _load_json_list(file_path):
+    """Load a JSON list from local storage safely."""
+    try:
+        if not os.path.exists(file_path):
+            return []
+
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return data if isinstance(data, list) else []
+
+    except (FileNotFoundError, json.JSONDecodeError, OSError) as e:
+        print(f"⚠️ Local JSON load error: {file_path} -> {e}", flush=True)
+        return []
+def _persistent_load_records(file_path):
+    table = _supabase_table_for_file(file_path)
+
+    if SUPABASE_ENABLED and table:
+        try:
+            records = _supabase_load_records(table)
+
+            if records:
+                return records
+
+            # First run: migrate existing local records automatically.
+            local_records = _local_load_json_list(file_path)
+
+            if local_records:
+                _supabase_save_records(
+                    table,
+                    local_records
+                )
+                return local_records
+
+            return []
+
+        except Exception as error:
+            print(
+                "⚠️ Supabase read failed; using local JSON:",
+                error
+            )
+
+    return _local_load_json_list(file_path)
+
+
+def _persistent_save_records(file_path, records):
+    local_ok = _save_json_list(
+        file_path,
+        records
+    )
+
+    table = _supabase_table_for_file(file_path)
+
+    if SUPABASE_ENABLED and table:
+        try:
+            _supabase_save_records(
+                table,
+                records
+            )
+
+            print(
+                "☁️ Supabase records saved:",
+                table
+            )
+
+            return True
+
+        except Exception as error:
+            print(
+                "❌ Supabase record save failed:",
+                error
+            )
+
+            return local_ok
+
+    return local_ok
 
 
 # ============================================================
@@ -1805,61 +2223,61 @@ def predict_disease(
 
 
 # ============================================================
+# TERMINAL RECORD LOGGING
+# ============================================================
+# This is ONLY for local terminal visibility. It does not change
+# how records are stored, filtered, or displayed in the app.
+# ============================================================
+
+def _terminal_record_log(title, record=None, extra=None):
+    print()
+    print("=" * 60, flush=True)
+    print(title, flush=True)
+    print("=" * 60, flush=True)
+
+    if isinstance(record, dict):
+        for key, value in record.items():
+            print(f"{key:<20}: {value}", flush=True)
+
+    if isinstance(extra, dict):
+        for key, value in extra.items():
+            print(f"{key:<20}: {value}", flush=True)
+
+    print("=" * 60, flush=True)
+
+
+def _terminal_records_count(title, records, user_id=None):
+    print(
+        f"📋 {title}: {len(records)} record(s)"
+        + (f" | user_id={user_id}" if user_id else ""),
+        flush=True
+    )
+
+
+# ============================================================
 # RECORD STORAGE
 # ============================================================
 
 def load_collection_records(user_id=None):
 
-    if not os.path.exists(
+    records = _persistent_load_records(
         COLLECTION_FILE
-    ):
+    )
 
-        return []
+    _terminal_records_count(
+        "Upload records loaded",
+        records,
+        user_id
+    )
 
+    if user_id is None:
+        return records
 
-    try:
-
-        with open(
-            COLLECTION_FILE,
-            "r",
-            encoding="utf-8"
-        ) as file:
-
-            records = json.load(
-                file
-            )
-
-
-        if not isinstance(
-            records,
-            list
-        ):
-
-            return []
-
-        if user_id is None:
-            return records
-
-        # Only records belonging to this account are visible.
-        # Older records without user_id are intentionally hidden
-        # from logged-in accounts so one user's data cannot leak
-        # into another user's history.
-        return [
-            record
-            for record in records
-            if str(record.get("user_id", "")) == str(user_id)
-        ]
-
-
-    except Exception as error:
-
-        print(
-            "⚠️ Upload record read error:",
-            error
-        )
-
-
-    return []
+    return [
+        record
+        for record in records
+        if str(record.get("user_id", "")) == str(user_id)
+    ]
 
 
 def save_collection_record(
@@ -1871,78 +2289,62 @@ def save_collection_record(
 ):
 
     user_id = session.get("user_id")
-
     records = load_collection_records()
 
+    image_path = (
+        "static/uploads/" + saved_filename
+    )
 
-    records.append({
+    local_image = os.path.join(
+        UPLOAD_FOLDER,
+        saved_filename
+    )
 
-        "id":
-            uuid.uuid4().hex,
+    storage_url = _upload_image_to_supabase(
+        local_image,
+        "uploads/" + saved_filename
+    )
 
-        "user_id":
-            user_id,
+    if storage_url:
+        image_path = storage_url
 
-        "original_filename":
-            original_filename,
-
-        "saved_filename":
-            saved_filename,
-
-        "image_path":
-            "static/uploads/"
-            +
-            saved_filename,
-
-        "predicted_disease":
-            disease,
-
-        "confidence":
-            confidence,
-
-        "confidence_level":
-            confidence_level,
-
-        "review_status":
-            "pending",
-
-        "verified_disease":
-            None,
-
-        "uploaded_at":
-            datetime.now().isoformat(
-                timespec="seconds"
-            )
-    })
-
-
-    try:
-
-        with open(
-            COLLECTION_FILE,
-            "w",
-            encoding="utf-8"
-        ) as file:
-
-            json.dump(
-                records,
-                file,
-                indent=4,
-                ensure_ascii=False
-            )
-
-
-        print(
-            "💾 Upload record saved"
+    record = {
+        "id": uuid.uuid4().hex,
+        "user_id": user_id,
+        "original_filename": original_filename,
+        "saved_filename": saved_filename,
+        "image_path": image_path,
+        "predicted_disease": disease,
+        "confidence": confidence,
+        "confidence_level": confidence_level,
+        "review_status": "pending",
+        "verified_disease": None,
+        "uploaded_at": datetime.now().isoformat(
+            timespec="seconds"
         )
+    }
 
+    records.append(record)
 
-    except Exception as error:
-
-        print(
-            "⚠️ Upload record save error:",
-            error
+    if _persistent_save_records(
+        COLLECTION_FILE,
+        records
+    ):
+        print("💾 Upload record saved", flush=True)
+        _terminal_record_log(
+            "📋 UPLOAD RECORD SAVED",
+            record,
+            {
+                "Total records": len(records),
+                "Storage": "Supabase + local JSON"
+                if SUPABASE_ENABLED
+                else "Local JSON"
+            }
         )
+    else:
+        print("⚠️ Upload record save error", flush=True)
+
+    return record
 
 
 # ============================================================
@@ -1950,70 +2352,16 @@ def save_collection_record(
 # ============================================================
 
 def load_users():
-
-    if not os.path.exists(
+    return _persistent_load_records(
         USERS_FILE
-    ):
-
-        return []
-
-
-    try:
-
-        with open(
-            USERS_FILE,
-            "r",
-            encoding="utf-8"
-        ) as file:
-
-            users = json.load(
-                file
-            )
-
-
-        if isinstance(
-            users,
-            list
-        ):
-
-            return users
-
-
-    except Exception as error:
-
-        print(
-            "⚠️ User record read error:",
-            error
-        )
-
-
-    return []
+    )
 
 
 def save_users(users):
-
-    try:
-
-        with open(
-            USERS_FILE,
-            "w",
-            encoding="utf-8"
-        ) as file:
-
-            json.dump(
-                users,
-                file,
-                indent=4,
-                ensure_ascii=False
-            )
-
-
-    except Exception as error:
-
-        print(
-            "⚠️ User record save error:",
-            error
-        )
+    return _persistent_save_records(
+        USERS_FILE,
+        users
+    )
 
 
 def normalize_phone(phone):
@@ -2131,52 +2479,24 @@ def get_current_user():
 
 def load_chat_records(user_id=None):
 
-    if not os.path.exists(
+    records = _persistent_load_records(
         CHAT_FILE
-    ):
+    )
 
-        return []
+    _terminal_records_count(
+        "Chat records loaded",
+        records,
+        user_id
+    )
 
+    if user_id is None:
+        return records
 
-    try:
-
-        with open(
-            CHAT_FILE,
-            "r",
-            encoding="utf-8"
-        ) as file:
-
-            records = json.load(
-                file
-            )
-
-
-        if not isinstance(
-            records,
-            list
-        ):
-
-            return []
-
-        if user_id is None:
-            return records
-
-        return [
-            record
-            for record in records
-            if str(record.get("user_id", "")) == str(user_id)
-        ]
-
-
-    except Exception as error:
-
-        print(
-            "⚠️ Chat record read error:",
-            error
-        )
-
-
-    return []
+    return [
+        record
+        for record in records
+        if str(record.get("user_id", "")) == str(user_id)
+    ]
 
 
 def save_chat_message(
@@ -2189,61 +2509,37 @@ def save_chat_message(
     user_id = session.get("user_id")
     records = load_chat_records()
 
-
     records.append({
-
-        "id":
-            uuid.uuid4().hex,
-
-        "user_id":
-            user_id,
-
-        "message":
-            message,
-
-        "response":
-            response,
-
-        "mentality":
-            mentality,
-
-        "disease":
-            disease,
-
-        "created_at":
-            datetime.now().isoformat(
-                timespec="seconds"
-            )
+        "id": uuid.uuid4().hex,
+        "user_id": user_id,
+        "message": message,
+        "response": response,
+        "mentality": mentality,
+        "disease": disease,
+        "created_at": datetime.now().isoformat(
+            timespec="seconds"
+        )
     })
 
+    chat_record = records[-1]
 
-    try:
-
-        with open(
-            CHAT_FILE,
-            "w",
-            encoding="utf-8"
-        ) as file:
-
-            json.dump(
-                records,
-                file,
-                indent=4,
-                ensure_ascii=False
-            )
-
-
-        print(
-            "💬 Chat record saved"
+    if _persistent_save_records(
+        CHAT_FILE,
+        records
+    ):
+        print("💬 Chat record saved", flush=True)
+        _terminal_record_log(
+            "💬 CHAT RECORD SAVED",
+            chat_record,
+            {
+                "Total records": len(records),
+                "Storage": "Supabase + local JSON"
+                if SUPABASE_ENABLED
+                else "Local JSON"
+            }
         )
-
-
-    except Exception as error:
-
-        print(
-            "⚠️ Chat record save error:",
-            error
-        )
+    else:
+        print("⚠️ Chat record save error", flush=True)
 
 
 # ============================================================
@@ -5276,6 +5572,15 @@ def login_page():
 
     session["user_name"] = user["name"]
 
+    _terminal_record_log(
+        "👤 USER LOGIN / ACCOUNT",
+        user,
+        {
+            "Action": "Login" if existing_user else "Create Account",
+            "Return to": return_to,
+            "Supabase": "ENABLED" if SUPABASE_ENABLED else "DISABLED"
+        }
+    )
 
     return redirect(
         return_to
@@ -5892,27 +6197,14 @@ def delete_upload_history_record(record_id):
                 except OSError:
                     pass
 
-        try:
-
-            with open(
-                COLLECTION_FILE,
-                "w",
-                encoding="utf-8"
-            ) as file:
-
-                json.dump(
-                    remaining,
-                    file,
-                    indent=4,
-                    ensure_ascii=False
-                )
-
-        except Exception as error:
-
-            print(
-                "❌ Upload history save error:",
-                error
+            _delete_storage_image(
+                "uploads/" + saved_filename
             )
+
+        if not _persistent_save_records(
+            COLLECTION_FILE,
+            remaining
+        ):
 
             return jsonify({
                 "success": False,
@@ -6992,14 +7284,24 @@ def save_scan_as_before():
             data.get("plant_name", "")
         ).strip()
 
+        before_image_url = url_for(
+            "static",
+            filename=f"uploads/before/{before_filename}"
+        )
+
+        storage_before_url = _upload_image_to_supabase(
+            before_path,
+            "before/" + before_filename
+        )
+
+        if storage_before_url:
+            before_image_url = storage_before_url
+
         record = {
             "id": before_id,
             "user_id": user.get("id"),
             "type": "saved_before",
-            "before_image": url_for(
-                "static",
-                filename=f"uploads/before/{before_filename}"
-            ),
+            "before_image": before_image_url,
             "before_filename": data.get(
                 "original_filename",
                 source_filename
@@ -7286,10 +7588,14 @@ def before_after_api():
 
             if not os.path.isfile(before_path):
 
-                return jsonify({
-                    "success": False,
-                    "error": "The saved BEFORE image file is missing."
-                }), 404
+                if not _download_storage_image(
+                    saved_before.get("before_image", ""),
+                    before_path
+                ):
+                    return jsonify({
+                        "success": False,
+                        "error": "The saved BEFORE image file is missing."
+                    }), 404
 
             # Verify that the saved file is a valid image.
             with Image.open(before_path) as image:
@@ -7408,10 +7714,26 @@ def before_after_api():
                 filename=f"uploads/before/{os.path.basename(before_path)}"
             )
 
+            storage_before_url = _upload_image_to_supabase(
+                before_path,
+                "before/" + os.path.basename(before_path)
+            )
+
+            if storage_before_url:
+                before_image_url = storage_before_url
+
         after_image_url = url_for(
             "static",
             filename=f"uploads/after/{after_filename}"
         )
+
+        storage_after_url = _upload_image_to_supabase(
+            after_path,
+            "after/" + after_filename
+        )
+
+        if storage_after_url:
+            after_image_url = storage_after_url
 
         record = {
             "id": comparison_id,
@@ -7733,6 +8055,10 @@ def delete_saved_before(record_id):
             if os.path.exists(path):
                 os.remove(path)
 
+        _delete_storage_image(
+            "before/" + filename
+        )
+
         if not save_saved_before_records(
             remaining
         ):
@@ -7840,6 +8166,10 @@ def delete_before_after_record(record_id):
                 if os.path.exists(before_path):
                     os.remove(before_path)
 
+            _delete_storage_image(
+                "before/" + before_filename
+            )
+
         after_url = target.get(
             "after_image",
             ""
@@ -7858,6 +8188,10 @@ def delete_before_after_record(record_id):
 
             if os.path.exists(after_path):
                 os.remove(after_path)
+
+        _delete_storage_image(
+            "after/" + after_filename
+        )
 
         if not save_before_after_records(
             remaining

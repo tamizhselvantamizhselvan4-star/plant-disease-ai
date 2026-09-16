@@ -209,7 +209,7 @@
 
                     <img
                         class="preview"
-                        src="/{{ record.image_path }}"
+                        src="{{ record.image_path if record.image_path and (record.image_path.startswith('http://') or record.image_path.startswith('https://')) else ('/' + record.image_path.lstrip('/') if record.image_path else '') }}"
                         alt="Uploaded plant image"
                         onerror="this.style.display='none'"
                     >

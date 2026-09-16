@@ -1116,7 +1116,7 @@ body {
 
                 <img
                     class="scan-thumb"
-                    src="/{{ scan.image_path }}"
+                    src="{{ scan.image_path if scan.image_path.startswith("http://") or scan.image_path.startswith("https://") else "/" + scan.image_path.lstrip("/") }}"
                     alt="Plant scan"
                 >
 

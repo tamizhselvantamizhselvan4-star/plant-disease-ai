@@ -4,6 +4,8 @@ import uuid
 import re
 import difflib
 import threading
+import time
+import copy
 from datetime import datetime
 from urllib.parse import quote
 from urllib.request import Request, urlopen
@@ -728,25 +730,129 @@ def _load_json_list(file_path):
     except (FileNotFoundError, json.JSONDecodeError, OSError) as e:
         print(f"⚠️ Local JSON load error: {file_path} -> {e}", flush=True)
         return []
+
+# ============================================================
+# ⚡ FAST PERSISTENCE CACHE + OLD RECORD IMAGE RESOLUTION
+# ============================================================
+# Keeps the existing JSON/Supabase design, but avoids repeatedly
+# downloading the same records on every page navigation.
+# Also converts old local image paths into Supabase Storage URLs
+# for display, without changing the underlying scan details.
+# ============================================================
+
+_PERSISTENT_CACHE = {}
+_PERSISTENT_CACHE_TTL = 15.0
+
+
+def _clone_records(records):
+    return copy.deepcopy(records)
+
+
+def _record_image_public_url(record):
+    image_path = str(record.get("image_path") or "").strip()
+
+    # New records already have the correct public URL.
+    if image_path.startswith("http://") or image_path.startswith("https://"):
+        return image_path
+
+    # Old records used static/uploads/<filename>.
+    filename = str(
+        record.get("saved_filename")
+        or os.path.basename(image_path)
+        or ""
+    ).strip()
+
+    if not filename:
+        return image_path
+
+    if SUPABASE_ENABLED and SUPABASE_URL:
+        return (
+            f"{SUPABASE_URL}/storage/v1/object/public/"
+            f"{quote(SUPABASE_BUCKET, safe='')}/uploads/"
+            f"{quote(filename, safe='')}"
+        )
+
+    return image_path
+
+
+def _normalize_persistent_records(file_path, records):
+    if os.path.basename(file_path) != "upload_records.json":
+        return records
+
+    fixed = _clone_records(records)
+
+    for record in fixed:
+        if isinstance(record, dict):
+            record["image_path"] = _record_image_public_url(record)
+
+    return fixed
+
 def _persistent_load_records(file_path):
+    key = os.path.abspath(file_path)
+    now = time.monotonic()
+
+    # Return a recent in-memory copy instead of making another
+    # Supabase request when the user simply navigates between pages.
+    cached = _PERSISTENT_CACHE.get(key)
+
+    if cached:
+        cached_time, cached_records = cached
+
+        if now - cached_time < _PERSISTENT_CACHE_TTL:
+            return _clone_records(cached_records)
+
     table = _supabase_table_for_file(file_path)
+
+    records = []
 
     if SUPABASE_ENABLED and table:
         try:
             records = _supabase_load_records(table)
 
             if records:
+                records = _normalize_persistent_records(
+                    file_path,
+                    records
+                )
+
+                _PERSISTENT_CACHE[key] = (
+                    time.monotonic(),
+                    _clone_records(records)
+                )
+
                 return records
 
             # First run: migrate existing local records automatically.
             local_records = _local_load_json_list(file_path)
 
             if local_records:
-                _supabase_save_records(
-                    table,
+                local_records = _normalize_persistent_records(
+                    file_path,
                     local_records
                 )
+
+                try:
+                    _supabase_save_records(
+                        table,
+                        local_records
+                    )
+                except Exception as migration_error:
+                    print(
+                        "⚠️ Supabase migration warning:",
+                        migration_error
+                    )
+
+                _PERSISTENT_CACHE[key] = (
+                    time.monotonic(),
+                    _clone_records(local_records)
+                )
+
                 return local_records
+
+            _PERSISTENT_CACHE[key] = (
+                time.monotonic(),
+                []
+            )
 
             return []
 
@@ -756,42 +862,169 @@ def _persistent_load_records(file_path):
                 error
             )
 
-    return _local_load_json_list(file_path)
+    records = _local_load_json_list(file_path)
 
-
-def _persistent_save_records(file_path, records):
-    local_ok = _save_json_list(
+    records = _normalize_persistent_records(
         file_path,
         records
     )
 
+    _PERSISTENT_CACHE[key] = (
+        time.monotonic(),
+        _clone_records(records)
+    )
+
+    return records
+
+def _persistent_save_records(file_path, records):
+    """
+    Fast persistent save.
+
+    Existing local JSON fallback is preserved.
+
+    When Supabase is enabled, the previous cached collection is
+    compared with the new collection. For normal appending/updating,
+    only changed records are sent to Supabase instead of re-saving
+    every record. Full synchronization is retained for deletions
+    or when no previous cache is available.
+    """
+
+    key = os.path.abspath(file_path)
+
+    # Always keep the local JSON fallback working.
+    try:
+        local_ok = _save_json_list(
+            file_path,
+            records
+        )
+    except Exception as local_error:
+        print(
+            "⚠️ Local JSON save error:",
+            local_error
+        )
+        local_ok = False
+
     table = _supabase_table_for_file(file_path)
 
-    if SUPABASE_ENABLED and table:
-        try:
+    if not (SUPABASE_ENABLED and table):
+        _PERSISTENT_CACHE[key] = (
+            time.monotonic(),
+            _clone_records(records)
+        )
+        return local_ok
+
+    try:
+        cached = _PERSISTENT_CACHE.get(key)
+        previous_records = cached[1] if cached else None
+
+        # No reliable previous state: retain the existing full-sync
+        # behavior so persistence is never silently skipped.
+        if previous_records is None:
             _supabase_save_records(
                 table,
                 records
             )
 
-            print(
-                "☁️ Supabase records saved:",
-                table
-            )
+        else:
+            old_map = {}
+            new_map = {}
+            valid_diff = True
 
-            return True
+            for record in previous_records:
+                if not isinstance(record, dict):
+                    continue
 
-        except Exception as error:
-            print(
-                "❌ Supabase record save failed:",
-                error
-            )
+                record_id = record.get("id")
 
-            return local_ok
+                if not record_id:
+                    valid_diff = False
+                    break
 
-    return local_ok
+                old_map[str(record_id)] = record
 
+            if valid_diff:
+                for record in records:
+                    if not isinstance(record, dict):
+                        continue
 
+                    record_id = record.get("id")
+
+                    if not record_id:
+                        valid_diff = False
+                        break
+
+                    new_map[str(record_id)] = record
+
+            if not valid_diff:
+                _supabase_save_records(
+                    table,
+                    records
+                )
+
+            else:
+                changed_records = []
+
+                for record_id, new_record in new_map.items():
+                    old_record = old_map.get(record_id)
+
+                    if old_record is None:
+                        changed_records.append(new_record)
+                        continue
+
+                    old_json = json.dumps(
+                        old_record,
+                        sort_keys=True,
+                        default=str
+                    )
+
+                    new_json = json.dumps(
+                        new_record,
+                        sort_keys=True,
+                        default=str
+                    )
+
+                    if old_json != new_json:
+                        changed_records.append(new_record)
+
+                deleted_ids = (
+                    set(old_map.keys())
+                    - set(new_map.keys())
+                )
+
+                # Normal case: usually just ONE new/changed record.
+                for changed_record in changed_records:
+                    _supabase_upsert_record(
+                        table,
+                        changed_record
+                    )
+
+                # Keep existing deletion behavior safe and complete.
+                if deleted_ids:
+                    _supabase_save_records(
+                        table,
+                        records
+                    )
+
+        _PERSISTENT_CACHE[key] = (
+            time.monotonic(),
+            _clone_records(records)
+        )
+
+        print(
+            "☁️ Supabase records saved:",
+            table
+        )
+
+        return True
+
+    except Exception as error:
+        print(
+            "❌ Supabase record save failed:",
+            error
+        )
+
+        # Do not replace the last good cache with a failed write.
+        return local_ok
 # ============================================================
 # 📱 MOBILE APP STATE / NAVIGATION PERSISTENCE
 # ============================================================
@@ -5022,7 +5255,7 @@ def predict():
     )
 
 
-    save_collection_record(
+    saved_record = save_collection_record(
         original_filename,
         unique_filename,
         disease,
@@ -5032,6 +5265,10 @@ def predict():
 
 
     image_url = (
+        saved_record.get("image_path")
+        if isinstance(saved_record, dict)
+        else None
+    ) or (
         "/static/uploads/"
         +
         unique_filename

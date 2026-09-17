@@ -8661,7 +8661,10 @@ TREATMENT_STATUSES = (
 
 def load_treatment_records(user_id=None, plant_id=None):
 
-    records = _load_json_list(
+    # Use the same persistent layer as My Records/scan history.
+    # This reads Supabase on deployed builds and falls back to local
+    # JSON when Supabase is not configured.
+    records = _persistent_load_records(
         TREATMENT_RECORDS_FILE
     )
 
@@ -8686,7 +8689,9 @@ def load_treatment_records(user_id=None, plant_id=None):
 
 def save_treatment_records(records):
 
-    return _save_json_list(
+    # Keep the local JSON fallback, while also persisting treatment
+    # records to Supabase when it is enabled.
+    return _persistent_save_records(
         TREATMENT_RECORDS_FILE,
         records
     )
@@ -8706,7 +8711,9 @@ def start_treatment(
     returned as-is instead of creating a duplicate.
     """
 
-    records = _load_json_list(
+    # Load from the persistent store so an active treatment survives
+    # logout, a new session, and a new Render instance.
+    records = _persistent_load_records(
         TREATMENT_RECORDS_FILE
     )
 
@@ -8773,7 +8780,7 @@ def update_treatment_status(
     if new_status not in TREATMENT_STATUSES:
         return None
 
-    records = _load_json_list(
+    records = _persistent_load_records(
         TREATMENT_RECORDS_FILE
     )
 
@@ -8818,7 +8825,7 @@ def remove_treatment(
     or None if nothing matched.
     """
 
-    records = _load_json_list(
+    records = _persistent_load_records(
         TREATMENT_RECORDS_FILE
     )
 

@@ -1125,7 +1125,21 @@ MOBILE_STATE_SCRIPT = r"""
         try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
     }
 
-    if (isRoot && !launchHome && !sessionStorage.getItem(HOME)) {
+    const referrerPath = (() => {
+        try {
+            if (!document.referrer) return "";
+            return new URL(document.referrer, window.location.origin).pathname;
+        } catch (e) {
+            return "";
+        }
+    })();
+
+    // Restore the last app page only when the app is opened directly.
+    // IMPORTANT: when the user presses the phone/browser BACK button and
+    // returns to '/', do NOT redirect them forward to LAST again.
+    const returningFromAnotherPage = !!(referrerPath && referrerPath !== "/");
+
+    if (isRoot && !launchHome && !sessionStorage.getItem(HOME) && !returningFromAnotherPage) {
         const last = localStorage.getItem(LAST);
         // Only restore real pages. Do NOT restore form/action/API endpoints.
         // /predict accepts POST only, so restoring it with a normal page

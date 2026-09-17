@@ -197,6 +197,31 @@ def _build_plant_care_display(raw_data):
             elif source_bullets:
                 bullets.append(str(source_bullets))
 
+            # FIX: these guidance-style lists were present in the JSON
+            # but were never read, so their content silently never
+            # displayed anywhere on the page. Fold them into the same
+            # bullet list used for "guidance"/"bullets" above.
+            for extra_guidance_key in (
+                "irrigation",
+                "flowering_guidance",
+                "nutrient_guidance",
+                "stage_based_guidance"
+            ):
+                extra_guidance = section.get(extra_guidance_key)
+                if isinstance(extra_guidance, list):
+                    bullets.extend(
+                        str(x) for x in extra_guidance if x is not None
+                    )
+                elif extra_guidance:
+                    bullets.append(str(extra_guidance))
+
+            def _readable(value):
+                """Join list values into a readable string so they
+                never get displayed as a raw Python list/tuple."""
+                if isinstance(value, (list, tuple)):
+                    return " • ".join(str(x) for x in value if x is not None)
+                return value
+
             extra = []
 
             if section.get("frequency"):
@@ -218,10 +243,61 @@ def _build_plant_care_display(raw_data):
                 ])
 
             if section.get("recommended_mix"):
+                # FIX: recommended_mix is a list in the JSON. It was
+                # being stored as-is, so it rendered as a raw Python
+                # list (e.g. "['a', 'b', 'c']") instead of readable
+                # text. Join it into a plain string.
                 extra.append([
                     "Recommended Mix",
-                    section.get("recommended_mix")
+                    _readable(section.get("recommended_mix"))
                 ])
+
+            # FIX: these fields existed in the JSON but were never
+            # read at all, so this information never displayed.
+            if section.get("soil_features"):
+                extra.append([
+                    "Soil Features",
+                    _readable(section.get("soil_features"))
+                ])
+
+            if section.get("pH_guidance"):
+                extra.append([
+                    "pH Guidance",
+                    section.get("pH_guidance")
+                ])
+
+            if section.get("humidity"):
+                extra.append([
+                    "Humidity",
+                    section.get("humidity")
+                ])
+
+            if section.get("signs_of_underwatering"):
+                extra.append([
+                    "Signs of Underwatering",
+                    _readable(section.get("signs_of_underwatering"))
+                ])
+
+            if section.get("signs_of_overwatering"):
+                extra.append([
+                    "Signs of Overwatering",
+                    _readable(section.get("signs_of_overwatering"))
+                ])
+
+            fertilizer_options = section.get("fertilizer_options")
+            if isinstance(fertilizer_options, list):
+                for option in fertilizer_options:
+                    if not isinstance(option, dict):
+                        continue
+                    name = option.get("name", "")
+                    purpose = option.get("purpose", "")
+                    option_guidance = option.get("guidance")
+                    guidance_text = _readable(option_guidance) or ""
+                    label = name
+                    if purpose:
+                        label = f"{name} ({purpose})" if name else purpose
+                    if label:
+                        extra.append([label, guidance_text])
 
             schedule = section.get("schedule")
             if schedule:
@@ -823,7 +899,7 @@ def _persistent_load_records(file_path):
                 return records
 
             # First run: migrate existing local records automatically.
-            local_records = _local_load_json_list(file_path)
+            local_records = _load_json_list(file_path)
 
             if local_records:
                 local_records = _normalize_persistent_records(
@@ -862,7 +938,7 @@ def _persistent_load_records(file_path):
                 error
             )
 
-    records = _local_load_json_list(file_path)
+    records = _load_json_list(file_path)
 
     records = _normalize_persistent_records(
         file_path,

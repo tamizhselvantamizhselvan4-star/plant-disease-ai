@@ -1,305 +1,570 @@
 {
-    "metadata": {
-        "title": "Smart Plant Care Guide",
-        "version": "1.1",
-        "supported_plants": [
-            "Hibiscus",
-            "Chilli",
-            "Tomato"
-        ]
+  "metadata": {
+    "title": "Smart Plant Care Guide",
+    "version": "2.0",
+    "supported_plants": [
+      "Hibiscus",
+      "Chilli",
+      "Tomato"
+    ],
+    "care_categories": [
+      "watering",
+      "sunlight",
+      "temperature",
+      "soil",
+      "fertilizer",
+      "pruning"
+    ]
+  },
+
+  "Hibiscus": {
+    "display_name": "🌺 Hibiscus Care Guide",
+
+    "watering": {
+      "title": " Watering & Irrigation",
+      "summary": "Keep hibiscus soil consistently moist but well drained. Do not allow the root zone to remain continuously waterlogged.",
+      "guidance": [
+        "🌱 Check the top 2–3 cm of soil before watering. Water when the surface begins to feel slightly dry.",
+        "💧 Water slowly around the root zone so moisture reaches the deeper soil.",
+        "☀️ Increase watering attention during hot, sunny and dry weather.",
+        "🌧️ Reduce watering when rainfall has already kept the soil moist.",
+        "🪴 Container-grown hibiscus may need more frequent watering because pots dry faster than garden soil.",
+        "🌿 Water thoroughly rather than giving very small amounts repeatedly.",
+        "🌅 Water preferably during the cooler part of the day so the plant can use the moisture efficiently.",
+        "🍂 Mulching around the plant can help reduce moisture loss, but keep mulch away from direct contact with the stem.",
+        "🚫 Do not allow the pot to stand continuously in collected water."
+      ],
+      "irrigation": [
+        "💧 Apply water directly to the soil around the root zone instead of repeatedly wetting the foliage.",
+        "🪴 Make sure containers have adequate drainage holes.",
+        "🌱 For garden plants, slow and deep irrigation is preferable to frequent shallow watering.",
+        "💦 Drip or soaker irrigation can provide moisture directly to the root zone.",
+        "🌧️ After heavy rainfall, check soil moisture before irrigating again.",
+        "🔥 During very hot periods, monitor the soil more frequently rather than following a fixed schedule."
+      ],
+      "frequency": "Usually around 2–4 times per week, but actual frequency depends on temperature, rainfall, soil type, drainage, plant size and container size.",
+      "signs_of_underwatering": [
+        "🌿 Wilting leaves",
+        "🌸 Bud drop",
+        "🍂 Dry or curling leaves",
+        "🪴 Very dry soil pulling away from the sides of the container"
+      ],
+      "signs_of_overwatering": [
+        "🍂 Yellowing leaves",
+        "🌱 Poor or weak growth",
+        "💧 Soil remaining wet for long periods",
+        "🦠 Increased risk of root and fungal problems"
+      ],
+      "warning": "⚠️ Hibiscus needs regular moisture but not waterlogged soil. Large changes between very dry and very wet conditions can contribute to stress and bud drop."
     },
 
-    "Hibiscus": {
-        "display_name": "🌺 Hibiscus Care Guide",
-
-        "watering": {
-            "title": "💧 Watering",
-            "summary": "Keep the soil evenly moist, but never constantly waterlogged.",
-            "guidance": [
-                "🌱 Check the top 2–3 cm of soil before watering. Water when it begins to feel slightly dry.",
-                "☀️ Hibiscus usually needs more frequent watering during hot, sunny weather.",
-                "🪴 Container-grown hibiscus may dry out faster than plants growing in the ground.",
-                "🌧️ Reduce watering during rainy or cool periods when the soil stays moist longer.",
-                "🚫 Do not keep the roots continuously submerged in water."
-            ],
-            "frequency": "Usually 2–4 times per week depending on heat, rainfall, pot size and soil drainage.",
-            "warning": "⚠️ Overwatering can cause yellow leaves, poor root health and fungal problems. Underwatering may cause wilting and bud drop."
-        },
-
-        "sunlight": {
-            "title": "☀️ Sunlight",
-            "summary": "Hibiscus grows and flowers best with plenty of bright sunlight.",
-            "guidance": [
-                "🌞 Aim for around 6 hours of sunlight or strong bright light.",
-                "🌸 Morning sunlight is generally beneficial.",
-                "🔥 In extremely hot weather, some protection from harsh afternoon heat can help prevent stress.",
-                "🏡 Keep potted plants in a bright location with good air circulation."
-            ],
-            "warning": "⚠️ Too little sunlight may reduce flowering and cause weak, stretched growth."
-        },
-
-        "temperature": {
-            "title": "🌡️ Temperature",
-            "summary": "Hibiscus prefers warm conditions.",
-            "ideal_range": "Approximately 18°C to 32°C.",
-            "guidance": [
-                "🌿 Protect the plant from extreme cold.",
-                "🔥 Provide sufficient water during very hot conditions.",
-                "🌬️ Good airflow helps reduce stress and disease-friendly humidity."
-            ],
-            "warning": "⚠️ Sudden environmental changes can cause stress, leaf drop or bud drop."
-        },
-
-        "soil": {
-            "title": "🪴 Soil",
-            "summary": "Use fertile soil that holds some moisture but drains excess water well.",
-            "recommended_mix": [
-                "🌱 Good-quality garden soil",
-                "🍂 Well-decomposed compost or organic matter",
-                "🏖️ Coarse material such as sand or perlite for improved drainage"
-            ],
-            "warning": "⚠️ Avoid heavy soil that remains saturated for long periods."
-        },
-
-        "fertilizer": {
-            "title": "🌱 Recommended Fertilizer",
-            "recommended": "🌱 19-19-19 NPK water-soluble fertilizer for general growth. 🌸 00-52-34 (MKP) can be used as a phosphorus-rich fertilizer during flowering.",
-            "guidance": [
-                "🌱 Use 19-19-19 NPK during active vegetative growth for balanced nutrition.",
-                "🌸 During flowering, 00-52-34 (MKP) can be used as a phosphorus-rich fertilizer when appropriate.",
-                "🧴 Follow the exact dosage and application instructions printed on the fertilizer product label.",
-                "💧 Avoid applying concentrated fertilizer to very dry soil unless the product label specifically allows it.",
-                "🚫 Do not repeatedly apply high doses in an attempt to produce more flowers."
-            ],
-            "schedule": "Generally every 2–4 weeks during active growth, depending on the fertilizer product and label instructions.",
-            "warning": "🚨 Over-fertilizing can damage roots, burn leaves and cause nutrient or salt buildup in containers."
-        },
-
-        "pruning": {
-            "title": "✂️ Pruning",
-            "guidance": [
-                "✂️ Remove dead, damaged or clearly diseased branches.",
-                "🌿 Light pruning can encourage bushier growth.",
-                "🧹 Use clean tools to reduce the risk of spreading disease.",
-                "🚫 Do not heavily prune a severely stressed plant unless necessary."
-            ],
-            "warning": "⚠️ Disinfect pruning tools when moving between diseased and healthy plants."
-        },
-
-        "calendar": {
-            "watering": "Check soil moisture every day; water when the upper soil layer begins to dry.",
-            "leaf_inspection": "Inspect leaves every 7 days for spots, pests, whiteflies, mealybugs, rust or powdery growth.",
-            "fertilizer": "Review feeding every 2–4 weeks during active growth, following the fertilizer label.",
-            "pruning": "Remove dead or damaged growth during regular weekly inspection."
-        },
-
-        "safety_care": [
-            "🧤 Wear gloves when handling fertilizers, pesticides or unknown plant treatments.",
-            "🧴 Never exceed the product label rate.",
-            "🌬️ Apply sprays only in suitable conditions and avoid strong wind.",
-            "🐝 Protect pollinators by avoiding unnecessary pesticide use on open flowers.",
-            "👶 Keep fertilizers and chemicals away from children and pets."
-        ],
-
-        "important_warning": [
-            "🚨 Do not treat every yellow leaf as a disease; watering, nutrient problems and environmental stress can produce similar symptoms.",
-            "🚨 Do not combine multiple pesticides or fungicides unless the product labels specifically permit it.",
-            "🚨 If the plant is rapidly declining, inspect roots, watering conditions and pest activity in addition to leaf symptoms."
-        ]
+    "sunlight": {
+      "title": " Sunlight",
+      "summary": "Hibiscus generally grows and flowers well with full sun or strong bright light.",
+      "guidance": [
+        "🌞 Aim for around 6 hours or more of direct sunlight when growing conditions allow.",
+        "🌸 Good sunlight supports healthy growth and flowering.",
+        "🌅 Morning sunlight is beneficial and can provide strong light with less intense afternoon heat.",
+        "🔥 During periods of extreme heat, monitor the plant for heat and water stress.",
+        "🏡 Keep container hibiscus in a bright location with good air circulation.",
+        "🌿 Avoid placing the plant in deep shade for long periods."
+      ],
+      "warning": "⚠️ Insufficient sunlight may result in weak growth, reduced flowering and excessive stretching."
     },
 
-    "Chilli": {
-        "display_name": "🌶️ Chilli Care Guide",
-
-        "watering": {
-            "title": "💧 Watering",
-            "summary": "Keep moisture reasonably consistent without waterlogging the root zone.",
-            "guidance": [
-                "🌱 Water when the upper layer of soil begins to dry.",
-                "☀️ Increase attention during hot and dry weather.",
-                "🌧️ Reduce watering when rainfall keeps the soil wet.",
-                "💧 Deep, appropriate watering is generally better than keeping the soil constantly saturated."
-            ],
-            "frequency": "Often 2–3 times per week, but actual needs depend on weather, soil and container size.",
-            "warning": "⚠️ Irregular watering can stress chilli plants and may affect flowering and fruit development."
-        },
-
-        "sunlight": {
-            "title": "☀️ Sunlight",
-            "summary": "Chilli generally performs best in bright sunlight.",
-            "guidance": [
-                "🌞 Aim for approximately 6–8 hours of direct sunlight where conditions are suitable.",
-                "🏡 Ensure the plant receives good light for healthy growth and fruit production.",
-                "🌬️ Avoid extremely enclosed locations with poor airflow."
-            ],
-            "warning": "⚠️ Low light can lead to weak growth and reduced flowering or fruit production."
-        },
-
-        "temperature": {
-            "title": "🌡️ Temperature",
-            "summary": "Chilli prefers warm growing conditions.",
-            "ideal_range": "Approximately 20°C to 32°C.",
-            "guidance": [
-                "🌱 Protect plants from prolonged cold conditions.",
-                "🔥 During intense heat, monitor for wilting and water stress.",
-                "🌸 Extreme temperatures may affect flowering and fruit set."
-            ],
-            "warning": "⚠️ Very high heat combined with poor watering can cause severe stress."
-        },
-
-        "soil": {
-            "title": "🪴 Soil",
-            "summary": "Use fertile, loose and well-draining soil.",
-            "recommended_mix": [
-                "🌱 Good garden soil",
-                "🍂 Mature compost",
-                "🏖️ Sand or another drainage-improving material"
-            ],
-            "warning": "⚠️ Poor drainage increases the risk of root problems and disease development."
-        },
-
-        "fertilizer": {
-            "title": "🌱 Recommended Fertilizer",
-            "recommended": "🌱 19-19-19 NPK water-soluble fertilizer during general vegetative growth. 🌶️ 13-00-45 (Potassium Nitrate) can be used as a potassium-rich fertilizer during flowering and fruit development.",
-            "guidance": [
-                "🌱 Use 19-19-19 NPK during active vegetative growth for balanced nutrition.",
-                "🌸 During flowering and fruit development, 13-00-45 (Potassium Nitrate) provides nitrogen and a higher proportion of potassium.",
-                "🌶️ Balanced nutrition is important for healthy flowering and fruit development.",
-                "🧴 Follow the exact dosage and application instructions on the fertilizer label.",
-                "🚫 Avoid excessive nitrogen, which can encourage excessive leafy growth."
-            ],
-            "schedule": "Review feeding every 2–4 weeks during active growth according to the fertilizer product label.",
-            "warning": "🚨 Excess fertilizer can burn roots, damage leaves and cause nutrient imbalance."
-        },
-
-        "pruning": {
-            "title": "✂️ Pruning",
-            "guidance": [
-                "✂️ Remove clearly dead or severely diseased leaves.",
-                "🌿 Avoid excessive pruning of a healthy fruiting plant.",
-                "🧹 Keep pruning tools clean."
-            ],
-            "warning": "⚠️ Remove and dispose of heavily diseased material appropriately instead of leaving it near healthy plants."
-        },
-
-        "calendar": {
-            "watering": "Check soil moisture daily during hot weather.",
-            "leaf_inspection": "Inspect every 7 days for thrips, mites, spots, curling and nutrient deficiency symptoms.",
-            "fertilizer": "Review feeding every 2–4 weeks during active growth according to the product label.",
-            "pruning": "Remove dead or severely affected material during inspection."
-        },
-
-        "safety_care": [
-            "🧤 Wear protective equipment when applying crop-protection products.",
-            "🌬️ Do not spray during strong wind.",
-            "🧴 Follow the exact product label and required waiting period before harvest.",
-            "🥬 Wash harvested produce appropriately.",
-            "🚫 Do not randomly mix pesticides or fertilizers."
-        ],
-
-        "important_warning": [
-            "🚨 Leaf curling can have several causes, including pests, viruses, heat stress or nutrient problems.",
-            "🚨 Yellow leaves do not automatically mean fertilizer is required.",
-            "🚨 Check the underside of leaves for mites, thrips and other small pests."
-        ]
+    "temperature": {
+      "title": " Temperature & Humidity",
+      "summary": "Hibiscus prefers warm growing conditions and regular moisture.",
+      "ideal_range": "Approximately 18°C to 32°C for general growing conditions.",
+      "guidance": [
+        "🌱 Protect tropical hibiscus from prolonged cold conditions.",
+        "🔥 Monitor water needs carefully during hot weather.",
+        "🌬️ Good airflow helps reduce excessive humidity around the foliage.",
+        "💧 Regular moisture is important during active growth.",
+        "🌡️ Sudden temperature changes can stress the plant.",
+        "❄️ Protect tropical hibiscus from frost and very cold conditions."
+      ],
+      "humidity": "Moderate to high humidity is generally tolerated by hibiscus, but good airflow should be maintained to reduce prolonged leaf wetness.",
+      "warning": "⚠️ Sudden temperature changes, heat stress and irregular watering may contribute to leaf drop or flower-bud drop."
     },
 
-    "Tomato": {
-        "display_name": "🍅 Tomato Care Guide",
+    "soil": {
+      "title": " Soil",
+      "summary": "Use fertile, organic-matter-rich soil that retains reasonable moisture while draining excess water.",
+      "recommended_mix": [
+        "🌱 Good-quality garden soil or suitable potting mix",
+        "🍂 Well-decomposed compost or organic matter",
+        "🏖️ Coarse material such as sand, perlite or another drainage-improving component when needed"
+      ],
+      "soil_features": [
+        "💧 Moisture-retentive but well drained",
+        "🌱 Rich in organic matter",
+        "🌬️ Good air movement through the root zone",
+        "🚫 Avoid soil that remains saturated for long periods"
+      ],
+      "pH_guidance": "A slightly acidic to near-neutral growing medium is generally suitable. Avoid making large pH adjustments without a soil test.",
+      "warning": "⚠️ Poor drainage can contribute to root problems, while extremely dry soil can cause water stress."
+    },
 
-        "watering": {
-            "title": "💧 Watering",
-            "summary": "Provide consistent moisture while avoiding waterlogged soil.",
-            "guidance": [
-                "🌱 Check the soil before watering.",
-                "💧 Water near the root zone rather than frequently wetting the leaves.",
-                "☀️ Increase monitoring during hot weather.",
-                "🌧️ Avoid unnecessary watering after sufficient rainfall.",
-                "🪴 Use pots with drainage holes for container-grown tomatoes."
-            ],
-            "frequency": "Often every 1–3 days in hot conditions, but the correct schedule depends on weather, soil and plant size.",
-            "warning": "⚠️ Very inconsistent watering can contribute to plant stress and some fruit-quality problems."
+    "fertilizer": {
+      "title": " Recommended Fertilizer",
+      "recommended": "🌱 A complete balanced fertilizer such as 13-13-13 or 20-20-20 can be used for general hibiscus growth. 🌸 A phosphorus-containing flowering fertilizer may be used when appropriate during active flowering, following the product label.",
+      "fertilizer_options": [
+        {
+          "name": "Complete Balanced Fertilizer",
+          "purpose": "General growth and nutrition",
+          "guidance": [
+            "Use a complete fertilizer supplying nitrogen, phosphorus and potassium.",
+            "Products such as 13-13-13 or 20-20-20 are examples cited in extension guidance.",
+            "Follow the fertilizer label rather than applying a fixed dose to every plant."
+          ]
         },
-
-        "sunlight": {
-            "title": "☀️ Sunlight",
-            "summary": "Tomatoes generally need strong sunlight for vigorous growth and fruit production.",
-            "guidance": [
-                "🌞 Aim for around 6–8 hours of direct sunlight when possible.",
-                "🌿 Ensure good airflow around plants.",
-                "🏡 Avoid overcrowding container plants."
-            ],
-            "warning": "⚠️ Poor sunlight can reduce healthy growth and fruit production."
+        {
+          "name": "Slow-Release Complete Fertilizer",
+          "purpose": "Steady nutrient supply, especially for container plants",
+          "guidance": [
+            "Use a suitable slow-release product according to its label.",
+            "Do not combine repeated high-rate applications with additional fertilizer unless recommended by the product instructions."
+          ]
         },
-
-        "temperature": {
-            "title": "🌡️ Temperature",
-            "summary": "Tomatoes prefer warm growing conditions.",
-            "ideal_range": "Approximately 18°C to 30°C.",
-            "guidance": [
-                "🌸 Very high temperatures can reduce successful flowering and fruit set.",
-                "🌱 Protect plants from prolonged cold.",
-                "💧 Monitor watering more carefully during hot periods."
-            ],
-            "warning": "⚠️ Extreme heat can cause stress and wilting even when the plant has no disease."
+        {
+          "name": "Compost",
+          "purpose": "Organic matter and soil improvement",
+          "guidance": [
+            "Use mature, well-decomposed compost during soil preparation or as a soil amendment.",
+            "Mix appropriately into the growing medium."
+          ]
         },
+        {
+          "name": "Well-Decomposed Farmyard Manure",
+          "purpose": "Organic matter and nutrient contribution",
+          "guidance": [
+            "Use only well-decomposed material.",
+            "Incorporate it into prepared soil rather than placing fresh manure directly against the plant."
+          ]
+        }
+      ],
+      "flowering_guidance": [
+        "🌸 Hibiscus can benefit from appropriate feeding during active growth and flowering.",
+        "🧪 A fertilizer with a higher middle number may be used for flowering only when appropriate and according to the product label.",
+        "🚫 More fertilizer does not automatically mean more flowers.",
+        "🌿 Excessive fertilization can encourage excessive foliage and may contribute to nutrient or salt problems."
+      ],
+      "nutrient_guidance": [
+        "🧪 If nutrient deficiency is suspected, consider soil or plant testing before adding specific nutrients.",
+        "🌿 Iron should not be added routinely unless deficiency or a suitable recommendation indicates a need."
+      ],
+      "schedule": "Feed during active growth according to the selected fertilizer label. Frequency varies by fertilizer type; slow-release and liquid fertilizers have different schedules.",
+      "warning": "🚨 Over-fertilization can damage roots, burn leaves and cause nutrient or salt buildup. Never exceed the product label rate."
+    },
 
-        "soil": {
-            "title": "🪴 Soil",
-            "summary": "Use fertile, well-draining soil rich in organic matter.",
-            "recommended_mix": [
-                "🌱 Quality garden or potting soil",
-                "🍂 Well-decomposed compost",
-                "🏖️ Drainage-improving material when required"
-            ],
-            "warning": "⚠️ Avoid reusing heavily diseased soil or leaving infected plant debris around the growing area."
+    "pruning": {
+      "title": " Pruning",
+      "guidance": [
+        "✂️ Remove dead, damaged or clearly diseased branches.",
+        "🌿 Light pruning can encourage bushier growth.",
+        "🌸 Pruning encourages new growth, which can support flowering in suitable hibiscus types.",
+        "🧹 Use clean pruning tools.",
+        "🦠 Remove clearly infected plant material and dispose of it appropriately.",
+        "🌱 Avoid removing large amounts of healthy growth from a severely stressed plant."
+      ],
+      "warning": "⚠️ Disinfect pruning tools when moving between diseased and healthy plants."
+    },
+
+    "calendar": {
+      "daily": [
+        "💧 Check soil moisture during hot or dry weather.",
+        "🌡️ Monitor for heat or water stress."
+      ],
+      "weekly": [
+        "🔍 Inspect leaves and stems for pests and disease symptoms.",
+        "🌿 Check for mealybugs, whiteflies, aphids, scale, mites, rust and powdery growth.",
+        "🧹 Remove fallen diseased leaves where appropriate."
+      ],
+      "watering": "Water when the upper soil layer begins to dry rather than following a rigid calendar.",
+      "fertilizer": "Review feeding during active growth according to the selected fertilizer label.",
+      "pruning": "Remove dead or damaged growth during routine inspection."
+    },
+
+    "safety_care": [
+      "🧤 Wear gloves when handling fertilizers or plant-protection products.",
+      "🧴 Never exceed the product label rate.",
+      "🌬️ Apply sprays only under suitable conditions and avoid strong wind.",
+      "🐝 Avoid unnecessary pesticide use when pollinators are actively visiting flowers.",
+      "👶 Keep fertilizers and crop-protection products away from children and pets.",
+      "🚫 Do not combine fertilizers, fungicides or pesticides unless the product labels specifically permit mixing."
+    ],
+
+    "important_warning": [
+      "🚨 Do not assume every yellow leaf is caused by a nutrient deficiency; watering, pests, diseases and environmental stress can cause similar symptoms.",
+      "🚨 Water stress can contribute to bud drop.",
+      "🚨 Do not repeatedly increase fertilizer because the plant is not flowering.",
+      "🚨 If the plant declines rapidly, inspect the root zone, watering conditions and pests as well as the leaves."
+    ]
+  },
+
+  "Chilli": {
+    "display_name": "🌶️ Chilli Care Guide",
+
+    "watering": {
+      "title": " Watering & Irrigation",
+      "summary": "Maintain reasonably consistent soil moisture while avoiding waterlogging.",
+      "guidance": [
+        "🌱 Check the upper layer of soil before watering.",
+        "💧 Water when the soil begins to dry rather than keeping it continuously saturated.",
+        "☀️ Increase monitoring during hot and dry weather.",
+        "🌧️ Reduce irrigation when rainfall has already supplied sufficient moisture.",
+        "🪴 Container-grown chilli may require more frequent watering than plants in the ground.",
+        "🌿 Water deeply enough to moisten the root zone.",
+        "🌅 Water during the cooler part of the day when practical.",
+        "🍂 Mulching can help reduce evaporation and maintain more consistent soil moisture."
+      ],
+      "irrigation": [
+        "💧 Direct water toward the root zone rather than repeatedly wetting leaves.",
+        "🌱 Drip or soaker irrigation can help provide consistent root-zone moisture.",
+        "🌧️ Check soil moisture after rainfall before irrigating again.",
+        "🔥 During heat waves, monitor soil moisture more frequently.",
+        "🚫 Avoid prolonged standing water around the roots.",
+        "💦 If using irrigation for a crop, adjust frequency according to soil type, weather and plant growth stage."
+      ],
+      "frequency": "Often around 2–3 times per week, but actual frequency depends on temperature, rainfall, soil type, drainage, plant size and container size.",
+      "signs_of_underwatering": [
+        "🌿 Wilting",
+        "🍂 Dry or curling leaves",
+        "🌸 Flower drop",
+        "🌶️ Poor fruit development when stress is prolonged"
+      ],
+      "signs_of_overwatering": [
+        "🍂 Yellowing leaves",
+        "💧 Persistently wet soil",
+        "🌱 Weak growth",
+        "🦠 Increased risk of root-related problems"
+      ],
+      "warning": "⚠️ Irregular watering and severe moisture stress can affect flowering, fruit set and fruit development."
+    },
+
+    "sunlight": {
+      "title": " Sunlight",
+      "summary": "Chilli generally performs best with strong direct sunlight.",
+      "guidance": [
+        "🌞 Aim for approximately 6–8 hours of direct sunlight where conditions are suitable.",
+        "🌶️ Good light supports healthy vegetative growth, flowering and fruit production.",
+        "🌬️ Provide adequate spacing and airflow around plants.",
+        "🏡 Avoid growing chilli in deep shade.",
+        "🔥 During extreme heat, monitor for heat and water stress."
+      ],
+      "warning": "⚠️ Insufficient light can result in weak growth and reduced flowering or fruit production."
+    },
+
+    "temperature": {
+      "title": " Temperature & Humidity",
+      "summary": "Chilli is a warm-season crop and performs best under warm growing conditions.",
+      "ideal_range": "Approximately 20°C to 32°C for general growing conditions.",
+      "guidance": [
+        "🌱 Protect plants from prolonged cold conditions.",
+        "🔥 Monitor irrigation carefully during very hot weather.",
+        "🌸 Extreme heat can interfere with flowering and fruit set.",
+        "🌬️ Good airflow helps reduce prolonged humidity around foliage.",
+        "🌡️ Avoid sudden environmental changes where practical."
+      ],
+      "humidity": "Maintain good air circulation, particularly where humidity is high. Avoid unnecessary prolonged leaf wetness.",
+      "warning": "⚠️ High heat combined with poor watering can cause severe plant stress and affect flowering and fruit development."
+    },
+
+    "soil": {
+      "title": " Soil",
+      "summary": "Use fertile, loose and well-draining soil with adequate organic matter.",
+      "recommended_mix": [
+        "🌱 Good-quality garden soil or vegetable potting mix",
+        "🍂 Mature compost or other well-decomposed organic matter",
+        "🏖️ Sand, perlite or another suitable drainage-improving material when required"
+      ],
+      "soil_features": [
+        "💧 Good drainage",
+        "🌱 Adequate organic matter",
+        "🌬️ Good root-zone aeration",
+        "⚖️ Avoid prolonged waterlogging"
+      ],
+      "pH_guidance": "For pepper/chilli production, approximately pH 6.0–6.8 is a commonly recommended range; soil testing is preferable before major pH correction.",
+      "warning": "⚠️ Poor drainage can increase root problems and excessive fertilizer accumulation."
+    },
+
+    "fertilizer": {
+      "title": " Recommended Fertilizer",
+      "recommended": "🌱 Use a complete vegetable fertilizer according to soil-test results and crop stage. 🌶️ Nitrogen is important for growth, while phosphorus and potassium should be supplied according to soil fertility and crop requirements.",
+      "fertilizer_options": [
+        {
+          "name": "Complete Vegetable Fertilizer",
+          "purpose": "General crop nutrition",
+          "guidance": [
+            "Use a complete N-P-K fertilizer when needed.",
+            "Choose the analysis according to soil-test results and local crop recommendations.",
+            "Do not assume the same fertilizer rate is suitable for every soil."
+          ]
         },
-
-        "fertilizer": {
-            "title": "🌱 Recommended Fertilizer",
-            "recommended": "🌱 19-19-19 NPK water-soluble fertilizer during general growth. 🍅 13-00-45 (Potassium Nitrate) can be used as a potassium-rich fertilizer during flowering and fruit development.",
-            "guidance": [
-                "🌱 Use 19-19-19 NPK during early vegetative growth for balanced nutrition.",
-                "🌸 During flowering and fruit development, 13-00-45 (Potassium Nitrate) provides a higher proportion of potassium.",
-                "🍅 Avoid excessive nitrogen during fruiting because it can encourage excessive leafy growth.",
-                "🧴 Follow fertilizer product label rates and application instructions.",
-                "🚫 Do not increase fertilizer dosage to try to obtain faster growth or larger fruits."
-            ],
-            "schedule": "Review feeding every 2–4 weeks during active growth depending on the fertilizer product and label instructions.",
-            "warning": "🚨 Over-fertilization can damage roots and cause nutrient imbalance or salt buildup."
+        {
+          "name": "Nitrogen Fertilizer",
+          "purpose": "Vegetative growth and crop development",
+          "guidance": [
+            "Nitrogen can be supplied before planting and later as a side-dress when appropriate.",
+            "Crop-stage nitrogen management is more useful than repeatedly applying large amounts.",
+            "Avoid excessive nitrogen because it can promote excessive vegetative growth."
+          ]
         },
-
-        "pruning": {
-            "title": "✂️ Pruning and Plant Support",
-            "guidance": [
-                "✂️ Remove dead or heavily diseased leaves where appropriate.",
-                "🌿 Keep lower foliage from resting on wet soil when possible.",
-                "🪢 Support plants using stakes or cages.",
-                "🧹 Keep tools clean when working with multiple plants."
-            ],
-            "warning": "⚠️ Do not remove large amounts of healthy foliage at once."
+        {
+          "name": "Phosphorus and Potassium Fertilizer",
+          "purpose": "Root development, flowering and fruit production",
+          "guidance": [
+            "Use phosphorus and potassium according to soil-test results.",
+            "Do not add high amounts of phosphorus or potassium when the soil already contains sufficient levels."
+          ]
         },
+        {
+          "name": "Compost or Well-Decomposed Organic Matter",
+          "purpose": "Soil improvement and organic nutrient contribution",
+          "guidance": [
+            "Use mature compost or well-decomposed organic material during soil preparation.",
+            "Do not use fresh manure directly around plants."
+          ]
+        }
+      ],
+      "stage_based_guidance": [
+        "🌱 Early growth: provide balanced nutrition sufficient for healthy vegetative development.",
+        "🌸 Flowering: maintain adequate nutrition without excessive nitrogen.",
+        "🌶️ Fruit development: maintain appropriate potassium and overall nutrition according to soil and crop requirements.",
+        "🧪 Soil testing is preferred when deciding phosphorus and potassium applications."
+      ],
+      "schedule": "Apply fertilizer according to soil-test recommendations, crop stage and the selected product label. Split applications may be appropriate for nitrogen during the crop cycle.",
+      "warning": "🚨 Excess fertilizer can burn roots, increase salt concentration and create nutrient imbalance. Do not use a high rate simply to increase plant growth."
+    },
 
-        "calendar": {
-            "watering": "Check soil moisture daily, especially during hot weather.",
-            "leaf_inspection": "Inspect every 7 days for early blight, late blight, leaf mold, spots, pests and leaf curling.",
-            "fertilizer": "Review feeding every 2–4 weeks during active growth according to the fertilizer label.",
-            "pruning": "Check and remove dead or severely affected leaves during weekly inspection."
+    "pruning": {
+      "title": " Pruning",
+      "guidance": [
+        "✂️ Remove clearly dead or severely diseased leaves.",
+        "🌿 Avoid excessive pruning of a healthy fruiting plant.",
+        "🧹 Keep pruning tools clean.",
+        "🦠 Remove heavily diseased material and dispose of it appropriately.",
+        "🌱 Maintain sufficient healthy foliage for photosynthesis and fruit development."
+      ],
+      "warning": "⚠️ Avoid removing large amounts of healthy foliage because the plant needs leaves to support growth and fruit production."
+    },
+
+    "calendar": {
+      "daily": [
+        "💧 Check soil moisture during hot weather.",
+        "🌡️ Monitor plants for heat or water stress."
+      ],
+      "weekly": [
+        "🔍 Inspect leaves and stems for pests and disease symptoms.",
+        "🐛 Check the underside of leaves for mites, thrips and other small pests.",
+        "🍂 Look for leaf spots, curling, discoloration and nutrient-deficiency symptoms."
+      ],
+      "watering": "Check soil moisture frequently and adjust irrigation according to weather and plant growth.",
+      "fertilizer": "Review feeding according to crop stage, soil-test results and product instructions.",
+      "pruning": "Remove dead or severely affected material during routine inspection."
+    },
+
+    "safety_care": [
+      "🧤 Wear appropriate protective equipment when applying fertilizers or crop-protection products.",
+      "🌬️ Do not spray during strong wind.",
+      "🧴 Follow the exact product label and required waiting period before harvest.",
+      "🥬 Follow appropriate produce-washing practices after harvest.",
+      "🚫 Do not randomly mix pesticides, fungicides or fertilizers.",
+      "🐝 Avoid unnecessary pesticide use when pollinators are active."
+    ],
+
+    "important_warning": [
+      "🚨 Leaf curling can have several causes, including pests, viruses, heat stress and nutrient problems.",
+      "🚨 Yellow leaves do not automatically mean that fertilizer is required.",
+      "🚨 Check the underside of leaves for mites, thrips and other small pests.",
+      "🚨 Do not apply large amounts of fertilizer without considering soil condition and plant symptoms.",
+      "🚨 If symptoms spread rapidly, inspect nearby plants and environmental conditions."
+    ]
+  },
+
+  "Tomato": {
+    "display_name": "🍅 Tomato Care Guide",
+
+    "watering": {
+      "title": " Watering & Irrigation",
+      "summary": "Tomatoes perform best with consistent root-zone moisture while avoiding waterlogged soil.",
+      "guidance": [
+        "🌱 Check soil moisture before watering.",
+        "💧 Water deeply enough to moisten the root zone rather than giving frequent shallow amounts.",
+        "🌿 Water near the base of the plant rather than repeatedly wetting leaves.",
+        "☀️ Increase monitoring during hot and dry weather.",
+        "🌧️ Reduce irrigation after sufficient rainfall.",
+        "🪴 Use containers with drainage holes.",
+        "🌅 Water during the cooler part of the day when practical.",
+        "🍂 Mulching can help conserve soil moisture and reduce rapid moisture fluctuations.",
+        "🚫 Avoid allowing the soil to remain continuously saturated."
+      ],
+      "irrigation": [
+        "💧 Drip irrigation or soaker irrigation is useful for delivering water directly to the root zone.",
+        "🌿 Avoid unnecessary overhead irrigation because wet foliage can encourage some foliar diseases.",
+        "🌧️ Check actual soil moisture after rainfall before irrigating.",
+        "🔥 During hot periods, monitor plants and soil more frequently.",
+        "🌱 Maintain relatively consistent moisture during flowering and fruit development.",
+        "💦 Adjust irrigation according to soil type, weather, plant size and container size."
+      ],
+      "frequency": "Often every 1–3 days in hot conditions, but actual frequency depends on weather, soil, plant size, container size and drainage.",
+      "signs_of_underwatering": [
+        "🌿 Wilting",
+        "🍂 Dry or curling leaves",
+        "🌱 Slow growth",
+        "🍅 Poor fruit development when stress is prolonged"
+      ],
+      "signs_of_overwatering": [
+        "🍂 Yellowing leaves",
+        "💧 Persistently saturated soil",
+        "🌱 Weak growth",
+        "🦠 Increased root and disease problems"
+      ],
+      "warning": "⚠️ Large fluctuations in soil moisture can stress tomato plants and contribute to some fruit-quality problems."
+    },
+
+    "sunlight": {
+      "title": " Sunlight",
+      "summary": "Tomatoes generally need strong sunlight for vigorous growth and fruit production.",
+      "guidance": [
+        "🌞 Aim for around 6–8 hours of direct sunlight when possible.",
+        "🍅 Strong light supports flowering and fruit development.",
+        "🌬️ Provide good airflow between plants.",
+        "🏡 Avoid overcrowding container-grown tomatoes.",
+        "🔥 Monitor watering during periods of intense heat."
+      ],
+      "warning": "⚠️ Poor sunlight can result in weak growth and reduced flowering and fruit production."
+    },
+
+    "temperature": {
+      "title": " Temperature & Humidity",
+      "summary": "Tomatoes prefer warm growing conditions but can experience stress under extreme temperatures.",
+      "ideal_range": "Approximately 18°C to 30°C for general growing conditions.",
+      "guidance": [
+        "🌱 Protect plants from prolonged cold conditions.",
+        "🔥 Monitor water needs carefully during hot weather.",
+        "🌸 Very high temperatures can interfere with flowering and fruit set.",
+        "🌬️ Maintain good airflow around foliage.",
+        "💧 Avoid unnecessarily prolonged leaf wetness."
+      ],
+      "humidity": "Good air circulation is particularly important when humidity is high because prolonged leaf wetness can increase foliar disease pressure.",
+      "warning": "⚠️ Extreme heat can cause stress and wilting even when the plant does not have a disease."
+    },
+
+    "soil": {
+      "title": " Soil",
+      "summary": "Use fertile, well-draining soil with adequate organic matter.",
+      "recommended_mix": [
+        "🌱 Quality garden soil or suitable vegetable potting mix",
+        "🍂 Well-decomposed compost or organic matter",
+        "🏖️ Perlite, coarse material or another drainage-improving component when required"
+      ],
+      "soil_features": [
+        "💧 Good drainage",
+        "🌱 Adequate organic matter",
+        "🌬️ Good root-zone aeration",
+        "⚖️ Suitable nutrient availability"
+      ],
+      "pH_guidance": "A soil pH around 6.0–6.8 is commonly recommended for tomato production. Use soil testing before making significant pH adjustments.",
+      "warning": "⚠️ Avoid heavily compacted, poorly drained soil and avoid leaving infected plant debris around the growing area."
+    },
+
+    "fertilizer": {
+      "title": " Recommended Fertilizer",
+      "recommended": "🍅 Use a complete tomato/vegetable fertilizer according to soil-test results. A fertilizer with relatively lower nitrogen and adequate phosphorus and potassium can be appropriate for tomatoes. 🌱 Apply additional nitrogen only when crop and soil conditions indicate a need.",
+      "fertilizer_options": [
+        {
+          "name": "Complete Tomato/Vegetable Fertilizer",
+          "purpose": "General tomato nutrition",
+          "guidance": [
+            "Use a complete fertilizer when soil testing indicates a need.",
+            "Tomatoes generally benefit from balanced nutrition with attention to nitrogen, phosphorus and potassium.",
+            "A product such as 10-20-10 is one example used in extension recommendations when soil-test information is unavailable."
+          ]
         },
+        {
+          "name": "Nitrogen Fertilizer",
+          "purpose": "Vegetative growth and continued crop development",
+          "guidance": [
+            "Apply nitrogen according to soil fertility and crop demand.",
+            "Split applications can be used when appropriate during the growing season.",
+            "Avoid excessive nitrogen because it can promote excessive vine growth and delay maturity."
+          ]
+        },
+        {
+          "name": "Phosphorus and Potassium Fertilizer",
+          "purpose": "Root development, flowering and fruit development",
+          "guidance": [
+            "Use phosphorus and potassium according to soil-test results.",
+            "Potassium is particularly important to maintain adequate nutrition during fruit production.",
+            "Do not apply large quantities when soil tests already show sufficient levels."
+          ]
+        },
+        {
+          "name": "Compost or Well-Decomposed Organic Matter",
+          "purpose": "Soil improvement and organic nutrient contribution",
+          "guidance": [
+            "Incorporate mature compost or well-decomposed organic matter into the soil before planting.",
+            "Use only well-decomposed manure or organic materials."
+          ]
+        }
+      ],
+      "stage_based_guidance": [
+        "🌱 Before planting: incorporate required nutrients based on soil testing and crop recommendations.",
+        "🌿 Early growth: provide enough nutrition for healthy plant establishment without excessive nitrogen.",
+        "🌸 Flowering: maintain balanced nutrition and adequate potassium.",
+        "🍅 Fruit development: maintain adequate potassium and nitrogen according to crop demand and soil condition.",
+        "🧪 Use soil or plant testing when nutrient deficiency or excess is suspected."
+      ],
+      "schedule": "Review feeding according to crop stage, soil-test results and the fertilizer product label. Additional applications should be based on crop demand rather than a fixed high-dose schedule.",
+      "warning": "🚨 Excess nitrogen can produce excessive vegetative growth and may increase some fruit and disease-management problems. Over-fertilization can also damage roots and increase salt buildup."
+    },
 
-        "safety_care": [
-            "🧤 Use protective equipment when handling fertilizers or plant-protection products.",
-            "🌬️ Avoid spraying in strong wind.",
-            "🧴 Follow product labels exactly.",
-            "🍅 Follow the required pre-harvest interval for agricultural chemicals.",
-            "🐝 Avoid unnecessary chemical treatment when pollinators are active."
-        ],
+    "pruning": {
+      "title": " Pruning and Plant Support",
+      "guidance": [
+        "✂️ Remove dead or severely diseased leaves where appropriate.",
+        "🌿 Keep lower foliage from resting directly on wet soil when possible.",
+        "🪢 Support plants using suitable stakes, cages or trellising.",
+        "🧹 Keep tools clean when working with multiple plants.",
+        "🌱 Avoid removing large amounts of healthy foliage at one time.",
+        "🦠 Remove severely infected plant material and dispose of it appropriately."
+      ],
+      "warning": "⚠️ Excessive removal of healthy foliage can reduce the plant's ability to photosynthesize and support fruit development."
+    },
 
-        "important_warning": [
-            "🚨 Tomato leaf spots can have multiple causes; do not assume every spot is the same disease.",
-            "🚨 Late blight and early blight require careful differentiation because management decisions can differ.",
-            "🚨 Avoid wetting leaves unnecessarily when fungal disease pressure is high.",
-            "🚨 If symptoms spread rapidly, isolate the affected plant area and inspect nearby plants."
-        ]
-    }
+    "calendar": {
+      "daily": [
+        "💧 Check soil moisture, especially during hot weather.",
+        "🌡️ Monitor plants for heat or water stress."
+      ],
+      "weekly": [
+        "🔍 Inspect leaves, stems and fruit.",
+        "🍂 Look for early blight, late blight, leaf mold, leaf spots and unusual discoloration.",
+        "🐛 Check for whiteflies, aphids and other pests.",
+        "🌿 Check plant support and airflow."
+      ],
+      "watering": "Check soil moisture daily during hot weather and adjust irrigation according to actual conditions.",
+      "fertilizer": "Review feeding according to crop stage, soil condition and fertilizer label instructions.",
+      "pruning": "Check and remove dead or severely affected leaves during weekly inspection."
+    },
+
+    "safety_care": [
+      "🧤 Use protective equipment when handling fertilizers or plant-protection products.",
+      "🌬️ Avoid spraying in strong wind.",
+      "🧴 Follow product labels exactly.",
+      "🍅 Follow the required pre-harvest interval for agricultural chemicals.",
+      "🐝 Avoid unnecessary chemical treatment when pollinators are active.",
+      "🚫 Do not randomly mix fertilizers, fungicides or pesticides."
+    ],
+
+    "important_warning": [
+      "🚨 Tomato leaf spots can have multiple causes; do not assume every spot is the same disease.",
+      "🚨 Early blight and late blight require careful differentiation because management can differ.",
+      "🚨 Avoid unnecessary wetting of tomato leaves when foliar disease pressure is high.",
+      "🚨 Do not automatically apply fertilizer when leaves turn yellow; check watering, pests, disease and nutrient conditions.",
+      "🚨 If symptoms spread rapidly, inspect nearby plants and environmental conditions."
+    ]
+  }
 }

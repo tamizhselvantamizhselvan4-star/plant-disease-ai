@@ -590,6 +590,293 @@ a{
 }
 
 /* =========================
+   THEMED CARE CARDS
+   (each care topic — watering,
+   sunlight, soil, fertilizer,
+   pruning, pests, temperature,
+   humidity — gets its own
+   colour, icon and motion,
+   auto-applied by the template)
+========================= */
+
+.care-card.care-themed{
+    overflow:hidden;
+    background:
+        linear-gradient(
+            160deg,
+            var(--theme-bg1) 0%,
+            var(--theme-bg2) 45%,
+            #ffffff 100%
+        );
+    border:1px solid var(--theme-border);
+    box-shadow:var(--theme-shadow);
+}
+
+.care-card.care-themed:hover{
+    box-shadow:var(--theme-shadow-hover);
+}
+
+.care-card.care-themed::before{
+    content:"";
+    position:absolute;
+    width:190px;
+    height:190px;
+    right:-70px;
+    bottom:-80px;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle,
+            var(--theme-glow),
+            transparent 70%
+        );
+    pointer-events:none;
+    z-index:0;
+}
+
+.care-card.care-themed .care-step-number{
+    background:
+        linear-gradient(
+            135deg,
+            var(--theme-accent),
+            var(--theme-accent2)
+        );
+    box-shadow:
+        0 6px 16px
+        var(--theme-accent-shadow);
+}
+
+.care-card.care-themed .care-card-title{
+    position:relative;
+    color:var(--theme-title-color);
+    border-bottom-color:var(--theme-border-light);
+}
+
+.care-card.care-themed .care-card-title::after{
+    content:var(--theme-icon);
+    margin-left:auto;
+    font-size:19px;
+    animation:theme-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes theme-pulse{
+    0%,100%{ transform:translateY(0) scale(1); opacity:.85; }
+    50%{ transform:translateY(3px) scale(1.1); opacity:1; }
+}
+
+.care-card.care-themed .care-card-summary{
+    position:relative;
+    z-index:1;
+    padding:12px 14px;
+    border-radius:14px;
+    background:var(--theme-summary-bg);
+    border:1px dashed var(--theme-border);
+    color:var(--theme-title-color);
+}
+
+.care-card.care-themed .care-card-content li{
+    background:var(--theme-li-bg);
+    color:var(--theme-li-color);
+}
+
+.care-card.care-themed .care-card-content li::before{
+    content:var(--theme-icon);
+    background:transparent;
+    font-size:12px;
+}
+
+.care-card.care-themed .care-card-extra{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+}
+
+.care-card.care-themed .care-card-extra>div{
+    border-left:none;
+    border:1px solid var(--theme-border);
+    background:
+        linear-gradient(
+            160deg,
+            #ffffff,
+            var(--theme-bg2)
+        );
+    border-radius:16px;
+    padding:14px 16px 14px 40px;
+    position:relative;
+}
+
+.care-card.care-themed .care-card-extra>div::before{
+    content:var(--theme-icon);
+    position:absolute;
+    left:12px;
+    top:14px;
+    font-size:15px;
+}
+
+.care-card.care-themed .care-card-extra strong{
+    display:block;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    color:var(--theme-accent);
+    margin-bottom:4px;
+}
+
+.care-card.care-themed .care-card-warning{
+    background:var(--theme-li-bg);
+    color:var(--theme-title-color);
+    border:1px solid var(--theme-border);
+}
+
+/* ---- individual theme palettes ---- */
+
+.care-water{
+    --theme-bg1:#eaf7ff;
+    --theme-bg2:#e3f3ff;
+    --theme-border:#bfe3fb;
+    --theme-border-light:#d2ecfa;
+    --theme-shadow:0 14px 34px rgba(20,110,180,.16);
+    --theme-shadow-hover:0 22px 44px rgba(20,110,180,.22);
+    --theme-accent:#1478c9;
+    --theme-accent2:#4ec3ef;
+    --theme-accent-shadow:rgba(20,120,190,.35);
+    --theme-title-color:#0b4f7a;
+    --theme-icon:"💧";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#eaf6ff;
+    --theme-li-color:#1c4a63;
+    --theme-glow:rgba(67,182,232,.18);
+}
+
+.care-sun{
+    --theme-bg1:#fff8e6;
+    --theme-bg2:#fff0cf;
+    --theme-border:#f5dfa0;
+    --theme-border-light:#f6e6bd;
+    --theme-shadow:0 14px 34px rgba(200,140,10,.16);
+    --theme-shadow-hover:0 22px 44px rgba(200,140,10,.22);
+    --theme-accent:#c9860f;
+    --theme-accent2:#f2b73d;
+    --theme-accent-shadow:rgba(200,140,10,.32);
+    --theme-title-color:#7a4f07;
+    --theme-icon:"☀️";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#fff3d9;
+    --theme-li-color:#6b4a10;
+    --theme-glow:rgba(242,183,61,.25);
+}
+
+.care-soil{
+    --theme-bg1:#faf3ea;
+    --theme-bg2:#f3e3cf;
+    --theme-border:#e3caa4;
+    --theme-border-light:#ecd9b8;
+    --theme-shadow:0 14px 34px rgba(140,95,35,.16);
+    --theme-shadow-hover:0 22px 44px rgba(140,95,35,.22);
+    --theme-accent:#8a5a20;
+    --theme-accent2:#c4914e;
+    --theme-accent-shadow:rgba(140,95,35,.3);
+    --theme-title-color:#5c3c15;
+    --theme-icon:"🪴";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#f4e6d2;
+    --theme-li-color:#5e4319;
+    --theme-glow:rgba(196,145,78,.22);
+}
+
+.care-feed{
+    --theme-bg1:#f2fbe9;
+    --theme-bg2:#e6f6d3;
+    --theme-border:#c9e79c;
+    --theme-border-light:#dcefb7;
+    --theme-shadow:0 14px 34px rgba(90,150,20,.16);
+    --theme-shadow-hover:0 22px 44px rgba(90,150,20,.22);
+    --theme-accent:#5c8c14;
+    --theme-accent2:#9ecb4a;
+    --theme-accent-shadow:rgba(90,150,20,.3);
+    --theme-title-color:#3d5c0d;
+    --theme-icon:"🌿";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#eaf6d5;
+    --theme-li-color:#3f5c14;
+    --theme-glow:rgba(158,203,74,.22);
+}
+
+.care-prune{
+    --theme-bg1:#f4f0fb;
+    --theme-bg2:#e9e0f7;
+    --theme-border:#cdb9ec;
+    --theme-border-light:#ddcdf2;
+    --theme-shadow:0 14px 34px rgba(110,60,170,.16);
+    --theme-shadow-hover:0 22px 44px rgba(110,60,170,.22);
+    --theme-accent:#7440b0;
+    --theme-accent2:#a878d8;
+    --theme-accent-shadow:rgba(110,60,170,.3);
+    --theme-title-color:#4b2778;
+    --theme-icon:"✂️";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#ece1f8;
+    --theme-li-color:#4c2a76;
+    --theme-glow:rgba(168,120,216,.22);
+}
+
+.care-shield{
+    --theme-bg1:#fff1ef;
+    --theme-bg2:#ffe1dc;
+    --theme-border:#f3bcb0;
+    --theme-border-light:#f7cec5;
+    --theme-shadow:0 14px 34px rgba(200,60,30,.16);
+    --theme-shadow-hover:0 22px 44px rgba(200,60,30,.22);
+    --theme-accent:#c8431e;
+    --theme-accent2:#ef7a4f;
+    --theme-accent-shadow:rgba(200,60,30,.3);
+    --theme-title-color:#7a2a10;
+    --theme-icon:"🛡️";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#ffe6e0;
+    --theme-li-color:#7a2a10;
+    --theme-glow:rgba(239,122,79,.22);
+}
+
+.care-temp{
+    --theme-bg1:#fff0ec;
+    --theme-bg2:#ffe0d6;
+    --theme-border:#f4c2ab;
+    --theme-border-light:#f8d4c1;
+    --theme-shadow:0 14px 34px rgba(210,90,30,.16);
+    --theme-shadow-hover:0 22px 44px rgba(210,90,30,.22);
+    --theme-accent:#d2601e;
+    --theme-accent2:#f2954f;
+    --theme-accent-shadow:rgba(210,90,30,.3);
+    --theme-title-color:#7a3a10;
+    --theme-icon:"🌡️";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#ffe8dd;
+    --theme-li-color:#7a3a10;
+    --theme-glow:rgba(242,149,79,.22);
+}
+
+.care-humid{
+    --theme-bg1:#eafbfb;
+    --theme-bg2:#dbf5f5;
+    --theme-border:#a9e2e2;
+    --theme-border-light:#c3ecec;
+    --theme-shadow:0 14px 34px rgba(10,150,150,.16);
+    --theme-shadow-hover:0 22px 44px rgba(10,150,150,.22);
+    --theme-accent:#0e8f8f;
+    --theme-accent2:#4fd3d3;
+    --theme-accent-shadow:rgba(10,150,150,.3);
+    --theme-title-color:#0a5555;
+    --theme-icon:"💦";
+    --theme-summary-bg:rgba(255,255,255,.65);
+    --theme-li-bg:#dff7f7;
+    --theme-li-color:#0a5555;
+    --theme-glow:rgba(79,211,211,.22);
+}
+
+/* =========================
    CALENDAR
 ========================= */
 
@@ -1045,7 +1332,28 @@ a{
 
 {% for card in plant_care.get("sections", []) %}
 
-<article class="care-card">
+{% set title_lower = card.title|lower %}
+{% if card.icon == "💧" or "water" in title_lower or "irrigat" in title_lower %}
+    {% set theme_class = "care-themed care-water" %}
+{% elif card.icon in ["☀️","🌞"] or "sun" in title_lower or "light" in title_lower %}
+    {% set theme_class = "care-themed care-sun" %}
+{% elif card.icon == "🪴" or "soil" in title_lower or "potting" in title_lower %}
+    {% set theme_class = "care-themed care-soil" %}
+{% elif card.icon in ["🌿","🍃"] or "fertiliz" in title_lower or "nutrition" in title_lower or "feed" in title_lower %}
+    {% set theme_class = "care-themed care-feed" %}
+{% elif card.icon == "✂️" or "prun" in title_lower or "trim" in title_lower %}
+    {% set theme_class = "care-themed care-prune" %}
+{% elif card.icon == "🛡️" or "pest" in title_lower or "disease" in title_lower or "prevent" in title_lower %}
+    {% set theme_class = "care-themed care-shield" %}
+{% elif card.icon == "🌡️" or "temperature" in title_lower %}
+    {% set theme_class = "care-themed care-temp" %}
+{% elif card.icon == "💦" or "humid" in title_lower %}
+    {% set theme_class = "care-themed care-humid" %}
+{% else %}
+    {% set theme_class = "" %}
+{% endif %}
+
+<article class="care-card{% if theme_class %} {{ theme_class }}{% endif %}">
 
 <div class="care-step-number">
 {{ loop.index }}
@@ -1111,6 +1419,13 @@ a{
 
 {% endfor %}
 
+{% elif item is sequence and item is not string and item|length == 2 %}
+
+<div>
+<strong>{{ item[0] }}:</strong>
+{{ item[1] }}
+</div>
+
 {% else %}
 
 <div>{{ item }}</div>
@@ -1141,7 +1456,7 @@ a{
 
 {% if plant_care.get("prevention") %}
 
-<article class="care-card">
+<article class="care-card care-themed care-shield">
 
 <div class="care-step-number">
 {{ plant_care.get("sections", [])|length + 1 }}

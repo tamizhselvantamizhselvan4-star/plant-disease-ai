@@ -4465,38 +4465,101 @@ function putFileIntoMainInput(file) {
 }
 
 
-function showSelectedImage(file) {
+async function optimizeScanImage(file) {
+
+    if (!file || !file.type || !file.type.startsWith("image/")) {
+        return file;
+    }
+
+    // Avoid unnecessary work for already-small images.
+    if (file.size <= 900 * 1024) {
+        return file;
+    }
+
+    try {
+        const bitmap = await createImageBitmap(file);
+        const maxDimension = 1280;
+        const scale = Math.min(
+            1,
+            maxDimension / Math.max(bitmap.width, bitmap.height)
+        );
+
+        const width = Math.max(1, Math.round(bitmap.width * scale));
+        const height = Math.max(1, Math.round(bitmap.height * scale));
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext("2d", { alpha: false });
+        context.drawImage(bitmap, 0, 0, width, height);
+        bitmap.close();
+
+        const blob = await new Promise(function (resolve) {
+            canvas.toBlob(resolve, "image/jpeg", 0.80);
+        });
+
+        canvas.width = 1;
+        canvas.height = 1;
+
+        if (!blob || blob.size >= file.size) {
+            return file;
+        }
+
+        const baseName = (file.name || "plant-image")
+            .replace(/\.[^.]+$/, "")
+            .replace(/[^a-zA-Z0-9_-]/g, "_");
+
+        return new File(
+            [blob],
+            baseName + ".jpg",
+            {
+                type: "image/jpeg",
+                lastModified: Date.now()
+            }
+        );
+
+    } catch (error) {
+        console.warn("Image optimization skipped:", error);
+        return file;
+    }
+}
+
+
+async function showSelectedImage(file, sourceInput) {
 
     if (!file) {
         return;
     }
 
+    detectButton.disabled = true;
+    detectButton.textContent = "⚡ PREPARING IMAGE...";
     filePreview.style.display = "block";
+    filePreview.textContent = "⚡ Optimizing image for faster scan...";
+
+    const optimizedFile = await optimizeScanImage(file);
+
+    // Always put the optimized image into the actual form input.
+    if (imageInput) {
+        putFileIntoMainInput(optimizedFile);
+    }
 
     filePreview.textContent =
-        "✅ Image selected: "
-        +
-        file.name;
+        "✅ Image ready: " + optimizedFile.name;
 
-    detectButton.textContent =
-        "🔍 DETECT DISEASE";
-
+    detectButton.textContent = "🔍 DETECT DISEASE";
     detectButton.disabled = false;
 
-    const reader = new FileReader();
+    if (imagePreview.dataset.objectUrl) {
+        try {
+            URL.revokeObjectURL(imagePreview.dataset.objectUrl);
+        } catch (error) {}
+    }
 
-    reader.onload = function (event) {
-
-        imagePreview.src =
-            event.target.result;
-
-        imagePreviewContainer.style.display =
-            "block";
-
-    };
-
-    reader.readAsDataURL(file);
-
+    // Object URLs are much lighter than FileReader/base64 for large camera photos.
+    const previewUrl = URL.createObjectURL(optimizedFile);
+    imagePreview.dataset.objectUrl = previewUrl;
+    imagePreview.src = previewUrl;
+    imagePreviewContainer.style.display = "block";
 }
 
 
@@ -4518,7 +4581,8 @@ if (imageInput) {
             ) {
 
                 showSelectedImage(
-                    this.files[0]
+                    this.files[0],
+                    imageInput
                 );
 
             }
@@ -4563,17 +4627,10 @@ if (cameraInput) {
                 const cameraFile =
                     this.files[0];
 
-                if (
-                    putFileIntoMainInput(
-                        cameraFile
-                    )
-                ) {
-
-                    showSelectedImage(
-                        cameraFile
-                    );
-
-                }
+                showSelectedImage(
+                    cameraFile,
+                    cameraInput
+                );
 
             }
 

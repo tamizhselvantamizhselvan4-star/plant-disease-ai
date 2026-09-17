@@ -2736,10 +2736,12 @@ def save_chat_message(
     message,
     response,
     mentality,
-    disease
+    disease,
+    user_id=None
 ):
 
-    user_id = session.get("user_id")
+    if user_id is None:
+        user_id = session.get("user_id")
     records = load_chat_records()
 
     records.append({
@@ -6236,32 +6238,59 @@ def chat_api():
     )
 
 
-    response = generate_chat_response(
+    # Generate the answer locally.  Chat must not fail just because a
+    # secondary knowledge/save operation has a temporary error.
+    try:
+        response = generate_chat_response(
 
-        message=message,
+            message=message,
 
-        disease=disease,
+            disease=disease,
 
-        confidence=confidence,
+            confidence=confidence,
 
-        treatment=treatment,
+            treatment=treatment,
 
-        mentality=mentality,
+            mentality=mentality,
 
-        restrict_to_disease=restrict_to_disease
-    )
+            restrict_to_disease=restrict_to_disease
+        )
+    except Exception as error:
+        print("⚠️ Chat response engine error:", error, flush=True)
 
+        # Use the local chat knowledge base as a safe fallback.
+        response = match_chat_knowledge(
+            message,
+            mentality
+        )
 
-    save_chat_message(
+        if not response:
+            response = (
+                "🌱 I can help with plant diseases, treatment, "
+                "plant care, prevention, watering, sunlight, soil, "
+                "fertilizer, and your scan records. Please try asking "
+                "your question again in a simple way."
+            )
 
-        message=message,
+    # Saving chat history is secondary.  Do it in the background so a
+    # slow Supabase request can NEVER make the chat UI show a
+    # connection error or make the user wait for the answer.
+    try:
+        chat_user_id = session.get("user_id")
 
-        response=response,
-
-        mentality=mentality,
-
-        disease=disease
-    )
+        threading.Thread(
+            target=save_chat_message,
+            kwargs={
+                "message": message,
+                "response": response,
+                "mentality": mentality,
+                "disease": disease,
+                "user_id": chat_user_id
+            },
+            daemon=True
+        ).start()
+    except Exception as error:
+        print("⚠️ Chat history background save skipped:", error, flush=True)
 
 
     return jsonify({

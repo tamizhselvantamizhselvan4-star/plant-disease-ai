@@ -851,15 +851,67 @@ def _record_image_public_url(record):
     return image_path
 
 
-def _normalize_persistent_records(file_path, records):
-    if os.path.basename(file_path) != "upload_records.json":
-        return records
+def _record_before_public_url(record):
+    image_path = str(record.get("before_image") or "").strip()
 
+    if image_path.startswith("http://") or image_path.startswith("https://"):
+        return image_path
+
+    filename = str(
+        record.get("stored_filename")
+        or os.path.basename(image_path)
+        or ""
+    ).strip()
+
+    if not filename or not (SUPABASE_ENABLED and SUPABASE_URL):
+        return image_path
+
+    return (
+        f"{SUPABASE_URL}/storage/v1/object/public/"
+        f"{quote(SUPABASE_BUCKET, safe='')}/before/"
+        f"{quote(filename, safe='')}"
+    )
+
+
+def _record_after_public_url(record):
+    image_path = str(record.get("after_image") or "").strip()
+
+    if image_path.startswith("http://") or image_path.startswith("https://"):
+        return image_path
+
+    filename = str(
+        record.get("after_filename")
+        or os.path.basename(image_path)
+        or ""
+    ).strip()
+
+    if not filename or not (SUPABASE_ENABLED and SUPABASE_URL):
+        return image_path
+
+    return (
+        f"{SUPABASE_URL}/storage/v1/object/public/"
+        f"{quote(SUPABASE_BUCKET, safe='')}/after/"
+        f"{quote(filename, safe='')}"
+    )
+
+
+def _normalize_persistent_records(file_path, records):
+    basename = os.path.basename(file_path)
     fixed = _clone_records(records)
 
     for record in fixed:
-        if isinstance(record, dict):
+        if not isinstance(record, dict):
+            continue
+
+        if basename == "upload_records.json":
             record["image_path"] = _record_image_public_url(record)
+
+        elif basename == "saved_before_records.json":
+            record["before_image"] = _record_before_public_url(record)
+
+        elif basename == "before_after_records.json":
+            record["before_image"] = _record_before_public_url(record)
+            record["after_image"] = _record_after_public_url(record)
 
     return fixed
 
@@ -6731,7 +6783,9 @@ def _save_json_list(file_path, records):
 
 def load_before_after_records(user_id=None):
 
-    records = _load_json_list(
+    # Before/After comparison history must survive logout and Render
+    # instance changes, so use the same persistent layer as My Records.
+    records = _persistent_load_records(
         BEFORE_AFTER_FILE
     )
 
@@ -6747,7 +6801,7 @@ def load_before_after_records(user_id=None):
 
 def save_before_after_records(records):
 
-    return _save_json_list(
+    return _persistent_save_records(
         BEFORE_AFTER_FILE,
         records
     )
@@ -6755,7 +6809,9 @@ def save_before_after_records(records):
 
 def load_saved_before_records(user_id=None):
 
-    records = _load_json_list(
+    # Saved BEFORE baselines must also survive logout and new Render
+    # instances. The image itself is stored in Supabase Storage.
+    records = _persistent_load_records(
         BEFORE_SAVED_FILE
     )
 
@@ -6771,7 +6827,7 @@ def load_saved_before_records(user_id=None):
 
 def save_saved_before_records(records):
 
-    return _save_json_list(
+    return _persistent_save_records(
         BEFORE_SAVED_FILE,
         records
     )
@@ -7583,7 +7639,7 @@ def save_scan_as_before():
         with Image.open(source_path) as image:
             image.verify()
 
-        existing_records = _load_json_list(
+        existing_records = _persistent_load_records(
             BEFORE_SAVED_FILE
         )
 
@@ -8167,7 +8223,7 @@ def before_after_api():
             )
         }
 
-        records = _load_json_list(
+        records = _persistent_load_records(
             BEFORE_AFTER_FILE
         )
 
@@ -8360,7 +8416,7 @@ def delete_saved_before(record_id):
 
     try:
 
-        records = _load_json_list(
+        records = _persistent_load_records(
             BEFORE_SAVED_FILE
         )
 
@@ -8463,7 +8519,7 @@ def delete_before_after_record(record_id):
 
     try:
 
-        records = _load_json_list(
+        records = _persistent_load_records(
             BEFORE_AFTER_FILE
         )
 
@@ -8585,7 +8641,7 @@ def delete_before_after_record(record_id):
 
 def load_plant_profiles(user_id=None):
 
-    profiles = _load_json_list(
+    profiles = _persistent_load_records(
         PLANT_PROFILES_FILE
     )
 
@@ -8601,7 +8657,7 @@ def load_plant_profiles(user_id=None):
 
 def save_plant_profiles(profiles):
 
-    return _save_json_list(
+    return _persistent_save_records(
         PLANT_PROFILES_FILE,
         profiles
     )
@@ -8609,7 +8665,7 @@ def save_plant_profiles(profiles):
 
 def get_plant_profile(plant_id, user_id=None):
 
-    profiles = _load_json_list(
+    profiles = _persistent_load_records(
         PLANT_PROFILES_FILE
     )
 
